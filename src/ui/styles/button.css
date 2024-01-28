@@ -1,0 +1,237 @@
+/************************************************************************/
+/*************************************TEXT*******************************/
+/************************************************************************/
+
+.WUIButton-text {
+    cursor: pointer;
+    font-weight: 500;
+    text-align: center;
+    background-color: transparent;
+    font-size: 1rem;
+    border: none;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+        border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    text-transform: uppercase;
+}
+
+.WUIButton-text-color-primary {
+    color: var(--palette-text-primary);
+    background-color: transparent;
+}
+
+.WUIButton-text-color-primary:hover {
+    color: var(--palette-primary-text-main);
+    background-color: var(--palette-primary-light);
+}
+
+.WUIButton-text-color-secondary {
+    color: var(--palette-text-primary);
+    background-color: transparent;
+}
+
+.WUIButton-text-color-secondary:hover {
+    color: var(--palette-secondary-text-light);
+    background-color: var(--palette-secondary-light);
+}
+
+.WUIButton-text-color-error {
+    color: var(--palette-text-secondary);
+    background-color: transparent;
+}
+
+.WUIButton-text-color-error:hover {
+    color: var(--palette-text-secondary);
+    background-color: var(--palette-error-text-light);
+}
+
+.WUIButton-text-color-warning {
+    color: var(--palette-text-secondary);
+    background-color: transparent;
+}
+
+.WUIButton-text-color-warning:hover {
+    color: var(--palette-warning-text-light);
+    background-color: var(--palette-warning-light);
+}
+
+.WUIButton-text-color-info {
+    color: var(--palette-text-secondary);
+    background-color: transparent;
+}
+
+.WUIButton-text-color-info:hover {
+    color: var(--palette-info-text-light);
+    background-color: var(--palette-info-light);
+}
+
+.WUIButton-text-color-success {
+    color: var(--palette-text-secondary);
+    background-color: transparent;
+}
+
+.WUIButton-text-color-success:hover {
+    color: var(--palette-success-text-light);
+    background-color: var(--palette-success-light);
+}
+
+/****************************************************************************/
+/*************************************OUTLINED*******************************/
+/****************************************************************************/
+
+.WUIButton-outlined {
+    cursor: pointer;
+    font-weight: 500;
+    text-align: center;
+    background-color: transparent;
+    border: solid 0.13rem;
+    font-size: 1rem;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+        border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    text-transform: uppercase;
+}
+
+.WUIButton-outlined-color-primary {
+    color: var(--palette-text-primary);
+    background-color: var(--palette-background-default);
+    border-color: var(--palette-primary-main);
+}
+
+.WUIButton-outlined-color-primary:hover {
+    color: var(--palette-primary-text-light);
+    background-color: var(--palette-primary-light);
+    border-color: var(--palette-primary-main);
+}
+
+.WUIButton-outlined-color-secondary {
+    color: var(--palette-text-primary);
+    background-color: var(--palette-background-default);
+    border-color: var(--palette-secondary-main);
+}
+
+.WUIButton-outlined-color-secondary:hover {
+    color: var(--palette-secondary-text-light);
+    background-color: var(--palette-secondary-light);
+}
+
+.WUIButton-outlined-color-error {
+    color: var(--palette-text-secondary);
+    background-color: var(--palette-background-default);
+    border-color: var(--palette-error-main);
+}
+
+.WUIButton-outlined-color-error:hover {
+    color: var(--palette-error-text-light);
+    background-color: var(--palette-error-light);
+}
+
+.WUIButton-outlined-color-warning {
+    color: var(--palette-text-secondary);
+    background-color: var(--palette-background-default);
+    border-color: var(--palette-warning-main);
+}
+
+.WUIButton-outlined-color-warning:hover {
+    color: var(--palette-warning-text-light);
+    background-color: var(--palette-warning-light);
+}
+
+.WUIButton-outlined-color-info {
+    color: var(--palette-text-secondary);
+    background-color: var(--palette-background-default);
+    border-color: var(--palette-info-main);
+}
+
+.WUIButton-outlined-color-info:hover {
+    color: var(--palette-info-text-light);
+    background-color: var(--palette-info-light);
+}
+
+.WUIButton-outlined-color-success {
+    color: var(--palette-text-secondary);
+    background-color: var(--palette-background-default);
+    border-color: var(--palette-success-main);
+}
+
+.WUIButton-outlined-color-success:hover {
+    color: var(--palette-success-text-light);
+    background-color: var(--palette-success-light);
+}
+
+/*****************************************************************************/
+/*************************************CONTAINED*******************************/
+/*****************************************************************************/
+
+.WUIButton-contained {
+    cursor: pointer;
+    font-weight: 500;
+    text-align: center;
+    background-color: transparent;
+    border: none;
+    font-size: 1rem;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+        border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    text-transform: uppercase;
+}
+
+.WUIButton-contained-color-primary {
+    color: var(--palette-primary-text-main);
+    background-color: var(--palette-primary-main);
+}
+
+.WUIButton-contained-color-primary:hover {
+    color: var(--palette-primary-text-dark);
+    background-color: var(--palette-primary-dark);
+}
+
+.WUIButton-contained-color-secondary {
+    color: var(--palette-secondary-text-main);
+    background-color: var(--palette-secondary-main);
+}
+
+.WUIButton-contained-color-secondary:hover {
+    color: var(--palette-secondary-text-dark);
+    background-color: var(--palette-secondary-dark);
+}
+
+.WUIButton-contained-color-error {
+    color: var(--palette-error-text-main);
+    background-color: var(--palette-error-main);
+}
+
+.WUIButton-contained-color-error:hover {
+    color: var(--palette-error-text-light);
+    background-color: var(--palette-error-light);
+}
+
+.WUIButton-contained-color-warning {
+    color: var(--palette-warning-text-main);
+    background-color: var(--palette-warning-main);
+}
+
+.WUIButton-contained-color-warning:hover {
+    color: var(--palette-warning-text-light);
+    background-color: var(--palette-warning-light);
+}
+
+.WUIButton-contained-color-info {
+    color: var(--palette-info-text-main);
+    background-color: var(--palette-info-main);
+}
+
+.WUIButton-contained-color-info:hover {
+    color: var(--palette-info-text-light);
+    background-color: var(--palette-info-light);
+}
+
+.WUIButton-contained-color-success {
+    color: var(--palette-success-text-main);
+    background-color: var(--palette-success-main);
+}
+
+.WUIButton-contained-color-success:hover {
+    color: var(palette-background-default);
+    background-color: var(--palette-success-light);
+}

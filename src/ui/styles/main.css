@@ -1,0 +1,93 @@
+body {
+    font-family: "Roboto", sans-serif;
+    background-color: var(--palette-background-default);
+    color: var(--palette-text-secondary);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-weight: 400;
+    text-shadow: -1px 0px 1px var(--palette-text-disabled);
+    color: var(--palette-text-primary);
+}
+
+p,
+span {
+    font-weight: 300;
+    text-shadow: -1px 0px 1px var(--palette-text-disabled);
+    box-sizing: border-box;
+    margin: 0;
+}
+
+a {
+    color: var(--palette-link);
+    text-decoration: none;
+    text-shadow: -1px 0px 1px var(--palette-text-disabled);
+}
+
+a:hover {
+    color: var(--palette-link-hover);
+    text-decoration: none;
+}
+
+.WUIFixPosition {
+    position: relative;
+    display: block;
+}
+
+.cssCustom {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.columnas {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: solid 2px var(--palette-success-dark);
+    padding: 20px;
+    border-radius: 5px;
+    background-color: var(--palette-success-light);
+    margin-bottom: 20px;
+}
+
+.columnas p {
+    display: inline;
+    width: 48%;
+    line-height: 25px;
+}
+
+.card {
+    background-color: var(--palette-action-hover);
+    border-radius: 5px;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.card h1 {
+    text-align: center;
+}
+
+.card p {
+    color: var(--palette-text-secondary);
+    line-height: 25px;
+}
+
+.formItem {
+    width: 100%;
+    height: 40px;
+    margin-top: 25px;
+}
+
+.formItem input {
+    width: 100% !important;
+}

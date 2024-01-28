@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "jsx": "preserve",
+    "jsxFactory": "DOMcreateElement",
+    "jsxFragmentFactory": "DOMcreateFragment",
+
+    "target": "ES2020",
+
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "outDir": "dist",
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "Node",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+
+    "baseUrl": ".",
+
+    "paths": {
+      "webui/*": ["./src/*.ts","./src/*.tsx" ]
+    },
+  },
+  "include": ["src", "**/*.js", "**/*.ts", "**/*.tsx", "**/*.css"]
+}

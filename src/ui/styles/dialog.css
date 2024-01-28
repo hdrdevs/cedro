@@ -1,0 +1,48 @@
+.WUIDialog {
+    background-color: transparent;
+    border-radius: 5px;
+    box-shadow: none;
+    transition: background-color 0.3s ease;
+}
+
+.WUIDialogDisplayed {
+    background-color: var(--palette-background-default);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    display: block !important;
+}
+
+.WUIDialogHide {
+    background-color: transparent;
+    box-shadow: none;
+    display: none;
+}
+
+.WUITitlebar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+}
+
+.WUIDialogBackground {
+    background-color: rgba(0, 0, 0, 0.01);
+    opacity: 0.1;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+}
+
+.WUIDialogResizeHandler {
+    background-color: rgba(0, 0, 0, 0.01);
+    cursor: nwse-resize;
+}
+
+.WUIDialogBackgroundReisizing {
+    cursor: nwse-resize;
+}
+
+.WUIDialogBackgroundDragging {
+    cursor: move;
+}

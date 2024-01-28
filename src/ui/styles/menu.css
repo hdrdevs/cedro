@@ -1,0 +1,56 @@
+.WUIMenuBackground {
+    background-color: rgba(127, 126, 126, 0.1);
+    opacity: 0.01;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+}
+
+.WUIMenuTransparent {
+    display: auto;
+    opacity: 0;
+}
+
+.WUIMenuHidden {
+    display: none;
+    opacity: 0;
+}
+
+.WUIMenuVisible {
+    display: auto;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.WUIMenu {
+    position: absolute;
+    overflow: hidden;
+    background-color: var(--palette-action-hover);
+    border-radius: 5px;
+    width: 50%;
+    padding: 5px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.WUIMenuOptions {
+    display: flex;
+    align-items: center;
+    width: auto;
+    height: 40px;
+}
+
+.WUIMenuOptions100w {
+    width: 100%;
+}
+
+.WUIMenuOptions :first-child {
+    margin-left: 10px;
+}
+
+.WUIMenuOptions :last-child {
+    margin-left: 10px;
+    margin-right: 15px;
+    text-transform: capitalize !important;
+}

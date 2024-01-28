@@ -1,0 +1,35 @@
+.WUIinput {
+    position: relative;
+}
+
+.WUIinput input {
+    outline: none;
+    /*border-collapse: collapse;*/
+    border: 2px solid var(--palette-action-disabled);
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    padding-left: 20px;
+    z-index: 1000;
+    background-color: var(--palette-background-default);
+    color: var(--palette-text-primary);
+}
+
+.WUIinput label {
+    position: absolute;
+    margin-left: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    color: var(--palette-text-secondary);
+    background-color: var(--palette-background-default);
+    border-radius: 5px;
+    z-index: 1001;
+}
+
+.WUIinput input:focus ~ label {
+    top: -15px !important;
+    font-size: 12px;
+}
