@@ -2,7 +2,7 @@ import "./styles/menu.css";
 import { IWidget } from "../interfaces/widget.interface";
 import { IconButton } from "./IconButton.ui";
 import { Widget, WidgetAlignTypes, WidgetTypes } from "./widget.ui";
-import { w } from "./windget.collection";
+import { w } from "./widget.collection";
 
 export class Menu extends Widget {
     background: Widget;

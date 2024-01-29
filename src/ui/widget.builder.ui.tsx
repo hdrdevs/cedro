@@ -5,7 +5,7 @@ import { Button, ButonVariants } from "./button.ui";
 import { InputTypes, Textbox } from "./textbox.ui";
 import { Colors } from "./colors.ui";
 import { IconButton } from "./IconButton.ui";
-import { w } from "./windget.collection";
+import { w } from "./widget.collection";
 import { Icon, IconVariants } from "./Icon.ui";
 import { Menu } from "./menu.ui";
 import { Select } from "./select.ui";
