@@ -1,4 +1,3 @@
-import { DOMcreateElement } from '../core/jsxsupport'; //import { DOMcreateElement, DOMcreateFragment } from '../core/jsxsupport';
 import { IWidget } from "../interfaces/widget.interface";
 import { Widget, WidgetAlignTypes, WidgetTypes } from "./widget.ui";
 import { Button, ButonVariants } from "./button.ui";
