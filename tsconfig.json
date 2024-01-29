@@ -28,7 +28,7 @@
     "baseUrl": ".",
 
     "paths": {
-      "webui/*": ["./src/*.ts","./src/*.tsx" ]
+      "webware/*": ["./src/*.ts","./src/*.tsx" ]
     },
   },
   "include": ["src", "**/*.js", "**/*.ts", "**/*.tsx", "**/*.css"]

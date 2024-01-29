@@ -16,7 +16,7 @@ import { Label } from "../ui/label.ui";
 import { Seo } from "./seo";
 import { DarkTheme, LightTheme, ThemeManager } from "./themes.core";
 
-class WebUIApplication implements IApplication {
+class WApplication implements IApplication {
     seo: Seo;
 
     screen: Screen;
@@ -179,4 +179,4 @@ class WebUIApplication implements IApplication {
     }
 }
 
-export default WebUIApplication;
+export default WApplication;
