@@ -26,10 +26,5 @@
     "noFallthroughCasesInSwitch": true,
 
     "baseUrl": ".",
-
-    "paths": {
-      "webware/*": ["./src/*.ts","./src/*.tsx" ]
-    },
-  },
-  "include": ["src", "**/*.js", "**/*.ts", "**/*.tsx", "**/*.css"]
+  }
 }
