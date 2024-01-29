@@ -1,6 +1,6 @@
 {
     "name": "webware",
-    "version": "0.10.4",
+    "version": "0.10.7",
     "type": "module",
     "devDependencies": {
         "@types/node": "^20.4.4",

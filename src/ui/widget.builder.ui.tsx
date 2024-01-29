@@ -4,7 +4,6 @@ import { Button, ButonVariants } from "./button.ui";
 import { InputTypes, Textbox } from "./textbox.ui";
 import { Colors } from "./colors.ui";
 import { IconButton } from "./IconButton.ui";
-import { w } from "./widget.collection";
 import { Icon, IconVariants } from "./Icon.ui";
 import { Menu } from "./menu.ui";
 import { Select } from "./select.ui";
@@ -437,7 +436,7 @@ export function createWidget(
             newButton.setType(dataType);
             newButton.setPadding(dataPadding);
             newButton.setText(dataText);
-            w.set(id, newButton);
+            window.w.set(id, newButton);
             return newButton;
         } else if (content.getAttribute("w-textbox")) {
             const newTextbox = new Textbox(id, parent as Widget);
@@ -477,7 +476,7 @@ export function createWidget(
             newTextbox.setType(dataType);
             newTextbox.setPadding(dataPadding);
             newTextbox.setTitle(dataTitle);
-            w.set(id, newTextbox);
+            window.w.set(id, newTextbox);
             return newTextbox;
         } else if (content.getAttribute("w-iconbutton")) {
             const dataIcon = content.getAttribute("widget-icon");
@@ -508,7 +507,7 @@ export function createWidget(
             newIconButton.setType(dataType);
             newIconButton.setPadding(dataPadding);
             newIconButton.setText(dataTitle);
-            w.set(id, newIconButton);
+            window.w.set(id, newIconButton);
             return newIconButton;
         } else if (content.getAttribute("w-icon")) {
             const dataIcon = content.getAttribute("widget-icon");
@@ -532,7 +531,7 @@ export function createWidget(
             newIcon.setType(dataType);
             newIcon.setPadding(dataPadding);
 
-            w.set(id, newIcon);
+            window.w.set(id, newIcon);
             return newIcon;
         } else if (content.getAttribute("w-menu")) {
             const dataTriggerId = content.getAttribute("widget-trigger-id");
@@ -560,7 +559,7 @@ export function createWidget(
                 }
             });
 
-            w.set(id, newMenu);
+            window.w.set(id, newMenu);
             return newMenu;
         } else if (content.getAttribute("w-select")) {
             const newSelect = new Select(id, parent as Widget);
@@ -616,7 +615,7 @@ export function createWidget(
             newSelect.setPadding(dataPadding);
             newSelect.setTitle(dataTitle);
 
-            w.set(id, newSelect);
+            window.w.set(id, newSelect);
             return newSelect;
         } else {
             const newWidget = new Widget(id, tagName, parent);
@@ -668,7 +667,7 @@ export function createWidget(
                 }
             });
             //console.log("new widget", newWidget);
-            w.set(id, newWidget);
+            window.w.set(id, newWidget);
             return newWidget;
         }
     }

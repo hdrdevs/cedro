@@ -8,7 +8,6 @@ import { Menu } from "./menu.ui"
 import { Select } from "./select.ui"
 import { Textbox } from "./textbox.ui"
 import {createWidget} from "./widget.builder.ui"
-import {w} from "./widget.collection"
 
 
 export{
@@ -22,5 +21,4 @@ export{
     Select,
     Textbox,
     createWidget,
-    w
 }

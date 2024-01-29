@@ -1,5 +1,4 @@
 import { IWidget, WUIEvent, WUICallback } from "../interfaces/widget.interface";
-import { w } from "./widget.collection";
 import { Vector2D } from "../types/vector2d.type";
 
 export enum WidgetTypes {
@@ -828,6 +827,6 @@ export class Widget implements IWidget {
                 child.free();
             }
         }
-        w.delete(this.id);
+        window.w.delete(this.id);
     }
 }

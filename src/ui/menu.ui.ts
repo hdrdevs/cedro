@@ -2,7 +2,6 @@ import "./styles/menu.css";
 import { IWidget } from "../interfaces/widget.interface";
 import { IconButton } from "./IconButton.ui";
 import { Widget, WidgetAlignTypes, WidgetTypes } from "./widget.ui";
-import { w } from "./widget.collection";
 
 export class Menu extends Widget {
     background: Widget;
@@ -40,8 +39,8 @@ export class Menu extends Widget {
                 clearInterval(this.triggeredBySearchCode);
                 return;
             }
-            if (w.get(this.triggeredById)) {
-                this.triggeredBy = w.get(this.triggeredById) as IWidget;
+            if (window.w.get(this.triggeredById)) {
+                this.triggeredBy = window.w.get(this.triggeredById) as IWidget;
 
                 this.triggeredBy.subscribe({
                     event: "click",
