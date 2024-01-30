@@ -4,12 +4,15 @@ declare global {
     interface Window {
         w: Map<string, IWidget>;
     }
+
+    var w: Map<string, IWidget>;
 }
 
 export const initWidgetCollection = () => {
     
     if(!window.w) {
         window.w = new Map<string, IWidget>();
+        w = window.w;
     }
         
 }
