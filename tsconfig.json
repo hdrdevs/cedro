@@ -26,5 +26,8 @@
     "noFallthroughCasesInSwitch": true,
 
     "baseUrl": ".",
-  }
+    
+  },
+  "include": ["src"]
+
 }
