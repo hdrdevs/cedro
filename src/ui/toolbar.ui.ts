@@ -35,7 +35,14 @@ export class Toolbar extends Widget {
      * @param {IWidget} widget - The widget to be added.
      */
     addItem(id: string, widget: IWidget) {
-        widget.setParent(this);
+        this.addChild(widget);
         this.items.set(id, widget);
+    }
+
+    public render(): void {
+        super.render();
+        this.items.forEach((widget) => {
+            widget.render();
+        });
     }
 }
