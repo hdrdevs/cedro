@@ -1,24 +1,13 @@
-import { Button } from "./button.ui"
-import { Widget } from "./widget.ui"
-import { Dialog } from "./dialog"
-import { Icon } from "./Icon.ui"
-import { IconButton } from "./IconButton.ui"
-import { Label } from "./label.ui"
-import { Menu } from "./menu.ui"
-import { Select } from "./select.ui"
-import { Textbox } from "./textbox.ui"
-import {createWidget} from "./widget.builder.ui"
+import { Button } from "./button.ui";
+import { Widget } from "./widget.ui";
+import { Dialog } from "./dialog";
+import { Icon } from "./Icon.ui";
+import { IconButton } from "./IconButton.ui";
+import { Label } from "./label.ui";
+import { Menu } from "./menu.ui";
+import { Select } from "./select.ui";
+import { Textbox } from "./textbox.ui";
+import { Toolbar } from "./toolbar.ui";
+import { createWidget } from "./widget.builder.ui";
 
-
-export{
-    Button,
-    Widget,
-    Dialog,
-    Icon,
-    IconButton,
-    Label,
-    Menu,
-    Select,
-    Textbox,
-    createWidget,
-}
+export { Button, Widget, Dialog, Icon, IconButton, Label, Menu, Select, Textbox, Toolbar, createWidget };

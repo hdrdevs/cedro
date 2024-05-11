@@ -50,6 +50,7 @@ class WApplication implements IApplication {
 
         window.addEventListener("load", () => {
             this.screen.updateSize();
+            this.getRoot().resize();
         });
 
         this.alertDialog = new Dialog("Dialog.alert", null);
@@ -58,11 +59,7 @@ class WApplication implements IApplication {
         this.theme.load();
     }
 
-    alert(
-        msg: string,
-        onOk: () => void = () => {},
-        onCancell: () => void = () => {}
-    ): void {
+    alert(msg: string, onOk: () => void = () => {}, onCancell: () => void = () => {}): void {
         const mesageLabel = new Label("alert.label", "span");
 
         mesageLabel.setType(WidgetTypes.FILL);
@@ -80,11 +77,7 @@ class WApplication implements IApplication {
         this.alertDialog.show();
     }
 
-    confirm(
-        msg: string,
-        onOk: () => void = () => {},
-        onCancell: () => void = () => {}
-    ): void {
+    confirm(msg: string, onOk: () => void = () => {}, onCancell: () => void = () => {}): void {
         const mesageLabel = new Label("alert.label", "span");
 
         mesageLabel.setType(WidgetTypes.FILL);
@@ -123,12 +116,7 @@ class WApplication implements IApplication {
         this.root.render();
     }
 
-    addMediaQuery(
-        query: string,
-        minWidth: number,
-        maxWidth: number,
-        cb: (app: IApplication) => void
-    ): void {
+    addMediaQuery(query: string, minWidth: number, maxWidth: number, cb: (app: IApplication) => void): void {
         this.mediaQueries.set(query, { minWidth, maxWidth, cb });
     }
 
@@ -145,10 +133,7 @@ class WApplication implements IApplication {
 
                 for (let query of app.mediaQueries.entries()) {
                     const { minWidth, maxWidth, cb } = query[1];
-                    if (
-                        minWidth <= app.screen.dimensions.x &&
-                        maxWidth > app.screen.dimensions.x
-                    ) {
+                    if (minWidth <= app.screen.dimensions.x && maxWidth > app.screen.dimensions.x) {
                         cb(this as IApplication);
                         //break; quite el break para dar soporte a mas de un media quiery del mismo tipo.
                     }

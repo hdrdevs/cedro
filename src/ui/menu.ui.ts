@@ -10,11 +10,7 @@ export class Menu extends Widget {
     triggeredBy: IWidget | null;
     triggeredBySearchCode: any;
     withCalculation: boolean;
-    constructor(
-        id: string,
-        trigeredById: string | null,
-        parent: IWidget | null = null
-    ) {
+    constructor(id: string, trigeredById: string | null, parent: IWidget | null = null) {
         super(id, "div", parent);
 
         this.background = new Widget(this.id + ".background", "div", null);
@@ -61,6 +57,7 @@ export class Menu extends Widget {
     }
 
     public close(): void {
+        this.deleteClass("WUIMenuTransparent");
         this.deleteClass("WUIMenuVisible");
         this.addClass("WUIMenuHidden");
         this.background.setVisible(false);

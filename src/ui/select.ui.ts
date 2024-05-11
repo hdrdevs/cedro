@@ -37,9 +37,7 @@ export class Select extends Textbox {
 
                 this.menu.wakeUp();
 
-                if (
-                    this.getBody().clientWidth > this.menu.getBody().clientWidth
-                ) {
+                if (this.getBody().clientWidth > this.menu.getBody().clientWidth) {
                     this.menu.setW(this.getBody().clientWidth);
                 }
             },
@@ -50,9 +48,7 @@ export class Select extends Textbox {
             then: (_e, clickedOption) => {
                 const option = clickedOption as IconButton;
 
-                const fintOption = this.items.find(
-                    (item) => item.id === option.id
-                );
+                const fintOption = this.items.find((item) => item.id === option.id);
 
                 if (fintOption) {
                     this.selectedItem = fintOption;

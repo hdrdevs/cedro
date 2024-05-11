@@ -42,11 +42,7 @@ export class Widget implements IWidget {
     bodyTagName: string;
     body: HTMLElement;
 
-    constructor(
-        id: string,
-        bodyTagName: string = "div",
-        parent: IWidget | null = null
-    ) {
+    constructor(id: string, bodyTagName: string = "div", parent: IWidget | null = null) {
         this.id = id;
 
         this.overflow = false;
@@ -123,9 +119,7 @@ export class Widget implements IWidget {
     }
 
     public subscribe(cb: WUICallback) {
-        const randomId =
-            Math.random().toString(36).substring(2, 15) +
-            Math.random().toString(36).substring(2, 15);
+        const randomId = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 
         this.subscribers.set(`${randomId}.${cb.event}`, cb);
     }
@@ -268,10 +262,7 @@ export class Widget implements IWidget {
             this.body.style.bottom = "";
             this.body.style.right = "";
         } else {
-            if (
-                this.type === WidgetTypes.CUSTOM ||
-                this.type === WidgetTypes.FILL
-            ) {
+            if (this.type === WidgetTypes.CUSTOM || this.type === WidgetTypes.FILL) {
                 this.body.style.position = "absolute";
                 this.body.style.overflow = "hidden";
             }
@@ -629,10 +620,7 @@ export class Widget implements IWidget {
 
         const padding = this.padding;
 
-        const size =
-            this.align === WidgetAlignTypes.HORIZONTAL
-                ? this.width
-                : this.height;
+        const size = this.align === WidgetAlignTypes.HORIZONTAL ? this.width : this.height;
 
         let currentPosition = padding;
 
@@ -699,29 +687,17 @@ export class Widget implements IWidget {
                 child.setX(currentPosition);
 
                 if (child.type === WidgetTypes.FILL) {
-                    child.setWH(
-                        elementSize - padding,
-                        this.getH() - padding * 2
-                    );
+                    child.setWH(elementSize - padding, this.getH() - padding * 2);
                 } else {
-                    child.setWH(
-                        elementSize - padding,
-                        this.getH() - padding * 2
-                    );
+                    child.setWH(elementSize - padding, this.getH() - padding * 2);
                 }
             } else if (this.align === WidgetAlignTypes.VERTICAL) {
                 child.setX(padding);
                 child.setY(currentPosition);
                 if (child.type === WidgetTypes.FILL) {
-                    child.setWH(
-                        this.getW() - padding * 2,
-                        elementSize - padding
-                    );
+                    child.setWH(this.getW() - padding * 2, elementSize - padding);
                 } else {
-                    child.setWH(
-                        this.getW() - padding * 2,
-                        elementSize - padding
-                    );
+                    child.setWH(this.getW() - padding * 2, elementSize - padding);
                 }
             }
             currentPosition += elementSize;
@@ -761,10 +737,7 @@ export class Widget implements IWidget {
         return content as HTMLElement;
     }
 
-    private getMaxZIndex(
-        maxZindex: number = 0,
-        node: ChildNode | null = null
-    ): number {
+    private getMaxZIndex(maxZindex: number = 0, node: ChildNode | null = null): number {
         const parent = node ? node : document.body;
 
         if (parent instanceof HTMLElement) {
