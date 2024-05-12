@@ -1,5 +1,5 @@
-import { Toolbar, IconButton, Button, Select } from "../ui";
-import { Application, WidgetAlignTypes, WidgetTypes } from "../index";
+import { Toolbar, IconButton, Button, Select } from "../../ui";
+import { Application, WidgetAlignTypes, WidgetTypes } from "../../index";
 
 class WorkingApp extends Application {
     toolbar: Toolbar;
