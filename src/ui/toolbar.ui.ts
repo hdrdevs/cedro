@@ -4,7 +4,7 @@ import { IconButton } from "./IconButton.ui";
 
 export type ToolbarOrientationTypes = "horizontal" | "vertical";
 const TOOLBAR_SIZE = 40;
-const TOOLBAR_BUTTON_SIZE = 20;
+const TOOLBAR_BUTTON_SIZE = 40;
 
 export class Toolbar extends Widget {
     orientation: ToolbarOrientationTypes;
@@ -29,14 +29,14 @@ export class Toolbar extends Widget {
         this.setType(WidgetTypes.FILL);
         this.getBody().style.overflow = "hidden";
 
-        this.btnLeft = new IconButton(this.id + ".btnLeft", "arrow_left");
+        this.btnLeft = new IconButton(this.id + ".btnLeft", this.getIconLeft());
         this.btnLeft.setType(WidgetTypes.CUSTOM);
         this.btnLeft.getBody().style.position = "absolute";
         this.btnLeft.setW(TOOLBAR_BUTTON_SIZE);
         this.btnLeft.setH(TOOLBAR_SIZE);
         this.addChild(this.btnLeft);
 
-        this.btnRight = new IconButton(this.id + ".btnRight", "arrow_right");
+        this.btnRight = new IconButton(this.id + ".btnRight", this.getIconRight());
         this.btnRight.setType(WidgetTypes.CUSTOM);
         this.btnRight.getBody().style.position = "absolute";
         this.btnRight.setW(TOOLBAR_BUTTON_SIZE);
@@ -46,16 +46,38 @@ export class Toolbar extends Widget {
         this.btnLeft.subscribe({
             event: "click",
             then: () => {
-                this.itemsContainer.getBody().scrollLeft -= TOOLBAR_SIZE;
+                if (this.orientation === "horizontal") {
+                    this.itemsContainer.getBody().scrollLeft -= TOOLBAR_SIZE;
+                } else {
+                    this.itemsContainer.getBody().scrollTop -= TOOLBAR_SIZE;
+                }
             },
         });
 
         this.btnRight.subscribe({
             event: "click",
             then: () => {
-                this.itemsContainer.getBody().scrollLeft += TOOLBAR_SIZE;
+                if (this.orientation === "horizontal") {
+                    this.itemsContainer.getBody().scrollLeft += TOOLBAR_SIZE;
+                } else {
+                    this.itemsContainer.getBody().scrollTop += TOOLBAR_SIZE;
+                }
             },
         });
+    }
+
+    public getIconLeft(): string {
+        if (this.orientation === "horizontal") {
+            return "arrow_left";
+        }
+        return "arrow_drop_up";
+    }
+
+    public getIconRight(): string {
+        if (this.orientation === "horizontal") {
+            return "arrow_right";
+        }
+        return "arrow_drop_down";
     }
 
     /**
@@ -99,35 +121,66 @@ export class Toolbar extends Widget {
 
     public getFullSize(): number {
         //Devuelve el tamaño que tiene la toolbar para mostrar todos los botones.
+
         let size = 0;
         for (const item of this.items.values()) {
-            size += item.getW();
+            if (this.orientation === "horizontal") {
+                size += item.getW();
+            } else if (this.orientation === "vertical") {
+                size += item.getH();
+            }
         }
         return size;
     }
 
     public render(): void {
         const fullSize = this.getFullSize();
-        const availableSize = this.getW();
+        const availableSize = this.orientation === "horizontal" ? this.getW() : this.getH();
 
         if (fullSize > availableSize) {
             this.btnLeft.setVisible(true);
             this.btnRight.setVisible(true);
 
-            this.itemsContainer.setY(0);
-            this.itemsContainer.setX(TOOLBAR_BUTTON_SIZE);
-            this.itemsContainer.setW(availableSize - TOOLBAR_BUTTON_SIZE * 2);
-            this.itemsContainer.setH(TOOLBAR_SIZE);
+            if (this.orientation === "horizontal") {
+                this.itemsContainer.setY(0);
+                this.itemsContainer.setX(TOOLBAR_BUTTON_SIZE);
+                this.itemsContainer.setW(availableSize - TOOLBAR_BUTTON_SIZE * 2);
+                this.itemsContainer.setH(TOOLBAR_SIZE);
 
-            this.btnLeft.setX(0);
-            this.btnRight.setX(availableSize - TOOLBAR_BUTTON_SIZE);
+                this.btnLeft.setX(0);
+                this.btnLeft.setW(TOOLBAR_BUTTON_SIZE);
+                this.btnLeft.setH(TOOLBAR_SIZE);
+                this.btnRight.setX(availableSize - TOOLBAR_BUTTON_SIZE);
+                this.btnRight.setW(TOOLBAR_BUTTON_SIZE);
+                this.btnRight.setH(TOOLBAR_SIZE);
+            } else {
+                this.itemsContainer.setY(TOOLBAR_BUTTON_SIZE);
+                this.itemsContainer.setX(0);
+                this.itemsContainer.setW(TOOLBAR_SIZE);
+                this.itemsContainer.setH(availableSize - TOOLBAR_BUTTON_SIZE * 2);
+
+                this.btnLeft.setY(0);
+                this.btnLeft.setW(TOOLBAR_SIZE);
+                this.btnLeft.setH(TOOLBAR_BUTTON_SIZE);
+                this.btnRight.setY(availableSize - TOOLBAR_BUTTON_SIZE);
+                this.btnRight.setW(TOOLBAR_SIZE);
+                this.btnRight.setH(TOOLBAR_BUTTON_SIZE);
+            }
         } else {
             this.btnLeft.setVisible(false);
             this.btnRight.setVisible(false);
-            this.itemsContainer.setY(0);
-            this.itemsContainer.setX(0);
-            this.itemsContainer.setW(fullSize);
-            this.itemsContainer.setH(TOOLBAR_SIZE);
+
+            if (this.orientation === "horizontal") {
+                this.itemsContainer.setY(0);
+                this.itemsContainer.setX(0);
+                this.itemsContainer.setW(fullSize);
+                this.itemsContainer.setH(TOOLBAR_SIZE);
+            } else {
+                this.itemsContainer.setY(0);
+                this.itemsContainer.setX(0);
+                this.itemsContainer.setW(TOOLBAR_SIZE);
+                this.itemsContainer.setH(fullSize);
+            }
         }
 
         let currentPosition: number = 0;
