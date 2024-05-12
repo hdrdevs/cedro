@@ -8,11 +8,7 @@ export class IconButton extends Button {
     icon: Icon;
     label: Label;
 
-    constructor(
-        id: string,
-        icon: string = "dark_mode",
-        parent: Widget | null = null
-    ) {
+    constructor(id: string, icon: string = "dark_mode", parent: Widget | null = null) {
         super(id, parent);
 
         this.icon = new Icon(id + ".icon", icon, undefined, this);
@@ -34,14 +30,17 @@ export class IconButton extends Button {
         this.label.getBody().style.position = "absolute";
         this.icon.getBody().style.position = "absolute";
 
+        //Estaria bueno utilizar un width fixed para el icon y uno libre para el label
+        //utilizando el Type del contendor en WidgetType.FILL
+
         const labelHeight = this.label.getBody().clientHeight;
-        const labelWidth = this.label.getBody().clientWidth;
 
         //const iconHeight = this.icon.getBody().clientHeight;
         const iconWidth = 24;
+        const padding = 5;
 
-        const startX =
-            this.getBody().clientWidth / 2 - (iconWidth + labelWidth) / 2;
+        const startX = padding; //this.getBody().clientWidth / 2 - (iconWidth + labelWidth) / 2;
+        const startLabelX = startX + iconWidth + padding;
         const startY = this.getH() / 2 - 24 / 2;
         const startLabelY = this.getH() / 2 - labelHeight / 2;
 
@@ -53,7 +52,7 @@ export class IconButton extends Button {
         }
 
         this.icon.setX(startX);
-        this.label.setX(startX + iconWidth + 5);
+        this.label.setX(startLabelX + padding);
 
         this.icon.setY(startY);
         this.label.setY(startLabelY);

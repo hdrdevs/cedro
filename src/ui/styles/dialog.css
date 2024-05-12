@@ -14,7 +14,7 @@
 .WUIDialogHide {
     background-color: transparent;
     box-shadow: none;
-    display: none;
+    display: none !important;
 }
 
 .WUITitlebar {

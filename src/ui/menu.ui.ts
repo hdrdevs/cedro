@@ -35,6 +35,7 @@ export class Menu extends Widget {
                 clearInterval(this.triggeredBySearchCode);
                 return;
             }
+
             if (window.w.get(this.triggeredById)) {
                 this.triggeredBy = window.w.get(this.triggeredById) as IWidget;
 
@@ -93,6 +94,7 @@ export class Menu extends Widget {
             for (const [, dataOption] of this.options) {
                 const option = dataOption as IconButton;
                 option.addClass("WUIMenuOptions100w");
+                option.render();
             }
             this.deleteClass("WUIMenuTransparent");
             this.addClass("WUIMenuHidden");

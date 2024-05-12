@@ -116,6 +116,8 @@ export class Widget implements IWidget {
         this.init();
 
         this.getMaxZIndex();
+
+        window.w.set(this.id, this);
     }
 
     public subscribe(cb: WUICallback) {
@@ -452,7 +454,6 @@ export class Widget implements IWidget {
         var clientLeft = docElem.clientLeft || body.clientLeft || 0;
         var top = box.top + scrollTop - clientTop;
         var left = box.left + scrollLeft - clientLeft;
-
         return { x: Math.round(left), y: Math.round(top) };
     }
 

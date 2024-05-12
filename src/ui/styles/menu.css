@@ -14,8 +14,8 @@
 }
 
 .WUIMenuHidden {
-    display: none;
     opacity: 0;
+    display: none !important;
 }
 
 .WUIMenuVisible {

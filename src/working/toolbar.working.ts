@@ -30,7 +30,7 @@ class WorkingApp extends Application {
         this.btn3.setW(200);
         this.btn3.addItem("item1", "Item 1", "");
         this.btn3.addItem("item2", "Item 2", "");
-        this.btn3.addItem("item3", "Item 3", "");
+        this.btn3.addItem("item3", "Item 3", "add");
         this.btn3.addItem("item4", "Item 4", "");
 
         this.btn4 = new IconButton("btn4", "add");
