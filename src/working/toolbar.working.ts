@@ -17,6 +17,7 @@ class WorkingApp extends Application {
         this.toolbar = new Toolbar("toolbar", this.getRoot());
         this.toolbar.setOrientation("horizontal");
         this.toolbar.setType(WidgetTypes.FILL);
+        this.toolbar.setFixedSize(40);
 
         this.btn1 = new Button("btn1");
         this.btn1.setText("Nuevo");
@@ -49,6 +50,7 @@ class WorkingApp extends Application {
     init() {
         super.init();
         this.root.render();
+        this.theme.setTheme("dark");
     }
 }
 
