@@ -1,0 +1,10 @@
+.WUIDataGrid-Header {
+    border-bottom: solid 1px var(--palette-primary-text-light);
+}
+
+.WUIDataGrid-HeaderLabel {
+    border-right: solid 1px var(--palette-primary-text-light);
+    /*border-bottom: solid 1px var(--palette-primary-text-light);*/
+    padding-left: 5px;
+    font-weight: bold;
+}
