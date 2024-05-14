@@ -10,7 +10,6 @@ const DATA_GRID_MIN_COLUMN_WIDTH = 24;
 type DataGridColumn = {
     header: string;
     width: number | null;
-    field: string;
     handler: (args: any) => void;
 };
 
@@ -76,7 +75,7 @@ export class DataGrid extends Widget {
         this.createHeaders();
     }
 
-    public createHeaders(): void {
+    private createHeaders(): void {
         if (!this.columns) {
             return;
         }
@@ -91,7 +90,7 @@ export class DataGrid extends Widget {
         this.renderHeaders();
     }
 
-    public renderHeaders(): void {
+    private renderHeaders(): void {
         if (!this.columns) {
             return;
         }
@@ -113,7 +112,7 @@ export class DataGrid extends Widget {
         }
     }
 
-    public buildRows(): void {
+    private buildRows(): void {
         let rowY = 0;
 
         for (let i = 0; i < this.data.length; i++) {
@@ -132,7 +131,6 @@ export class DataGrid extends Widget {
                     data: this.data[i],
                     index: i,
                     fieldId: fieldId,
-                    field: column.field,
                     row: row,
                 });
                 const columnWidget = window.w.get(fieldId) as Widget;
@@ -142,7 +140,7 @@ export class DataGrid extends Widget {
         }
     }
 
-    public renderRows(): void {
+    private renderRows(): void {
         let rowY = 0;
 
         for (let i = 0; i < this.data.length; i++) {
@@ -158,7 +156,6 @@ export class DataGrid extends Widget {
                 const column = this.columns[j];
                 const fieldId = this.id + ".row." + i + ".column." + j;
                 const columnWidget = window.w.get(fieldId) as Widget;
-                console.log(widgetX);
                 columnWidget.setY(0);
                 columnWidget.setX(widgetX);
                 columnWidget.setH(this.rowHeight);
@@ -183,8 +180,8 @@ export class DataGrid extends Widget {
         this.rowHeight = rowHeight;
     }
 
-    public addColumn(header: string, width: number | null, field: string, handler: (args: any) => void) {
-        this.columns.push({ header, width, field, handler });
+    public addColumn(header: string, width: number | null, handler: (args: any) => void) {
+        this.columns.push({ header, width, handler });
     }
 
     public getHeader(index: number): Label {
