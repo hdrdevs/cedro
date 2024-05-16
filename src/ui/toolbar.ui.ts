@@ -1,13 +1,13 @@
 import { IWidget } from "src/interfaces/widget.interface";
 import { Widget, WidgetTypes } from "./widget.ui";
 import { IconButton } from "./IconButton.ui";
+import { OrientationTypes } from "src/types/orientation.type";
 
-export type ToolbarOrientationTypes = "horizontal" | "vertical";
 const TOOLBAR_SIZE = 40;
 const TOOLBAR_BUTTON_SIZE = 40;
 
 export class Toolbar extends Widget {
-    orientation: ToolbarOrientationTypes;
+    orientation: OrientationTypes;
     items: Map<string, IWidget>;
     size: number; //Indica el alto o ancho de la toolbar.
 
@@ -15,7 +15,7 @@ export class Toolbar extends Widget {
     btnLeft: IconButton;
     btnRight: IconButton;
 
-    constructor(id: string, parent: Widget | null = null, orientationType: ToolbarOrientationTypes = "horizontal") {
+    constructor(id: string, parent: Widget | null = null, orientationType: OrientationTypes = "horizontal") {
         super(id, "div", parent);
         this.orientation = orientationType;
         this.size = TOOLBAR_SIZE;
@@ -86,7 +86,7 @@ export class Toolbar extends Widget {
      * @param {ToolbarOrientationTypes} orientationType - the type of orientation to set
      * @return {void}
      */
-    public setOrientation(orientationType: ToolbarOrientationTypes, size: number = TOOLBAR_SIZE): void {
+    public setOrientation(orientationType: OrientationTypes, size: number = TOOLBAR_SIZE): void {
         this.orientation = orientationType;
         this.size = size;
     }

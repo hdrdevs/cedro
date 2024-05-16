@@ -113,6 +113,14 @@ export class Widget implements IWidget {
             });
         });
 
+        this.body.addEventListener("wheel", (e) => {
+            this.subscribers.forEach((callback) => {
+                if (callback.event == "wheel") {
+                    callback.then(e, this);
+                }
+            });
+        });
+
         this.init();
 
         this.getMaxZIndex();

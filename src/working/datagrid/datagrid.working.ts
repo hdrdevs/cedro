@@ -5,13 +5,13 @@ class WorkingApp extends Application {
     grid: DataGrid;
 
     constructor() {
-        super("Working App - Toolbar");
+        super("Working App - Datagrid Example");
         this.getRoot().setAlign(WidgetAlignTypes.VERTICAL);
 
         this.grid = new DataGrid("grid");
-
         this.grid.setRowHeight(30);
 
+        //Defining and perzonalizing Columns
         this.grid.addColumn("Nombre", 200, (args) => {
             args.row.addChild(new Label(args.fieldId));
             const lbl = window.w.get(args.fieldId) as Label;
@@ -49,6 +49,7 @@ class WorkingApp extends Application {
             args.row.addChild(new IconButton(args.fieldId, "delete"));
             const btn = window.w.get(args.fieldId) as IconButton;
 
+            //Handling click event
             btn.subscribe({
                 event: "click",
                 then: () => {
@@ -61,6 +62,7 @@ class WorkingApp extends Application {
 
         this.getRoot().addChild(this.grid);
 
+        //Insert random data...
         this.grid.setData([
             { name: "Ana González", years: 19, country: "Colombia" },
             { name: "Diego Martínez", years: 55, country: "Chile" },
@@ -102,6 +104,7 @@ class WorkingApp extends Application {
         this.root.render();
         this.theme.setTheme("dark");
 
+        //Customizing a Header
         const headerEdad = this.grid.getHeader(1);
         headerEdad.getBody().style.fontWeight = "bold";
         headerEdad.getBody().style.color = "#ff9900";

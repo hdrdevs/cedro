@@ -20,6 +20,7 @@ export class DataGrid extends Widget {
     footerContainer: Widget;
     data: Array<any>;
     verticalScrollbar: Scroll;
+    horizontalScrollbar: Scroll;
 
     rowHeight: number;
 
@@ -49,7 +50,8 @@ export class DataGrid extends Widget {
         this.addChild(this.dataContainer);
         this.addChild(this.footerContainer);
 
-        this.verticalScrollbar = new Scroll(id + ".scrollbar", this.dataContainer);
+        this.verticalScrollbar = new Scroll(id + ".VerticalScrollbar", this.dataContainer);
+        this.horizontalScrollbar = new Scroll(id + ".HorizontalScrollbar", this.dataContainer, "horizontal");
 
         this.columns = new Array<DataGridColumn>();
 
@@ -71,6 +73,17 @@ export class DataGrid extends Widget {
             freeW = DATA_GRID_MIN_COLUMN_WIDTH;
         }
         return freeW;
+    }
+
+    private getAllColumnsWidth(): number {
+        let returnValue = 0;
+        for (let i = 0; i < this.columns.length; i++) {
+            let width = this.columns[i].width;
+            if (width) {
+                returnValue += width;
+            }
+        }
+        return returnValue;
     }
 
     public init(): void {
@@ -152,7 +165,7 @@ export class DataGrid extends Widget {
 
             row.setX(0);
             row.setY(rowY);
-            row.setW(this.dataContainer.getW());
+            row.setW(this.getAllColumnsWidth());
             row.setH(this.rowHeight);
 
             let widgetX = 0;
@@ -179,6 +192,7 @@ export class DataGrid extends Widget {
         this.renderHeaders();
         this.renderRows();
         this.verticalScrollbar.render();
+        this.horizontalScrollbar.render();
     }
 
     public setRowHeight(rowHeight: number): void {

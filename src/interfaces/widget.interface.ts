@@ -1,13 +1,7 @@
 import { WidgetAlignTypes, WidgetTypes } from "../ui/widget.ui";
 import { Vector2D } from "../types/vector2d.type";
 
-export type WUIEvent =
-    | "click"
-    | "resize"
-    | "mousedown"
-    | "mouseup"
-    | "mousemove"
-    | "option-clicked";
+export type WUIEvent = "click" | "resize" | "mousedown" | "mouseup" | "mousemove" | "option-clicked" | "wheel";
 
 export type WUICallback = {
     event: WUIEvent;
