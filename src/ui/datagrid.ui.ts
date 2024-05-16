@@ -1,6 +1,7 @@
 import "./styles/datagrid.css";
 import { Label } from "./label.ui";
 import { Widget, WidgetAlignTypes, WidgetTypes } from "./widget.ui";
+import { Scroll } from "./scroll.ui";
 
 const DATA_GRID_HEADER_HEIGHT = 30;
 const DATA_GRID_FOOTER_HEIGHT = 40;
@@ -18,6 +19,7 @@ export class DataGrid extends Widget {
     dataContainer: Widget;
     footerContainer: Widget;
     data: Array<any>;
+    verticalScrollbar: Scroll;
 
     rowHeight: number;
 
@@ -46,6 +48,8 @@ export class DataGrid extends Widget {
         this.addChild(this.headerContainer);
         this.addChild(this.dataContainer);
         this.addChild(this.footerContainer);
+
+        this.verticalScrollbar = new Scroll(id + ".scrollbar", this.dataContainer);
 
         this.columns = new Array<DataGridColumn>();
 
@@ -148,7 +152,7 @@ export class DataGrid extends Widget {
 
             row.setX(0);
             row.setY(rowY);
-            row.setW(1000);
+            row.setW(this.dataContainer.getW());
             row.setH(this.rowHeight);
 
             let widgetX = 0;
@@ -174,6 +178,7 @@ export class DataGrid extends Widget {
         super.render();
         this.renderHeaders();
         this.renderRows();
+        this.verticalScrollbar.render();
     }
 
     public setRowHeight(rowHeight: number): void {
