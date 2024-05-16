@@ -27,6 +27,14 @@ class WorkingApp extends Application {
             lbl.getBody().style.textAlign = "right";
             lbl.getBody().style.lineHeight = "30px";
             lbl.getBody().style.paddingRight = "5px";
+
+            if (args.data.years < 20) {
+                lbl.getBody().style.color = "green";
+            } else if (args.data.years < 55) {
+                lbl.getBody().style.color = "#ff9900";
+            } else {
+                lbl.getBody().style.color = "red";
+            }
         });
 
         this.grid.addColumn("Nacionalidad", 150, (args) => {
@@ -96,6 +104,7 @@ class WorkingApp extends Application {
 
         const headerEdad = this.grid.getHeader(1);
         headerEdad.getBody().style.fontWeight = "bold";
+        headerEdad.getBody().style.color = "#ff9900";
     }
 }
 
