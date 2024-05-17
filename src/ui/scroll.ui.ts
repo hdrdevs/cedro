@@ -1,12 +1,16 @@
 import { OrientationTypes } from "src/types/orientation.type";
 import "./styles/scroll.css";
 import { Widget, WidgetTypes } from "./widget.ui";
+import { Draggable } from "./draggable.ui";
 
 const SCROLL_SIZE = 10;
 
 export class Scroll extends Widget {
     contentArea: Widget;
     orientation: OrientationTypes;
+
+    drag: Draggable;
+
     constructor(id: string, contentArea: Widget, orientation: OrientationTypes = "vertical") {
         super(id, "div", contentArea.getParent());
 
@@ -19,6 +23,8 @@ export class Scroll extends Widget {
         this.getBody().style.position = "absolute";
 
         this.addClass("WUIScrollbar");
+
+        this.drag = new Draggable(this, orientation);
 
         this.contentArea.subscribe({
             event: "wheel",
@@ -58,6 +64,9 @@ export class Scroll extends Widget {
             this.setH(scrollBarHeight);
             this.setW(SCROLL_SIZE);
             this.raisteTop();
+
+            this.drag.setMinY(1 + this.contentArea.getY());
+            this.drag.setMaxY(this.contentArea.getY() + availablePositionSize);
         } else if (this.orientation === "horizontal") {
             const scrollWidth = this.contentArea.getBody().scrollWidth;
             const areaWidth = this.contentArea.getW();
@@ -68,7 +77,7 @@ export class Scroll extends Widget {
             }
 
             const availablePositionSize = areaWidth - scrollBarWidth - 1;
-            const ratioScroll = this.contentArea.getBody().scrollLeft / scrollWidth;
+            const ratioScroll = this.contentArea.getBody().scrollLeft / (areaWidth - scrollBarWidth);
             const position = availablePositionSize * ratioScroll;
 
             if (areaWidth < scrollWidth) {
@@ -85,6 +94,9 @@ export class Scroll extends Widget {
             this.setW(scrollBarWidth);
             this.setH(SCROLL_SIZE);
             this.raisteTop();
+
+            this.drag.setMinX(1 + this.contentArea.getX());
+            this.drag.setMaxX(this.contentArea.getX() + availablePositionSize);
         }
     }
 }
