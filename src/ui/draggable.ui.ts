@@ -102,6 +102,8 @@ export class Draggable {
             }
             this.target.setY(newY);
         }
+
+        this.target.run("drag");
     }
 
     private endDrag(): void {

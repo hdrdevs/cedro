@@ -1,7 +1,15 @@
 import { WidgetAlignTypes, WidgetTypes } from "../ui/widget.ui";
 import { Vector2D } from "../types/vector2d.type";
 
-export type WUIEvent = "click" | "resize" | "mousedown" | "mouseup" | "mousemove" | "option-clicked" | "wheel";
+export type WUIEvent =
+    | "click"
+    | "resize"
+    | "mousedown"
+    | "mouseup"
+    | "mousemove"
+    | "option-clicked"
+    | "wheel"
+    | "drag";
 
 export type WUICallback = {
     event: WUIEvent;
@@ -42,6 +50,7 @@ export interface IWidget {
 
     subscribe: (cb: WUICallback) => void;
     unsubscribe: (event: WUIEvent) => void;
+    run(eventId: WUIEvent): void;
 
     setPadding(p: number): void;
 

@@ -128,8 +128,18 @@ export class Widget implements IWidget {
         window.w.set(this.id, this);
     }
 
+    public run(eventId: WUIEvent): void {
+        this.subscribers.forEach((callback) => {
+            if (callback.event == eventId) {
+                callback.then(new Event(eventId), this);
+            }
+        });
+    }
+
     public subscribe(cb: WUICallback) {
-        const randomId = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+        const randomId =
+            Math.random().toString(36).substring(2, 15) +
+            Math.random().toString(36).substring(2, 15);
 
         this.subscribers.set(`${randomId}.${cb.event}`, cb);
     }
