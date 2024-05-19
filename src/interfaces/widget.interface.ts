@@ -7,6 +7,8 @@ export type WUIEvent =
     | "mousedown"
     | "mouseup"
     | "mousemove"
+    | "mouseout"
+    | "mouseleave"
     | "option-clicked"
     | "wheel"
     | "drag";

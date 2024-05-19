@@ -140,8 +140,19 @@ export class Scroll extends Widget {
             this.setW(SCROLL_SIZE);
             this.raisteTop();
 
-            this.drag.setMinY(1 + this.contentArea.getY());
-            this.drag.setMaxY(this.contentArea.getY() + scrollData.availablePositionSize);
+            const minY = 1 + this.contentArea.getY();
+            const maxY = this.contentArea.getY() + scrollData.availablePositionSize;
+
+            this.drag.setMinY(minY);
+            this.drag.setMaxY(maxY);
+
+            if (this.getY() > maxY) {
+                this.setY(maxY);
+            }
+
+            if (this.getY() < minY) {
+                this.setY(minY);
+            }
         } else if (this.orientation === "horizontal") {
             if (scrollData.areaWidth < scrollData.scrollWidth) {
                 this.setVisible(true);
@@ -156,8 +167,19 @@ export class Scroll extends Widget {
             this.setH(SCROLL_SIZE);
             this.raisteTop();
 
-            this.drag.setMinX(1 + this.contentArea.getX());
-            this.drag.setMaxX(this.contentArea.getX() + scrollData.availablePositionSize);
+            const minX = 1 + this.contentArea.getX();
+            const maxX = this.contentArea.getX() + scrollData.availablePositionSize;
+
+            this.drag.setMinX(minX);
+            this.drag.setMaxX(maxX);
+
+            if (this.getX() > maxX) {
+                this.setX(maxX);
+            }
+
+            if (this.getX() < minX) {
+                this.setX(minX);
+            }
         }
     }
 }

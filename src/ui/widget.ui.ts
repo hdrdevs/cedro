@@ -121,6 +121,22 @@ export class Widget implements IWidget {
             });
         });
 
+        this.body.addEventListener("mouseout", (e) => {
+            this.subscribers.forEach((callback) => {
+                if (callback.event == "mouseout") {
+                    callback.then(e, this);
+                }
+            });
+        });
+
+        this.body.addEventListener("mouseleave", (e) => {
+            this.subscribers.forEach((callback) => {
+                if (callback.event == "mouseleave") {
+                    callback.then(e, this);
+                }
+            });
+        });
+
         this.init();
 
         this.getMaxZIndex();

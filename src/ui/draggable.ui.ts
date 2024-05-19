@@ -56,6 +56,20 @@ export class Draggable {
                 this.endDrag();
             },
         });
+
+        this.background.subscribe({
+            event: "mouseout",
+            then: (_e, _w) => {
+                this.endDrag();
+            },
+        });
+
+        this.background.subscribe({
+            event: "mouseleave",
+            then: (_e, _w) => {
+                this.endDrag();
+            },
+        });
     }
 
     private startDrag(e: MouseEvent): void {
