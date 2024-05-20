@@ -7,8 +7,23 @@ import { Label } from "./label.ui";
 import { Menu } from "./menu.ui";
 import { Select } from "./select.ui";
 import { Textbox } from "./textbox.ui";
+import { Tabs } from "./tabs.ui";
 import { Toolbar } from "./toolbar.ui";
 import { DataGrid } from "./datagrid.ui";
 import { createWidget } from "./widget.builder.ui";
 
-export { Button, Widget, Dialog, Icon, IconButton, Label, Menu, Select, Textbox, Toolbar, DataGrid, createWidget };
+export {
+    Button,
+    Widget,
+    Dialog,
+    Icon,
+    IconButton,
+    Label,
+    Menu,
+    Select,
+    Tabs,
+    Textbox,
+    Toolbar,
+    DataGrid,
+    createWidget,
+};
