@@ -1,6 +1,7 @@
 import { OrientationTypes } from "src/types/orientation.type";
 import { Widget, WidgetAlignTypes, WidgetTypes } from "./widget.ui";
 import { Toolbar } from "./toolbar.ui";
+import { Button } from "./button.ui";
 
 const TAB_HEADER_HEIGHT = 40;
 
@@ -30,11 +31,9 @@ export class Tabs extends Widget {
         this.header = new Widget(id + ".header", "div");
         this.header.setType(WidgetTypes.FILL);
         this.header.setFixedSize(TAB_HEADER_HEIGHT);
-        this.header.getBody().style.backgroundColor = "#ff9900";
 
         this.content = new Widget(id + ".content", "div");
         this.content.setType(WidgetTypes.FILL);
-        this.content.getBody().style.backgroundColor = "red";
 
         this.setType(WidgetTypes.FILL);
 
@@ -58,12 +57,36 @@ export class Tabs extends Widget {
 
     public addTab(id: string, title: string, content: Widget) {
         this.items.set(id, { title, content });
+
+        const itemControl = new Button(id + ".itemControl");
+        itemControl.setText(title);
+        itemControl.setW(100);
+
+        itemControl.subscribe({
+            event: "click",
+            then: (_e, _w) => {
+                this.setTab(id);
+            },
+        });
+
+        this.itemControls.addItem(id, itemControl);
     }
 
     public setTab(id: string) {
-        for (const item of this.items.values()) {
-            item.content.setVisible(false);
+        this.content.removeAllChilds();
+        const actualTab = this.items.get(id);
+
+        for (const itemId of this.items.keys()) {
+            if (itemId != id) {
+                this.items.get(itemId)?.content.setVisible(false);
+            }
         }
-        this.items.get(id)?.content.setVisible(true);
+
+        if (actualTab) {
+            this.items.get(id)?.content.setVisible(true);
+            this.content.addChild(actualTab.content);
+        }
+
+        this.render();
     }
 }
