@@ -1,0 +1,33 @@
+.WUITabControl {
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-bottom: none !important;
+    background-color: var(--palette-background-default);
+    box-sizing: border-box;
+    font-weight: normal;
+    text-align: center;
+    cursor: default;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 0px !important;
+}
+
+.WUITabControlActive {
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-bottom: solid 2px var(--palette-primary-dark) !important;
+    background-color: var(--palette-divider);
+    box-sizing: border-box;
+    font-weight: bold;
+    text-align: center;
+    cursor: default;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 0px !important;
+}
+
+.WUITabContainer {
+    border-top: solid 1px var(--palette-divider);
+}

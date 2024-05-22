@@ -6,6 +6,7 @@ class WorkingApp extends Application {
 
     btn1: Button;
     btn2: Button;
+    btn3: Button;
 
     constructor() {
         super("Working App - Tab Example");
@@ -21,8 +22,13 @@ class WorkingApp extends Application {
         this.btn2.setText("Guardar");
         this.btn2.setType(WidgetTypes.FILL);
 
-        this.tab.addTab("tab1", "Tab 1", this.btn1);
-        this.tab.addTab("tab2", "Tab 2", this.btn2);
+        this.btn3 = new Button("btn3");
+        this.btn3.setText("TEST");
+        this.btn3.setType(WidgetTypes.FILL);
+
+        this.tab.addTab("tab1", "PREFERENCIAS", this.btn1);
+        this.tab.addTab("tab2", "SEGURIDAD", this.btn2);
+        this.tab.addIconTab("tab3", "add", this.btn3);
 
         this.tab.setTab("tab1");
 

@@ -1,7 +1,10 @@
+import "./styles/tabs.css";
+
 import { OrientationTypes } from "src/types/orientation.type";
 import { Widget, WidgetAlignTypes, WidgetTypes } from "./widget.ui";
 import { Toolbar } from "./toolbar.ui";
-import { Button } from "./button.ui";
+import { Label } from "./label.ui";
+import { IconButton } from "./IconButton.ui";
 
 const TAB_HEADER_HEIGHT = 40;
 
@@ -10,6 +13,14 @@ export type TabItem = {
     content: Widget;
 };
 
+class TabControl extends Label {
+    constructor(id: string, parent: Widget | null = null, text: string) {
+        super(id, "span", parent);
+        this.setText(text);
+        this.addClass("WUITabControl");
+        this.getBody().style.lineHeight = TAB_HEADER_HEIGHT + "px";
+    }
+}
 export class Tabs extends Widget {
     orientation: OrientationTypes;
 
@@ -34,6 +45,7 @@ export class Tabs extends Widget {
 
         this.content = new Widget(id + ".content", "div");
         this.content.setType(WidgetTypes.FILL);
+        this.content.addClass("WUITabContainer");
 
         this.setType(WidgetTypes.FILL);
 
@@ -58,9 +70,26 @@ export class Tabs extends Widget {
     public addTab(id: string, title: string, content: Widget) {
         this.items.set(id, { title, content });
 
-        const itemControl = new Button(id + ".itemControl");
-        itemControl.setText(title);
-        itemControl.setW(100);
+        const itemControl = new TabControl(id + ".itemControl", null, title);
+        //itemControl.setW(100);
+        itemControl.setH(TAB_HEADER_HEIGHT);
+
+        itemControl.subscribe({
+            event: "click",
+            then: (_e, _w) => {
+                this.setTab(id);
+            },
+        });
+
+        this.itemControls.addItem(id, itemControl);
+    }
+
+    public addIconTab(id: string, icon: string, content: Widget) {
+        this.items.set(id, { title: icon, content });
+
+        const itemControl = new IconButton(id + ".itemControl", icon);
+        itemControl.setW(40);
+        itemControl.setH(TAB_HEADER_HEIGHT);
 
         itemControl.subscribe({
             event: "click",
@@ -79,6 +108,16 @@ export class Tabs extends Widget {
         for (const itemId of this.items.keys()) {
             if (itemId != id) {
                 this.items.get(itemId)?.content.setVisible(false);
+                const ctrlTab = window.w.get(itemId + ".itemControl");
+                if (ctrlTab) {
+                    ctrlTab.deleteClass("WUITabControlActive");
+                    ctrlTab.addClass("WUITabControl");
+                }
+            } else {
+                const ctrlTab = window.w.get(itemId + ".itemControl");
+                if (ctrlTab) {
+                    ctrlTab.addClass("WUITabControlActive");
+                }
             }
         }
 
