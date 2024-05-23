@@ -6,7 +6,7 @@ import { Toolbar } from "./toolbar.ui";
 import { Label } from "./label.ui";
 import { IconButton } from "./IconButton.ui";
 
-const TAB_HEADER_HEIGHT = 40;
+const TAB_HEADER_SIZE = 40;
 
 export type TabItem = {
     title: string;
@@ -18,7 +18,7 @@ class TabControl extends Label {
         super(id, "span", parent);
         this.setText(text);
         this.addClass("WUITabControl");
-        this.getBody().style.lineHeight = TAB_HEADER_HEIGHT + "px";
+        this.getBody().style.lineHeight = TAB_HEADER_SIZE + "px";
     }
 }
 export class Tabs extends Widget {
@@ -41,7 +41,7 @@ export class Tabs extends Widget {
 
         this.header = new Widget(id + ".header", "div");
         this.header.setType(WidgetTypes.FILL);
-        this.header.setFixedSize(TAB_HEADER_HEIGHT);
+        this.header.setFixedSize(TAB_HEADER_SIZE);
 
         this.content = new Widget(id + ".content", "div");
         this.content.setType(WidgetTypes.FILL);
@@ -60,7 +60,7 @@ export class Tabs extends Widget {
 
         this.items = new Map<string, TabItem>();
 
-        this.itemControls = new Toolbar(id + ".itemControls", this.header);
+        this.itemControls = new Toolbar(id + ".itemControls", this.header, orientation);
     }
 
     public setOrientation(orientation: OrientationTypes) {
@@ -70,9 +70,22 @@ export class Tabs extends Widget {
     public addTab(id: string, title: string, content: Widget) {
         this.items.set(id, { title, content });
 
-        const itemControl = new TabControl(id + ".itemControl", null, title);
-        //itemControl.setW(100);
-        itemControl.setH(TAB_HEADER_HEIGHT);
+        const itemControl = new Label(id + ".itemControl", "span");
+
+        itemControl.setText(title);
+        itemControl.addClass("WUITabControl");
+
+        if (this.orientation === "horizontal") {
+            itemControl.setH(TAB_HEADER_SIZE);
+            itemControl.getBody().style.lineHeight = TAB_HEADER_SIZE + "px";
+        } else if (this.orientation === "vertical") {
+            itemControl.getBody().style.writingMode = "vertical-rl";
+            itemControl.getBody().style.transform = "scale(-1,-1)";
+            itemControl.getBody().style.paddingTop = "15px";
+            itemControl.getBody().style.paddingBottom = "15px";
+            itemControl.getBody().style.paddingRight = "12px";
+            itemControl.setW(TAB_HEADER_SIZE);
+        }
 
         itemControl.subscribe({
             event: "click",
@@ -89,7 +102,7 @@ export class Tabs extends Widget {
 
         const itemControl = new IconButton(id + ".itemControl", icon);
         itemControl.setW(40);
-        itemControl.setH(TAB_HEADER_HEIGHT);
+        itemControl.setH(TAB_HEADER_SIZE);
 
         itemControl.subscribe({
             event: "click",
@@ -110,13 +123,30 @@ export class Tabs extends Widget {
                 this.items.get(itemId)?.content.setVisible(false);
                 const ctrlTab = window.w.get(itemId + ".itemControl");
                 if (ctrlTab) {
-                    ctrlTab.deleteClass("WUITabControlActive");
-                    ctrlTab.addClass("WUITabControl");
+                    if (this.orientation === "horizontal") {
+                        ctrlTab.deleteClass("WUITabControlActive");
+                        ctrlTab.addClass("WUITabControl");
+                    } else if (this.orientation === "vertical") {
+                        if (ctrlTab instanceof IconButton) {
+                            ctrlTab.deleteClass("WUITabControlActiveIcon_VL");
+                        } else if (ctrlTab instanceof Label) {
+                            ctrlTab.deleteClass("WUITabControlActive_VL");
+                        }
+                        ctrlTab.addClass("WUITabControl");
+                    }
                 }
             } else {
                 const ctrlTab = window.w.get(itemId + ".itemControl");
                 if (ctrlTab) {
-                    ctrlTab.addClass("WUITabControlActive");
+                    if (this.orientation === "horizontal") {
+                        ctrlTab.addClass("WUITabControlActive");
+                    } else if (this.orientation === "vertical") {
+                        if (ctrlTab instanceof IconButton) {
+                            ctrlTab.addClass("WUITabControlActiveIcon_VL");
+                        } else if (ctrlTab instanceof Label) {
+                            ctrlTab.addClass("WUITabControlActive_VL");
+                        }
+                    }
                 }
             }
         }

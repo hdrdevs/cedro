@@ -12,7 +12,7 @@ class WorkingApp extends Application {
         super("Working App - Tab Example");
         this.getRoot().setAlign(WidgetAlignTypes.VERTICAL);
 
-        this.tab = new Tabs("tab1");
+        this.tab = new Tabs("tab1", null, "vertical");
 
         this.btn1 = new Button("btn1");
         this.btn1.setText("Nuevo");

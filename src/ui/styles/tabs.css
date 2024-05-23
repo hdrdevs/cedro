@@ -31,3 +31,37 @@
 .WUITabContainer {
     border-top: solid 1px var(--palette-divider);
 }
+
+.WUITabControlActive_VL {
+    border-top: none !important;
+    border-right: none !important;
+    border-left: solid 2px var(--palette-primary-dark) !important;
+    border-bottom: none !important;
+    background-color: var(--palette-divider);
+    box-sizing: border-box;
+    font-weight: bold;
+    text-align: center;
+    cursor: default;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 0px !important;
+}
+
+.WUITabControlActiveIcon_VL {
+    border-top: none !important;
+    border-left: none !important;
+    border-right: solid 2px var(--palette-primary-dark) !important;
+    border-bottom: none !important;
+    background-color: var(--palette-divider);
+    box-sizing: border-box;
+    font-weight: bold;
+    text-align: center;
+    cursor: default;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 0px !important;
+}
+
+.WUITabContainer_VL {
+    border-right: solid 1px var(--palette-divider);
+}
