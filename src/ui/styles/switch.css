@@ -1,0 +1,5 @@
+.WUISwitch {
+    cursor: default;
+    font-size: 40px !important;
+    color: var(--palette-text-secondary);
+}

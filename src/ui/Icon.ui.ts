@@ -1,12 +1,7 @@
 import { Colors } from "./colors.ui";
 import { Widget } from "./widget.ui";
 
-export type IconVariants =
-    | "Filled"
-    | "Outlined"
-    | "Round"
-    | "Sharp"
-    | "Two Tone";
+export type IconVariants = "Filled" | "Outlined" | "Round" | "Sharp" | "Two Tone";
 
 export class Icon extends Widget {
     variant: IconVariants;
@@ -17,7 +12,7 @@ export class Icon extends Widget {
         id: string,
         icon: string,
         variant: IconVariants = "Filled",
-        parent: Widget
+        parent: Widget | null = null
     ) {
         super(id, "span", parent);
 
@@ -29,8 +24,7 @@ export class Icon extends Widget {
             this.addClass("material-icons");
         } else {
             this.addClass(
-                "material-icons-" +
-                    this.variant.toString().replace(" ", "-").toLowerCase()
+                "material-icons-" + this.variant.toString().replace(" ", "-").toLowerCase()
             );
         }
 

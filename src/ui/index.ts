@@ -6,6 +6,7 @@ import { IconButton } from "./IconButton.ui";
 import { Label } from "./label.ui";
 import { Menu } from "./menu.ui";
 import { Select } from "./select.ui";
+import { Switch } from "./switch.ui";
 import { Textbox } from "./textbox.ui";
 import { Tabs } from "./tabs.ui";
 import { Toolbar } from "./toolbar.ui";
@@ -21,6 +22,7 @@ export {
     Label,
     Menu,
     Select,
+    Switch,
     Tabs,
     Textbox,
     Toolbar,
