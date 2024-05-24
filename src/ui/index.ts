@@ -1,4 +1,5 @@
 import { Button } from "./button.ui";
+import { Checkbox } from "./checkbox.ui";
 import { Widget } from "./widget.ui";
 import { Dialog } from "./dialog";
 import { Icon } from "./Icon.ui";
@@ -15,6 +16,7 @@ import { createWidget } from "./widget.builder.ui";
 
 export {
     Button,
+    Checkbox,
     Widget,
     Dialog,
     Icon,

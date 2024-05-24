@@ -1,9 +1,11 @@
-import { Switch } from "../../ui";
+import { Checkbox, Switch } from "../../ui";
 import { Application, WidgetAlignTypes } from "../../index";
 
 class WorkingApp extends Application {
     switch1: Switch;
     switch2: Switch;
+    check1: Checkbox;
+    check2: Checkbox;
 
     constructor() {
         super("Working App - Tab Example");
@@ -12,8 +14,14 @@ class WorkingApp extends Application {
         this.switch1 = new Switch("switch1", null);
         this.switch2 = new Switch("switch2", null);
 
+        this.check1 = new Checkbox("chk1", null);
+        this.check2 = new Checkbox("chk2", null);
+
         this.getRoot().addChild(this.switch1);
         this.getRoot().addChild(this.switch2);
+
+        this.getRoot().addChild(this.check1);
+        this.getRoot().addChild(this.check2);
     }
 
     init() {
