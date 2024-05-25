@@ -6,6 +6,7 @@ import { Icon } from "./Icon.ui";
 import { IconButton } from "./IconButton.ui";
 import { Label } from "./label.ui";
 import { Menu } from "./menu.ui";
+import { ProgressBar } from "./progressbar.ui";
 import { Select } from "./select.ui";
 import { Switch } from "./switch.ui";
 import { Textbox } from "./textbox.ui";
@@ -24,6 +25,7 @@ export {
     IconButton,
     Label,
     Menu,
+    ProgressBar,
     RadioButton,
     Select,
     Switch,

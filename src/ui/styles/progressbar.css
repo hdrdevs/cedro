@@ -1,0 +1,19 @@
+.WUIProgressBarContainer {
+    overflow: hidden;
+    border: solid 2px var(--palette-divider);
+    border-radius: 7px;
+    background-color: var(--palette-background-default);
+}
+
+.WUIProgressBarBar {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    border-radius: 6px;
+    background-color: var(--palette-primary-dark);
+}
+
+.WUIProgressBarLabel {
+    position: absolute;
+    color: var(--palette-primary-light);
+}
