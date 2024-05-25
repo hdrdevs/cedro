@@ -12,6 +12,7 @@ import { Textbox } from "./textbox.ui";
 import { Tabs } from "./tabs.ui";
 import { Toolbar } from "./toolbar.ui";
 import { DataGrid } from "./datagrid.ui";
+import { RadioButton } from "./radiobutton";
 import { createWidget } from "./widget.builder.ui";
 
 export {
@@ -23,6 +24,7 @@ export {
     IconButton,
     Label,
     Menu,
+    RadioButton,
     Select,
     Switch,
     Tabs,
