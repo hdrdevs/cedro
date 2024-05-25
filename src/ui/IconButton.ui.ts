@@ -49,8 +49,13 @@ export class IconButton extends Button {
 
             const startX = padding; //this.getBody().clientWidth / 2 - (iconWidth + labelWidth) / 2;
             const startLabelX = startX + iconWidth + padding;
-            const startY = this.getH() / 2 - iconWidth / 2;
-            const startLabelY = this.getH() / 2 - labelHeight / 2;
+            let startY = this.getH() / 2 - iconWidth / 2;
+            let startLabelY = this.getH() / 2 - labelHeight / 2;
+
+            if (this.getType() !== WidgetTypes.FILL) {
+                startY = 0;
+                startLabelY = iconWidth / 6;
+            }
 
             if (startX < 0 || startY < 0) {
                 setTimeout(() => {

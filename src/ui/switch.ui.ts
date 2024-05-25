@@ -1,14 +1,21 @@
 import "./styles/switch.css";
-import { Icon } from "./Icon.ui";
 import { Widget } from "./widget.ui";
+import { IconButton } from "./IconButton.ui";
 
-export class Switch extends Icon {
+export class Switch extends IconButton {
     state: boolean;
-    constructor(id: string, parent: Widget | null = null) {
-        super(id + ".Switch", "toggle_off", "Outlined", parent);
+    constructor(id: string, text: string = "", parent: Widget | null = null) {
+        super(id, "toggle_off", parent);
+        //super(id + ".Switch", "toggle_off", "Outlined", parent);
         this.state = false;
 
-        this.addClass("WUISwitch");
+        if (text) {
+            this.setText(text);
+        }
+
+        this.setVariant("text");
+
+        //this.addClass("WUISwitch");
 
         this.subscribe({
             event: "click",
@@ -20,7 +27,8 @@ export class Switch extends Icon {
 
     public setState(state: boolean): void {
         this.state = state;
-        this.getBody().innerHTML = state ? "toggle_on" : "toggle_off";
+        this.setIcon(state ? "toggle_on" : "toggle_off");
+        //this.getBody().innerHTML = state ? "toggle_on" : "toggle_off";
     }
 
     public toggle(): void {
