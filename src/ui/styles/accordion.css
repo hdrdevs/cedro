@@ -1,0 +1,9 @@
+.WUIAccordion {
+    background-color: transparent;
+    border-left: solid 0.13rem;
+    border-top: solid 0.13rem;
+    border-bottom: solid 0.13rem;
+    border-right: solid 0.13rem;
+    border-radius: 0.25rem;
+    border-color: var(--palette-primary-main);
+}

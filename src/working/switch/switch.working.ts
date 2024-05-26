@@ -1,8 +1,10 @@
 import {
+    Accordion,
     Button,
     ButtonStack,
     Checkbox,
     IconButton,
+    Label,
     ProgressBar,
     RadioButton,
     Switch,
@@ -43,6 +45,10 @@ class WorkingApp extends Application {
     vButon2: Button;
     vButon3: Button;
     vButon4: IconButton;
+
+    acordion: Accordion;
+    itemAcordion: Label;
+    itemAcordion2: Label;
 
     constructor() {
         super("Working App - Tab Example");
@@ -111,6 +117,7 @@ class WorkingApp extends Application {
         this.verticalContainer = new Widget("verticalContainer", "div");
         this.verticalContainer.setType(WidgetTypes.FILL);
         this.verticalContainer.setAlign(WidgetAlignTypes.HORIZONTAL);
+        this.verticalContainer.setPadding(4);
 
         this.valuebar4 = new ValueBar("valuebar4", "vertical", null);
         this.valuebar4.setType(WidgetTypes.FILL);
@@ -180,6 +187,22 @@ class WorkingApp extends Application {
         this.verticalContainer.addChild(this.verticalStack);
 
         /********** */
+
+        this.acordion = new Accordion("accordion", null);
+        this.acordion.setType(WidgetTypes.FILL);
+
+        this.itemAcordion = new Label("itemAcordion", "span", null);
+        this.itemAcordion.setText("Item 1");
+
+        this.itemAcordion2 = new Label("itemAcordion2", "span", null);
+        this.itemAcordion2.setText("Item 2");
+
+        this.acordion.addItem("Lista de Objetos", "list", this.itemAcordion);
+        this.acordion.addItem("Capas", "add", this.itemAcordion2);
+
+        this.verticalContainer.addChild(this.acordion);
+
+        /********** */
         this.getRoot().addChild(this.switch1);
 
         this.getRoot().addChild(this.buttonStack);
@@ -206,7 +229,7 @@ class WorkingApp extends Application {
     init() {
         super.init();
         this.root.render();
-        this.theme.setTheme("dark");
+        this.theme.setTheme("light");
     }
 }
 

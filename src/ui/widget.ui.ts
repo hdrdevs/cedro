@@ -259,7 +259,7 @@ export class Widget implements IWidget {
         });
     }
 
-    public setFixedSize(s: number): void {
+    public setFixedSize(s: number | null): void {
         this.fixedSize = s;
     }
 

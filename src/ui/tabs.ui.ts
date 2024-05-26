@@ -13,14 +13,6 @@ export type TabItem = {
     content: Widget;
 };
 
-class TabControl extends Label {
-    constructor(id: string, parent: Widget | null = null, text: string) {
-        super(id, "span", parent);
-        this.setText(text);
-        this.addClass("WUITabControl");
-        this.getBody().style.lineHeight = TAB_HEADER_SIZE + "px";
-    }
-}
 export class Tabs extends Widget {
     orientation: OrientationTypes;
 
