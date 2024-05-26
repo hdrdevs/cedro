@@ -1,4 +1,4 @@
-import { Checkbox, ProgressBar, RadioButton, Switch } from "../../ui";
+import { Checkbox, ProgressBar, RadioButton, Switch, ValueBar } from "../../ui";
 import { Application, WidgetAlignTypes, WidgetTypes } from "../../index";
 
 class WorkingApp extends Application {
@@ -12,6 +12,10 @@ class WorkingApp extends Application {
 
     progress1: ProgressBar;
     progress2: ProgressBar;
+
+    valuebar1: ValueBar;
+    valuebar2: ValueBar;
+    valuebar3: ValueBar;
 
     constructor() {
         super("Working App - Tab Example");
@@ -62,12 +66,31 @@ class WorkingApp extends Application {
         this.progress2.setPaddingBar(4);
         this.progress2.hideLabel();
 
+        this.valuebar1 = new ValueBar("valuebar1", "horizontal", null);
+        this.valuebar1.setType(WidgetTypes.FILL);
+        this.valuebar1.setFixedSize(35);
+        this.valuebar1.setValue(50);
+
+        this.valuebar2 = new ValueBar("valuebar2", "horizontal", null);
+        this.valuebar2.setType(WidgetTypes.FILL);
+        this.valuebar2.setFixedSize(35);
+        this.valuebar2.setValue(75);
+
+        this.valuebar3 = new ValueBar("valuebar3", "horizontal", null);
+        this.valuebar3.setType(WidgetTypes.FILL);
+        this.valuebar3.setFixedSize(35);
+        this.valuebar3.setValue(25);
+
         this.getRoot().addChild(this.switch1);
         this.getRoot().addChild(this.switch2);
         this.getRoot().addChild(this.switch3);
 
         this.getRoot().addChild(this.check1);
         this.getRoot().addChild(this.check2);
+
+        this.getRoot().addChild(this.valuebar1);
+        this.getRoot().addChild(this.valuebar2);
+        this.getRoot().addChild(this.valuebar3);
 
         this.getRoot().addChild(this.radio1);
 

@@ -1,0 +1,26 @@
+.WUIValueBar {
+    overflow: hidden;
+}
+
+.WUIValueBarContainer {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    border: solid 2px var(--palette-divider);
+    border-radius: 6px;
+    background-color: var(--palette-background-default);
+}
+
+.WUIValueBarBar {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    border-radius: 6px;
+    background-color: var(--palette-primary-dark);
+}
+
+.WUIValueBarHandler {
+    position: absolute;
+    border-radius: 50%;
+    background-color: var(--palette-primary-dark);
+}

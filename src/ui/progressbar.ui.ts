@@ -4,6 +4,8 @@ import { Widget } from "./widget.ui";
 
 const PROGRESS_BAR_HEIGHT = 40;
 
+//icono para el progress bar interactivo humidity_high
+
 export class ProgressBar extends Widget {
     private value: number;
     private paddingBar: number;

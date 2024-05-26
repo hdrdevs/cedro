@@ -14,6 +14,7 @@ import { Tabs } from "./tabs.ui";
 import { Toolbar } from "./toolbar.ui";
 import { DataGrid } from "./datagrid.ui";
 import { RadioButton } from "./radiobutton";
+import { ValueBar } from "./valuebar.ui";
 import { createWidget } from "./widget.builder.ui";
 
 export {
@@ -32,6 +33,7 @@ export {
     Tabs,
     Textbox,
     Toolbar,
+    ValueBar,
     DataGrid,
     createWidget,
 };
