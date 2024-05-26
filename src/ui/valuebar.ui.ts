@@ -49,9 +49,15 @@ export class ValueBar extends Widget {
     }
 
     public updateValueFromHandlerPosition(): void {
-        const maxX = this.draggable.maxX ? this.draggable.maxX : 1;
-        const ratio = this.handler.getX() / maxX;
-        this.value = Math.round(ratio * 100);
+        if (this.orientation === "horizontal") {
+            const maxX = this.draggable.maxX ? this.draggable.maxX : 1;
+            const ratio = this.handler.getX() / maxX;
+            this.value = Math.round(ratio * 100);
+        } else if (this.orientation === "vertical") {
+            const maxY = this.draggable.maxY ? this.draggable.maxY : 1;
+            const ratio = this.handler.getY() / maxY;
+            this.value = Math.round(ratio * 100);
+        }
 
         this.render();
     }
@@ -59,27 +65,52 @@ export class ValueBar extends Widget {
     public render(): void {
         super.render();
 
-        const handlerSize = 24;
-        const heightBar = 10;
-        const width = this.getW() - 2;
-        const height = this.getH();
-        const widthBar = width * (this.value / 100);
+        if (this.orientation === "horizontal") {
+            const handlerSize = 24;
+            const heightBar = 10;
+            const width = this.getW() - 3;
+            const height = this.getH();
+            const widthBar = width * (this.value / 100);
 
-        this.containerBar.setX(0);
-        this.containerBar.setY(height / 2 - heightBar / 2);
-        this.containerBar.setH(heightBar);
-        this.containerBar.setW(width);
+            this.containerBar.setX(0);
+            this.containerBar.setY(height / 2 - heightBar / 2);
+            this.containerBar.setH(heightBar);
+            this.containerBar.setW(width);
 
-        this.bar.setX(0);
-        this.bar.setY(0);
-        this.bar.setW(widthBar);
-        this.bar.setH(heightBar);
+            this.bar.setX(0);
+            this.bar.setY(0);
+            this.bar.setW(widthBar);
+            this.bar.setH(heightBar);
 
-        this.handler.setX(widthBar - handlerSize + 2);
-        this.handler.setY(height / 2 - handlerSize / 2 + 2);
-        this.handler.setWH(handlerSize, handlerSize);
+            this.handler.setX(widthBar - handlerSize + 2);
+            this.handler.setY(height / 2 - handlerSize / 2 + 2);
+            this.handler.setWH(handlerSize, handlerSize);
 
-        this.draggable.setMinX(0);
-        this.draggable.setMaxX(width - handlerSize + 2);
+            this.draggable.setMinX(0);
+            this.draggable.setMaxX(width - handlerSize + 2);
+        } else if (this.orientation === "vertical") {
+            const handlerSize = 24;
+            const widthBar = 10;
+            const height = this.getH() - 3;
+            const width = this.getW();
+            const heightBar = height * (this.value / 100);
+
+            this.containerBar.setY(0);
+            this.containerBar.setX(width / 2 - widthBar / 2);
+            this.containerBar.setW(widthBar);
+            this.containerBar.setH(height);
+
+            this.bar.setX(0);
+            this.bar.setY(0);
+            this.bar.setH(heightBar);
+            this.bar.setW(widthBar);
+
+            this.handler.setY(heightBar - handlerSize + 2);
+            this.handler.setX(width / 2 - handlerSize / 2 + 2);
+            this.handler.setWH(handlerSize, handlerSize);
+
+            this.draggable.setMinY(0);
+            this.draggable.setMaxY(height - handlerSize + 2);
+        }
     }
 }

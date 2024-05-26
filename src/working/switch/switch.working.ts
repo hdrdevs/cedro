@@ -1,5 +1,5 @@
 import { Checkbox, ProgressBar, RadioButton, Switch, ValueBar } from "../../ui";
-import { Application, WidgetAlignTypes, WidgetTypes } from "../../index";
+import { Application, Widget, WidgetAlignTypes, WidgetTypes } from "../../index";
 
 class WorkingApp extends Application {
     switch1: Switch;
@@ -16,6 +16,12 @@ class WorkingApp extends Application {
     valuebar1: ValueBar;
     valuebar2: ValueBar;
     valuebar3: ValueBar;
+
+    valuebar4: ValueBar;
+    valuebar5: ValueBar;
+    valuebar6: ValueBar;
+
+    verticalContainer: Widget;
 
     constructor() {
         super("Working App - Tab Example");
@@ -81,6 +87,29 @@ class WorkingApp extends Application {
         this.valuebar3.setFixedSize(35);
         this.valuebar3.setValue(25);
 
+        this.verticalContainer = new Widget("verticalContainer", "div");
+        this.verticalContainer.setType(WidgetTypes.FILL);
+        this.verticalContainer.setAlign(WidgetAlignTypes.HORIZONTAL);
+
+        this.valuebar4 = new ValueBar("valuebar4", "vertical", null);
+        this.valuebar4.setType(WidgetTypes.FILL);
+        this.valuebar4.setFixedSize(35);
+        this.valuebar4.setValue(50);
+
+        this.valuebar5 = new ValueBar("valuebar5", "vertical", null);
+        this.valuebar5.setType(WidgetTypes.FILL);
+        this.valuebar5.setFixedSize(35);
+        this.valuebar5.setValue(75);
+
+        this.valuebar6 = new ValueBar("valuebar6", "vertical", null);
+        this.valuebar6.setType(WidgetTypes.FILL);
+        this.valuebar6.setFixedSize(35);
+        this.valuebar6.setValue(25);
+
+        this.verticalContainer.addChild(this.valuebar4);
+        this.verticalContainer.addChild(this.valuebar5);
+        this.verticalContainer.addChild(this.valuebar6);
+
         this.getRoot().addChild(this.switch1);
         this.getRoot().addChild(this.switch2);
         this.getRoot().addChild(this.switch3);
@@ -97,6 +126,8 @@ class WorkingApp extends Application {
         this.getRoot().addChild(this.progress1);
         this.getRoot().addChild(this.radio2);
         this.getRoot().addChild(this.progress2);
+
+        this.getRoot().addChild(this.verticalContainer);
     }
 
     init() {
