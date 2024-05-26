@@ -1,4 +1,13 @@
-import { Checkbox, ProgressBar, RadioButton, Switch, ValueBar } from "../../ui";
+import {
+    Button,
+    ButtonStack,
+    Checkbox,
+    IconButton,
+    ProgressBar,
+    RadioButton,
+    Switch,
+    ValueBar,
+} from "../../ui";
 import { Application, Widget, WidgetAlignTypes, WidgetTypes } from "../../index";
 
 class WorkingApp extends Application {
@@ -22,6 +31,12 @@ class WorkingApp extends Application {
     valuebar6: ValueBar;
 
     verticalContainer: Widget;
+
+    buttonStack: ButtonStack;
+    buttonPage1: Button;
+    buttonPage2: Button;
+    buttonPage3: Button;
+    buttonPage4: IconButton;
 
     constructor() {
         super("Working App - Tab Example");
@@ -110,7 +125,32 @@ class WorkingApp extends Application {
         this.verticalContainer.addChild(this.valuebar5);
         this.verticalContainer.addChild(this.valuebar6);
 
+        this.buttonStack = new ButtonStack("buttonStack", "horizontal", null);
+        this.buttonStack.setType(WidgetTypes.FILL);
+        this.buttonStack.setFixedSize(35);
+
+        this.buttonPage1 = new Button("buttonPage1", null);
+        this.buttonPage1.setText("Page 1");
+
+        this.buttonPage2 = new Button("buttonPage2", null);
+        this.buttonPage2.setText("Page 2");
+
+        this.buttonPage3 = new Button("buttonPage3", null);
+        this.buttonPage3.setText("Page 3");
+
+        this.buttonPage4 = new IconButton("buttonPage4", "add", null);
+
+        this.buttonStack.addButton(this.buttonPage1);
+        this.buttonStack.addButton(this.buttonPage4);
+        this.buttonStack.addButton(this.buttonPage2);
+        this.buttonStack.addButton(this.buttonPage3);
+
+        this.buttonStack.setActive(this.buttonPage2.id);
+
         this.getRoot().addChild(this.switch1);
+
+        this.getRoot().addChild(this.buttonStack);
+
         this.getRoot().addChild(this.switch2);
         this.getRoot().addChild(this.switch3);
 
@@ -133,7 +173,7 @@ class WorkingApp extends Application {
     init() {
         super.init();
         this.root.render();
-        this.theme.setTheme("dark");
+        this.theme.setTheme("light");
     }
 }
 

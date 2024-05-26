@@ -1,8 +1,18 @@
 import "./styles/button.css";
+import "./styles/stackbutton.css";
 import { Colors } from "./colors.ui";
 import { Widget } from "./widget.ui";
 
-export type ButonVariants = "contained" | "outlined" | "text";
+export type ButonVariants =
+    | "contained"
+    | "outlined"
+    | "text"
+    | "stack-start"
+    | "stack-middle"
+    | "stack-end"
+    | "stack-start-active"
+    | "stack-middle-active"
+    | "stack-end-active";
 export type ButonSizes = "small" | "medium" | "large";
 
 export class Button extends Widget {

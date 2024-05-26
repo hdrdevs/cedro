@@ -70,6 +70,8 @@ export class Draggable {
                 this.endDrag();
             },
         });
+
+        this.background.setVisible(false);
     }
 
     private startDrag(e: MouseEvent): void {
