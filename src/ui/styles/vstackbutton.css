@@ -2,30 +2,30 @@
 /***********************************STACK-START******************************/
 /****************************************************************************/
 
-.WUIButton-stack-start {
+.WUIButton-stack-vertical-start {
     cursor: pointer;
     font-weight: 500;
     text-align: center;
     background-color: transparent;
     border-left: solid 0.13rem;
     border-top: solid 0.13rem;
-    border-bottom: solid 0.13rem;
-    border-right: none;
+    border-right: solid 0.13rem;
+    border-bottom: none;
     font-size: 1rem;
     border-top-left-radius: 0.25rem;
-    border-bottom-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
         border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     text-transform: uppercase;
 }
 
-.WUIButton-stack-start-color-primary {
+.WUIButton-stack-vertical-start-color-primary {
     color: var(--palette-text-primary);
     background-color: var(--palette-background-default);
     border-color: var(--palette-primary-main);
 }
 
-.WUIButton-stack-start-color-primary:hover {
+.WUIButton-stack-vertical-start-color-primary:hover {
     color: var(--palette-primary-text-light);
     background-color: var(--palette-primary-light);
     border-color: var(--palette-primary-main);
@@ -35,30 +35,29 @@
 /***********************************STACK-MIDDLE******************************/
 /****************************************************************************/
 
-.WUIButton-stack-middle {
+.WUIButton-stack-vertical-middle {
     cursor: pointer;
     font-weight: 500;
     text-align: center;
     background-color: transparent;
     border-left: solid 0.13rem;
     border-top: solid 0.13rem;
-    border-bottom: solid 0.13rem;
-    border-right: none;
+    border-right: solid 0.13rem;
+    border-bottom: none;
     font-size: 1rem;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
+    border-radius: 0;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
         border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     text-transform: uppercase;
 }
 
-.WUIButton-stack-middle-color-primary {
+.WUIButton-stack-vertical-middle-color-primary {
     color: var(--palette-text-primary);
     background-color: var(--palette-background-default);
     border-color: var(--palette-primary-main);
 }
 
-.WUIButton-stack-middle-color-primary:hover {
+.WUIButton-stack-vertical-middle-color-primary:hover {
     color: var(--palette-primary-text-light);
     background-color: var(--palette-primary-light);
     border-color: var(--palette-primary-main);
@@ -68,7 +67,7 @@
 /***********************************STACK-END******************************/
 /**************************************************************************/
 
-.WUIButton-stack-end {
+.WUIButton-stack-vertical-end {
     cursor: pointer;
     font-weight: 500;
     text-align: center;
@@ -79,21 +78,21 @@
     border-bottom: solid 0.13rem;
     font-size: 1rem;
     border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    border-top-right-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+    border-top-right-radius: 0;
     border-bottom-right-radius: 0.25rem;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
         border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     text-transform: uppercase;
 }
 
-.WUIButton-stack-end-color-primary {
+.WUIButton-stack-vertical-end-color-primary {
     color: var(--palette-text-primary);
     background-color: var(--palette-background-default);
     border-color: var(--palette-primary-main);
 }
 
-.WUIButton-stack-end-color-primary:hover {
+.WUIButton-stack-vertical-end-color-primary:hover {
     color: var(--palette-primary-text-light);
     background-color: var(--palette-primary-light);
     border-color: var(--palette-primary-main);
@@ -103,7 +102,7 @@
 /******************************STACK-START-ACTIVE************************/
 /************************************************************************/
 
-.WUIButton-stack-start-active {
+.WUIButton-stack-vertical-start-active {
     cursor: pointer;
     font-weight: 500;
     text-align: center;
@@ -111,23 +110,23 @@
     background-color: var(--palette-primary-light);
     border-left: solid 0.13rem;
     border-top: solid 0.13rem;
-    border-bottom: solid 0.13rem;
-    border-right: none;
+    border-right: solid 0.13rem;
+    border-bottom: none;
     font-size: 1rem;
     border-top-left-radius: 0.25rem;
-    border-bottom-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
         border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     text-transform: uppercase;
 }
 
-.WUIButton-stack-start-active-color-primary {
+.WUIButton-stack-vertical-start-active-color-primary {
     color: var(--palette-primary-text-light);
     background-color: var(--palette-primary-light);
     border-color: var(--palette-primary-main);
 }
 
-.WUIButton-stack-start-active-color-primary:hover {
+.WUIButton-stack-vertical-start-active-color-primary:hover {
     color: var(--palette-primary-text-light);
     background-color: var(--palette-primary-light);
     border-color: var(--palette-primary-main);
@@ -137,7 +136,7 @@
 /**************************STACK-MIDDLE-ACTIVE****************************/
 /*************************************************************************/
 
-.WUIButton-stack-middle-active {
+.WUIButton-stack-vertical-middle-active {
     cursor: pointer;
     font-weight: 500;
     text-align: center;
@@ -145,23 +144,22 @@
     background-color: var(--palette-primary-light);
     border-left: solid 0.13rem;
     border-top: solid 0.13rem;
-    border-bottom: solid 0.13rem;
-    border-right: none;
+    border-right: solid 0.13rem;
+    border-bottom: none;
     font-size: 1rem;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
+    border-radius: 0;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
         border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     text-transform: uppercase;
 }
 
-.WUIButton-stack-middle-active-color-primary {
+.WUIButton-stack-vertical-middle-active-color-primary {
     color: var(--palette-primary-text-light);
     background-color: var(--palette-primary-light);
     border-color: var(--palette-primary-main);
 }
 
-.WUIButton-stack-middle-active-color-primary:hover {
+.WUIButton-stack-vertical-middle-active-color-primary:hover {
     color: var(--palette-primary-text-light);
     background-color: var(--palette-primary-light);
     border-color: var(--palette-primary-main);
@@ -171,7 +169,7 @@
 /********************************STACK-END-ACTIVE**************************/
 /**************************************************************************/
 
-.WUIButton-stack-end-active {
+.WUIButton-stack-vertical-end-active {
     cursor: pointer;
     font-weight: 500;
     text-align: center;
@@ -181,24 +179,23 @@
     border-right: solid 0.13rem;
     border-top: solid 0.13rem;
     border-bottom: solid 0.13rem;
-    border-right: solid 0.13rem;
     font-size: 1rem;
     border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    border-top-right-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+    border-top-right-radius: 0;
     border-bottom-right-radius: 0.25rem;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
         border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     text-transform: uppercase;
 }
 
-.WUIButton-stack-end-active-color-primary {
+.WUIButton-stack-vertical-end-active-color-primary {
     color: var(--palette-primary-text-light);
     background-color: var(--palette-primary-light);
     border-color: var(--palette-primary-main);
 }
 
-.WUIButton-stack-end-active-color-primary:hover {
+.WUIButton-stack-vertical-end-active-color-primary:hover {
     color: var(--palette-primary-text-light);
     background-color: var(--palette-primary-light);
     border-color: var(--palette-primary-main);

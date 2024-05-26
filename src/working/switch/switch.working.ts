@@ -38,6 +38,12 @@ class WorkingApp extends Application {
     buttonPage3: Button;
     buttonPage4: IconButton;
 
+    verticalStack: ButtonStack;
+    vButon1: Button;
+    vButon2: Button;
+    vButon3: Button;
+    vButon4: IconButton;
+
     constructor() {
         super("Working App - Tab Example");
         this.getRoot().setAlign(WidgetAlignTypes.VERTICAL);
@@ -147,6 +153,33 @@ class WorkingApp extends Application {
 
         this.buttonStack.setActive(this.buttonPage2.id);
 
+        /********** */
+
+        this.verticalStack = new ButtonStack("verticalStack", "vertical", null);
+        this.verticalStack.setType(WidgetTypes.FILL);
+        this.verticalStack.setFixedSize(150);
+
+        this.vButon1 = new Button("vb1", null);
+        this.vButon1.setText("Page 1");
+
+        this.vButon2 = new Button("vb2", null);
+        this.vButon2.setText("Page 2");
+
+        this.vButon3 = new Button("vb3", null);
+        this.vButon3.setText("Page 3");
+
+        this.vButon4 = new IconButton("vb4", "add", null);
+
+        this.verticalStack.addButton(this.vButon1);
+        this.verticalStack.addButton(this.vButon2);
+        this.verticalStack.addButton(this.vButon3);
+        this.verticalStack.addButton(this.vButon4);
+
+        this.verticalStack.setActive(this.vButon2.id);
+
+        this.verticalContainer.addChild(this.verticalStack);
+
+        /********** */
         this.getRoot().addChild(this.switch1);
 
         this.getRoot().addChild(this.buttonStack);
@@ -173,7 +206,7 @@ class WorkingApp extends Application {
     init() {
         super.init();
         this.root.render();
-        this.theme.setTheme("light");
+        this.theme.setTheme("dark");
     }
 }
 

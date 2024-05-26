@@ -1,5 +1,6 @@
 import "./styles/button.css";
 import "./styles/stackbutton.css";
+import "./styles/vstackbutton.css";
 import { Colors } from "./colors.ui";
 import { Widget } from "./widget.ui";
 
@@ -12,7 +13,13 @@ export type ButonVariants =
     | "stack-end"
     | "stack-start-active"
     | "stack-middle-active"
-    | "stack-end-active";
+    | "stack-end-active"
+    | "stack-vertical-start"
+    | "stack-vertical-middle"
+    | "stack-vertical-end"
+    | "stack-vertical-start-active"
+    | "stack-vertical-middle-active"
+    | "stack-vertical-end-active";
 export type ButonSizes = "small" | "medium" | "large";
 
 export class Button extends Widget {

@@ -60,10 +60,15 @@ export class ButtonStack extends Widget {
     }
 
     private setButtonVariant(button: Button | IconButton, variant: ButonVariants): void {
+        let fixedVariant = variant as string;
+
+        if (this.orientation === "vertical") {
+            fixedVariant = fixedVariant.replace("stack", "stack-vertical");
+        }
         if (button.id === this.activeButton) {
-            button.setVariant((variant + "-active") as ButonVariants);
+            button.setVariant((fixedVariant + "-active") as ButonVariants);
         } else {
-            button.setVariant(variant);
+            button.setVariant(fixedVariant as ButonVariants);
         }
     }
 
