@@ -4,11 +4,14 @@ import { Widget, WidgetAlignTypes, WidgetTypes } from "./widget.ui";
 import { IconButton } from "./IconButton.ui";
 import { OrientationTypes } from "src/types/orientation.type";
 
+export type ToolbarVariants = "contained" | "outlined";
+
 const TOOLBAR_SIZE = 48;
 const TOOLBAR_BUTTON_SIZE = 40;
 
 export class Toolbar extends Widget {
     orientation: OrientationTypes;
+    variant: ToolbarVariants;
     items: Map<string, IWidget>;
     size: number; //Indica el alto o ancho de la toolbar.
 
@@ -26,6 +29,8 @@ export class Toolbar extends Widget {
         this.size = TOOLBAR_SIZE;
         this.items = new Map<string, IWidget>();
 
+        this.variant = "outlined";
+
         if (this.orientation === "vertical") {
             this.setAlign(WidgetAlignTypes.VERTICAL);
         } else {
@@ -34,7 +39,7 @@ export class Toolbar extends Widget {
 
         this.setType(WidgetTypes.FILL);
         this.setFixedSize(TOOLBAR_SIZE);
-        this.addClass("WUIToolbar");
+        this.addClass("WUIToolbar-" + this.variant);
 
         this.itemsContainer = new Widget(this.id + ".itemsContainer", "div", this);
         this.itemsContainer.setType(WidgetTypes.CUSTOM);
@@ -78,6 +83,12 @@ export class Toolbar extends Widget {
                 }
             },
         });
+    }
+
+    public setVariant(variant: ToolbarVariants): void {
+        this.deleteClass("WUIToolbar-" + this.variant);
+        this.variant = variant;
+        this.addClass("WUIToolbar-" + this.variant);
     }
 
     public getIconLeft(): string {

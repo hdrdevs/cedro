@@ -53,6 +53,7 @@ export class Tabs extends Widget {
         this.items = new Map<string, TabItem>();
 
         this.itemControls = new Toolbar(id + ".itemControls", this.header, orientation);
+        this.itemControls.setVariant("contained");
 
         this.addClass("WUITab");
     }
