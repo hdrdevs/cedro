@@ -9,12 +9,27 @@
 }
 
 .WUIDataGrid-Header {
-    border-bottom: solid 1px var(--palette-primary-text-light);
+    border-bottom: solid 1px var(--palette-divider);
+}
+
+.WUIDataGrid-HeaderLabel:hover {
+    border-bottom: solid 1px var(--palette-divider);
+    background-color: var(--palette-action-hover) !important;
 }
 
 .WUIDataGrid-HeaderLabel {
-    border-right: solid 1px var(--palette-primary-text-light);
+    border-right: solid 1px var(--palette-divider);
     /*border-bottom: solid 1px var(--palette-primary-text-light);*/
     padding-left: 5px;
     font-weight: bold;
+}
+
+.WUIDataGrid-Row {
+    border-bottom: solid 1px var(--palette-divider);
+    background-color: transparent;
+}
+
+.WUIDataGrid-Row:hover {
+    border-bottom: solid 1px var(--palette-divider);
+    background-color: var(--palette-action-hover) !important;
 }

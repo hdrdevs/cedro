@@ -260,7 +260,7 @@ class WorkingApp extends Application {
     init() {
         super.init();
         this.root.render();
-        this.theme.setTheme("dark");
+        this.theme.setTheme("light");
     }
 }
 

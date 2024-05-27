@@ -4,7 +4,7 @@ import { Widget, WidgetAlignTypes, WidgetTypes } from "./widget.ui";
 import { IconButton } from "./IconButton.ui";
 import { OrientationTypes } from "src/types/orientation.type";
 
-const TOOLBAR_SIZE = 40;
+const TOOLBAR_SIZE = 48;
 const TOOLBAR_BUTTON_SIZE = 40;
 
 export class Toolbar extends Widget {
@@ -150,7 +150,7 @@ export class Toolbar extends Widget {
     public render(): void {
         const fullSize = this.getFullSize();
         const availableSize = this.orientation === "horizontal" ? this.getW() : this.getH();
-
+        super.render();
         if (fullSize > availableSize) {
             this.btnLeft.setVisible(true);
             this.btnRight.setVisible(true);
@@ -204,14 +204,14 @@ export class Toolbar extends Widget {
                 item.setY(currentPosition);
                 currentPosition += item.getH();
                 item.setX(0);
+                item.setW(TOOLBAR_BUTTON_SIZE);
             } else {
                 item.setX(currentPosition);
                 item.setY(0);
+                item.setH(TOOLBAR_BUTTON_SIZE);
                 currentPosition += item.getW();
             }
             item.render();
         }
-
-        super.render();
     }
 }

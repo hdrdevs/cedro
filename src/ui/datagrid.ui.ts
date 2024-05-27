@@ -144,6 +144,7 @@ export class DataGrid extends Widget {
             row.setType(WidgetTypes.CUSTOM);
             row.getBody().style.position = "absolute";
             row.getBody().style.overflow = "hidden";
+            row.addClass("WUIDataGrid-Row");
 
             this.dataContainer.addChild(row);
 
