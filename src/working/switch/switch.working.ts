@@ -3,6 +3,7 @@ import {
     Button,
     ButtonStack,
     Checkbox,
+    HPanel,
     IconButton,
     Label,
     ProgressBar,
@@ -16,7 +17,7 @@ import { formToolbar } from "./toolbar.working";
 import { tabWidget } from "./tab.working";
 
 class WorkingApp extends Application {
-    mainForm: Widget;
+    mainForm: HPanel;
     column1: Widget;
     column2: Widget;
 
@@ -62,9 +63,7 @@ class WorkingApp extends Application {
         this.getRoot().setAlign(WidgetAlignTypes.VERTICAL);
         this.getRoot().setPadding(4);
 
-        this.mainForm = new Widget("mainForm");
-        this.mainForm.setType(WidgetTypes.FILL);
-        this.mainForm.setAlign(WidgetAlignTypes.HORIZONTAL);
+        this.mainForm = new HPanel("mainForm");
         this.mainForm.setPadding(4);
 
         this.column1 = new Widget("column1");
@@ -251,8 +250,8 @@ class WorkingApp extends Application {
         this.column2.addChild(grid);
         this.column2.addChild(tabWidget);
 
-        this.mainForm.addChild(this.column1);
-        this.mainForm.addChild(this.column2);
+        this.mainForm.setLeft(this.column1, 300);
+        this.mainForm.setRight(this.column2, null);
 
         this.getRoot().addChild(this.mainForm);
     }

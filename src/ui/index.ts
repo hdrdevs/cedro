@@ -4,6 +4,7 @@ import { ButtonStack } from "./buttonstack.ui";
 import { Checkbox } from "./checkbox.ui";
 import { Widget } from "./widget.ui";
 import { Dialog } from "./dialog";
+import { HPanel } from "./hpanel.ui";
 import { Icon } from "./Icon.ui";
 import { IconButton } from "./IconButton.ui";
 import { Label } from "./label.ui";
@@ -26,6 +27,7 @@ export {
     Checkbox,
     Widget,
     Dialog,
+    HPanel,
     Icon,
     IconButton,
     Label,

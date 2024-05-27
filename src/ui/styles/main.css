@@ -2,6 +2,7 @@ body {
     font-family: "Roboto", sans-serif;
     background-color: var(--palette-background-default);
     color: var(--palette-text-secondary);
+    overflow: hidden;
 }
 
 h1,

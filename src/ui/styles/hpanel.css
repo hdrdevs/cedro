@@ -1,0 +1,12 @@
+.WUIHPanelHandler {
+    position: absolute;
+    overflow: hidden;
+    cursor: col-resize;
+    background-color: var(--palette-divider);
+    opacity: 0.1;
+}
+
+.WUIHPanelDragging {
+    background-color: var(--palette-divider) !important;
+    opacity: 1;
+}

@@ -18,12 +18,16 @@ export class Draggable {
     maxX: number | null;
     maxY: number | null;
 
+    draggingClass: string | null;
+
     constructor(widget: Widget, orientation: DragOrientation = "both") {
         this.target = widget;
 
         this.background = new Widget(this.target.id + ".Draggable.Background", "div", null);
         this.background.setType(WidgetTypes.CUSTOM);
         this.background.addClass("WUIDraggableBackground");
+
+        this.draggingClass = null;
 
         this.dragDistX = 0;
         this.dragDistY = 0;
@@ -74,6 +78,10 @@ export class Draggable {
         this.background.setVisible(false);
     }
 
+    public setDraggingClass(draggingClass: string | null): void {
+        this.draggingClass = draggingClass;
+    }
+
     private startDrag(e: MouseEvent): void {
         e.preventDefault();
         const mouseX = e.clientX;
@@ -83,6 +91,10 @@ export class Draggable {
         this.dragging = true;
         this.background.setVisible(true);
         this.background.raisteTop();
+
+        if (this.draggingClass) {
+            this.target.addClass(this.draggingClass);
+        }
     }
 
     private draggingTarget(e: MouseEvent): void {
@@ -125,6 +137,10 @@ export class Draggable {
     private endDrag(): void {
         this.dragging = false;
         this.background.setVisible(false);
+
+        if (this.draggingClass) {
+            this.target.deleteClass(this.draggingClass);
+        }
     }
 
     public setMaxX(x: number | null): void {
