@@ -65,6 +65,7 @@ class WorkingApp extends Application {
         this.mainForm = new Widget("mainForm");
         this.mainForm.setType(WidgetTypes.FILL);
         this.mainForm.setAlign(WidgetAlignTypes.HORIZONTAL);
+        this.mainForm.setPadding(4);
 
         this.column1 = new Widget("column1");
         this.column1.setType(WidgetTypes.FILL);
@@ -73,6 +74,7 @@ class WorkingApp extends Application {
         this.column2 = new Widget("column2");
         this.column2.setType(WidgetTypes.FILL);
         this.column2.setAlign(WidgetAlignTypes.VERTICAL);
+        this.column2.setPadding(4);
 
         this.mainForm.addChild(this.column1);
         this.mainForm.addChild(this.column2);

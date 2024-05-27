@@ -13,7 +13,7 @@ class FormToolbar extends Widget {
     constructor() {
         super("formToolbar", "div");
         this.setType(WidgetTypes.FILL);
-        this.setFixedSize(40);
+        this.setFixedSize(44);
         this.setAlign(WidgetAlignTypes.VERTICAL);
 
         this.toolbar = new Toolbar("toolbar");
