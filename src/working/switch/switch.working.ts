@@ -70,14 +70,12 @@ class WorkingApp extends Application {
         this.column1 = new Widget("column1");
         this.column1.setType(WidgetTypes.FILL);
         this.column1.setAlign(WidgetAlignTypes.VERTICAL);
+        this.column1.setPadding(4);
 
         this.column2 = new Widget("column2");
         this.column2.setType(WidgetTypes.FILL);
         this.column2.setAlign(WidgetAlignTypes.VERTICAL);
-        this.column2.setPadding(4);
-
-        this.mainForm.addChild(this.column1);
-        this.mainForm.addChild(this.column2);
+        this.column2.setPadding(8);
 
         this.switch1 = new Switch("switch1", "Iniciar con la aplicacion", null);
         this.switch2 = new Switch("switch2", "Aplicar el modo oscuro cuando sea posible", null);
@@ -252,6 +250,9 @@ class WorkingApp extends Application {
         this.column2.addChild(formToolbar);
         this.column2.addChild(grid);
         this.column2.addChild(tabWidget);
+
+        this.mainForm.addChild(this.column1);
+        this.mainForm.addChild(this.column2);
 
         this.getRoot().addChild(this.mainForm);
     }

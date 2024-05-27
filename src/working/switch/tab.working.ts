@@ -1,19 +1,13 @@
 import { Button, Tabs } from "../../ui";
-import { Widget, WidgetAlignTypes, WidgetTypes } from "../../index";
+import { WidgetTypes } from "../../index";
 
-class TabWidget extends Widget {
-    tab: Tabs;
-
+class TabWidget extends Tabs {
     btn1: Button;
     btn2: Button;
     btn3: Button;
 
     constructor() {
-        super("tabWidget");
-        this.setAlign(WidgetAlignTypes.VERTICAL);
-        this.setType(WidgetTypes.FILL);
-
-        this.tab = new Tabs("tab1", null, "horizontal");
+        super("tab1", null, "horizontal");
 
         this.btn1 = new Button("btn1");
         this.btn1.setText("Nuevo");
@@ -27,13 +21,11 @@ class TabWidget extends Widget {
         this.btn3.setText("TEST");
         this.btn3.setType(WidgetTypes.FILL);
 
-        this.tab.addTab("tab1", "PREFERENCIAS", this.btn1);
-        this.tab.addTab("tab2", "SEGURIDAD", this.btn2);
-        this.tab.addIconTab("tab3", "add", this.btn3);
+        this.addTab("tab1", "PREFERENCIAS", this.btn1);
+        this.addTab("tab2", "SEGURIDAD", this.btn2);
+        this.addIconTab("tab3", "add", this.btn3);
 
-        this.tab.setTab("tab1");
-
-        this.addChild(this.tab);
+        this.setTab("tab1");
     }
 }
 

@@ -1,4 +1,4 @@
 .WUIScrollbar {
-    background-color: var(--palette-action-hover);
+    background-color: var(--palette-primary-dark);
     border-radius: 5px;
 }

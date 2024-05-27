@@ -53,6 +53,8 @@ export class Tabs extends Widget {
         this.items = new Map<string, TabItem>();
 
         this.itemControls = new Toolbar(id + ".itemControls", this.header, orientation);
+
+        this.addClass("WUITab");
     }
 
     public setOrientation(orientation: OrientationTypes) {

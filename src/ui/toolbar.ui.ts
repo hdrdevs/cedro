@@ -1,5 +1,6 @@
+import "./styles/toolbar.css";
 import { IWidget } from "src/interfaces/widget.interface";
-import { Widget, WidgetTypes } from "./widget.ui";
+import { Widget, WidgetAlignTypes, WidgetTypes } from "./widget.ui";
 import { IconButton } from "./IconButton.ui";
 import { OrientationTypes } from "src/types/orientation.type";
 
@@ -15,18 +16,31 @@ export class Toolbar extends Widget {
     btnLeft: IconButton;
     btnRight: IconButton;
 
-    constructor(id: string, parent: Widget | null = null, orientationType: OrientationTypes = "horizontal") {
+    constructor(
+        id: string,
+        parent: Widget | null = null,
+        orientationType: OrientationTypes = "horizontal"
+    ) {
         super(id, "div", parent);
         this.orientation = orientationType;
         this.size = TOOLBAR_SIZE;
         this.items = new Map<string, IWidget>();
+
+        if (this.orientation === "vertical") {
+            this.setAlign(WidgetAlignTypes.VERTICAL);
+        } else {
+            this.setAlign(WidgetAlignTypes.HORIZONTAL);
+        }
+
+        this.setType(WidgetTypes.FILL);
+        this.setFixedSize(TOOLBAR_SIZE);
+        this.addClass("WUIToolbar");
 
         this.itemsContainer = new Widget(this.id + ".itemsContainer", "div", this);
         this.itemsContainer.setType(WidgetTypes.CUSTOM);
         this.itemsContainer.getBody().style.position = "absolute";
         this.itemsContainer.getBody().style.overflow = "hidden";
 
-        this.setType(WidgetTypes.FILL);
         this.getBody().style.overflow = "hidden";
 
         this.btnLeft = new IconButton(this.id + ".btnLeft", this.getIconLeft());

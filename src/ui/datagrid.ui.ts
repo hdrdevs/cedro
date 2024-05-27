@@ -51,11 +51,17 @@ export class DataGrid extends Widget {
         this.addChild(this.footerContainer);
 
         this.verticalScrollbar = new Scroll(id + ".VerticalScrollbar", this.dataContainer);
-        this.horizontalScrollbar = new Scroll(id + ".HorizontalScrollbar", this.dataContainer, "horizontal");
+        this.horizontalScrollbar = new Scroll(
+            id + ".HorizontalScrollbar",
+            this.dataContainer,
+            "horizontal"
+        );
 
         this.columns = new Array<DataGridColumn>();
 
         this.data = new Array<any>();
+
+        this.addClass("WUIDataGrid");
     }
 
     private getFreeWidth(): number {
