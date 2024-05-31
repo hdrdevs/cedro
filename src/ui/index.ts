@@ -1,5 +1,6 @@
 import { Accordion } from "./accordion";
 import { Button } from "./button.ui";
+import { ButtonColor } from "./buttonColor.ui";
 import { ButtonMenu } from "./buttonmenu.ui";
 import { ButtonStack } from "./buttonstack.ui";
 import { Checkbox } from "./checkbox.ui";
@@ -20,10 +21,12 @@ import { DataGrid } from "./datagrid.ui";
 import { RadioButton } from "./radiobutton";
 import { ValueBar } from "./valuebar.ui";
 import { createWidget } from "./widget.builder.ui";
+import { IconButtonMenu } from "./iconButtonMenu.ui";
 
 export {
     Accordion,
     Button,
+    ButtonColor,
     ButtonMenu,
     ButtonStack,
     Checkbox,
@@ -32,6 +35,7 @@ export {
     HPanel,
     Icon,
     IconButton,
+    IconButtonMenu,
     Label,
     Menu,
     ProgressBar,

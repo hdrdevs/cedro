@@ -1,13 +1,7 @@
 import "./styles/textbox.css";
 import { Widget, WidgetTypes } from "./widget.ui";
 
-export type InputTypes =
-    | "text"
-    | "number"
-    | "password"
-    | "email"
-    | "url"
-    | "tel";
+export type InputTypes = "text" | "number" | "password" | "email" | "url" | "color" | "tel";
 
 export class Textbox extends Widget {
     input: Widget;

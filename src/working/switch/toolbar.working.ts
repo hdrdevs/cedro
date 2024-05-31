@@ -1,4 +1,4 @@
-import { Toolbar, IconButton, Button, ButtonMenu } from "../../ui";
+import { Toolbar, IconButton, Button, ButtonMenu, IconButtonMenu, ButtonColor } from "../../ui";
 import { WidgetTypes } from "../../index";
 
 class FormToolbar extends Toolbar {
@@ -9,6 +9,9 @@ class FormToolbar extends Toolbar {
     btn5: IconButton;
 
     btnSel: ButtonMenu;
+    iconSel: IconButtonMenu;
+
+    textColor: ButtonColor;
 
     constructor() {
         super("toolbar");
@@ -42,12 +45,24 @@ class FormToolbar extends Toolbar {
         this.btnSel.addItem("item5", "Item 5", "list");
         this.btnSel.addItem("item6", "Item 6 tiene mas ancho", "save");
 
+        this.iconSel = new IconButtonMenu("iconSel", "folder_open");
+        this.iconSel.setW(40);
+
+        this.iconSel.addItem("item1", "Item 1", "add");
+        this.iconSel.addItem("item2", "Item 2", "list");
+
+        this.textColor = new ButtonColor("textColor");
+        this.textColor.setW(45);
+
         this.addItem("btn1", this.btn1);
         this.addItem("btn5", this.btn5);
         this.addItem("btn2", this.btn2);
 
         this.addItem("btn4", this.btn4);
         this.addItem("btnSel", this.btnSel);
+        this.addItem("iconSel", this.iconSel);
+
+        this.addItem("selColor", this.textColor);
     }
 }
 
