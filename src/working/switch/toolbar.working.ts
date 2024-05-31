@@ -8,6 +8,7 @@ import {
     Textbox,
 } from "../../ui";
 import { WidgetTypes } from "../../index";
+import { workingApp } from "./switch.working";
 
 class FormToolbar extends Toolbar {
     btn1: Button;
@@ -40,6 +41,12 @@ class FormToolbar extends Toolbar {
 
         this.btn4 = new IconButton("btn4", "add");
         this.btn4.setW(40);
+        this.btn4.subscribe({
+            event: "click",
+            then: () => {
+                workingApp.showLoading();
+            },
+        });
 
         this.btn5 = new IconButton("btn5", "delete");
         this.btn5.setW(40);

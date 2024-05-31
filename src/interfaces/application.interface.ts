@@ -43,4 +43,7 @@ export interface IApplication {
 
     confirm(msg: string): void;
     alert(msg: string): void;
+
+    showLoading(): void;
+    hideLoading(): void;
 }

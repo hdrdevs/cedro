@@ -15,7 +15,7 @@ import { Dialog } from "../ui/dialog";
 import { Label } from "../ui/label.ui";
 import { Seo } from "./seo";
 import { DarkTheme, LightTheme, ThemeManager } from "./themes.core";
-import { Vector2D } from "src/types/vector2d.type";
+import { Loading } from "../ui/loading.ui";
 
 class WApplication implements IApplication {
     seo: Seo;
@@ -26,6 +26,7 @@ class WApplication implements IApplication {
 
     alertDialog: Dialog;
     confirmDialog: Dialog;
+    loading: Loading;
 
     mediaQueries: Map<string, IScreenSize>;
 
@@ -56,6 +57,8 @@ class WApplication implements IApplication {
 
         this.alertDialog = new Dialog("Dialog.alert", null);
         this.confirmDialog = new Dialog("Dialog.confirm", null);
+
+        this.loading = new Loading("loading", null);
 
         this.theme.load();
     }
@@ -167,6 +170,15 @@ class WApplication implements IApplication {
      */
     setRoot(root: Widget): void {
         this.root = root;
+    }
+
+    public showLoading(): void {
+        this.loading.setVisible(true);
+        this.loading.raisteTop();
+    }
+
+    public hideLoading(): void {
+        this.loading.setVisible(false);
     }
 }
 
