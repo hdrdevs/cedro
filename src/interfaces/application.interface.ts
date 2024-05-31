@@ -4,6 +4,7 @@ import { IWidget } from "./widget.interface";
 import { Dialog } from "../ui/dialog";
 import { Seo } from "../core/seo";
 import { ThemeManager } from "../core/themes.core";
+import { Vector2D } from "src/types/vector2d.type";
 
 export interface IScreenSize {
     minWidth: number;

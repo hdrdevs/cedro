@@ -3,13 +3,16 @@ import { IWidget } from "../interfaces/widget.interface";
 import { IconButton } from "./IconButton.ui";
 import { Widget, WidgetAlignTypes, WidgetTypes } from "./widget.ui";
 
+const MENU_OPTION_HEIGHT = 40;
+
 export class Menu extends Widget {
     background: Widget;
     options: Map<string, IconButton>;
+    optionsWidth: Array<number>;
     triggeredById: string | null;
     triggeredBy: IWidget | null;
     triggeredBySearchCode: any;
-    withCalculation: boolean;
+
     constructor(id: string, trigeredById: string | null, parent: IWidget | null = null) {
         super(id, "div", parent);
 
@@ -20,15 +23,16 @@ export class Menu extends Widget {
 
         this.triggeredById = trigeredById;
         this.setType(WidgetTypes.CUSTOM);
+        this.setAlign(WidgetAlignTypes.VERTICAL);
+        this.setPadding(4);
 
         this.triggeredBy = null;
 
         this.options = new Map<string, IconButton>();
+        this.optionsWidth = new Array<number>();
 
         this.addClass("WUIMenu");
         this.addClass("WUIMenuTransparent");
-
-        this.withCalculation = false;
 
         this.triggeredBySearchCode = setInterval(() => {
             if (!this.triggeredById) {
@@ -64,43 +68,25 @@ export class Menu extends Widget {
         this.background.setVisible(false);
     }
 
-    private setFreeOptionWidth(): void {
-        for (const [, dataOption] of this.options) {
-            const option = dataOption as IconButton;
-            option.deleteClass("WUIMenuOptions100w");
-        }
-    }
-
     private getMaxWidth(): number {
-        this.setFreeOptionWidth();
-        this.deleteClass("WUIMenuHidden");
-        this.addClass("WUIMenuTransparent");
-        let maxWidth = 0;
-        for (const [, dataOption] of this.options) {
-            const option = dataOption as IconButton;
-            const optionWidth = option.getBody().clientWidth;
-
-            if (optionWidth > maxWidth) {
-                maxWidth = optionWidth;
-            }
-        }
-        return maxWidth;
+        return Math.max(...this.optionsWidth) * 1.1;
     }
 
     wakeUp(): void {
-        if (!this.withCalculation) {
-            let maxWidth = this.getMaxWidth();
-
-            for (const [, dataOption] of this.options) {
-                const option = dataOption as IconButton;
-                option.addClass("WUIMenuOptions100w");
-                option.render();
+        const maxWidth = this.getMaxWidth();
+        let menuWidth = 0;
+        if (this.triggeredBy) {
+            const triggerWidth = this.triggeredBy.getBody().clientWidth;
+            if (triggerWidth > maxWidth) {
+                menuWidth = triggerWidth;
+            } else {
+                menuWidth = maxWidth;
             }
-            this.deleteClass("WUIMenuTransparent");
-            this.addClass("WUIMenuHidden");
-            this.setW(maxWidth);
-            this.withCalculation = true;
+        } else {
+            menuWidth = maxWidth;
         }
+
+        this.setW(menuWidth);
 
         this.background.setVisible(true);
         this.background.raisteTop();
@@ -110,6 +96,8 @@ export class Menu extends Widget {
         this.deleteClass("WUIMenuHidden");
         this.addClass("WUIMenuVisible");
 
+        this.render();
+
         if (this.triggeredBy) {
             const position = this.triggeredBy.getPosition(false);
 
@@ -118,7 +106,7 @@ export class Menu extends Widget {
 
             const screenW = window.innerWidth;
             const screenH = window.innerHeight;
-            const menuW = this.getBody().clientWidth;
+            const menuW = menuWidth;
             const menuH = this.getBody().clientHeight;
             let positionX = position.x;
             let positionY = position.y;
@@ -126,8 +114,8 @@ export class Menu extends Widget {
             let openRight = true;
             let openBottom = true;
 
-            if (position.x + menuW + triggerW > screenW) {
-                positionX = screenW - menuW - triggerW;
+            if (position.x + menuW > screenW) {
+                positionX = screenW - menuW;
                 openRight = false;
             }
 
@@ -140,18 +128,16 @@ export class Menu extends Widget {
                 this.setX(positionX);
                 this.setY(positionY + triggerH);
             } else if (openRight && !openBottom) {
-                this.setX(positionX + triggerW);
+                this.setX(positionX);
                 this.setY(positionY);
             } else if (!openRight && openBottom) {
                 /*abajo izq: Works!*/
-                this.setX(positionX + triggerW);
+                this.setX(positionX);
                 this.setY(positionY + triggerH);
             } else if (!openRight && !openBottom) {
-                this.setX(positionX + triggerW);
+                this.setX(positionX);
                 this.setY(positionY - triggerH);
             }
-
-            //this.setY(positionY);
         }
     }
 
@@ -165,17 +151,19 @@ export class Menu extends Widget {
     }
 
     public clearOptions(): void {
+        this.optionsWidth = new Array<number>();
         this.options.clear();
         this.removeAllChilds();
-        this.withCalculation = false;
     }
 
     addOption(id: string, icon: string, label: string) {
-        const newOption = new IconButton(id, icon, this);
-        newOption.setType(WidgetTypes.FREE);
-        newOption.setAlign(WidgetAlignTypes.HORIZONTAL);
+        const newOption = new IconButton(id, icon, null);
+        newOption.setType(WidgetTypes.FILL);
+        newOption.setAlign(WidgetAlignTypes.VERTICAL);
         newOption.setText(label);
-        newOption.addClass("WUIMenuOptions");
+        newOption.setFixedSize(MENU_OPTION_HEIGHT);
+        //newOption.addClass("WUIMenuOptions");
+        //newOption.setH(MENU_OPTION_HEIGHT);
 
         newOption.subscribe({
             event: "click",
@@ -187,5 +175,11 @@ export class Menu extends Widget {
         });
 
         this.options.set(id, newOption);
+
+        const width = newOption.getBody().clientWidth;
+        this.optionsWidth.push(width);
+        const height = this.options.size * MENU_OPTION_HEIGHT;
+        this.addChild(newOption);
+        this.setH(height);
     }
 }

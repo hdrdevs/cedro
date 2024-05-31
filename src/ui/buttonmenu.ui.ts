@@ -1,32 +1,20 @@
-import { IconButton } from "./IconButton.ui";
+import { Button } from "./button.ui";
 import { Menu } from "./menu.ui";
-import { Textbox } from "./textbox.ui";
-import { Widget } from "./widget.ui";
+import { SelectItem } from "./select.ui";
 
-export class SelectItem {
-    id: string;
-    label: string;
-    icon: string;
-
-    constructor(id: string, label: string, icon: string) {
-        this.id = id;
-        this.label = label;
-        this.icon = icon;
-    }
-}
-
-export class Select extends Textbox {
+export class ButtonMenu extends Button {
     menu: Menu;
-
-    items: SelectItem[];
-
+    items: Array<SelectItem>;
     selectedItem: SelectItem | null;
 
-    constructor(id: string, parent: Widget | null = null) {
-        super(id, parent);
+    public constructor(id: string) {
+        super(id);
+
         this.menu = new Menu(this.id + ".menu", this.id, null);
-        this.items = [];
+
+        this.items = new Array<SelectItem>();
         this.selectedItem = null;
+
         this.subscribe({
             event: "click",
             then: () => {
@@ -37,16 +25,14 @@ export class Select extends Textbox {
 
                 this.menu.wakeUp();
 
-                console.log(this.getBody().clientWidth, this.menu.getBody().clientWidth);
-
-                if (this.getBody().clientWidth > this.menu.getBody().clientWidth) {
+                if (this.getW() > this.menu.getW()) {
                     this.menu.setW(this.getBody().clientWidth);
-                    this.menu.resize();
+                    console.log("cambiando ancho...");
                 }
             },
         });
 
-        this.menu.subscribe({
+        /*this.menu.subscribe({
             event: "option-clicked",
             then: (_e, clickedOption) => {
                 const option = clickedOption as IconButton;
@@ -59,15 +45,15 @@ export class Select extends Textbox {
 
                 const selectedText = this.selectedItem?.label;
                 if (selectedText) {
-                    this.setValue(selectedText);
+                    this.setText(selectedText);
                 } else {
-                    this.setValue("");
+                    this.setText("");
                 }
             },
-        });
+        });*/
     }
 
-    addItem(id: string, label: string, icon: string) {
+    public addItem(id: string, label: string, icon: string): void {
         this.items.push(new SelectItem(id, label, icon));
     }
 }

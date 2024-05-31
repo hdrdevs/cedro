@@ -15,6 +15,7 @@ import { Dialog } from "../ui/dialog";
 import { Label } from "../ui/label.ui";
 import { Seo } from "./seo";
 import { DarkTheme, LightTheme, ThemeManager } from "./themes.core";
+import { Vector2D } from "src/types/vector2d.type";
 
 class WApplication implements IApplication {
     seo: Seo;
@@ -116,7 +117,12 @@ class WApplication implements IApplication {
         this.root.render();
     }
 
-    addMediaQuery(query: string, minWidth: number, maxWidth: number, cb: (app: IApplication) => void): void {
+    addMediaQuery(
+        query: string,
+        minWidth: number,
+        maxWidth: number,
+        cb: (app: IApplication) => void
+    ): void {
         this.mediaQueries.set(query, { minWidth, maxWidth, cb });
     }
 

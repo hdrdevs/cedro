@@ -1,4 +1,4 @@
-import { Toolbar, IconButton, Button, Select } from "../../ui";
+import { Toolbar, IconButton, Button, ButtonMenu } from "../../ui";
 import { WidgetTypes } from "../../index";
 
 class FormToolbar extends Toolbar {
@@ -7,6 +7,8 @@ class FormToolbar extends Toolbar {
 
     btn4: IconButton;
     btn5: IconButton;
+
+    btnSel: ButtonMenu;
 
     constructor() {
         super("toolbar");
@@ -30,11 +32,22 @@ class FormToolbar extends Toolbar {
         this.btn5 = new IconButton("btn5", "delete");
         this.btn5.setW(40);
 
+        this.btnSel = new ButtonMenu("btnSel");
+        this.btnSel.setText("Menu");
+        //this.btnSel.setW(200);
+        this.btnSel.addItem("item1", "Item 1", "add");
+        this.btnSel.addItem("item2", "Item 2", "list");
+        this.btnSel.addItem("item3", "Item 3 pero este es el  ancho", "save");
+        this.btnSel.addItem("item4", "Item 4", "draw");
+        this.btnSel.addItem("item5", "Item 5", "list");
+        this.btnSel.addItem("item6", "Item 6 tiene mas ancho", "save");
+
         this.addItem("btn1", this.btn1);
         this.addItem("btn5", this.btn5);
         this.addItem("btn2", this.btn2);
 
         this.addItem("btn4", this.btn4);
+        this.addItem("btnSel", this.btnSel);
     }
 }
 

@@ -1,5 +1,6 @@
 import { Accordion } from "./accordion";
 import { Button } from "./button.ui";
+import { ButtonMenu } from "./buttonmenu.ui";
 import { ButtonStack } from "./buttonstack.ui";
 import { Checkbox } from "./checkbox.ui";
 import { Widget } from "./widget.ui";
@@ -23,6 +24,7 @@ import { createWidget } from "./widget.builder.ui";
 export {
     Accordion,
     Button,
+    ButtonMenu,
     ButtonStack,
     Checkbox,
     Widget,

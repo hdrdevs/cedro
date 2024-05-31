@@ -15,6 +15,7 @@
 .WUIDataGrid-HeaderLabel:hover {
     border-bottom: solid 1px var(--palette-divider);
     background-color: var(--palette-action-hover) !important;
+    cursor: default;
 }
 
 .WUIDataGrid-HeaderLabel {
