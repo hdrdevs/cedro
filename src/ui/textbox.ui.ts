@@ -1,7 +1,17 @@
 import "./styles/textbox.css";
 import { Widget, WidgetTypes } from "./widget.ui";
 
-export type InputTypes = "text" | "number" | "password" | "email" | "url" | "color" | "tel";
+export type InputTypes =
+    | "text"
+    | "date"
+    | "datetime-local"
+    | "file"
+    | "number"
+    | "password"
+    | "email"
+    | "url"
+    | "color"
+    | "tel";
 
 export class Textbox extends Widget {
     input: Widget;
@@ -65,6 +75,10 @@ export class Textbox extends Widget {
     }
 
     private positionLabel(): void {
+        if (this.title === "") {
+            this.label.setVisible(false);
+            return;
+        }
         if (this.getValue() === "") {
             this.moveLabelToCenter();
         } else {
@@ -93,6 +107,7 @@ export class Textbox extends Widget {
 
         this.positionLabel();
         this.input.setWH(this.getW(), this.getH());
+        this.input.getBody().style.lineHeight = this.getH() + "px";
         this.input.render();
 
         super.render();

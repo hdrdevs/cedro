@@ -1,3 +1,69 @@
+/* NUMERIC INPUT */
+
+input[type="number"] {
+    -moz-appearance: textfield; /* Firefox */
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+/* FILE INPUT */
+
+input[type="file"]::file-selector-button {
+    margin-right: 0px;
+    border: none;
+    border-radius: 0.25rem;
+    background: var(--palette-primary-main);
+    height: 100%;
+    color: var(--palette-primary-text-main);
+    cursor: pointer;
+    transition: background 0.2s ease-in-out;
+    float: right;
+}
+
+input[type="file"]::file-selector-button:hover {
+    color: var(--palette-primary-text-dark);
+    background-color: var(--palette-primary-dark);
+}
+
+/* DATE INPUT */
+
+::-webkit-datetime-edit {
+    padding: 0em;
+    text-align: right;
+}
+::-webkit-datetime-edit-fields-wrapper {
+    background: transparent;
+}
+::-webkit-datetime-edit-text {
+    color: var(--palette-text-primary);
+    padding: 0 0.3em;
+}
+::-webkit-datetime-edit-month-field {
+    color: var(--palette-text-primary);
+}
+::-webkit-datetime-edit-day-field {
+    color: var(--palette-text-primary);
+}
+::-webkit-datetime-edit-year-field {
+    color: var(--palette-text-primary);
+}
+::-webkit-inner-spin-button {
+    display: none;
+}
+::-webkit-calendar-picker-indicator {
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: transparent;
+    filter: invert(0.5);
+}
+
+/* TEXT INPUT  */
+
 .WUIinput {
     position: relative;
 }

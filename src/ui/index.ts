@@ -16,6 +16,7 @@ import { Select } from "./select.ui";
 import { Switch } from "./switch.ui";
 import { Textbox } from "./textbox.ui";
 import { Tabs } from "./tabs.ui";
+import { TextArea } from "./textarea.ui";
 import { Toolbar } from "./toolbar.ui";
 import { DataGrid } from "./datagrid.ui";
 import { RadioButton } from "./radiobutton";
@@ -43,6 +44,7 @@ export {
     Select,
     Switch,
     Tabs,
+    TextArea,
     Textbox,
     Toolbar,
     ValueBar,

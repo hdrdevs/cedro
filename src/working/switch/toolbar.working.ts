@@ -1,4 +1,12 @@
-import { Toolbar, IconButton, Button, ButtonMenu, IconButtonMenu, ButtonColor } from "../../ui";
+import {
+    Toolbar,
+    IconButton,
+    Button,
+    ButtonMenu,
+    IconButtonMenu,
+    ButtonColor,
+    Textbox,
+} from "../../ui";
 import { WidgetTypes } from "../../index";
 
 class FormToolbar extends Toolbar {
@@ -12,6 +20,7 @@ class FormToolbar extends Toolbar {
     iconSel: IconButtonMenu;
 
     textColor: ButtonColor;
+    textDate: Textbox;
 
     constructor() {
         super("toolbar");
@@ -54,6 +63,11 @@ class FormToolbar extends Toolbar {
         this.textColor = new ButtonColor("textColor");
         this.textColor.setW(45);
 
+        this.textDate = new Textbox("textDate");
+        this.textDate.setW(300);
+        this.textDate.setInputType("number");
+        this.textDate.getInput().getBody().setAttribute("step", "1");
+
         this.addItem("btn1", this.btn1);
         this.addItem("btn5", this.btn5);
         this.addItem("btn2", this.btn2);
@@ -63,6 +77,7 @@ class FormToolbar extends Toolbar {
         this.addItem("iconSel", this.iconSel);
 
         this.addItem("selColor", this.textColor);
+        this.addItem("selDate", this.textDate);
     }
 }
 

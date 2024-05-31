@@ -1,10 +1,10 @@
-import { Button, Tabs } from "../../ui";
+import { Button, Tabs, TextArea } from "../../ui";
 import { WidgetTypes } from "../../index";
 
 class TabWidget extends Tabs {
     btn1: Button;
     btn2: Button;
-    btn3: Button;
+    text: TextArea;
 
     constructor() {
         super("tab1", null, "horizontal");
@@ -17,13 +17,13 @@ class TabWidget extends Tabs {
         this.btn2.setText("Guardar");
         this.btn2.setType(WidgetTypes.FILL);
 
-        this.btn3 = new Button("btn3");
-        this.btn3.setText("TEST");
-        this.btn3.setType(WidgetTypes.FILL);
+        this.text = new TextArea("btn3");
+        this.text.setType(WidgetTypes.FILL);
+        this.text.setText("esto es un texto para testear el area de texto.");
 
         this.addTab("tab1", "PREFERENCIAS", this.btn1);
         this.addTab("tab2", "SEGURIDAD", this.btn2);
-        this.addIconTab("tab3", "add", this.btn3);
+        this.addIconTab("tab3", "add", this.text);
 
         this.setTab("tab1");
     }
