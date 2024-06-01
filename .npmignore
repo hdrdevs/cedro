@@ -6,3 +6,4 @@ package.publish.template.json
 package.working.template.json
 vite.config.ts
 package-lock.json
+favicon.ico
