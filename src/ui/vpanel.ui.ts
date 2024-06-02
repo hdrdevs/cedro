@@ -2,7 +2,7 @@ import { Draggable } from "./draggable.ui";
 import "./styles/vpanel.css";
 import { Widget, WidgetAlignTypes, WidgetTypes } from "./widget.ui";
 
-const VPANEL_HANDLER_SIZE = 15;
+const VPANEL_HANDLER_SIZE = 4;
 
 export class VPanel extends Widget {
     topContent: Widget | null;
@@ -18,7 +18,7 @@ export class VPanel extends Widget {
         super(id, "div", parent);
         this.setAlign(WidgetAlignTypes.VERTICAL);
         this.setType(WidgetTypes.FILL);
-        this.setPadding(VPANEL_HANDLER_SIZE);
+        //this.setPadding(VPANEL_HANDLER_SIZE);
 
         this.handler = new Widget(id + ".handler", "div", null);
         this.handler.addClass("WUIVPanelHandler");
@@ -72,6 +72,11 @@ export class VPanel extends Widget {
             this.topContent.setFixedSize(fixHeight);
         }
         this.addChild(content);
+
+        const spacer = new Widget("spacer." + Date.now().toString(), "div", null);
+        spacer.setType(WidgetTypes.FILL);
+        spacer.setFixedSize(VPANEL_HANDLER_SIZE);
+        this.addChild(spacer);
     }
 
     public setBottom(content: Widget, fixHeight: number | null = null): void {
@@ -96,23 +101,26 @@ export class VPanel extends Widget {
 
     public render(): void {
         super.render();
-        this.handler.setH(VPANEL_HANDLER_SIZE - 10);
+        this.handler.setH(VPANEL_HANDLER_SIZE);
         this.handler.setW(this.getW());
 
         if (this.topHeight !== null) {
-            this.handler.setY(this.topHeight);
+            const topY = this.topContent ? this.topContent.getY(true) : 0;
+            this.handler.setY(topY + this.topHeight);
             this.topContent?.setFixedSize(this.topHeight);
         } else if (this.bottomHeight !== null) {
-            this.handler.setY(this.getH() - this.bottomHeight);
+            const bottomY = this.bottomContent ? this.bottomContent.getY(true) : 0;
+            this.handler.setY(bottomY + this.bottomHeight);
             this.bottomContent?.setFixedSize(this.bottomHeight);
         } else {
             if (this.topHeight === null) {
                 this.topHeight = this.getH() / 2 - VPANEL_HANDLER_SIZE / 2;
             }
-            this.handler.setY(this.topHeight);
+            const topY = this.topContent ? this.topContent.getY(true) : 0;
+            this.handler.setY(topY + this.topHeight);
             this.topContent?.setFixedSize(this.topHeight);
         }
 
-        this.handler.setX(0);
+        this.handler.setX(this.getX(true));
     }
 }

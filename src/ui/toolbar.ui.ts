@@ -159,9 +159,12 @@ export class Toolbar extends Widget {
     }
 
     public render(): void {
-        const fullSize = this.getFullSize();
-        const availableSize = this.orientation === "horizontal" ? this.getW() : this.getH();
         super.render();
+        const fullSize = this.getFullSize();
+        const parent = this.getParent();
+        const parentH = parent?.getH() || 0;
+        const availableSize = this.orientation === "horizontal" ? this.getW() : parentH;
+
         if (fullSize > availableSize) {
             this.btnLeft.setVisible(true);
             this.btnRight.setVisible(true);

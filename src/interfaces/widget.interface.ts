@@ -85,8 +85,8 @@ export interface IWidget {
 
     getPadding(): number;
 
-    getX(): number;
-    getY(): number;
+    getX(recursive?: boolean): number;
+    getY(recursive?: boolean): number;
     getW(): number;
     getH(): number;
 

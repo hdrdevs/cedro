@@ -16,9 +16,7 @@ export type TabItem = {
 export class Tabs extends Widget {
     orientation: OrientationTypes;
 
-    header: Widget;
     content: Widget;
-
     itemControls: Toolbar;
 
     items: Map<string, TabItem>;
@@ -30,10 +28,6 @@ export class Tabs extends Widget {
     ) {
         super(id, "div", parent);
         this.orientation = orientation;
-
-        this.header = new Widget(id + ".header", "div");
-        this.header.setType(WidgetTypes.FILL);
-        this.header.setFixedSize(TAB_HEADER_SIZE);
 
         this.content = new Widget(id + ".content", "div");
         this.content.setType(WidgetTypes.FILL);
@@ -47,13 +41,14 @@ export class Tabs extends Widget {
             this.setAlign(WidgetAlignTypes.HORIZONTAL);
         }
 
-        this.addChild(this.header);
-        this.addChild(this.content);
-
         this.items = new Map<string, TabItem>();
 
-        this.itemControls = new Toolbar(id + ".itemControls", this.header, orientation);
+        this.itemControls = new Toolbar(id + ".itemControls", null, orientation);
         this.itemControls.setVariant("contained");
+        this.itemControls.setFixedSize(TAB_HEADER_SIZE);
+
+        this.addChild(this.itemControls);
+        this.addChild(this.content);
 
         this.addClass("WUITab");
     }

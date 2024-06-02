@@ -122,8 +122,7 @@
 }
 
 .WUIButton-stack-start-active-color-primary {
-    color: var(--palette-text-primary);
-    font-weight: 700;
+    color: var(--palette-primary-text-light);
     background-color: var(--palette-primary-dark);
     border-color: var(--palette-divider);
 }
@@ -157,8 +156,7 @@
 }
 
 .WUIButton-stack-middle-active-color-primary {
-    color: var(--palette-text-primary);
-    font-weight: 700;
+    color: var(--palette-primary-text-light);
     background-color: var(--palette-primary-dark);
     border-color: var(--palette-divider);
 }
@@ -195,8 +193,7 @@
 }
 
 .WUIButton-stack-end-active-color-primary {
-    color: var(--palette-text-primary);
-    font-weight: 700;
+    color: var(--palette-primary-text-light);
     background-color: var(--palette-primary-dark);
     border-color: var(--palette-divider);
 }

@@ -21,6 +21,7 @@ import { Toolbar } from "./toolbar.ui";
 import { DataGrid } from "./datagrid.ui";
 import { RadioButton } from "./radiobutton";
 import { ValueBar } from "./valuebar.ui";
+import { VPanel } from "./vpanel.ui";
 import { createWidget } from "./widget.builder.ui";
 import { IconButtonMenu } from "./iconButtonMenu.ui";
 
@@ -48,6 +49,7 @@ export {
     Textbox,
     Toolbar,
     ValueBar,
+    VPanel,
     DataGrid,
     createWidget,
 };

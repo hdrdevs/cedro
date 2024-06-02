@@ -439,7 +439,16 @@ export class Widget implements IWidget {
      *
      * @return {number} The value of the 'left' property.
      */
-    public getX(): number {
+    public getX(recursive: boolean = false): number {
+        if (!recursive) {
+            return this.left;
+        }
+
+        const parent = this.getParent();
+
+        if (parent) {
+            return this.left + parent.getX(true);
+        }
         return this.left;
     }
 
@@ -448,7 +457,16 @@ export class Widget implements IWidget {
      *
      * @return {number} The value of Y.
      */
-    public getY(): number {
+    public getY(recursive: boolean = false): number {
+        if (!recursive) {
+            return this.top;
+        }
+
+        const parent = this.getParent();
+
+        if (parent) {
+            return this.top + parent.getY(true);
+        }
         return this.top;
     }
 
