@@ -8,6 +8,9 @@ export class IconButton extends Button {
     icon: Icon;
     label: Label;
 
+    showIcon: boolean;
+    showText: boolean;
+
     constructor(id: string, icon: string = "dark_mode", parent: Widget | null = null) {
         super(id, parent);
 
@@ -15,7 +18,34 @@ export class IconButton extends Button {
         this.icon = new Icon(id + ".icon", icon, undefined, this);
         this.label = new Label(id + ".label", undefined, this);
 
+        this.showIcon = true;
+        this.showText = true;
+
         this.init();
+    }
+
+    public displayIcon(): void {
+        this.showIcon = true;
+        this.icon.setVisible(true);
+        this.render();
+    }
+
+    public hideIcon(): void {
+        this.showIcon = false;
+        this.icon.setVisible(false);
+        this.render();
+    }
+
+    public displayText(): void {
+        this.showText = true;
+        this.label.setVisible(true);
+        this.render();
+    }
+
+    public hideText(): void {
+        this.showText = false;
+        this.label.setVisible(false);
+        this.render();
     }
 
     public init(): void {

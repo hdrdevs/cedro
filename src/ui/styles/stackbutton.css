@@ -22,13 +22,13 @@
 .WUIButton-stack-start-color-primary {
     color: var(--palette-text-primary);
     background-color: var(--palette-background-default);
-    border-color: var(--palette-primary-main);
+    border-color: var(--palette-divider);
 }
 
 .WUIButton-stack-start-color-primary:hover {
     color: var(--palette-primary-text-light);
     background-color: var(--palette-primary-light);
-    border-color: var(--palette-primary-main);
+    border-color: var(--palette-divider);
 }
 
 /****************************************************************************/
@@ -55,13 +55,13 @@
 .WUIButton-stack-middle-color-primary {
     color: var(--palette-text-primary);
     background-color: var(--palette-background-default);
-    border-color: var(--palette-primary-main);
+    border-color: var(--palette-divider);
 }
 
 .WUIButton-stack-middle-color-primary:hover {
     color: var(--palette-primary-text-light);
     background-color: var(--palette-primary-light);
-    border-color: var(--palette-primary-main);
+    border-color: var(--palette-divider);
 }
 
 /**************************************************************************/
@@ -90,13 +90,13 @@
 .WUIButton-stack-end-color-primary {
     color: var(--palette-text-primary);
     background-color: var(--palette-background-default);
-    border-color: var(--palette-primary-main);
+    border-color: var(--palette-divider);
 }
 
 .WUIButton-stack-end-color-primary:hover {
     color: var(--palette-primary-text-light);
     background-color: var(--palette-primary-light);
-    border-color: var(--palette-primary-main);
+    border-color: var(--palette-divider);
 }
 
 /************************************************************************/
@@ -122,15 +122,16 @@
 }
 
 .WUIButton-stack-start-active-color-primary {
-    color: var(--palette-primary-text-light);
-    background-color: var(--palette-primary-light);
-    border-color: var(--palette-primary-main);
+    color: var(--palette-text-primary);
+    font-weight: 700;
+    background-color: var(--palette-primary-dark);
+    border-color: var(--palette-divider);
 }
 
 .WUIButton-stack-start-active-color-primary:hover {
     color: var(--palette-primary-text-light);
     background-color: var(--palette-primary-light);
-    border-color: var(--palette-primary-main);
+    border-color: var(--palette-divider);
 }
 
 /*************************************************************************/
@@ -156,15 +157,16 @@
 }
 
 .WUIButton-stack-middle-active-color-primary {
-    color: var(--palette-primary-text-light);
-    background-color: var(--palette-primary-light);
-    border-color: var(--palette-primary-main);
+    color: var(--palette-text-primary);
+    font-weight: 700;
+    background-color: var(--palette-primary-dark);
+    border-color: var(--palette-divider);
 }
 
 .WUIButton-stack-middle-active-color-primary:hover {
     color: var(--palette-primary-text-light);
     background-color: var(--palette-primary-light);
-    border-color: var(--palette-primary-main);
+    border-color: var(--palette-divider);
 }
 
 /**************************************************************************/
@@ -193,13 +195,14 @@
 }
 
 .WUIButton-stack-end-active-color-primary {
-    color: var(--palette-primary-text-light);
-    background-color: var(--palette-primary-light);
-    border-color: var(--palette-primary-main);
+    color: var(--palette-text-primary);
+    font-weight: 700;
+    background-color: var(--palette-primary-dark);
+    border-color: var(--palette-divider);
 }
 
 .WUIButton-stack-end-active-color-primary:hover {
     color: var(--palette-primary-text-light);
     background-color: var(--palette-primary-light);
-    border-color: var(--palette-primary-main);
+    border-color: var(--palette-divider);
 }
