@@ -58,6 +58,21 @@ class Header extends Widget {
         this.theme.setType(WidgetTypes.FILL);
         this.theme.setFixedSize(40);
 
+        this.theme.subscribe({
+            event: "click",
+            then: (_e, _w) => {
+                const theme = widgetFactory.theme.getTheme();
+
+                if (theme === "light") {
+                    this.theme.setIcon("light_mode");
+                } else {
+                    this.theme.setIcon("dark_mode");
+                }
+
+                widgetFactory.theme.toggleTheme();
+            },
+        });
+
         this.addChild(this.logo);
         this.addChild(Spacer());
         this.addChild(this.btnStack);
@@ -91,8 +106,8 @@ class Header extends Widget {
 }
 
 function Spacer(): Widget {
-    const id = "spacer" + Date.now().toString();
-    const spacer = new Widget("spacer." + id);
+    const id = "spacer." + Date.now().toString();
+    const spacer = new Widget(id);
     spacer.setAlign(WidgetAlignTypes.HORIZONTAL);
     spacer.setType(WidgetTypes.FILL);
     return spacer;
