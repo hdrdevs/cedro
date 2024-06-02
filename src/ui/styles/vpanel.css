@@ -1,7 +1,7 @@
 .WUIVPanelHandler {
     position: absolute;
     overflow: hidden;
-    cursor: col-resize;
+    cursor: row-resize;
     background-color: var(--palette-divider);
     opacity: 0.1;
 }

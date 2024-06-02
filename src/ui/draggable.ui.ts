@@ -78,6 +78,10 @@ export class Draggable {
         this.background.setVisible(false);
     }
 
+    public setBackgroundCursor(cursor: string): void {
+        this.background.getBody().style.cursor = cursor;
+    }
+
     public setDraggingClass(draggingClass: string | null): void {
         this.draggingClass = draggingClass;
     }

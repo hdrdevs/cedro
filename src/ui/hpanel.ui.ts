@@ -24,6 +24,7 @@ export class HPanel extends Widget {
 
         this.draggable = new Draggable(this.handler, "horizontal");
         this.draggable.setDraggingClass("WUIHPanelDragging");
+        this.draggable.setBackgroundCursor("col-resize");
 
         this.handler.subscribe({
             event: "drag",
@@ -90,7 +91,8 @@ export class HPanel extends Widget {
 
     private updateSizeFromHandlerPosition(): void {
         if (this.leftWidth !== null) {
-            this.leftWidth = this.handler.getX();
+            const leftX = this.leftContent ? this.leftContent.getX(true) : 0;
+            this.leftWidth = this.handler.getX() - leftX;
         } else if (this.rightWidth !== null) {
             this.rightWidth = this.getW() - this.handler.getX();
         }

@@ -25,6 +25,7 @@ export class VPanel extends Widget {
 
         this.draggable = new Draggable(this.handler, "vertical");
         this.draggable.setDraggingClass("WUIVPanelDragging");
+        this.draggable.setBackgroundCursor("row-resize");
 
         this.handler.subscribe({
             event: "drag",
@@ -91,7 +92,8 @@ export class VPanel extends Widget {
 
     private updateSizeFromHandlerPosition(): void {
         if (this.topHeight !== null) {
-            this.topHeight = this.handler.getY();
+            const topY = this.topContent ? this.topContent.getY(true) : 0;
+            this.topHeight = this.handler.getY() - topY;
         } else if (this.bottomHeight !== null) {
             this.bottomHeight = this.getH() - this.handler.getY();
         }
