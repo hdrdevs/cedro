@@ -64,6 +64,14 @@ export class DataGrid extends Widget {
         this.addClass("WUIDataGrid");
     }
 
+    public hideFooter(): void {
+        this.footerContainer.setFixedSize(0);
+    }
+
+    public showFooter(): void {
+        this.footerContainer.setFixedSize(DATA_GRID_FOOTER_HEIGHT);
+    }
+
     private getFreeWidth(): number {
         let freeW = 0;
         for (let i = 0; i < this.columns.length; i++) {

@@ -67,7 +67,7 @@ export class IconButton extends Button {
             this.icon.getBody().style.position = "absolute";
 
             const startX = this.getBody().clientWidth / 2 - iconWidth / 2;
-            const startY = this.getH() / 2 - iconWidth / 2;
+            const startY = this.getH() / 2 - this.icon.getH() / 2;
 
             this.icon.setX(startX);
             this.icon.setY(startY);
@@ -83,8 +83,9 @@ export class IconButton extends Button {
             let startLabelY = this.getH() / 2 - labelHeight / 2;
 
             if (this.getType() !== WidgetTypes.FILL) {
-                startY = 0;
-                startLabelY = iconWidth / 6;
+                startY = this.getH() / 2 - this.icon.getH() / 2;
+                this.label.getBody().style.lineHeight = this.getH() + "px";
+                startLabelY = this.getH() / 2 - this.label.getH() / 2;
             }
 
             if (startX < 0 || startY < 0) {
