@@ -1,9 +1,9 @@
 import { WidgetAlignTypes, WidgetTypes } from "../../../../index";
-import { Widget } from "../../../../ui";
+import { HPanel } from "../../../../ui";
 import { BottomAccordion } from "./accordion";
 import { BottomTabs } from "./bottomtabs";
 
-export class BottomPanel extends Widget {
+export class BottomPanel extends HPanel {
     tabs: BottomTabs;
     accordion: BottomAccordion;
     constructor() {
@@ -14,7 +14,7 @@ export class BottomPanel extends Widget {
         this.tabs = new BottomTabs();
         this.accordion = new BottomAccordion();
 
-        this.addChild(this.tabs);
-        this.addChild(this.accordion);
+        this.setLeft(this.tabs, 500);
+        this.setRight(this.accordion);
     }
 }

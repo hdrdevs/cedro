@@ -72,13 +72,13 @@ export class mainToolbar extends Toolbar {
         });
 
         this.btnSel = new ButtonMenu("btnSel");
-        this.btnSel.setText("Menu");
-        this.btnSel.addItem("item1", "Item 1", "add");
-        this.btnSel.addItem("item2", "Item 2", "list");
-        this.btnSel.addItem("item3", "Item 3 pero este es el  ancho", "save");
-        this.btnSel.addItem("item4", "Item 4", "draw");
-        this.btnSel.addItem("item5", "Item 5", "list");
-        this.btnSel.addItem("item6", "Item 6 tiene mas ancho", "save");
+        this.btnSel.setText("Actions");
+        this.btnSel.addItem("item1", "Repair all", "add");
+        this.btnSel.addItem("item2", "Print all", "list");
+        this.btnSel.addItem("item3", "Get broken cars", "save");
+        this.btnSel.addItem("item4", "Get old cars", "draw");
+        this.btnSel.addItem("item5", "Get moder cars", "list");
+        this.btnSel.addItem("item6", "Sell unused cars", "save");
 
         this.addItem("btn1", this.btn1);
         this.addItem("btn5", this.btn5);

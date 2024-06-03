@@ -67,7 +67,7 @@ export class ValueBar extends Widget {
 
         if (this.orientation === "horizontal") {
             const handlerSize = 24;
-            const heightBar = 10;
+            const heightBar = 14;
             const width = this.getW() - 3;
             const height = this.getH();
             const widthBar = width * (this.value / 100);
@@ -80,17 +80,17 @@ export class ValueBar extends Widget {
             this.bar.setX(0);
             this.bar.setY(0);
             this.bar.setW(widthBar);
-            this.bar.setH(heightBar);
+            this.bar.setH(heightBar - 4);
 
             this.handler.setX(widthBar - handlerSize + 2);
-            this.handler.setY(height / 2 - handlerSize / 2 + 2);
+            this.handler.setY(height / 2 - handlerSize / 2);
             this.handler.setWH(handlerSize, handlerSize);
 
             this.draggable.setMinX(0);
             this.draggable.setMaxX(width - handlerSize + 2);
         } else if (this.orientation === "vertical") {
             const handlerSize = 24;
-            const widthBar = 10;
+            const widthBar = 14;
             const height = this.getH() - 3;
             const width = this.getW();
             const heightBar = height * (this.value / 100);
@@ -103,10 +103,10 @@ export class ValueBar extends Widget {
             this.bar.setX(0);
             this.bar.setY(0);
             this.bar.setH(heightBar);
-            this.bar.setW(widthBar);
+            this.bar.setW(widthBar - 4);
 
             this.handler.setY(heightBar - handlerSize + 2);
-            this.handler.setX(width / 2 - handlerSize / 2 + 2);
+            this.handler.setX(width / 2 - handlerSize / 2);
             this.handler.setWH(handlerSize, handlerSize);
 
             this.draggable.setMinY(0);
