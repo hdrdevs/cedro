@@ -73,6 +73,8 @@ class Header extends Widget {
             },
         });
 
+        this.btnStack.setActive("buttonPage1");
+
         this.addChild(this.logo);
         this.addChild(Spacer());
         this.addChild(this.btnStack);
