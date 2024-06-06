@@ -22,7 +22,6 @@ type ScrollData = {
 export class Scroll extends Widget {
     contentArea: Widget;
     orientation: OrientationTypes;
-
     drag: Draggable;
 
     constructor(id: string, contentArea: Widget, orientation: OrientationTypes = "vertical") {
@@ -134,7 +133,7 @@ export class Scroll extends Widget {
                 return;
             }
 
-            this.setX(this.contentArea.getW() - SCROLL_SIZE - 1);
+            this.setX(this.contentArea.getX() + this.contentArea.getW() - SCROLL_SIZE - 1);
             this.setY(1 + this.contentArea.getY() + scrollData.position);
             this.setH(scrollData.scrollBarHeight);
             this.setW(SCROLL_SIZE);

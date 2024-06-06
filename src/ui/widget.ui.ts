@@ -144,6 +144,13 @@ export class Widget implements IWidget {
         window.w.set(this.id, this);
     }
 
+    public dispose(): void {
+        this.removeAllChilds();
+        const body = this.getBody();
+        const parent = body.parentNode;
+        parent?.removeChild(body);
+    }
+
     public run(eventId: WUIEvent): void {
         this.subscribers.forEach((callback) => {
             if (callback.event == eventId) {

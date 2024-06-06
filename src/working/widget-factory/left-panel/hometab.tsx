@@ -2,7 +2,7 @@ import "./hometab.css"
 import { WidgetTypes, createWidget } from "../../../index";
 
 export default createWidget(
-    <div  widget-type={WidgetTypes.FREE}  widget-class={"homeContainer"}>
+    <div id="hometabDiv"  widget-type={WidgetTypes.FREE}  widget-class={"homeContainer"}>
         <h1>Lorem Ipsum</h1>
         <h2>The standard Lorem Ipsum passage</h2>
         <h3>What is Lorem Ipsum?</h3>

@@ -5,6 +5,7 @@ import { Widget, WidgetAlignTypes, WidgetTypes } from "./widget.ui";
 import { Toolbar } from "./toolbar.ui";
 import { Label } from "./label.ui";
 import { IconButton } from "./IconButton.ui";
+import { Scroll } from "./scroll.ui";
 
 const TAB_HEADER_SIZE = 40;
 
@@ -20,6 +21,8 @@ export class Tabs extends Widget {
     itemControls: Toolbar;
 
     items: Map<string, TabItem>;
+    itemsScrollable: Map<string, boolean>;
+    verticalScrollbar: Scroll | null;
 
     constructor(
         id: string,
@@ -42,6 +45,8 @@ export class Tabs extends Widget {
         }
 
         this.items = new Map<string, TabItem>();
+        this.itemsScrollable = new Map<string, boolean>();
+        this.verticalScrollbar = null;
 
         this.itemControls = new Toolbar(id + ".itemControls", null, orientation);
         this.itemControls.setVariant("contained");
@@ -57,8 +62,9 @@ export class Tabs extends Widget {
         this.orientation = orientation;
     }
 
-    public addTab(id: string, title: string, content: Widget) {
+    public addTab(id: string, title: string, content: Widget, scrollable: boolean = false) {
         this.items.set(id, { title, content });
+        this.itemsScrollable.set(id, scrollable);
 
         const itemControl = new Label(id + ".itemControl", "span");
 
@@ -87,8 +93,9 @@ export class Tabs extends Widget {
         this.itemControls.addItem(id, itemControl);
     }
 
-    public addIconTab(id: string, icon: string, content: Widget) {
+    public addIconTab(id: string, icon: string, content: Widget, scrollable: boolean = false) {
         this.items.set(id, { title: icon, content });
+        this.itemsScrollable.set(id, scrollable);
 
         const itemControl = new IconButton(id + ".itemControl", icon);
         itemControl.setW(40);
@@ -143,9 +150,33 @@ export class Tabs extends Widget {
 
         if (actualTab) {
             this.items.get(id)?.content.setVisible(true);
+            const scrollable = this.itemsScrollable.get(id);
+
             this.content.addChild(actualTab.content);
+
+            if (scrollable) {
+                if (this.verticalScrollbar == null) {
+                    this.verticalScrollbar = new Scroll(
+                        actualTab.content.id + ".verticalScrollbar",
+                        this.content,
+                        "vertical"
+                    );
+                }
+            } else {
+                if (this.verticalScrollbar) {
+                    this.verticalScrollbar.dispose();
+                    this.verticalScrollbar = null;
+                }
+            }
         }
 
         this.render();
+    }
+
+    public render(): void {
+        super.render();
+        if (this.verticalScrollbar) {
+            this.verticalScrollbar.render();
+        }
     }
 }

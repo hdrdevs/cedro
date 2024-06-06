@@ -54,6 +54,8 @@ export interface IWidget {
     unsubscribe: (event: WUIEvent) => void;
     run(eventId: WUIEvent): void;
 
+    dispose(): void;
+
     setPadding(p: number): void;
 
     setX(x: number): void;
