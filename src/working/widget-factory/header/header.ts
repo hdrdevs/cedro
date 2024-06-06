@@ -33,13 +33,13 @@ class Header extends Widget {
         this.btnStack.setFixedSize(STACK_MAX_WIDTH);
 
         this.page1 = new IconButton("buttonPage1", "house", null);
-        this.page1.setText("Home");
+        this.page1.setText("Page 1");
 
         this.page2 = new IconButton("buttonPage2", "cloud_download", null);
-        this.page2.setText("Links");
+        this.page2.setText("Page 2");
 
         this.page3 = new IconButton("buttonPage3", "info", null);
-        this.page3.setText("About");
+        this.page3.setText("Page 3");
 
         this.btnStack.addButton(this.page1);
         this.btnStack.addButton(this.page2);

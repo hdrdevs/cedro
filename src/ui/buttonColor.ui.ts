@@ -11,4 +11,14 @@ export class ButtonColor extends Button {
         this.inputColor.getBody().setAttribute("type", "color");
         this.inputColor.addClass("WUIButtonColorInput");
     }
+
+    public setValue(value: string): void {
+        this.inputColor.getBody().setAttribute("value", value);
+    }
+
+    public getValue(): string {
+        const value = this.inputColor.getBody().getAttribute("value");
+
+        return value ? value : "";
+    }
 }
