@@ -1,26 +1,14 @@
 import { Colors } from "./colors.ui";
 import { Widget } from "./widget.ui";
 
-export type LabelVariants =
-    | "h1"
-    | "h2"
-    | "h3"
-    | "h4"
-    | "h5"
-    | "h6"
-    | "p"
-    | "span";
+export type LabelVariants = "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span";
 
 export class Label extends Widget {
     variant: LabelVariants;
     color: Colors;
     text: string;
 
-    constructor(
-        id: string,
-        variant: LabelVariants = "span",
-        parent: Widget | null = null
-    ) {
+    constructor(id: string, variant: LabelVariants = "span", parent: Widget | null = null) {
         super(id, variant, parent);
 
         this.variant = variant;
@@ -34,28 +22,36 @@ export class Label extends Widget {
         super.init();
     }
 
-    setText(text: string): void {
+    public centerV(): void {
+        this.getBody().style.lineHeight = this.getH() + "px";
+    }
+
+    public centerH(): void {
+        this.getBody().style.textAlign = "center";
+    }
+
+    public setText(text: string): void {
         this.text = text;
         this.body.innerHTML = text;
     }
 
-    setVariant(variant: LabelVariants = "span"): void {
+    public setVariant(variant: LabelVariants = "span"): void {
         this.variant = variant;
     }
 
-    setColor(color: Colors = "primary"): void {
+    public setColor(color: Colors = "primary"): void {
         this.color = color;
     }
 
-    getVariant(): LabelVariants {
+    public getVariant(): LabelVariants {
         return this.variant;
     }
 
-    getColor(): Colors {
+    public getColor(): Colors {
         return this.color;
     }
 
-    getText(): string {
+    public getText(): string {
         return this.text;
     }
 }

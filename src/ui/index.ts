@@ -4,6 +4,7 @@ import { ButtonColor } from "./buttonColor.ui";
 import { ButtonMenu } from "./buttonmenu.ui";
 import { ButtonStack } from "./buttonstack.ui";
 import { Checkbox } from "./checkbox.ui";
+import { Container, Spacer, ContainerParams } from "./container.ui";
 import { WidgetAlignTypes, WidgetTypes, Widget } from "./widget.ui";
 import { Dialog } from "./dialog";
 import { HPanel } from "./hpanel.ui";
@@ -26,6 +27,8 @@ import { VPanel } from "./vpanel.ui";
 import { createWidget } from "./widget.builder.ui";
 import { IconButtonMenu } from "./iconButtonMenu.ui";
 
+export type { ContainerParams };
+
 export {
     Accordion,
     Button,
@@ -33,6 +36,7 @@ export {
     ButtonMenu,
     ButtonStack,
     Checkbox,
+    Container,
     Dialog,
     HPanel,
     Icon,
@@ -44,6 +48,7 @@ export {
     ProgressBar,
     RadioButton,
     Select,
+    Spacer,
     Switch,
     Tabs,
     TextArea,
