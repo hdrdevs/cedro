@@ -6,11 +6,12 @@ export type ContainerParams = {
     orientation?: OrientationTypes;
     parent?: Widget | null;
     size?: number | null;
+    padding?: number | null;
 };
 
 export class Container extends Widget {
     constructor(params: ContainerParams) {
-        const { orientation = "horizontal", parent = null, size = null } = params;
+        const { orientation = "horizontal", parent = null, size = null, padding = null } = params;
 
         super(UID(), "div", parent);
 
@@ -22,6 +23,10 @@ export class Container extends Widget {
 
         if (size !== null) {
             this.setFixedSize(size);
+        }
+
+        if (padding !== null) {
+            this.setPadding(padding);
         }
 
         this.setType(WidgetTypes.FILL);
