@@ -1,4 +1,4 @@
-import { Accordion } from "./accordion";
+import { Accordion } from "./accordion.ui";
 import { Button } from "./button.ui";
 import { ButtonColor } from "./buttonColor.ui";
 import { ButtonMenu } from "./buttonmenu.ui";
@@ -9,6 +9,7 @@ import { Dialog } from "./dialog";
 import { HPanel } from "./hpanel.ui";
 import { Icon } from "./Icon.ui";
 import { IconButton } from "./IconButton.ui";
+import { Image } from "./image.ui";
 import { Label } from "./label.ui";
 import { Menu } from "./menu.ui";
 import { ProgressBar } from "./progressbar.ui";
@@ -37,6 +38,7 @@ export {
     Icon,
     IconButton,
     IconButtonMenu,
+    Image,
     Label,
     Menu,
     ProgressBar,

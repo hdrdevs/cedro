@@ -1,0 +1,19 @@
+.WUIImageContainer {
+    position: absolute;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.WUIImageContainer img {
+    margin: auto;
+}
+
+.WUIImageFillWidth {
+    width: 100% !important;
+}
+
+.WUIImageFillHeight {
+    height: 100% !important;
+}
