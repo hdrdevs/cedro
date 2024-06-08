@@ -164,7 +164,7 @@ export class Tabs extends Widget {
                 }
             } else {
                 if (this.verticalScrollbar) {
-                    this.verticalScrollbar.dispose();
+                    this.verticalScrollbar.free();
                     this.verticalScrollbar = null;
                 }
             }

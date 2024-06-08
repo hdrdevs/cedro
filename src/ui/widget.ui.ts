@@ -144,13 +144,6 @@ export class Widget implements IWidget {
         window.w.set(this.id, this);
     }
 
-    public dispose(): void {
-        this.removeAllChilds();
-        const body = this.getBody();
-        const parent = body.parentNode;
-        parent?.removeChild(body);
-    }
-
     public run(eventId: WUIEvent): void {
         this.subscribers.forEach((callback) => {
             if (callback.event == eventId) {
@@ -792,7 +785,7 @@ export class Widget implements IWidget {
         this.setVisible(!this.visible);
     }
 
-    renderHTML(content: any): HTMLElement {
+    public renderHTML(content: any): HTMLElement {
         this.body.appendChild(content);
         return content as HTMLElement;
     }
@@ -813,15 +806,15 @@ export class Widget implements IWidget {
         return maxZindex;
     }
 
-    setZIndex(zIndex: number): void {
+    public setZIndex(zIndex: number): void {
         this.getBody().style.zIndex = `${zIndex}`;
     }
 
-    raisteTop(): void {
+    public raisteTop(): void {
         this.setZIndex(this.getMaxZIndex() + 1);
     }
 
-    raiseBottom(): void {
+    public raiseBottom(): void {
         this.setZIndex(0);
     }
 
@@ -831,7 +824,7 @@ export class Widget implements IWidget {
      * @param {IWidget} guest - The widget to attach.
      * @return {void} This function does not return anything.
      */
-    attachWidget(guest: IWidget): void {
+    public attachWidget(guest: IWidget): void {
         this.removeAllChilds();
         this.addChild(guest);
         guest.setParent(this);
@@ -845,7 +838,7 @@ export class Widget implements IWidget {
      *
      * @return {void} No return value.
      */
-    removeAllChilds(): void {
+    public removeAllChilds(): void {
         while (this.getBody().childNodes.length > 0) {
             const child = this.getBody().firstChild;
             if (child) this.getBody().removeChild(child);
@@ -854,12 +847,19 @@ export class Widget implements IWidget {
         this.childs = [];
     }
 
-    free(): void {
+    public free(): void {
         if (this.childs) {
             for (const child of this.childs) {
                 child.free();
             }
         }
         window.w.delete(this.id);
+    }
+
+    public dispose(): void {
+        this.removeAllChilds();
+        const body = this.getBody();
+        const parent = body.parentNode;
+        parent?.removeChild(body);
     }
 }
