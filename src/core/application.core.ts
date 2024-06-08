@@ -151,6 +151,7 @@ class WApplication implements IApplication {
         });
 
         this.root.render();
+        this.seo.setTitle(this.seo.getTitle());
     }
 
     /**

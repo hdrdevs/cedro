@@ -1,6 +1,6 @@
 {
     "name": "cedro",
-    "version": "0.1.7",
+    "version": "0.1.9",
     "type": "module",
     "devDependencies": {
         "@types/node": "^20.4.4",
