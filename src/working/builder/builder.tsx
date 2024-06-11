@@ -4,6 +4,7 @@ import { Application, Widgets } from "../../core/application.core";
 import { WButton } from "../../ui/button.ui";
 import { WLabel } from "../../ui/label.ui";
 import { WContainer } from "../../ui/container.ui";
+import { WIconButton } from "../../ui/IconButton.ui";
 
 export const app = (() => {
     const sendData = () => {
@@ -21,6 +22,7 @@ export const app = (() => {
                     <WContainer orientation="vertical">
                         <WLabel id="lblh2" text="Result" variant="h2" />
                         <WLabel id="lblh3" text="Result" variant="h3" />
+                        <WIconButton id="icn1" icon="home" text="Home" />
                     </WContainer>
                 </WContainer>
                 <WButton

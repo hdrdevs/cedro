@@ -6,6 +6,7 @@ import { addNewWidget } from "../widget.collection";
 import { createLabel } from "../label.ui";
 import { OrientationTypes } from "src/types/orientation.type";
 import { createContainer } from "../container.ui";
+import { createIconButton } from "../IconButton.ui";
 
 export type WidgetEventProps = {
     onClick?: () => {} | void;
@@ -64,6 +65,8 @@ export function createWidget(
         widget = createTextbox(widgetProps.id, content, parent);
     } else if (content.getAttribute("w-button")) {
         widget = createButton(widgetProps.id, content, parent);
+    } else if (content.getAttribute("w-icon-button")) {
+        widget = createIconButton(widgetProps.id, content, parent);
     } else if (content.getAttribute("w-label")) {
         widget = createLabel(widgetProps.id, content, parent);
     } else if (content.getAttribute("w-container")) {

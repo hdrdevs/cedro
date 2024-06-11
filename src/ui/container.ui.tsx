@@ -1,11 +1,5 @@
 import { OrientationTypes } from "src/types/orientation.type";
-import {
-    Widget,
-    WidgetAlignTypes,
-    WidgetTypes,
-    connectWidgetCallback,
-    getOnlyEventProps,
-} from "./widget.ui";
+import { Widget, WidgetAlignTypes, WidgetTypes } from "./widget.ui";
 import { UID } from "../core/uid";
 import { WidgetProps, createWidget } from "./builder/widget.builder";
 

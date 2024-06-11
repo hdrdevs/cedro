@@ -1,6 +1,12 @@
 import "./styles/button.css";
-import { Widget, WidgetAlignTypes, WidgetTypes } from "./widget.ui";
-import { Button } from "./button.ui";
+import {
+    Widget,
+    WidgetAlignTypes,
+    WidgetTypes,
+    connectWidgetCallback,
+    getOnlyEventProps,
+} from "./widget.ui";
+import { Button, wButtonProps } from "./button.ui";
 import { Icon } from "./Icon.ui";
 import { Label } from "./label.ui";
 
@@ -111,4 +117,75 @@ export class IconButton extends Button {
     public setIcon(icon: string): void {
         this.icon.setIcon(icon);
     }
+}
+
+export type wIconButtonProps = Omit<wButtonProps, "text"> & {
+    icon?: string | null;
+    text?: string | null;
+    onlyIcon?: boolean | null;
+};
+
+export const WIconButton = (props: wIconButtonProps) => {
+    connectWidgetCallback(props.id, getOnlyEventProps(props));
+
+    return (
+        <button
+            id={props.id}
+            w-icon-button
+            w-icon={props.icon}
+            w-text={props.text}
+            w-only-icon={props.onlyIcon}
+            w-variant={props.variant}
+            w-color={props.color}
+            w-width={props.width}
+            w-height={props.height}
+            w-class={props.classNames}
+            w-orientation={props.orientation}
+            w-fixed-size={props.fixedSize}
+            w-padding={props.padding}
+            w-type={props.type}
+        />
+    );
+};
+
+export function createIconButton(
+    id: string,
+    content: any,
+    parent: Widget | null = null
+): IconButton {
+    const dataIcon = content.getAttribute("w-icon");
+    const dataText = content.getAttribute("w-text");
+    const dataVariant = content.getAttribute("w-variant");
+    const dataColor = content.getAttribute("w-color");
+    const dataWidth = content.getAttribute("w-width");
+    const dataHeight = content.getAttribute("w-height");
+    const dataOnlyIcon = content.getAttribute("w-only-icon");
+
+    let newIconButton = new IconButton(id, dataIcon, parent);
+
+    if (dataText) {
+        newIconButton.setText(dataText);
+    }
+
+    if (dataVariant) {
+        newIconButton.setVariant(dataVariant);
+    }
+
+    if (dataColor) {
+        newIconButton.setColor(dataColor);
+    }
+
+    if (dataWidth) {
+        newIconButton.setInitialW(dataWidth);
+    }
+
+    if (dataHeight) {
+        newIconButton.setInitialH(dataHeight);
+    }
+
+    if (dataOnlyIcon) {
+        newIconButton.onlyIcon();
+    }
+
+    return newIconButton;
 }

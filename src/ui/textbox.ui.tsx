@@ -160,7 +160,7 @@ export const WTextbox = (props: wTextBoxProps) => {
             w-width={props.width}
             w-height={props.height}
             w-class={props.classNames}
-            w-align={props.align}
+            w-orientation={props.orientation}
             w-fixed-size={props.fixedSize}
             w-padding={props.padding}
             w-type={props.type}
