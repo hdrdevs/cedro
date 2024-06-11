@@ -2,7 +2,8 @@ import "./styles/button.css";
 import "./styles/stackbutton.css";
 import "./styles/vstackbutton.css";
 import { Colors } from "./colors.ui";
-import { Widget } from "./widget.ui";
+import { Widget, connectWidgetCallback, getOnlyEventProps } from "./widget.ui";
+import { WidgetProps } from "./builder/widget.builder";
 
 export type ButonVariants =
     | "contained"
@@ -102,4 +103,65 @@ export class Button extends Widget {
     getText(): string {
         return this.text;
     }
+}
+
+export type wButtonProps = WidgetProps & {
+    text: string;
+    variant?: ButonVariants | null;
+    color?: Colors | null;
+    width?: number | null;
+    height?: number | null;
+};
+
+export const WButton = (props: wButtonProps) => {
+    connectWidgetCallback(props.id, getOnlyEventProps(props));
+
+    return (
+        <button
+            id={props.id}
+            w-button
+            w-text={props.text}
+            w-variant={props.variant}
+            w-color={props.color}
+            w-width={props.width}
+            w-height={props.height}
+            w-class={props.classNames}
+            w-align={props.align}
+            w-fixed-size={props.fixedSize}
+            w-padding={props.padding}
+            w-type={props.type}
+        />
+    );
+};
+
+export function createButton(id: string, content: any, parent: Widget | null = null): Button {
+    let newButton = new Button(id, parent);
+
+    const dataText = content.getAttribute("w-text");
+    const dataVariant = content.getAttribute("w-variant");
+    const dataColor = content.getAttribute("w-color");
+    const dataWidth = content.getAttribute("w-width");
+    const dataHeight = content.getAttribute("w-height");
+
+    if (dataText) {
+        newButton.setText(dataText);
+    }
+
+    if (dataVariant) {
+        newButton.setVariant(dataVariant);
+    }
+
+    if (dataColor) {
+        newButton.setColor(dataColor);
+    }
+
+    if (dataWidth) {
+        newButton.setInitialW(dataWidth);
+    }
+
+    if (dataHeight) {
+        newButton.setInitialH(dataHeight);
+    }
+
+    return newButton;
 }

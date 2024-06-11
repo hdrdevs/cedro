@@ -2,6 +2,8 @@ import { WidgetAlignTypes, WidgetTypes } from "../ui/widget.ui";
 import { Vector2D } from "../types/vector2d.type";
 
 export type WUIEvent =
+    | "widget-load"
+    | "load"
     | "click"
     | "resize"
     | "mousedown"
@@ -15,7 +17,7 @@ export type WUIEvent =
 
 export type WUICallback = {
     event: WUIEvent;
-    then: (event: Event, wuie: IWidget) => void;
+    then: (event: Event, wuie: IWidget | null) => void;
 };
 
 export interface IWidget {

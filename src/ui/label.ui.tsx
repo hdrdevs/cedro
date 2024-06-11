@@ -1,5 +1,6 @@
+import { WidgetProps } from "./builder/widget.builder";
 import { Colors } from "./colors.ui";
-import { Widget } from "./widget.ui";
+import { Widget, connectWidgetCallback, getOnlyEventProps } from "./widget.ui";
 
 export type LabelVariants = "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span";
 
@@ -79,4 +80,47 @@ export class Label extends Widget {
     public getText(): string {
         return this.text;
     }
+}
+
+export type wLabelProps = WidgetProps & {
+    variant?: string | null;
+    color?: Colors | null;
+    text?: string | null;
+};
+
+export const WLabel = (props: wLabelProps) => {
+    connectWidgetCallback(props.id, getOnlyEventProps(props));
+
+    return (
+        <div
+            id={props.id}
+            w-label
+            w-text={props.text}
+            w-variant={props.variant}
+            w-color={props.color}
+        ></div>
+    );
+};
+
+export function createLabel(id: string, content: any, parent: Widget | null = null): Label {
+    const dataText = content.getAttribute("w-text");
+    const dataVariant = content.getAttribute("w-variant");
+    const dataColor = content.getAttribute("w-color");
+    let tag = dataVariant ? dataVariant : "span";
+
+    let newLabel = new Label(id, tag, parent);
+
+    if (dataText) {
+        newLabel.setText(dataText);
+    }
+
+    if (dataVariant) {
+        newLabel.setVariant(dataVariant);
+    }
+
+    if (dataColor) {
+        newLabel.setColor(dataColor);
+    }
+
+    return newLabel;
 }

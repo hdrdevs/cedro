@@ -1,5 +1,6 @@
+import { WidgetProps } from "./builder/widget.builder";
 import "./styles/textbox.css";
-import { Widget, WidgetTypes } from "./widget.ui";
+import { Widget, WidgetTypes, connectWidgetCallback, getOnlyEventProps } from "./widget.ui";
 
 export type InputTypes =
     | "text"
@@ -138,4 +139,56 @@ export class Textbox extends Widget {
     getInputType(): string {
         return this.inputType;
     }
+}
+
+export type wTextBoxProps = WidgetProps & {
+    title: string;
+    inputType?: InputTypes | null;
+    width?: number | null;
+    height?: number | null;
+};
+
+export const WTextbox = (props: wTextBoxProps) => {
+    connectWidgetCallback(props.id, getOnlyEventProps(props));
+
+    return (
+        <input
+            id={props.id}
+            w-textbox
+            w-title={props.title}
+            w-input-type={props.inputType}
+            w-width={props.width}
+            w-height={props.height}
+            w-class={props.classNames}
+            w-align={props.align}
+            w-fixed-size={props.fixedSize}
+            w-padding={props.padding}
+            w-type={props.type}
+        />
+    );
+};
+
+export function createTextbox(id: string, content: any, parent: Widget | null = null): Textbox {
+    let newTextbox = new Textbox(id, parent);
+
+    const dataTitle = content.getAttribute("w-title");
+    const dataInputType = content.getAttribute("w-input-type");
+    const dataWidth = content.getAttribute("w-width");
+    const dataHeight = content.getAttribute("w-height");
+
+    if (dataInputType) {
+        newTextbox.setInputType(dataInputType);
+    }
+
+    if (dataWidth) {
+        newTextbox.setInitialW(dataWidth);
+    }
+
+    if (dataHeight) {
+        newTextbox.setInitialH(dataHeight);
+    }
+
+    newTextbox.setTitle(dataTitle);
+
+    return newTextbox;
 }

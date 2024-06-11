@@ -1,6 +1,6 @@
 import Navigo from "navigo";
 import { IScreen } from "./screen.interface";
-import { IWidget } from "./widget.interface";
+import { IWidget, WUICallback, WUIEvent } from "./widget.interface";
 import { Dialog } from "../ui/dialog";
 import { Seo } from "../core/seo";
 import { ThemeManager } from "../core/themes.core";
@@ -26,9 +26,15 @@ export interface IApplication {
     confirmDialog: Dialog;
     mediaQueries: Map<string, IScreenSize>;
 
+    subscribers: Map<string, WUICallback>;
+
     theme: ThemeManager;
 
     attachWidget(guest: IWidget, host: IWidget): void;
+
+    subscribe: (cb: WUICallback) => void;
+    unsubscribe: (event: WUIEvent) => void;
+    run(eventId: WUIEvent): void;
 
     addMediaQuery(
         query: string,

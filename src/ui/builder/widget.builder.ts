@@ -1,0 +1,111 @@
+import { UID } from "../../core/uid";
+import { Widget, WidgetAlignTypes, WidgetTypes } from "../widget.ui";
+import { createTextbox } from "../textbox.ui";
+import { createButton } from "../button.ui";
+import { addNewWidget } from "../widget.collection";
+import { createLabel } from "../label.ui";
+
+export type WidgetEventProps = {
+    onClick?: () => {} | void;
+    onResize?: () => {} | void;
+    onMouseDown?: () => {} | void;
+    onMouseUp?: () => {} | void;
+    onMouseMove?: () => {} | void;
+    onMouseOut?: () => {} | void;
+    onMouseLeave?: () => {} | void;
+    onWheel?: () => {} | void;
+    onDrag?: () => {} | void;
+};
+
+export type WidgetProps = {
+    id: string;
+    type?: WidgetTypes | null;
+    align?: WidgetAlignTypes | null;
+    padding?: number | null;
+    classNames?: string | null;
+    fixedSize?: number | null;
+} & WidgetEventProps;
+
+export function createWidget(
+    content: any,
+    parent: Widget | null = null,
+    freedom: boolean = false
+): Widget | null {
+    if (!content.tagName) {
+        return null;
+    }
+
+    let widget: Widget | null = null;
+    let widgetProps: WidgetProps = {
+        id: content.id ? content.id : UID(),
+        type:
+            content.getAttribute("w-type") === null
+                ? WidgetTypes.FILL
+                : parseInt(content.getAttribute("w-type")),
+        align:
+            content.getAttribute("w-align") === null
+                ? WidgetAlignTypes.HORIZONTAL
+                : parseInt(content.getAttribute("w-align")),
+        padding:
+            content.getAttribute("w-padding") === null
+                ? 0
+                : parseInt(content.getAttribute("w-padding")),
+        fixedSize:
+            content.getAttribute("w-fixed-size") === null
+                ? null
+                : parseInt(content.getAttribute("w-fixed-size")),
+        classNames:
+            content.getAttribute("w-classes") === null ? null : content.getAttribute("w-classes"),
+    };
+
+    if (content.getAttribute("w-textbox")) {
+        widget = createTextbox(widgetProps.id, content, parent);
+    } else if (content.getAttribute("w-button")) {
+        widget = createButton(widgetProps.id, content, parent);
+    } else if (content.getAttribute("w-label")) {
+        widget = createLabel(widgetProps.id, content, parent);
+    } else {
+        widget = new Widget(widgetProps.id, content.tagName, parent);
+
+        if (widgetProps.type === WidgetTypes.FREE) {
+            freedom = true;
+        }
+
+        content.getAttributeNames().forEach((key: string) => {
+            if (widget) widget.getBody().setAttribute(key, content.getAttribute(key));
+        });
+
+        (content as HTMLElement).childNodes.forEach((child) => {
+            if (child.hasChildNodes() == true) {
+                createWidget(child, widget, freedom);
+            } else {
+                if (widget) widget.getBody().appendChild(child);
+            }
+        });
+    }
+
+    if (widget) {
+        if (!freedom && widgetProps.type) {
+            widget.setType(widgetProps.type);
+        } else {
+            widget.setType(WidgetTypes.FREE);
+        }
+
+        if (widgetProps.align) widget.setAlign(widgetProps.align);
+        if (widgetProps.padding) widget.setPadding(widgetProps.padding);
+        if (widgetProps.fixedSize) widget.setFixedSize(widgetProps.fixedSize);
+
+        if (widgetProps.classNames) {
+            const clases = widgetProps.classNames.split(" ");
+            for (const clase of clases) {
+                widget.addClass(clase);
+            }
+        }
+
+        addNewWidget(widgetProps.id, widget);
+
+        return widget;
+    }
+
+    return null;
+}

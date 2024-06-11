@@ -9,16 +9,19 @@ import "material-icons/iconfont/material-icons.css";
 import { Widget, WidgetAlignTypes, WidgetTypes } from "../ui/widget.ui";
 import { Screen } from "./screeen.core";
 import { IApplication, IScreenSize } from "../interfaces/application.interface";
-import { IWidget } from "../interfaces/widget.interface";
+import { IWidget, WUICallback, WUIEvent } from "../interfaces/widget.interface";
 import Navigo from "navigo";
 import { Dialog } from "../ui/dialog";
 import { Label } from "../ui/label.ui";
 import { Seo } from "./seo";
 import { DarkTheme, LightTheme, ThemeManager } from "./themes.core";
 import { Loading } from "../ui/loading.ui";
+import { OrientationTypes } from "../types/orientation.type";
 
 class WApplication implements IApplication {
     seo: Seo;
+
+    subscribers: Map<string, WUICallback>;
 
     screen: Screen;
     root: Widget;
@@ -35,7 +38,10 @@ class WApplication implements IApplication {
     constructor(title: string) {
         this.seo = new Seo(title);
 
+        this.subscribers = new Map<string, WUICallback>();
+
         this.root = new Widget("root");
+
         this.root.setType(WidgetTypes.FILL);
         this.screen = new Screen();
         this.router = new Navigo("/");
@@ -53,6 +59,7 @@ class WApplication implements IApplication {
         window.addEventListener("load", () => {
             this.screen.updateSize();
             this.getRoot().resize();
+            this.run("load");
         });
 
         this.alertDialog = new Dialog("Dialog.alert", null);
@@ -61,6 +68,26 @@ class WApplication implements IApplication {
         this.loading = new Loading("loading", null);
 
         this.theme.load();
+    }
+
+    public run(eventId: WUIEvent): void {
+        this.subscribers.forEach((callback) => {
+            if (callback.event == eventId) {
+                callback.then(new Event(eventId), null);
+            }
+        });
+    }
+
+    public subscribe(cb: WUICallback) {
+        const randomId =
+            Math.random().toString(36).substring(2, 15) +
+            Math.random().toString(36).substring(2, 15);
+
+        this.subscribers.set(`${randomId}.${cb.event}`, cb);
+    }
+
+    public unsubscribe(event: WUIEvent) {
+        this.subscribers.delete(`${event}`);
     }
 
     alert(msg: string, onOk: () => void = () => {}, onCancell: () => void = () => {}): void {
@@ -182,5 +209,44 @@ class WApplication implements IApplication {
         this.loading.setVisible(false);
     }
 }
+
+export type ApplicationProps = {
+    title: string;
+    padding?: number | null;
+    orientation?: OrientationTypes | null;
+    children: any;
+};
+
+export const Application = (props: ApplicationProps) => {
+    return (
+        <div title={props.title} w-padding={props.padding} w-orientation={props.orientation}>
+            {props.children}
+        </div>
+    );
+};
+
+export type WidgetsProps = {
+    children: any;
+};
+
+export const Widgets = (props: WidgetsProps) => {
+    return <div w-widget-collection>{props.children}</div>;
+};
+
+export type RoutesProps = {
+    children: any;
+};
+
+export const Routes = (props: RoutesProps) => {
+    return <div w-routes>{props.children}</div>;
+};
+
+export type RouteProps = {
+    src: string;
+};
+
+export const Route = (props: RouteProps) => {
+    return <a w-path href={props.src}></a>;
+};
 
 export default WApplication;
