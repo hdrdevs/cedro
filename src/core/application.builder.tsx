@@ -1,6 +1,6 @@
 //import { createWidget } from "src/ui/builder/widget.builder";
 import { WidgetAlignTypes } from "../ui";
-import { createWidget } from "../ui/builder/widget.builder";
+import { createWidget } from "../ui/widget.builder";
 import Application, { ApplicationProps } from "./application.core";
 
 function getApplicationProps(content: any): ApplicationProps {

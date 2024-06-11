@@ -1,4 +1,4 @@
-import { WidgetProps } from "./builder/widget.builder";
+import { WidgetProps } from "./widget.builder";
 import { Colors } from "./colors.ui";
 import { Widget, connectWidgetCallback, getOnlyEventProps } from "./widget.ui";
 

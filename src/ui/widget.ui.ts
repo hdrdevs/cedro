@@ -1,6 +1,6 @@
 import { IWidget, WUIEvent, WUICallback } from "../interfaces/widget.interface";
 import { Vector2D } from "../types/vector2d.type";
-import { WidgetEventProps, WidgetProps } from "./builder/widget.builder";
+import { WidgetEventProps, WidgetProps } from "./widget.builder";
 import { addNewWidget, connectWidget } from "./widget.collection";
 
 export enum WidgetTypes {

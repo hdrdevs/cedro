@@ -1,7 +1,7 @@
 import { OrientationTypes } from "src/types/orientation.type";
 import { Widget, WidgetAlignTypes, WidgetTypes } from "./widget.ui";
 import { UID } from "../core/uid";
-import { WidgetProps, createWidget } from "./builder/widget.builder";
+import { WidgetProps, createWidget } from "./widget.builder";
 
 export type ContainerParams = {
     orientation?: OrientationTypes;

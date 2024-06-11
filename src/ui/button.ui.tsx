@@ -3,7 +3,7 @@ import "./styles/stackbutton.css";
 import "./styles/vstackbutton.css";
 import { Colors } from "./colors.ui";
 import { Widget, connectWidgetCallback, getOnlyEventProps } from "./widget.ui";
-import { WidgetProps } from "./builder/widget.builder";
+import { WidgetProps } from "./widget.builder";
 
 export type ButonVariants =
     | "contained"

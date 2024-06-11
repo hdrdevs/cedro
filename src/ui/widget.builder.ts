@@ -1,12 +1,12 @@
-import { UID } from "../../core/uid";
-import { Widget, WidgetAlignTypes, WidgetTypes } from "../widget.ui";
-import { createTextbox } from "../textbox.ui";
-import { createButton } from "../button.ui";
-import { addNewWidget } from "../widget.collection";
-import { createLabel } from "../label.ui";
+import { UID } from "../core/uid";
+import { Widget, WidgetAlignTypes, WidgetTypes } from "./widget.ui";
+import { createTextbox } from "./textbox.ui";
+import { createButton } from "./button.ui";
+import { addNewWidget } from "./widget.collection";
+import { createLabel } from "./label.ui";
 import { OrientationTypes } from "src/types/orientation.type";
-import { createContainer } from "../container.ui";
-import { createIconButton } from "../IconButton.ui";
+import { createContainer } from "./container.ui";
+import { createIconButton } from "./IconButton.ui";
 
 export type WidgetEventProps = {
     onClick?: () => {} | void;
