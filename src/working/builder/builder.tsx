@@ -3,6 +3,7 @@ import { createApplication } from "../../core/application.builder";
 import { Application, Widgets } from "../../core/application.core";
 import { WButton } from "../../ui/button.ui";
 import { WLabel } from "../../ui/label.ui";
+import { WContainer } from "../../ui/container.ui";
 
 export const app = (() => {
     const sendData = () => {
@@ -15,8 +16,13 @@ export const app = (() => {
             <Widgets>
                 <WTextbox id="txtName" title="Name" fixedSize={50} />
                 <WTextbox id="txtLastname" title="Lastname" />
-                <WLabel id="lblh1" text="Result" variant="h1" />
-                <WLabel id="lblh2" text="Result" variant="h2" />
+                <WContainer orientation="horizontal">
+                    <WLabel id="lblh1" text="Result" variant="h1" />
+                    <WContainer orientation="vertical">
+                        <WLabel id="lblh2" text="Result" variant="h2" />
+                        <WLabel id="lblh3" text="Result" variant="h3" />
+                    </WContainer>
+                </WContainer>
                 <WButton
                     id="btnSend"
                     text="Enviar Datos"

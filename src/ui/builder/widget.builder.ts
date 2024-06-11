@@ -4,6 +4,8 @@ import { createTextbox } from "../textbox.ui";
 import { createButton } from "../button.ui";
 import { addNewWidget } from "../widget.collection";
 import { createLabel } from "../label.ui";
+import { OrientationTypes } from "src/types/orientation.type";
+import { createContainer } from "../container.ui";
 
 export type WidgetEventProps = {
     onClick?: () => {} | void;
@@ -20,10 +22,10 @@ export type WidgetEventProps = {
 export type WidgetProps = {
     id: string;
     type?: WidgetTypes | null;
-    align?: WidgetAlignTypes | null;
     padding?: number | null;
     classNames?: string | null;
     fixedSize?: number | null;
+    orientation?: OrientationTypes | null;
 } & WidgetEventProps;
 
 export function createWidget(
@@ -42,10 +44,10 @@ export function createWidget(
             content.getAttribute("w-type") === null
                 ? WidgetTypes.FILL
                 : parseInt(content.getAttribute("w-type")),
-        align:
-            content.getAttribute("w-align") === null
-                ? WidgetAlignTypes.HORIZONTAL
-                : parseInt(content.getAttribute("w-align")),
+        orientation:
+            content.getAttribute("w-orientation") === null
+                ? "horizontal"
+                : content.getAttribute("w-orientation"),
         padding:
             content.getAttribute("w-padding") === null
                 ? 0
@@ -64,6 +66,8 @@ export function createWidget(
         widget = createButton(widgetProps.id, content, parent);
     } else if (content.getAttribute("w-label")) {
         widget = createLabel(widgetProps.id, content, parent);
+    } else if (content.getAttribute("w-container")) {
+        widget = createContainer(content, parent);
     } else {
         widget = new Widget(widgetProps.id, content.tagName, parent);
 
@@ -91,7 +95,13 @@ export function createWidget(
             widget.setType(WidgetTypes.FREE);
         }
 
-        if (widgetProps.align) widget.setAlign(widgetProps.align);
+        if (widgetProps.orientation) {
+            if (widgetProps.orientation === "vertical") {
+                widget.setAlign(WidgetAlignTypes.VERTICAL);
+            } else {
+                widget.setAlign(WidgetAlignTypes.HORIZONTAL);
+            }
+        }
         if (widgetProps.padding) widget.setPadding(widgetProps.padding);
         if (widgetProps.fixedSize) widget.setFixedSize(widgetProps.fixedSize);
 
