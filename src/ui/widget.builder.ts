@@ -7,6 +7,7 @@ import { createLabel } from "./label.ui";
 import { OrientationTypes } from "src/types/orientation.type";
 import { createContainer } from "./container.ui";
 import { createIconButton } from "./IconButton.ui";
+import { createImage } from "./image.ui";
 
 export type WidgetEventProps = {
     onClick?: () => {} | void;
@@ -69,6 +70,8 @@ export function createWidget(
         widget = createIconButton(widgetProps.id, content, parent);
     } else if (content.getAttribute("w-label")) {
         widget = createLabel(widgetProps.id, content, parent);
+    } else if (content.getAttribute("w-image")) {
+        widget = createImage(widgetProps.id, content, parent);
     } else if (content.getAttribute("w-container")) {
         widget = createContainer(content, parent);
     } else {

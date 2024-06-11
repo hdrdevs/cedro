@@ -5,6 +5,7 @@ import { WButton } from "../../ui/button.ui";
 import { WLabel } from "../../ui/label.ui";
 import { WContainer } from "../../ui/container.ui";
 import { WIconButton } from "../../ui/IconButton.ui";
+import { WImage } from "../../ui/image.ui";
 
 export const app = (() => {
     const sendData = () => {
@@ -18,7 +19,10 @@ export const app = (() => {
                 <WTextbox id="txtName" title="Name" fixedSize={50} />
                 <WTextbox id="txtLastname" title="Lastname" />
                 <WContainer orientation="horizontal">
-                    <WLabel id="lblh1" text="Result" variant="h1" />
+                    <WContainer orientation="vertical">
+                        <WLabel id="lblh1" text="Result" variant="h1" />
+                        <WImage id="img1" src="cedro-logo.png" />
+                    </WContainer>
                     <WContainer orientation="vertical">
                         <WLabel id="lblh2" text="Result" variant="h2" />
                         <WLabel id="lblh3" text="Result" variant="h3" />
