@@ -1,7 +1,8 @@
 import "./styles/valuebar.css";
 import { OrientationTypes } from "src/types/orientation.type";
-import { Widget } from "./widget.ui";
+import { Widget, connectWidgetCallback, getOnlyEventProps } from "./widget.ui";
 import { Draggable } from "./draggable.ui";
+import { WidgetProps } from "./widget.builder";
 
 export class ValueBar extends Widget {
     orientation: OrientationTypes;
@@ -113,4 +114,39 @@ export class ValueBar extends Widget {
             this.draggable.setMaxY(height - handlerSize + 2);
         }
     }
+}
+
+export type wValueBarProps = WidgetProps & {
+    value: number;
+};
+
+export const WValueBar = (props: wValueBarProps) => {
+    connectWidgetCallback(props.id, getOnlyEventProps(props));
+
+    return (
+        <div
+            id={props.id}
+            w-valuebar
+            w-value={props.value}
+            w-class={props.classNames}
+            w-orientation={props.orientation}
+            w-fixed-size={props.fixedSize}
+            w-padding={props.padding}
+            w-type={props.type}
+        ></div>
+    );
+};
+
+export function createValueBar(id: string, content: any, parent: Widget | null = null): ValueBar {
+    const dataOrientation = content.getAttribute("w-orientation");
+    const dataValue = content.getAttribute("w-value");
+    let orientation: OrientationTypes = dataOrientation ? dataOrientation : "horizontal";
+
+    let newValueBar = new ValueBar(id, orientation, parent);
+
+    if (dataValue) {
+        newValueBar.setValue(parseInt(dataValue));
+    }
+
+    return newValueBar;
 }

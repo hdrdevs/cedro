@@ -124,13 +124,10 @@ export function createProgressBar(
         newProgressBar.setPaddingBar(parseInt(dataPaddingBar));
     }
 
-    console.log(dataHideLabel);
-
     if (dataHideLabel !== null) {
         newProgressBar.hideLabel();
     } else {
         newProgressBar.displayLabel();
-        console.log("mostrando label");
     }
 
     return newProgressBar;

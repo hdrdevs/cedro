@@ -10,6 +10,7 @@ import { WCheckbox } from "../../ui/checkbox.ui";
 import { WRadioButton } from "../../ui/radiobutton";
 import { WToolbar } from "../../ui/toolbar.ui";
 import { WProgressBar } from "../../ui/progressbar.ui";
+import { WValueBar } from "../../ui/valuebar.ui";
 
 window.app = (() => {
     const sendData = () => {
@@ -31,6 +32,7 @@ window.app = (() => {
                         <WIconButton id="tool2Btn1" icon="home" height={45} />
                         <WIconButton id="tool2Btn2" icon="list" height={45} />
                     </WToolbar>
+                    <WValueBar id="valbar1" value={65} orientation="vertical" fixedSize={35} />
                     <WContainer orientation="vertical">
                         <WLabel id="lblh1" text="Result" variant="h1" />
                         <WImage id="img1" src="cedro-logo.png" />
@@ -49,6 +51,12 @@ window.app = (() => {
                         <WLabel id="lblh2" text="Result" variant="h2" />
                         <WLabel id="lblh3" text="Result" variant="h3" />
                         <WIconButton id="icn1" icon="home" text="Home" />
+                        <WValueBar
+                            id="valbar2"
+                            value={65}
+                            orientation="horizontal"
+                            fixedSize={50}
+                        />
                         <WProgressBar id="prgbar1" value={65} paddingBar={5} fixedSize={35} />
                     </WContainer>
                 </WContainer>

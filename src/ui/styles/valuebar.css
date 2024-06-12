@@ -20,7 +20,7 @@
 }
 
 .WUIValueBarHandler {
-    position: absolute;
+    position: absolute !important;
     border-radius: 50%;
     background-color: var(--palette-primary-dark);
 }
