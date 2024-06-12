@@ -1,12 +1,15 @@
+import WApplication from "src/core/application.core";
 import { IWidget, WUICallback } from "../interfaces/widget.interface";
 
 declare global {
     interface Window {
+        app: WApplication | undefined;
         w: Map<string, IWidget>;
         widgetConnections: Map<string, WUICallback>;
     }
 
     var w: Map<string, IWidget>;
+    var app: WApplication | undefined;
     var widgetConnections: Map<string, WUICallback>;
 }
 

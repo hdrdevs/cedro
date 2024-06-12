@@ -8,6 +8,9 @@ import { OrientationTypes } from "src/types/orientation.type";
 import { createContainer } from "./container.ui";
 import { createIconButton } from "./IconButton.ui";
 import { createImage } from "./image.ui";
+import { createCheckbox } from "./checkbox.ui";
+import { createRadioButton } from "./radiobutton";
+import { createToolbar } from "./toolbar.ui";
 
 export type WidgetEventProps = {
     onClick?: () => {} | void;
@@ -72,6 +75,12 @@ export function createWidget(
         widget = createLabel(widgetProps.id, content, parent);
     } else if (content.getAttribute("w-image")) {
         widget = createImage(widgetProps.id, content, parent);
+    } else if (content.getAttribute("w-checkbox")) {
+        widget = createCheckbox(widgetProps.id, content, parent);
+    } else if (content.getAttribute("w-radiobutton")) {
+        widget = createRadioButton(widgetProps.id, content, parent);
+    } else if (content.getAttribute("w-toolbar")) {
+        widget = createToolbar(widgetProps.id, content, parent);
     } else if (content.getAttribute("w-container")) {
         widget = createContainer(content, parent);
     } else {

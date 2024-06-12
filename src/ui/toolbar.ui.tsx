@@ -3,6 +3,7 @@ import { IWidget } from "src/interfaces/widget.interface";
 import { Widget, WidgetAlignTypes, WidgetTypes } from "./widget.ui";
 import { IconButton } from "./IconButton.ui";
 import { OrientationTypes } from "src/types/orientation.type";
+import { WidgetProps, createWidget } from "./widget.builder";
 
 export type ToolbarVariants = "contained" | "outlined";
 
@@ -228,4 +229,41 @@ export class Toolbar extends Widget {
             item.render();
         }
     }
+}
+
+export type ToolbarProps = WidgetProps & {
+    children: any;
+};
+
+export const WToolbar = (props: ToolbarProps) => {
+    return (
+        <div
+            w-toolbar
+            w-class={props.classNames}
+            w-orientation={props.orientation}
+            w-fixed-size={props.fixedSize}
+            w-padding={props.padding}
+            w-type={props.type}
+        >
+            {props.children}
+        </div>
+    );
+};
+
+export function createToolbar(id: string, content: any, parent: Widget | null = null): Toolbar {
+    const dataOrientation = content.getAttribute("w-orientation");
+
+    let orientation: OrientationTypes = dataOrientation ? dataOrientation : "horizontal";
+
+    let newToolbar = new Toolbar(id, parent, orientation);
+
+    content.childNodes.forEach((item: HTMLElement) => {
+        const widget = createWidget(item);
+
+        if (widget !== null) {
+            newToolbar.addItem(widget.id, widget);
+        }
+    });
+
+    return newToolbar;
 }
