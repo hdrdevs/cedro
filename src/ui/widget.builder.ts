@@ -13,6 +13,8 @@ import { createRadioButton } from "./radiobutton";
 import { createToolbar } from "./toolbar.ui";
 import { createProgressBar } from "./progressbar.ui";
 import { createValueBar } from "./valuebar.ui";
+import { VPanel, createVPanel } from "./vpanel.ui";
+import { HPanel, createHPanel } from "./hpanel.ui";
 
 export type WidgetEventProps = {
     onClick?: () => {} | void;
@@ -87,6 +89,10 @@ export function createWidget(
         widget = createProgressBar(widgetProps.id, content, parent);
     } else if (content.getAttribute("w-valuebar")) {
         widget = createValueBar(widgetProps.id, content, parent);
+    } else if (content.getAttribute("w-vpanel")) {
+        widget = createVPanel(widgetProps.id, content, parent);
+    } else if (content.getAttribute("w-hpanel")) {
+        widget = createHPanel(widgetProps.id, content, parent);
     } else if (content.getAttribute("w-container")) {
         widget = createContainer(content, parent);
     } else {
@@ -116,7 +122,7 @@ export function createWidget(
             widget.setType(WidgetTypes.FREE);
         }
 
-        if (widgetProps.orientation) {
+        if (widgetProps.orientation && !(widget instanceof VPanel) && !(widget instanceof HPanel)) {
             if (widgetProps.orientation === "vertical") {
                 widget.setAlign(WidgetAlignTypes.VERTICAL);
             } else {

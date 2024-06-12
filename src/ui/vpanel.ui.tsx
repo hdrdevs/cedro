@@ -1,5 +1,6 @@
 import { Draggable } from "./draggable.ui";
 import "./styles/vpanel.css";
+import { WidgetProps, createWidget } from "./widget.builder";
 import { Widget, WidgetAlignTypes, WidgetTypes } from "./widget.ui";
 
 const VPANEL_HANDLER_SIZE = 4;
@@ -125,4 +126,40 @@ export class VPanel extends Widget {
 
         this.handler.setX(this.getX(true));
     }
+}
+
+export type WVPanelProps = WidgetProps & {
+    children: any;
+};
+
+export const WVPanel = (props: WVPanelProps) => {
+    return (
+        <div
+            w-vpanel
+            w-class={props.classNames}
+            w-fixed-size={props.fixedSize}
+            w-padding={props.padding}
+            w-type={props.type}
+        >
+            {props.children}
+        </div>
+    );
+};
+
+export function createVPanel(id: string, content: any, parent: Widget | null = null): VPanel {
+    let newPanel = new VPanel(id, parent);
+
+    content.childNodes.forEach((item: HTMLElement, index: number) => {
+        const widget = createWidget(item);
+
+        if (widget !== null) {
+            if (index === 0) {
+                newPanel.setTop(widget, widget.getFixedSize());
+            } else if (index === 1) {
+                newPanel.setBottom(widget);
+            }
+        }
+    });
+
+    return newPanel;
 }

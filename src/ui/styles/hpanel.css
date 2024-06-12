@@ -1,5 +1,5 @@
 .WUIHPanelHandler {
-    position: absolute;
+    position: absolute !important;
     overflow: hidden;
     cursor: col-resize;
     background-color: var(--palette-divider);

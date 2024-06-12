@@ -1,5 +1,5 @@
 .WUIVPanelHandler {
-    position: absolute;
+    position: absolute !important;
     overflow: hidden;
     cursor: row-resize;
     background-color: var(--palette-divider);
