@@ -11,6 +11,7 @@ import { createImage } from "./image.ui";
 import { createCheckbox } from "./checkbox.ui";
 import { createRadioButton } from "./radiobutton";
 import { createToolbar } from "./toolbar.ui";
+import { createProgressBar } from "./progressbar.ui";
 
 export type WidgetEventProps = {
     onClick?: () => {} | void;
@@ -81,6 +82,8 @@ export function createWidget(
         widget = createRadioButton(widgetProps.id, content, parent);
     } else if (content.getAttribute("w-toolbar")) {
         widget = createToolbar(widgetProps.id, content, parent);
+    } else if (content.getAttribute("w-progressbar")) {
+        widget = createProgressBar(widgetProps.id, content, parent);
     } else if (content.getAttribute("w-container")) {
         widget = createContainer(content, parent);
     } else {

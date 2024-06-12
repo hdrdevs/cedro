@@ -14,6 +14,6 @@
 }
 
 .WUIProgressBarLabel {
-    position: absolute;
+    position: absolute !important;
     color: var(--palette-primary-light);
 }

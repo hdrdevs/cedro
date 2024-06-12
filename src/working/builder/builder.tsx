@@ -9,6 +9,7 @@ import { WImage } from "../../ui/image.ui";
 import { WCheckbox } from "../../ui/checkbox.ui";
 import { WRadioButton } from "../../ui/radiobutton";
 import { WToolbar } from "../../ui/toolbar.ui";
+import { WProgressBar } from "../../ui/progressbar.ui";
 
 window.app = (() => {
     const sendData = () => {
@@ -48,6 +49,7 @@ window.app = (() => {
                         <WLabel id="lblh2" text="Result" variant="h2" />
                         <WLabel id="lblh3" text="Result" variant="h3" />
                         <WIconButton id="icn1" icon="home" text="Home" />
+                        <WProgressBar id="prgbar1" value={65} paddingBar={5} fixedSize={35} />
                     </WContainer>
                 </WContainer>
                 <WButton
