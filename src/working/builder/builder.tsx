@@ -11,6 +11,7 @@ import { WRadioButton } from "../../ui/radiobutton";
 import { WToolbar } from "../../ui/toolbar.ui";
 import { WProgressBar } from "../../ui/progressbar.ui";
 import { WValueBar } from "../../ui/valuebar.ui";
+import { WSwitch } from "../../ui/switch.ui";
 
 window.app = (() => {
     const sendData = () => {
@@ -36,6 +37,7 @@ window.app = (() => {
                     <WContainer orientation="vertical">
                         <WLabel id="lblh1" text="Result" variant="h1" />
                         <WImage id="img1" src="cedro-logo.png" />
+                        <WSwitch id="swt1" text="Click to check me!" fixedSize={40} />
                         <WCheckbox id="chk1" text="Click to check me!" fixedSize={40} />
                         <WCheckbox id="chk2" text="Click to uncheck me!" fixedSize={40} checked />
                         <WRadioButton id="rad1" text="Click to check me!" fixedSize={40} />

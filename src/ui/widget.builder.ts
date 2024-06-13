@@ -16,6 +16,7 @@ import { createValueBar } from "./valuebar.ui";
 import { VPanel, createVPanel } from "./vpanel.ui";
 import { HPanel, createHPanel } from "./hpanel.ui";
 import { Tabs, createTab } from "./tabs.ui";
+import { createSwitch } from "./switch.ui";
 
 export type WidgetEventProps = {
     onClick?: () => {} | void;
@@ -84,6 +85,8 @@ export function createWidget(
         widget = createCheckbox(widgetProps.id, content, parent);
     } else if (content.getAttribute("w-radiobutton")) {
         widget = createRadioButton(widgetProps.id, content, parent);
+    } else if (content.getAttribute("w-switch")) {
+        widget = createSwitch(widgetProps.id, content, parent);
     } else if (content.getAttribute("w-toolbar")) {
         widget = createToolbar(widgetProps.id, content, parent);
     } else if (content.getAttribute("w-progressbar")) {
