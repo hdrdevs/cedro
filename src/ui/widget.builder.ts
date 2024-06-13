@@ -15,6 +15,7 @@ import { createProgressBar } from "./progressbar.ui";
 import { createValueBar } from "./valuebar.ui";
 import { VPanel, createVPanel } from "./vpanel.ui";
 import { HPanel, createHPanel } from "./hpanel.ui";
+import { Tabs, createTab } from "./tabs.ui";
 
 export type WidgetEventProps = {
     onClick?: () => {} | void;
@@ -89,6 +90,8 @@ export function createWidget(
         widget = createProgressBar(widgetProps.id, content, parent);
     } else if (content.getAttribute("w-valuebar")) {
         widget = createValueBar(widgetProps.id, content, parent);
+    } else if (content.getAttribute("w-tab")) {
+        widget = createTab(widgetProps.id, content, parent);
     } else if (content.getAttribute("w-vpanel")) {
         widget = createVPanel(widgetProps.id, content, parent);
     } else if (content.getAttribute("w-hpanel")) {
@@ -122,7 +125,12 @@ export function createWidget(
             widget.setType(WidgetTypes.FREE);
         }
 
-        if (widgetProps.orientation && !(widget instanceof VPanel) && !(widget instanceof HPanel)) {
+        if (
+            widgetProps.orientation &&
+            !(widget instanceof VPanel) &&
+            !(widget instanceof HPanel) &&
+            !(widget instanceof Tabs)
+        ) {
             if (widgetProps.orientation === "vertical") {
                 widget.setAlign(WidgetAlignTypes.VERTICAL);
             } else {

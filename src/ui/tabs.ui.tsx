@@ -6,6 +6,7 @@ import { Toolbar } from "./toolbar.ui";
 import { Label } from "./label.ui";
 import { IconButton } from "./IconButton.ui";
 import { Scroll } from "./scroll.ui";
+import { WidgetProps, createWidget } from "./widget.builder";
 
 const TAB_HEADER_SIZE = 40;
 
@@ -179,4 +180,88 @@ export class Tabs extends Widget {
             this.verticalScrollbar.render();
         }
     }
+}
+
+export type TabItemType = "text" | "icon-tab";
+
+export type WTabProps = Omit<WidgetProps, "orientation"> & {
+    orientation?: OrientationTypes;
+    children: any;
+};
+
+export type WTabItemProps = {
+    title?: string | null;
+    icon?: string | null;
+    type?: TabItemType | null;
+    scrollable?: boolean | null;
+    children: any;
+};
+
+export const WTab = (props: WTabProps) => {
+    return (
+        <div
+            id={props.id}
+            w-tab
+            w-class={props.classNames}
+            w-orientation={props.orientation}
+            w-fixed-size={props.fixedSize}
+            w-padding={props.padding}
+            w-type={props.type}
+        >
+            {props.children}
+        </div>
+    );
+};
+
+export const WTabItem = (props: WTabItemProps) => {
+    return (
+        <div w-tab-item w-title={props.title} w-icon={props.icon} w-type={props.type}>
+            {props.children}
+        </div>
+    );
+};
+
+export function createTab(id: string, content: any, parent: Widget | null = null): Tabs {
+    const dataOrientation = content.getAttribute("w-orientation");
+    const dataScrollable = content.getAttribute("w-scrollable") ? true : false;
+
+    let orientation: OrientationTypes = dataOrientation ? dataOrientation : "horizontal";
+
+    let newTab = new Tabs(id, parent, orientation);
+
+    content.childNodes.forEach((tabItem: HTMLElement, index: number) => {
+        if (tabItem.getAttribute("w-tab-item") !== null) {
+            const tabTitle = tabItem.getAttribute("w-title");
+            const tabIcon = tabItem.getAttribute("w-icon");
+            const tabType = tabItem.getAttribute("w-type") || "text";
+
+            if (!tabItem.firstChild) {
+                throw new Error("Tab Item must have a content");
+            }
+
+            const widget = createWidget(tabItem.firstChild);
+
+            if (widget !== null) {
+                if (tabType === "text") {
+                    newTab.addTab(
+                        "Tab.Item." + index,
+                        tabTitle || "Untitled",
+                        widget,
+                        dataScrollable
+                    );
+                } else if (tabType === "icon-tab") {
+                    newTab.addIconTab(
+                        "Tab.Item." + index,
+                        tabIcon || "home",
+                        widget,
+                        dataScrollable
+                    );
+                }
+            }
+        }
+    });
+
+    newTab.setTab("Tab.Item.0");
+
+    return newTab;
 }
