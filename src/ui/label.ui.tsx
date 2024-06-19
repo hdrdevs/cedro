@@ -86,6 +86,8 @@ export type wLabelProps = WidgetProps & {
     variant?: string | null;
     color?: Colors | null;
     text?: string | null;
+    centerX?: boolean | null;
+    centerY?: boolean | null;
 };
 
 export const WLabel = (props: wLabelProps) => {
@@ -98,6 +100,8 @@ export const WLabel = (props: wLabelProps) => {
             w-text={props.text}
             w-variant={props.variant}
             w-color={props.color}
+            w-centerX={props.centerX}
+            w-centerY={props.centerY}
         ></div>
     );
 };
@@ -120,6 +124,14 @@ export function createLabel(id: string, content: any, parent: Widget | null = nu
 
     if (dataColor) {
         newLabel.setColor(dataColor);
+    }
+
+    if (content.getAttribute("w-centerX")) {
+        newLabel.setHCentered(true);
+    }
+
+    if (content.getAttribute("w-centerY")) {
+        newLabel.setVCentered(true);
     }
 
     return newLabel;

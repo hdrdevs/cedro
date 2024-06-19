@@ -50,7 +50,7 @@ window.app = (() => {
                     </WContainer>
 
                     <WContainer orientation="vertical">
-                        <WLabel id="lblh2" text="Result" variant="h2" />
+                        <WLabel id="lblh2" text="Result" variant="h2" centerY />
                         <WLabel id="lblh3" text="Result" variant="h3" />
                         <WIconButton id="icn1" icon="home" text="Home" />
                         <WValueBar
