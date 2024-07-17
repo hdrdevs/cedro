@@ -2,7 +2,7 @@ import "./styles/valuebar.css";
 import { OrientationTypes } from "src/types/orientation.type";
 import { Widget, connectWidgetCallback, getOnlyEventProps } from "./widget.ui";
 import { Draggable } from "./draggable.ui";
-import { WidgetProps } from "./widget.builder";
+import { normalizeWidget, WidgetProps } from "./widget.builder";
 
 export class ValueBar extends Widget {
     orientation: OrientationTypes;
@@ -123,18 +123,7 @@ export type wValueBarProps = WidgetProps & {
 export const WValueBar = (props: wValueBarProps) => {
     connectWidgetCallback(props.id, getOnlyEventProps(props));
 
-    return (
-        <div
-            id={props.id}
-            w-valuebar
-            w-value={props.value}
-            w-class={props.classNames}
-            w-orientation={props.orientation}
-            w-fixed-size={props.fixedSize}
-            w-padding={props.padding}
-            w-type={props.type}
-        ></div>
-    );
+    return normalizeWidget(<div id={props.id} w-valuebar w-value={props.value}></div>, props);
 };
 
 export function createValueBar(id: string, content: any, parent: Widget | null = null): ValueBar {

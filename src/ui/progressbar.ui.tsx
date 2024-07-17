@@ -1,6 +1,6 @@
 import { Label } from "./label.ui";
 import "./styles/progressbar.css";
-import { WidgetProps } from "./widget.builder";
+import { normalizeWidget, WidgetProps } from "./widget.builder";
 import { Widget, WidgetTypes, connectWidgetCallback, getOnlyEventProps } from "./widget.ui";
 
 const PROGRESS_BAR_HEIGHT = 40;
@@ -89,19 +89,15 @@ export type wProgressBarProps = WidgetProps & {
 export const WProgressBar = (props: wProgressBarProps) => {
     connectWidgetCallback(props.id, getOnlyEventProps(props));
 
-    return (
+    return normalizeWidget(
         <div
             id={props.id}
             w-progressbar
             w-value={props.value}
             w-padding-bar={props.paddingBar}
             w-hide-label={props.hideLabel}
-            w-class={props.classNames}
-            w-orientation={props.orientation}
-            w-fixed-size={props.fixedSize}
-            w-padding={props.padding}
-            w-type={props.type}
-        ></div>
+        ></div>,
+        props
     );
 };
 

@@ -1,4 +1,4 @@
-import { WidgetProps } from "./widget.builder";
+import { normalizeWidget, WidgetProps } from "./widget.builder";
 import { Colors } from "./colors.ui";
 import { Widget, connectWidgetCallback, getOnlyEventProps } from "./widget.ui";
 
@@ -93,7 +93,7 @@ export type wLabelProps = WidgetProps & {
 export const WLabel = (props: wLabelProps) => {
     connectWidgetCallback(props.id, getOnlyEventProps(props));
 
-    return (
+    return normalizeWidget(
         <div
             id={props.id}
             w-label
@@ -102,7 +102,8 @@ export const WLabel = (props: wLabelProps) => {
             w-color={props.color}
             w-centerX={props.centerX}
             w-centerY={props.centerY}
-        ></div>
+        ></div>,
+        props
     );
 };
 

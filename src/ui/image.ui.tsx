@@ -1,5 +1,5 @@
 import "./styles/image.css";
-import { WidgetProps } from "./widget.builder";
+import { normalizeWidget, WidgetProps } from "./widget.builder";
 import { Widget, WidgetTypes, connectWidgetCallback, getOnlyEventProps } from "./widget.ui";
 
 export class Image extends Widget {
@@ -61,7 +61,7 @@ export type wImageProps = WidgetProps & {
 export const WImage = (props: wImageProps) => {
     connectWidgetCallback(props.id, getOnlyEventProps(props));
 
-    return (
+    return normalizeWidget(
         <div
             id={props.id}
             w-image
@@ -71,10 +71,8 @@ export const WImage = (props: wImageProps) => {
             w-fill-height={props.fillHeight}
             w-width={props.width}
             w-height={props.height}
-            w-fixed-size={props.fixedSize}
-            w-padding={props.padding}
-            w-type={props.type}
-        ></div>
+        ></div>,
+        props
     );
 };
 

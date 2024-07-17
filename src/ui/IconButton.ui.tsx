@@ -9,6 +9,7 @@ import {
 import { Button, wButtonProps } from "./button.ui";
 import { Icon } from "./Icon.ui";
 import { Label } from "./label.ui";
+import { normalizeWidget } from "./widget.builder";
 
 export class IconButton extends Button {
     icon: Icon;
@@ -128,7 +129,7 @@ export type wIconButtonProps = Omit<wButtonProps, "text"> & {
 export const WIconButton = (props: wIconButtonProps) => {
     connectWidgetCallback(props.id, getOnlyEventProps(props));
 
-    return (
+    return normalizeWidget(
         <button
             id={props.id}
             w-icon-button
@@ -139,12 +140,8 @@ export const WIconButton = (props: wIconButtonProps) => {
             w-color={props.color}
             w-width={props.width}
             w-height={props.height}
-            w-class={props.classNames}
-            w-orientation={props.orientation}
-            w-fixed-size={props.fixedSize}
-            w-padding={props.padding}
-            w-type={props.type}
-        />
+        />,
+        props
     );
 };
 

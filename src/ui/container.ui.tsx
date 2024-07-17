@@ -1,7 +1,7 @@
 import { OrientationTypes } from "src/types/orientation.type";
 import { Widget, WidgetAlignTypes, WidgetTypes } from "./widget.ui";
 import { UID } from "../core/uid";
-import { WidgetProps, createWidget } from "./widget.builder";
+import { WidgetProps, createWidget, normalizeWidget } from "./widget.builder";
 
 export type ContainerParams = {
     orientation?: OrientationTypes;
@@ -43,18 +43,7 @@ export type ContainerProps = Omit<WidgetProps, "id"> & {
 };
 
 export const WContainer = (props: ContainerProps) => {
-    return (
-        <div
-            w-container
-            w-class={props.classNames}
-            w-orientation={props.orientation}
-            w-fixed-size={props.fixedSize}
-            w-padding={props.padding}
-            w-type={props.type}
-        >
-            {props.children}
-        </div>
-    );
+    return normalizeWidget(<div w-container>{props.children}</div>, { id: "", ...props });
 };
 
 export function createContainer(content: any, parent: Widget | null = null): Container {

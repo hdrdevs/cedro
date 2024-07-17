@@ -3,7 +3,7 @@ import "./styles/stackbutton.css";
 import "./styles/vstackbutton.css";
 import { Colors } from "./colors.ui";
 import { Widget, connectWidgetCallback, getOnlyEventProps } from "./widget.ui";
-import { WidgetProps } from "./widget.builder";
+import { normalizeWidget, WidgetProps } from "./widget.builder";
 
 export type ButonVariants =
     | "contained"
@@ -116,7 +116,7 @@ export type wButtonProps = WidgetProps & {
 export const WButton = (props: wButtonProps) => {
     connectWidgetCallback(props.id, getOnlyEventProps(props));
 
-    return (
+    return normalizeWidget(
         <button
             id={props.id}
             w-button
@@ -125,12 +125,8 @@ export const WButton = (props: wButtonProps) => {
             w-color={props.color}
             w-width={props.width}
             w-height={props.height}
-            w-class={props.classNames}
-            w-orientation={props.orientation}
-            w-fixed-size={props.fixedSize}
-            w-padding={props.padding}
-            w-type={props.type}
-        />
+        />,
+        props
     );
 };
 

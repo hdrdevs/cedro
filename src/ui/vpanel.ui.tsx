@@ -1,6 +1,6 @@
 import { Draggable } from "./draggable.ui";
 import "./styles/vpanel.css";
-import { WidgetProps, createWidget } from "./widget.builder";
+import { WidgetProps, createWidget, normalizeWidget } from "./widget.builder";
 import { Widget, WidgetAlignTypes, WidgetTypes } from "./widget.ui";
 
 const VPANEL_HANDLER_SIZE = 4;
@@ -133,17 +133,7 @@ export type WVPanelProps = WidgetProps & {
 };
 
 export const WVPanel = (props: WVPanelProps) => {
-    return (
-        <div
-            w-vpanel
-            w-class={props.classNames}
-            w-fixed-size={props.fixedSize}
-            w-padding={props.padding}
-            w-type={props.type}
-        >
-            {props.children}
-        </div>
-    );
+    return normalizeWidget(<div w-vpanel>{props.children}</div>, props);
 };
 
 export function createVPanel(id: string, content: any, parent: Widget | null = null): VPanel {

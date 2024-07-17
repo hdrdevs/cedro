@@ -37,6 +37,7 @@ export type WidgetProps = {
     classNames?: string | null;
     fixedSize?: number | null;
     orientation?: OrientationTypes | null;
+    hidden?: boolean | null;
 } & WidgetEventProps;
 
 export function createWidget(
@@ -59,6 +60,7 @@ export function createWidget(
             content.getAttribute("w-orientation") === null
                 ? "horizontal"
                 : content.getAttribute("w-orientation"),
+        hidden: content.getAttribute("w-hidden") !== null ? true : false,
         padding:
             content.getAttribute("w-padding") === null
                 ? 0
@@ -150,10 +152,27 @@ export function createWidget(
             }
         }
 
+        if (widgetProps.hidden) {
+            widget.setVisible(false);
+        }
+
         addNewWidget(widgetProps.id, widget);
 
         return widget;
     }
 
     return null;
+}
+
+export function normalizeWidget(widget: any, props: WidgetProps) {
+    if (widget) {
+        widget.setAttribute("w-fixed-size", props.fixedSize);
+        widget.setAttribute("w-padding", props.padding);
+        widget.setAttribute("w-type", props.type);
+        widget.setAttribute("w-hidden", props.hidden);
+        widget.setAttribute("w-classes", props.classNames);
+        widget.setAttribute("w-orientation", props.orientation);
+    }
+
+    return widget;
 }

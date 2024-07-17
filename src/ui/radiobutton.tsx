@@ -1,5 +1,5 @@
 import { ToggleButton } from "./toggle.ui";
-import { WidgetProps } from "./widget.builder";
+import { normalizeWidget, WidgetProps } from "./widget.builder";
 import { Widget, connectWidgetCallback, getOnlyEventProps } from "./widget.ui";
 
 export class RadioButton extends ToggleButton {
@@ -16,18 +16,9 @@ export type wRadioButtonProps = WidgetProps & {
 export const WRadioButton = (props: wRadioButtonProps) => {
     connectWidgetCallback(props.id, getOnlyEventProps(props));
 
-    return (
-        <div
-            id={props.id}
-            w-radiobutton
-            w-text={props.text}
-            w-checked={props.checked}
-            w-class={props.classNames}
-            w-orientation={props.orientation}
-            w-fixed-size={props.fixedSize}
-            w-padding={props.padding}
-            w-type={props.type}
-        />
+    return normalizeWidget(
+        <div id={props.id} w-radiobutton w-text={props.text} w-checked={props.checked} />,
+        props
     );
 };
 

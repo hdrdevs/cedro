@@ -6,7 +6,7 @@ import { Toolbar } from "./toolbar.ui";
 import { Label } from "./label.ui";
 import { IconButton } from "./IconButton.ui";
 import { Scroll } from "./scroll.ui";
-import { WidgetProps, createWidget } from "./widget.builder";
+import { WidgetProps, createWidget, normalizeWidget } from "./widget.builder";
 
 const TAB_HEADER_SIZE = 40;
 
@@ -198,18 +198,11 @@ export type WTabItemProps = {
 };
 
 export const WTab = (props: WTabProps) => {
-    return (
-        <div
-            id={props.id}
-            w-tab
-            w-class={props.classNames}
-            w-orientation={props.orientation}
-            w-fixed-size={props.fixedSize}
-            w-padding={props.padding}
-            w-type={props.type}
-        >
+    return normalizeWidget(
+        <div id={props.id} w-tab w-class={props.classNames}>
             {props.children}
-        </div>
+        </div>,
+        props
     );
 };
 

@@ -1,6 +1,6 @@
 import { Draggable } from "./draggable.ui";
 import "./styles/hpanel.css";
-import { WidgetProps, createWidget } from "./widget.builder";
+import { WidgetProps, createWidget, normalizeWidget } from "./widget.builder";
 import { Widget, WidgetAlignTypes, WidgetTypes } from "./widget.ui";
 
 const HPANEL_HANDLER_SIZE = 4;
@@ -132,17 +132,7 @@ export type WHPanelProps = WidgetProps & {
 };
 
 export const WHPanel = (props: WHPanelProps) => {
-    return (
-        <div
-            w-hpanel
-            w-class={props.classNames}
-            w-fixed-size={props.fixedSize}
-            w-padding={props.padding}
-            w-type={props.type}
-        >
-            {props.children}
-        </div>
-    );
+    return normalizeWidget(<div w-hpanel>{props.children}</div>, props);
 };
 
 export function createHPanel(id: string, content: any, parent: Widget | null = null): HPanel {

@@ -3,7 +3,7 @@ import { IWidget } from "src/interfaces/widget.interface";
 import { Widget, WidgetAlignTypes, WidgetTypes } from "./widget.ui";
 import { IconButton } from "./IconButton.ui";
 import { OrientationTypes } from "src/types/orientation.type";
-import { WidgetProps, createWidget } from "./widget.builder";
+import { WidgetProps, createWidget, normalizeWidget } from "./widget.builder";
 
 export type ToolbarVariants = "contained" | "outlined";
 
@@ -236,18 +236,7 @@ export type ToolbarProps = WidgetProps & {
 };
 
 export const WToolbar = (props: ToolbarProps) => {
-    return (
-        <div
-            w-toolbar
-            w-class={props.classNames}
-            w-orientation={props.orientation}
-            w-fixed-size={props.fixedSize}
-            w-padding={props.padding}
-            w-type={props.type}
-        >
-            {props.children}
-        </div>
-    );
+    return normalizeWidget(<div w-toolbar>{props.children}</div>, props);
 };
 
 export function createToolbar(id: string, content: any, parent: Widget | null = null): Toolbar {
