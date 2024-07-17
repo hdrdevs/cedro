@@ -9,3 +9,4 @@ package.working.template.json
 vite.config.ts
 package-lock.json
 favicon.ico
+.vscode/*
