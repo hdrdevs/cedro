@@ -14,6 +14,7 @@ import { WValueBar } from "../../ui/valuebar.ui";
 import { WSwitch } from "../../ui/switch.ui";
 import { WAccordion, WAccordionItem } from "../../ui/accordion.ui";
 import { WButtonStack } from "../..//ui/buttonstack.ui";
+import { WButtonColor } from "../../ui/buttonColor.ui";
 
 window.app = (() => {
     const sendData = () => {
@@ -64,6 +65,7 @@ window.app = (() => {
                             <WIconButton id="icn2" icon="list" text="List" />
                             <WIconButton id="icn3" icon="delete" text="Draft" />
                         </WButtonStack>
+                        <WButtonColor id="btnColor" value="#ff0000" fixedSize={50} />
                         <WValueBar
                             id="valbar2"
                             value={65}
