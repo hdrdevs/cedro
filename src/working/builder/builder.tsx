@@ -12,6 +12,8 @@ import { WToolbar } from "../../ui/toolbar.ui";
 import { WProgressBar } from "../../ui/progressbar.ui";
 import { WValueBar } from "../../ui/valuebar.ui";
 import { WSwitch } from "../../ui/switch.ui";
+import { WAccordion, WAccordionItem } from "../../ui/accordion.ui";
+import { WButtonStack } from "../..//ui/buttonstack.ui";
 
 window.app = (() => {
     const sendData = () => {
@@ -48,11 +50,20 @@ window.app = (() => {
                             checked
                         />
                     </WContainer>
-
                     <WContainer orientation="vertical">
-                        <WLabel id="lblh2" text="Result" variant="h2" centerY />
-                        <WLabel id="lblh3" text="Result" variant="h3" />
-                        <WIconButton id="icn1" icon="home" text="Home" />
+                        <WAccordion id="acc1" orientation="vertical">
+                            <WAccordionItem title="cabecera 1" icon="draw">
+                                <WLabel id="lblh2" text="Result 1" variant="h2" centerY />
+                            </WAccordionItem>
+                            <WAccordionItem title="cabecera 2" icon="home">
+                                <WLabel id="lblh3" text="Result 2" variant="h3" centerX centerY />
+                            </WAccordionItem>
+                        </WAccordion>
+                        <WButtonStack id="btnstack1" orientation="vertical" fixedSize={150}>
+                            <WIconButton id="icn1" icon="home" text="Home" />
+                            <WIconButton id="icn2" icon="list" text="List" />
+                            <WIconButton id="icn3" icon="delete" text="Draft" />
+                        </WButtonStack>
                         <WValueBar
                             id="valbar2"
                             value={65}

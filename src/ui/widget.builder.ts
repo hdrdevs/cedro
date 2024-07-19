@@ -17,6 +17,8 @@ import { VPanel, createVPanel } from "./vpanel.ui";
 import { HPanel, createHPanel } from "./hpanel.ui";
 import { Tabs, createTab } from "./tabs.ui";
 import { createSwitch } from "./switch.ui";
+import { createAccordion } from "./accordion.ui";
+import { createButtonStack } from "./buttonstack.ui";
 
 export type WidgetEventProps = {
     onClick?: () => {} | void;
@@ -79,6 +81,8 @@ export function createWidget(
         widget = createButton(widgetProps.id, content, parent);
     } else if (content.getAttribute("w-icon-button")) {
         widget = createIconButton(widgetProps.id, content, parent);
+    } else if (content.getAttribute("w-button-stack")) {
+        widget = createButtonStack(widgetProps.id, content, parent);
     } else if (content.getAttribute("w-label")) {
         widget = createLabel(widgetProps.id, content, parent);
     } else if (content.getAttribute("w-image")) {
@@ -97,6 +101,8 @@ export function createWidget(
         widget = createValueBar(widgetProps.id, content, parent);
     } else if (content.getAttribute("w-tab")) {
         widget = createTab(widgetProps.id, content, parent);
+    } else if (content.getAttribute("w-accordion")) {
+        widget = createAccordion(widgetProps.id, content, parent);
     } else if (content.getAttribute("w-vpanel")) {
         widget = createVPanel(widgetProps.id, content, parent);
     } else if (content.getAttribute("w-hpanel")) {

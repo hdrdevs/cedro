@@ -2,6 +2,7 @@ import "./styles/accordion.css";
 import { IconButton } from "./IconButton.ui";
 import { Label } from "./label.ui";
 import { Widget, WidgetTypes } from "./widget.ui";
+import { createWidget, normalizeWidget, WidgetProps } from "./widget.builder";
 
 const ACCORDION_HEADER_HEIGHT = 40;
 
@@ -68,4 +69,61 @@ export class Accordion extends Widget {
         this.addChild(header);
         this.addChild(content);
     }
+}
+
+export type WAccordionProps = WidgetProps & {
+    children: any;
+};
+
+export type WAccordionItemProps = {
+    title?: string | null;
+    icon?: string | null;
+    children: any;
+};
+
+export const WAccordion = (props: WAccordionProps) => {
+    return normalizeWidget(
+        <div id={props.id} w-accordion>
+            {props.children}
+        </div>,
+        props
+    );
+};
+
+export const WAccordionItem = (props: WAccordionItemProps) => {
+    return (
+        <div w-accordion-item w-title={props.title} w-icon={props.icon}>
+            {props.children}
+        </div>
+    );
+};
+
+export function createAccordion(id: string, content: any, parent: Widget | null = null): Accordion {
+    let newAccordion = new Accordion(id, parent);
+    let firstWidgetId = "";
+
+    content.childNodes.forEach((accordionItem: HTMLElement, _index: number) => {
+        if (accordionItem.getAttribute("w-accordion-item") !== null) {
+            const accordionTitle = accordionItem.getAttribute("w-title");
+            const accordionIcon = accordionItem.getAttribute("w-icon");
+
+            if (!accordionItem.firstChild) {
+                throw new Error("Accordion Item must have a content");
+            }
+
+            const widget = createWidget(accordionItem.firstChild);
+
+            if (widget !== null) {
+                newAccordion.addItem(accordionTitle || "Untitled", accordionIcon || "", widget);
+
+                if (firstWidgetId === "") {
+                    firstWidgetId = widget.id;
+                }
+            }
+        }
+    });
+
+    newAccordion.selectItem(firstWidgetId);
+
+    return newAccordion;
 }

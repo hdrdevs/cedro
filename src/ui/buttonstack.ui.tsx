@@ -2,6 +2,7 @@ import { OrientationTypes } from "src/types/orientation.type";
 import { IconButton } from "./IconButton.ui";
 import { ButonVariants, Button } from "./button.ui";
 import { Widget, WidgetAlignTypes, WidgetTypes } from "./widget.ui";
+import { createWidget, normalizeWidget, WidgetProps } from "./widget.builder";
 
 export class ButtonStack extends Widget {
     orientation: OrientationTypes;
@@ -91,4 +92,41 @@ export class ButtonStack extends Widget {
     private thereAreMoreThanTwoButtons(): boolean {
         return this.buttons.size > 2;
     }
+}
+
+export type WButtonStackProps = WidgetProps & {
+    children: any;
+};
+
+export const WButtonStack = (props: WButtonStackProps) => {
+    return normalizeWidget(
+        <div id={props.id} w-button-stack>
+            {props.children}
+        </div>,
+        props
+    );
+};
+
+export function createButtonStack(
+    id: string,
+    content: any,
+    parent: Widget | null = null
+): ButtonStack {
+    const dataOrientation = content.getAttribute("w-orientation")
+        ? content.getAttribute("w-orientation")
+        : "vertical";
+
+    let newStack = new ButtonStack(id, dataOrientation, parent);
+
+    content.childNodes.forEach((item: HTMLElement, _index: number) => {
+        if (item.getAttribute("w-button") || item.getAttribute("w-icon-button")) {
+            const widget = createWidget(item) as Button;
+
+            if (widget !== null) {
+                newStack.addButton(widget);
+            }
+        }
+    });
+
+    return newStack;
 }
