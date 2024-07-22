@@ -16,6 +16,7 @@ import { WAccordion, WAccordionItem } from "../../ui/accordion.ui";
 import { WButtonStack } from "../..//ui/buttonstack.ui";
 import { WButtonColor } from "../../ui/buttonColor.ui";
 import { WButtonMenu, WButtonMenuItem } from "../../ui/buttonmenu.ui";
+import { WIconButtonMenu, WIconButtonMenuItem } from "../../ui/iconButtonMenu.ui";
 
 window.app = (() => {
     const sendData = () => {
@@ -43,6 +44,18 @@ window.app = (() => {
                     <WButtonMenuItem id="option2" label="Opcion 2" icon="list" />
                     <WButtonMenuItem id="option3" label="Opcion 3" icon="delete" />
                 </WButtonMenu>
+                <WIconButtonMenu
+                    id="btnIconMenu"
+                    fixedSize={50}
+                    variant={"contained"}
+                    color={"success"}
+                    text="Boton Icono con Opciones"
+                    icon="delete"
+                >
+                    <WIconButtonMenuItem id="option1" label="Boca Juniors" icon="home" />
+                    <WIconButtonMenuItem id="option2" label="Los simpson" icon="list" />
+                    <WIconButtonMenuItem id="option3" label="Terminator" icon="delete" />
+                </WIconButtonMenu>
                 <WContainer orientation="horizontal">
                     <WToolbar id="toolbar2" orientation="vertical" fixedSize={45}>
                         <WIconButton id="tool2Btn1" icon="home" height={45} />

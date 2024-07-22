@@ -21,6 +21,7 @@ import { createAccordion } from "./accordion.ui";
 import { createButtonStack } from "./buttonstack.ui";
 import { createButtonColor } from "./buttonColor.ui";
 import { createButtonMenu } from "./buttonmenu.ui";
+import { createIconButtonMenu } from "./iconButtonMenu.ui";
 
 export type WidgetEventProps = {
     onClick?: () => {} | void;
@@ -89,6 +90,8 @@ export function createWidget(
         widget = createButtonColor(widgetProps.id, content, parent);
     } else if (content.getAttribute("w-button-menu")) {
         widget = createButtonMenu(widgetProps.id, content, parent);
+    } else if (content.getAttribute("w-icon-button-menu")) {
+        widget = createIconButtonMenu(widgetProps.id, content, parent);
     } else if (content.getAttribute("w-label")) {
         widget = createLabel(widgetProps.id, content, parent);
     } else if (content.getAttribute("w-image")) {
