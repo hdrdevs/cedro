@@ -17,6 +17,8 @@ import { WButtonStack } from "../..//ui/buttonstack.ui";
 import { WButtonColor } from "../../ui/buttonColor.ui";
 import { WButtonMenu, WButtonMenuItem } from "../../ui/buttonmenu.ui";
 import { WIconButtonMenu, WIconButtonMenuItem } from "../../ui/iconButtonMenu.ui";
+import { WIcon } from "../../ui/Icon.ui";
+import { WTextarea } from "../../ui/textarea.ui";
 
 window.app = (() => {
     const sendData = () => {
@@ -33,6 +35,7 @@ window.app = (() => {
                 </WToolbar>
                 <WTextbox id="txtName" title="Name" fixedSize={50} />
                 <WTextbox id="txtLastname" title="Lastname" fixedSize={50} />
+                <WTextarea id="txtArea" text="Area" fixedSize={100} />
                 <WButtonMenu
                     id="btnMenu"
                     fixedSize={50}
@@ -65,6 +68,7 @@ window.app = (() => {
                     <WContainer orientation="vertical">
                         <WLabel id="lblh1" text="Result" variant="h1" />
                         <WImage id="img1" src="cedro-logo.png" />
+                        <WIcon id="icon1" icon="home" color="success" />
                         <WSwitch id="swt1" text="Click to check me!" fixedSize={40} />
                         <WCheckbox id="chk1" text="Click to check me!" fixedSize={40} />
                         <WCheckbox id="chk2" text="Click to uncheck me!" fixedSize={40} checked />

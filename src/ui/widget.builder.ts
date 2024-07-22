@@ -22,6 +22,8 @@ import { createButtonStack } from "./buttonstack.ui";
 import { createButtonColor } from "./buttonColor.ui";
 import { createButtonMenu } from "./buttonmenu.ui";
 import { createIconButtonMenu } from "./iconButtonMenu.ui";
+import { createIcon } from "./Icon.ui";
+import { createTextarea } from "./textarea.ui";
 
 export type WidgetEventProps = {
     onClick?: () => {} | void;
@@ -80,6 +82,8 @@ export function createWidget(
 
     if (content.getAttribute("w-textbox")) {
         widget = createTextbox(widgetProps.id, content, parent);
+    } else if (content.getAttribute("w-textarea")) {
+        widget = createTextarea(widgetProps.id, content, parent);
     } else if (content.getAttribute("w-button")) {
         widget = createButton(widgetProps.id, content, parent);
     } else if (content.getAttribute("w-icon-button")) {
@@ -96,6 +100,8 @@ export function createWidget(
         widget = createLabel(widgetProps.id, content, parent);
     } else if (content.getAttribute("w-image")) {
         widget = createImage(widgetProps.id, content, parent);
+    } else if (content.getAttribute("w-icon")) {
+        widget = createIcon(widgetProps.id, content, parent);
     } else if (content.getAttribute("w-checkbox")) {
         widget = createCheckbox(widgetProps.id, content, parent);
     } else if (content.getAttribute("w-radiobutton")) {
