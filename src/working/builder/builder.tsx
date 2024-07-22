@@ -15,6 +15,7 @@ import { WSwitch } from "../../ui/switch.ui";
 import { WAccordion, WAccordionItem } from "../../ui/accordion.ui";
 import { WButtonStack } from "../..//ui/buttonstack.ui";
 import { WButtonColor } from "../../ui/buttonColor.ui";
+import { WButtonMenu, WButtonMenuItem } from "../../ui/buttonmenu.ui";
 
 window.app = (() => {
     const sendData = () => {
@@ -31,6 +32,17 @@ window.app = (() => {
                 </WToolbar>
                 <WTextbox id="txtName" title="Name" fixedSize={50} />
                 <WTextbox id="txtLastname" title="Lastname" fixedSize={50} />
+                <WButtonMenu
+                    id="btnMenu"
+                    fixedSize={50}
+                    variant={"contained"}
+                    color={"primary"}
+                    text="Boton con Opciones"
+                >
+                    <WButtonMenuItem id="option1" label="Opcion 1" icon="home" />
+                    <WButtonMenuItem id="option2" label="Opcion 2" icon="list" />
+                    <WButtonMenuItem id="option3" label="Opcion 3" icon="delete" />
+                </WButtonMenu>
                 <WContainer orientation="horizontal">
                     <WToolbar id="toolbar2" orientation="vertical" fixedSize={45}>
                         <WIconButton id="tool2Btn1" icon="home" height={45} />

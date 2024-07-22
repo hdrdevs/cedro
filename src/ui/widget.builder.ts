@@ -20,6 +20,7 @@ import { createSwitch } from "./switch.ui";
 import { createAccordion } from "./accordion.ui";
 import { createButtonStack } from "./buttonstack.ui";
 import { createButtonColor } from "./buttonColor.ui";
+import { createButtonMenu } from "./buttonmenu.ui";
 
 export type WidgetEventProps = {
     onClick?: () => {} | void;
@@ -86,6 +87,8 @@ export function createWidget(
         widget = createButtonStack(widgetProps.id, content, parent);
     } else if (content.getAttribute("w-button-color")) {
         widget = createButtonColor(widgetProps.id, content, parent);
+    } else if (content.getAttribute("w-button-menu")) {
+        widget = createButtonMenu(widgetProps.id, content, parent);
     } else if (content.getAttribute("w-label")) {
         widget = createLabel(widgetProps.id, content, parent);
     } else if (content.getAttribute("w-image")) {

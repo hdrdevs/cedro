@@ -1,6 +1,6 @@
 import { IconButton } from "./IconButton.ui";
 import { Menu } from "./menu.ui";
-import { SelectItem } from "./select.ui";
+import { SelectItem } from "../types/select.item.type";
 
 export class IconButtonMenu extends IconButton {
     menu: Menu;
