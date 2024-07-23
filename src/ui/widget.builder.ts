@@ -1,15 +1,15 @@
 import { UID } from "../core/uid";
 import { Widget, WidgetAlignTypes, WidgetTypes } from "./widget.ui";
-import { createTextbox } from "./textbox.ui";
-import { createButton } from "./button.ui";
 import { addNewWidget } from "./widget.collection";
+import { createTextbox } from "./Textbox.ui";
+import { createButton } from "./button.ui";
 import { createLabel } from "./label.ui";
 import { OrientationTypes } from "src/types/orientation.type";
 import { createContainer } from "./container.ui";
 import { createIconButton } from "./IconButton.ui";
 import { createImage } from "./image.ui";
 import { createCheckbox } from "./checkbox.ui";
-import { createRadioButton } from "./radiobutton";
+import { createRadioButton } from "./radiobutton.ui";
 import { createToolbar } from "./toolbar.ui";
 import { createProgressBar } from "./progressbar.ui";
 import { createValueBar } from "./valuebar.ui";
@@ -24,6 +24,7 @@ import { createButtonMenu } from "./buttonmenu.ui";
 import { createIconButtonMenu } from "./iconButtonMenu.ui";
 import { createIcon } from "./Icon.ui";
 import { createTextarea } from "./textarea.ui";
+import { createSelect } from "./select.ui";
 
 export type WidgetEventProps = {
     onClick?: () => {} | void;
@@ -124,6 +125,8 @@ export function createWidget(
         widget = createHPanel(widgetProps.id, content, parent);
     } else if (content.getAttribute("w-container")) {
         widget = createContainer(content, parent);
+    } else if (content.getAttribute("w-select")) {
+        widget = createSelect(widgetProps.id, content, parent);
     } else {
         widget = new Widget(widgetProps.id, content.tagName, parent);
 

@@ -1,17 +1,19 @@
-import { Textbox, WTextbox } from "../../ui/textbox.ui";
 import { createApplication } from "../../core/application.builder";
 import { Application, Widgets } from "../../core/application.core";
+
+import { WTextbox } from "../../ui/Textbox.ui";
+import { WCheckbox } from "../../ui/checkbox.ui";
+import { WRadioButton } from "../../ui/radiobutton.ui";
+import { WSwitch } from "../../ui/switch.ui";
+import { WIconButton } from "../../ui/IconButton.ui";
+
 import { WButton } from "../../ui/button.ui";
 import { WLabel } from "../../ui/label.ui";
 import { WContainer } from "../../ui/container.ui";
-import { WIconButton } from "../../ui/IconButton.ui";
 import { WImage } from "../../ui/image.ui";
-import { WCheckbox } from "../../ui/checkbox.ui";
-import { WRadioButton } from "../../ui/radiobutton";
 import { WToolbar } from "../../ui/toolbar.ui";
 import { WProgressBar } from "../../ui/progressbar.ui";
 import { WValueBar } from "../../ui/valuebar.ui";
-import { WSwitch } from "../../ui/switch.ui";
 import { WAccordion, WAccordionItem } from "../../ui/accordion.ui";
 import { WButtonStack } from "../..//ui/buttonstack.ui";
 import { WButtonColor } from "../../ui/buttonColor.ui";
@@ -19,11 +21,12 @@ import { WButtonMenu, WButtonMenuItem } from "../../ui/buttonmenu.ui";
 import { WIconButtonMenu, WIconButtonMenuItem } from "../../ui/iconButtonMenu.ui";
 import { WIcon } from "../../ui/Icon.ui";
 import { WTextarea } from "../../ui/textarea.ui";
+import { WSelect, WSelectItem } from "../../ui/select.ui";
 
 window.app = (() => {
     const sendData = () => {
-        const textName = w.get("txtName") as Textbox;
-        console.log("Send Data:", textName.getValue());
+        //const textName = w.get("txtName") as Textbox;
+        console.log("Send Data:...");
     };
 
     return createApplication(
@@ -35,6 +38,11 @@ window.app = (() => {
                 </WToolbar>
                 <WTextbox id="txtName" title="Name" fixedSize={50} />
                 <WTextbox id="txtLastname" title="Lastname" fixedSize={50} />
+                <WSelect id="txtSelect" title="Select an option" fixedSize={50}>
+                    <WSelectItem label="Option 1" id="1" icon="home" />
+                    <WSelectItem label="Option 2" id="2" icon="list" />
+                    <WSelectItem label="Option 3" id="3" icon="delete" />
+                </WSelect>
                 <WTextarea id="txtArea" text="Area" fixedSize={100} />
                 <WButtonMenu
                     id="btnMenu"

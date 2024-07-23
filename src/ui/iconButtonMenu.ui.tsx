@@ -2,7 +2,6 @@ import { IconButton, wIconButtonProps } from "./IconButton.ui";
 import { Menu } from "./menu.ui";
 import { SelectItem } from "../types/select.item.type";
 import { normalizeWidget, WidgetProps } from "./widget.builder";
-import { wButtonProps } from "./button.ui";
 import { Widget } from "./widget.ui";
 
 export class IconButtonMenu extends IconButton {

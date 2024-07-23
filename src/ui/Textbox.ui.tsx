@@ -53,7 +53,7 @@ export class Textbox extends Widget {
         this.getBody().style.overflow = "";
     }
 
-    getValue(): string {
+    public getValue(): string {
         const value = (this.input.getBody() as HTMLInputElement).value;
 
         if (value) return value;
@@ -61,7 +61,7 @@ export class Textbox extends Widget {
         return "";
     }
 
-    setValue(value: string): void {
+    public setValue(value: string): void {
         (this.input.getBody() as HTMLInputElement).value = value;
         this.positionLabel();
     }
@@ -114,17 +114,17 @@ export class Textbox extends Widget {
         super.render();
     }
 
-    setTitle(title: string): void {
+    public setTitle(title: string): void {
         this.title = title;
         this.label.getBody().innerHTML = this.title;
     }
 
-    setInputType(type: InputTypes): void {
+    public setInputType(type: InputTypes): void {
         this.inputType = type;
         this.input.getBody().setAttribute("type", this.inputType);
     }
 
-    getTitle(): string {
+    public getTitle(): string {
         return this.title;
     }
 
@@ -132,11 +132,11 @@ export class Textbox extends Widget {
         return this.label;
     }*/
 
-    getInput(): Widget {
+    public getInput(): Widget {
         return this.input;
     }
 
-    getInputType(): string {
+    public getInputType(): string {
         return this.inputType;
     }
 }
