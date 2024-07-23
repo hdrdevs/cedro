@@ -25,6 +25,7 @@ import { createIconButtonMenu } from "./iconButtonMenu.ui";
 import { createIcon } from "./Icon.ui";
 import { createTextarea } from "./textarea.ui";
 import { createSelect } from "./select.ui";
+import { createDialog, Dialog } from "./dialog";
 
 export type WidgetEventProps = {
     onClick?: () => {} | void;
@@ -127,6 +128,8 @@ export function createWidget(
         widget = createContainer(content, parent);
     } else if (content.getAttribute("w-select")) {
         widget = createSelect(widgetProps.id, content, parent);
+    } else if (content.getAttribute("w-dialog")) {
+        widget = createDialog(widgetProps.id, content, null);
     } else {
         widget = new Widget(widgetProps.id, content.tagName, parent);
 
@@ -154,10 +157,15 @@ export function createWidget(
             widget.setType(WidgetTypes.FREE);
         }
 
+        if (widget instanceof Dialog) {
+            widget.setType(WidgetTypes.CUSTOM);
+        }
+
         if (
             widgetProps.orientation &&
             !(widget instanceof VPanel) &&
             !(widget instanceof HPanel) &&
+            !(widget instanceof Dialog) &&
             !(widget instanceof Tabs)
         ) {
             if (widgetProps.orientation === "vertical") {

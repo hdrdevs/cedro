@@ -2,6 +2,7 @@ import { WUICallback } from "../interfaces/widget.interface";
 import { Button } from "./button.ui";
 import { Label } from "./label.ui";
 import "./styles/dialog.css";
+import { createWidget, normalizeWidget, WidgetProps } from "./widget.builder";
 import { Widget, WidgetAlignTypes, WidgetTypes } from "./widget.ui";
 
 const TITLE_BAR_HEIGHT = 40;
@@ -71,23 +72,11 @@ export class Dialog extends Widget {
         this.setType(WidgetTypes.CUSTOM);
         this.setAlign(WidgetAlignTypes.VERTICAL);
 
-        this.titleContainer = new Widget(
-            this.id + ".titleContainer",
-            "div",
-            this
-        );
-        this.contentCntainer = new Widget(
-            this.id + ".contentCntainer",
-            "div",
-            this
-        );
+        this.titleContainer = new Widget(this.id + ".titleContainer", "div", this);
+        this.contentCntainer = new Widget(this.id + ".contentCntainer", "div", this);
 
         if (hasButtons) {
-            this.buttonContainer = new Widget(
-                this.id + ".buttonContainer",
-                "div",
-                this
-            );
+            this.buttonContainer = new Widget(this.id + ".buttonContainer", "div", this);
 
             this.buttonContainer.setType(WidgetTypes.FILL);
             this.buttonContainer.setAlign(WidgetAlignTypes.HORIZONTAL);
@@ -96,11 +85,7 @@ export class Dialog extends Widget {
         }
 
         if (resizable) {
-            this.handlerResizable = new Widget(
-                this.id + ".handlerResizable",
-                "div",
-                this
-            );
+            this.handlerResizable = new Widget(this.id + ".handlerResizable", "div", this);
             this.handlerResizable.setType(WidgetTypes.CUSTOM);
             this.handlerResizable.getBody().innerHTML = "&nbsp;";
             this.handlerResizable.addClass("WUIDialogResizeHandler");
@@ -117,11 +102,7 @@ export class Dialog extends Widget {
 
         this.titleContainer.setFixedSize(TITLE_BAR_HEIGHT);
 
-        this.titleBar = new Label(
-            this.id + ".titleBar",
-            "span",
-            this.titleContainer
-        );
+        this.titleBar = new Label(this.id + ".titleBar", "span", this.titleContainer);
         this.titleBar.setType(WidgetTypes.FILL);
         this.titleBar.setText("Title");
         this.titleBar.addClass("WUITitlebar");
@@ -133,19 +114,12 @@ export class Dialog extends Widget {
         this.close.setText("X");
         this.close.setFixedSize(40);
 
-        this.btnSpacerLeft = new Widget(
-            this.id + ".btnSpacerLeft",
-            "div",
-            this.buttonContainer
-        );
+        this.btnSpacerLeft = new Widget(this.id + ".btnSpacerLeft", "div", this.buttonContainer);
         this.btnSpacerLeft.setType(WidgetTypes.FILL);
         this.btnSpacerLeft.setAlign(WidgetAlignTypes.HORIZONTAL);
 
         if (this.buttonContainer) {
-            this.cancell = new Button(
-                this.id + ".cancell",
-                this.buttonContainer
-            );
+            this.cancell = new Button(this.id + ".cancell", this.buttonContainer);
             this.cancell.setType(WidgetTypes.FILL);
             this.cancell.setColor("error");
             this.cancell.setText("Cancel");
@@ -256,12 +230,8 @@ export class Dialog extends Widget {
                     if (!this.handlerResizable) return;
                     const mouseX = (e as MouseEvent).clientX;
                     const mouseY = (e as MouseEvent).clientY;
-                    this.dragDistX = Math.abs(
-                        this.handlerResizable.getPosition().x - mouseX
-                    );
-                    this.dragDistY = Math.abs(
-                        this.handlerResizable.getPosition().y - mouseY
-                    );
+                    this.dragDistX = Math.abs(this.handlerResizable.getPosition().x - mouseX);
+                    this.dragDistY = Math.abs(this.handlerResizable.getPosition().y - mouseY);
 
                     this.resizing = true;
                     this.background.setVisible(true);
@@ -345,7 +315,7 @@ export class Dialog extends Widget {
         this.raiseBottom();
     }
 
-    init() {
+    public init() {
         super.init();
     }
 
@@ -354,7 +324,7 @@ export class Dialog extends Widget {
      *
      * @param {number} height - The height of the title bar.
      */
-    setTitlebarHeight(height: number) {
+    public setTitlebarHeight(height: number) {
         this.titleBarHeight = height;
     }
 
@@ -363,7 +333,7 @@ export class Dialog extends Widget {
      *
      * @param {number} height - The height of the button bar.
      */
-    setButtonbarHeight(height: number) {
+    public setButtonbarHeight(height: number) {
         this.buttonBarHeight = height;
     }
 
@@ -395,4 +365,65 @@ export class Dialog extends Widget {
         if (!this.cancell) return;
         this.cancell.subscribe({ event: "click", then: cb.then });
     }
+}
+
+export type WDialogProps = Omit<WidgetProps, "orientation" | "hidden"> & {
+    hasButtons?: boolean;
+    resizable?: boolean;
+    visible?: boolean;
+    titleBarHeight?: number;
+    buttonBarHeight?: number;
+    children: any;
+};
+
+export const WDialog = (props: WDialogProps) => {
+    return normalizeWidget(
+        <div
+            id={props.id}
+            w-dialog
+            w-has-buttons={props.hasButtons}
+            w-resizable={props.resizable}
+            w-visible={props.visible}
+            w-titlebar-height={props.titleBarHeight}
+            w-buttonbar-height={props.buttonBarHeight}
+        >
+            {props.children}
+        </div>,
+        props
+    );
+};
+
+export function createDialog(id: string, content: any, _parent: Widget | null = null): Dialog {
+    const dataHasButtons = content.getAttribute("w-has-buttons") ? true : false;
+    const dataResizable = content.getAttribute("w-resizable") ? true : false;
+    const dataVisible = content.getAttribute("w-visible") ? true : false;
+    const dataTitlebarHeight = content.getAttribute("w-titlebar-height")
+        ? parseInt(content.getAttribute("w-titlebar-height"))
+        : null;
+    const dataButtonbarHeight = content.getAttribute("w-buttonbar-height")
+        ? parseInt(content.getAttribute("w-buttonbar-height"))
+        : null;
+
+    let newDialog = new Dialog(id, null, dataHasButtons, dataResizable);
+
+    if (dataTitlebarHeight !== null) newDialog.setTitlebarHeight(dataTitlebarHeight);
+    if (dataButtonbarHeight !== null) newDialog.setButtonbarHeight(dataButtonbarHeight);
+
+    if (content.childNodes.length > 1) {
+        throw new Error("Dialog must have only one child");
+    }
+
+    const childWidget = content.firstChild;
+
+    if (childWidget !== null) {
+        const widget = createWidget(childWidget);
+        if (widget) {
+            newDialog.getContentCntainer().setPadding(0);
+            newDialog.getContentCntainer().attachWidget(widget);
+        }
+    }
+
+    if (dataVisible) newDialog.show();
+
+    return newDialog;
 }

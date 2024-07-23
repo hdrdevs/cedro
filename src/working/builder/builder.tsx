@@ -22,6 +22,7 @@ import { WIconButtonMenu, WIconButtonMenuItem } from "../../ui/iconButtonMenu.ui
 import { WIcon } from "../../ui/Icon.ui";
 import { WTextarea } from "../../ui/textarea.ui";
 import { WSelect, WSelectItem } from "../../ui/select.ui";
+import { WDialog } from "../../ui/dialog";
 
 window.app = (() => {
     const sendData = () => {
@@ -119,6 +120,15 @@ window.app = (() => {
                     fixedSize={50}
                     onClick={sendData}
                 />
+                <WDialog id="dlg1" hasButtons resizable visible>
+                    <WLabel
+                        id="lblhOnDialog"
+                        text="Este es un dialogo"
+                        variant="span"
+                        centerY
+                        centerX
+                    />
+                </WDialog>
             </Widgets>
         </Application>
     );
