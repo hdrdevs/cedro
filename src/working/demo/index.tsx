@@ -7,10 +7,11 @@ import { WIconButtonMenu, WIconButtonMenuItem } from "../../ui/iconButtonMenu.ui
 
 const ThemeMenu = () => {
     return (
-        <WIconButtonMenu id="btn-theme" icon="delete" fixedSize={50}>
-            <WIconButtonMenuItem id="btn-theme-light" icon="light" label="Light" />
-            <WIconButtonMenuItem id="btn-theme-dark" icon="dark" label="Dark" />
-            <WIconButtonMenuItem id="btn-theme-cedro" icon="cedro" label="Cedro" />
+        <WIconButtonMenu id="btn-theme" icon="palette" fixedSize={50}>
+            <WIconButtonMenuItem id="btn-theme-light" icon="light_mode" label="Light" />
+            <WIconButtonMenuItem id="btn-theme-dark" icon="dark_mode" label="Dark" />
+            <WIconButtonMenuItem id="btn-theme-cedro" icon="light_mode" label="Cedro Light" />
+            <WIconButtonMenuItem id="btn-theme-cedro-dark" icon="dark_mode" label="Cedro Dark" />
         </WIconButtonMenu>
     );
 };

@@ -104,12 +104,19 @@ class WApplication implements IApplication {
         this.subscribers.delete(`${event}`);
     }
 
-    public alert(msg: string, onOk: () => void = () => {}, onCancell: () => void = () => {}): void {
+    public alert(
+        title: string = "",
+        msg: string,
+        onOk: () => void = () => {},
+        onCancell: () => void = () => {}
+    ): void {
         const mesageLabel = new Label("alert.label", "span");
 
         mesageLabel.setType(WidgetTypes.FILL);
         mesageLabel.setAlign(WidgetAlignTypes.VERTICAL);
         mesageLabel.setText(msg);
+
+        this.alertDialog.titleBar.setText(title);
 
         this.alertDialog.setOkCallback({ event: "click", then: onOk });
         this.alertDialog.setCancellCallback({

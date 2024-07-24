@@ -47,7 +47,7 @@ export interface IApplication {
     getRoot(): IWidget;
 
     confirm(msg: string): void;
-    alert(msg: string): void;
+    alert(title: string, msg: string): void;
 
     showLoading(): void;
     hideLoading(): void;

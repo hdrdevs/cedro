@@ -44,7 +44,7 @@ class CounterWidget extends Container {
 
         this.link = new Button("btn-id");
         this.link.setType(WidgetTypes.FILL);
-        this.link.setText("Go to Widget Factory");
+        this.link.setText("About as Cedro");
         this.link.setVariant("text");
         this.link.setColor("warning");
         this.link.setFixedSize(40);
@@ -52,8 +52,10 @@ class CounterWidget extends Container {
         this.link.subscribe({
             event: "click",
             then: (_w, _e) => {
-                app.showLoading();
-                app.router.navigate("/widget-factory");
+                app?.alert(
+                    "About as Cedro",
+                    "Cedro is a JavaScript library written in TypeScript and based on widgets."
+                );
             },
         });
 
