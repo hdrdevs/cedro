@@ -26,6 +26,7 @@ class WApplication implements IApplication {
     screen: Screen;
     root: Widget;
     router: Navigo;
+    routerHostId: string;
 
     alertDialog: Dialog;
     confirmDialog: Dialog;
@@ -45,6 +46,7 @@ class WApplication implements IApplication {
         this.root.setType(WidgetTypes.FILL);
         this.screen = new Screen();
         this.router = new Navigo("/");
+        this.routerHostId = this.getRoot().id;
 
         this.mediaQueries = new Map<string, IScreenSize>();
 
@@ -70,6 +72,18 @@ class WApplication implements IApplication {
         this.theme.load();
     }
 
+    public setRouterHostId(id: string | null): void {
+        if (!id) {
+            this.routerHostId = this.getRoot().id;
+            return;
+        }
+        this.routerHostId = id;
+    }
+
+    public getRouterHostId(): string {
+        return this.routerHostId;
+    }
+
     public run(eventId: WUIEvent): void {
         this.subscribers.forEach((callback) => {
             if (callback.event == eventId) {
@@ -90,7 +104,7 @@ class WApplication implements IApplication {
         this.subscribers.delete(`${event}`);
     }
 
-    alert(msg: string, onOk: () => void = () => {}, onCancell: () => void = () => {}): void {
+    public alert(msg: string, onOk: () => void = () => {}, onCancell: () => void = () => {}): void {
         const mesageLabel = new Label("alert.label", "span");
 
         mesageLabel.setType(WidgetTypes.FILL);
@@ -108,7 +122,11 @@ class WApplication implements IApplication {
         this.alertDialog.show();
     }
 
-    confirm(msg: string, onOk: () => void = () => {}, onCancell: () => void = () => {}): void {
+    public confirm(
+        msg: string,
+        onOk: () => void = () => {},
+        onCancell: () => void = () => {}
+    ): void {
         const mesageLabel = new Label("alert.label", "span");
 
         mesageLabel.setType(WidgetTypes.FILL);
@@ -126,7 +144,7 @@ class WApplication implements IApplication {
         this.confirmDialog.show();
     }
 
-    attachWidget(guest: IWidget, host: IWidget): void {
+    public attachWidget(guest: IWidget, host: IWidget): void {
         if (!host) {
             console.log("guest:", guest);
         }
@@ -147,7 +165,7 @@ class WApplication implements IApplication {
         this.root.render();
     }
 
-    addMediaQuery(
+    public addMediaQuery(
         query: string,
         minWidth: number,
         maxWidth: number,
@@ -161,7 +179,7 @@ class WApplication implements IApplication {
      *
      * @return {void} This function does not return a value.
      */
-    init(): void {
+    public init(): void {
         this.root.subscribe({
             event: "resize",
             then: () => {
@@ -186,7 +204,7 @@ class WApplication implements IApplication {
      *
      * @return {Widget} The root widget of the application.
      */
-    getRoot(): Widget {
+    public getRoot(): Widget {
         return this.root;
     }
 
@@ -196,7 +214,7 @@ class WApplication implements IApplication {
      * @param {Widget} root - The root widget to set.
      * @return {void}
      */
-    setRoot(root: Widget): void {
+    public setRoot(root: Widget): void {
         this.root = root;
     }
 
@@ -207,6 +225,10 @@ class WApplication implements IApplication {
 
     public hideLoading(): void {
         this.loading.setVisible(false);
+    }
+
+    public goTo(path: string): void {
+        this.router.navigate(path);
     }
 }
 
@@ -234,11 +256,16 @@ export const Widgets = (props: WidgetsProps) => {
 };
 
 export type RoutesProps = {
+    hostId: string;
     children: any;
 };
 
 export const Routes = (props: RoutesProps) => {
-    return <div w-routes>{props.children}</div>;
+    return (
+        <div w-routes w-host-id={props.hostId}>
+            {props.children}
+        </div>
+    );
 };
 
 export type RouteProps = {
@@ -246,7 +273,7 @@ export type RouteProps = {
 };
 
 export const Route = (props: RouteProps) => {
-    return <a w-path href={props.src}></a>;
+    return <a w-route-path href={props.src}></a>;
 };
 
 export default WApplication;

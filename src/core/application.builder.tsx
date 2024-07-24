@@ -1,7 +1,8 @@
 //import { createWidget } from "src/ui/builder/widget.builder";
-import { WidgetAlignTypes } from "../ui";
+import { Widget, WidgetAlignTypes } from "../ui";
 import { createWidget } from "../ui/widget.builder";
 import Application, { ApplicationProps } from "./application.core";
+import { decode } from "html-entities";
 
 function getApplicationProps(content: any): ApplicationProps {
     let props: ApplicationProps = {
@@ -52,7 +53,23 @@ export function createApplication(content: any): Application {
                 }
             });
         } else if (item.getAttribute("w-routes")) {
-            console.log("routes:", item);
+            newApp.setRouterHostId(item.getAttribute("w-host-id"));
+            item.childNodes.forEach((ietmRoute: any) => {
+                if (ietmRoute.getAttribute("w-route-path") && ietmRoute.getAttribute("href")) {
+                    newApp.router.on(decode(ietmRoute.getAttribute("href")), () => {
+                        import(
+                            /*@vite-ignore*/ "./.." + decode(ietmRoute.getAttribute("href"))
+                        ).then((module) => {
+                            const host = w.get(newApp.getRouterHostId());
+                            if (host) {
+                                newApp.attachWidget(module.default as Widget, host);
+                            }
+                            newApp.hideLoading();
+                        });
+                    });
+                }
+            });
+            newApp.router.resolve();
         }
     });
 

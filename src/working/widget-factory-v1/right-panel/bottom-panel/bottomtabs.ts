@@ -1,5 +1,5 @@
 //import { WidgetTypes } from "../../../index";
-import { Tabs, Widget } from "../../../../ui";
+import { Tabs } from "../../../../ui";
 import { BarsForm } from "./bars";
 import { ButtonsForm } from "./buttons";
 import { TextBoxesForm } from "./textboxes";

@@ -62,6 +62,7 @@ export class IconButtonMenu extends IconButton {
 
 export type WIconButtonMenuProps = WidgetProps &
     wIconButtonProps & {
+        icon?: string | null;
         children: any;
     };
 
@@ -77,6 +78,7 @@ export const WIconButtonMenu = (props: WIconButtonMenuProps) => {
             id={props.id}
             w-icon-button-menu
             w-text={props.text}
+            w-icon={props.icon}
             w-variant={props.variant}
             w-color={props.color}
         >

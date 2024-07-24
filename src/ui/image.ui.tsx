@@ -1,6 +1,7 @@
 import "./styles/image.css";
 import { normalizeWidget, WidgetProps } from "./widget.builder";
 import { Widget, WidgetTypes, connectWidgetCallback, getOnlyEventProps } from "./widget.ui";
+import { decode } from "html-entities";
 
 export class Image extends Widget {
     imageContainer: Widget;
@@ -84,7 +85,7 @@ export function createImage(id: string, content: any, parent: Widget | null = nu
     const dataWidth = content.getAttribute("w-width");
     const dataHeight = content.getAttribute("w-height");
 
-    let newImage = new Image(id, dataSrc, parent);
+    let newImage = new Image(id, decode(dataSrc), parent);
 
     if (dataAlt) {
         newImage.setAlternateText(dataAlt);

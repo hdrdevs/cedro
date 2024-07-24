@@ -39,10 +39,14 @@ export function Spacer(): Container {
 }
 
 export type ContainerProps = Omit<WidgetProps, "id"> & {
-    children: any;
+    children?: any;
 };
 
 export const WContainer = (props: ContainerProps) => {
+    return normalizeWidget(<div w-container>{props.children}</div>, { id: "", ...props });
+};
+
+export const WSpacer = (props: ContainerProps) => {
     return normalizeWidget(<div w-container>{props.children}</div>, { id: "", ...props });
 };
 
@@ -60,6 +64,10 @@ export function createContainer(content: any, parent: Widget | null = null): Con
             newContainer.addChild(widget);
         }
     });
+
+    if (parent) {
+        parent.addChild(newContainer);
+    }
 
     return newContainer;
 }

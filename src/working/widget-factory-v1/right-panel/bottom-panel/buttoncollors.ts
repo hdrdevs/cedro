@@ -1,4 +1,4 @@
-import { WidgetAlignTypes, WidgetTypes, Widget, Label, ButtonColor } from "../../../../ui";
+import { WidgetAlignTypes, WidgetTypes, Widget, ButtonColor } from "../../../../ui";
 
 export class ColorButtonsForm extends Widget {
     btn1: ButtonColor;

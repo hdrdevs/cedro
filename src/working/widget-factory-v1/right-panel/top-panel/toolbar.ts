@@ -1,5 +1,5 @@
 import { WidgetTypes } from "../../../../index";
-import { Button, ButtonMenu, IconButton, Toolbar } from "../../../../ui";
+import { ButtonMenu, IconButton, Toolbar } from "../../../../ui";
 import { widgetFactory } from "../../widget-factory.working";
 
 export class mainToolbar extends Toolbar {

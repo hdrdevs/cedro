@@ -101,7 +101,7 @@ export class Menu extends Widget {
         if (this.triggeredBy) {
             const position = this.triggeredBy.getPosition(false);
 
-            const triggerW = this.triggeredBy.getBody().clientWidth;
+            //const triggerW = this.triggeredBy.getBody().clientWidth;
             const triggerH = this.triggeredBy.getBody().clientHeight;
 
             const screenW = window.innerWidth;

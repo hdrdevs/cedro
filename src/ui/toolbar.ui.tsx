@@ -39,7 +39,7 @@ export class Toolbar extends Widget {
         }
 
         this.setType(WidgetTypes.FILL);
-        this.setFixedSize(TOOLBAR_SIZE);
+        //this.setFixedSize(TOOLBAR_SIZE);
         this.addClass("WUIToolbar-" + this.variant);
 
         this.itemsContainer = new Widget(this.id + ".itemsContainer", "div", this);
@@ -232,19 +232,30 @@ export class Toolbar extends Widget {
 }
 
 export type ToolbarProps = WidgetProps & {
+    variant?: ToolbarVariants;
     children: any;
 };
 
 export const WToolbar = (props: ToolbarProps) => {
-    return normalizeWidget(<div w-toolbar>{props.children}</div>, props);
+    return normalizeWidget(
+        <div w-toolbar id={props.id} w-variant={props.variant}>
+            {props.children}
+        </div>,
+        props
+    );
 };
 
 export function createToolbar(id: string, content: any, parent: Widget | null = null): Toolbar {
     const dataOrientation = content.getAttribute("w-orientation");
+    const dataVariant = content.getAttribute("w-variant");
 
     let orientation: OrientationTypes = dataOrientation ? dataOrientation : "horizontal";
 
     let newToolbar = new Toolbar(id, parent, orientation);
+
+    if (dataVariant) {
+        newToolbar.setVariant(dataVariant);
+    }
 
     content.childNodes.forEach((item: HTMLElement) => {
         const widget = createWidget(item);
