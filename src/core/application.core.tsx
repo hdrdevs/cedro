@@ -14,7 +14,7 @@ import Navigo from "navigo";
 import { Dialog } from "../ui/dialog";
 import { Label } from "../ui/label.ui";
 import { Seo } from "./seo";
-import { DarkTheme, LightTheme, ThemeManager } from "./themes.core";
+import { CedroDarkTheme, DarkTheme, LightTheme, ThemeManager } from "./themes.core";
 import { Loading } from "../ui/loading.ui";
 import { OrientationTypes } from "../types/orientation.type";
 
@@ -53,6 +53,7 @@ class WApplication implements IApplication {
         this.theme = new ThemeManager();
         this.theme.add(LightTheme);
         this.theme.add(DarkTheme);
+        this.theme.add(CedroDarkTheme);
 
         this.screen.onResize(() => {
             this.getRoot().resize();
@@ -243,12 +244,18 @@ export type ApplicationProps = {
     title: string;
     padding?: number | null;
     orientation?: OrientationTypes | null;
+    theme?: string | null;
     children: any;
 };
 
 export const Application = (props: ApplicationProps) => {
     return (
-        <div title={props.title} w-padding={props.padding} w-orientation={props.orientation}>
+        <div
+            title={props.title}
+            w-padding={props.padding}
+            w-orientation={props.orientation}
+            w-theme={props.theme}
+        >
             {props.children}
         </div>
     );

@@ -8,6 +8,7 @@ function getApplicationProps(content: any): ApplicationProps {
     let props: ApplicationProps = {
         title: content.title,
         padding: 0,
+        theme: null,
         orientation: null,
         children: null,
     };
@@ -22,6 +23,10 @@ function getApplicationProps(content: any): ApplicationProps {
 
     if (content.getAttribute("w-orientation") !== null) {
         props.orientation = content.getAttribute("w-orientation");
+    }
+
+    if (content.getAttribute("w-theme") !== null) {
+        props.theme = content.getAttribute("w-theme");
     }
 
     return props;
@@ -41,6 +46,10 @@ export function createApplication(content: any): Application {
         } else {
             newApp.getRoot().setAlign(WidgetAlignTypes.VERTICAL);
         }
+    }
+
+    if (appProps.theme) {
+        newApp.theme.setTheme(appProps.theme);
     }
 
     content.childNodes.forEach((item: HTMLElement) => {

@@ -18,7 +18,12 @@ const ThemeMenu = () => {
 
 window.app = (() =>
     createApplication(
-        <Application title="Ceddro Application Demo | Cedro" padding={0} orientation="vertical">
+        <Application
+            title="Ceddro Application Demo | Cedro"
+            padding={0}
+            orientation="vertical"
+            theme="cedro-dark"
+        >
             <Widgets>
                 <WContainer orientation="vertical">
                     <WContainer orientation="horizontal" fixedSize={50} padding={4}>
@@ -32,7 +37,14 @@ window.app = (() =>
                                 app?.goTo("/working/demo/counter");
                             }}
                         />
-                        <WButton id="btn-2" text="Widget Factory" fixedSize={150} />
+                        <WButton
+                            id="btn-2"
+                            text="Widget Gallery"
+                            fixedSize={150}
+                            onClick={() => {
+                                app?.goTo("/working/demo/widget-gallery");
+                            }}
+                        />
                         <WSpacer />
                         <ThemeMenu />
                     </WContainer>
@@ -42,7 +54,7 @@ window.app = (() =>
             <Routes hostId="main-container">
                 <Route src="/" />
                 <Route src="/working/demo/counter" />
-                <Route src="/working/demo/widget-factory" />
+                <Route src="/working/demo/widget-gallery" />
             </Routes>
         </Application>
     ))();
