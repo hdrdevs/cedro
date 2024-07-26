@@ -22,7 +22,7 @@ window.app = (() =>
             title="Ceddro Application Demo | Cedro"
             padding={0}
             orientation="vertical"
-            theme="cedro-dark"
+            theme="dark"
         >
             <Widgets>
                 <WContainer orientation="vertical">
@@ -48,13 +48,14 @@ window.app = (() =>
                         <WSpacer />
                         <ThemeMenu />
                     </WContainer>
-                    <div id="main-container"></div>
+                    <WContainer id="main-container" orientation="vertical"></WContainer>
                 </WContainer>
             </Widgets>
             <Routes hostId="main-container">
                 <Route src="/" />
                 <Route src="/working/demo/counter" />
                 <Route src="/working/demo/widget-gallery" />
+                <Route src="/working/demo/widget-gallery/buttons" />
             </Routes>
         </Application>
     ))();

@@ -1,0 +1,14 @@
+.ButtonsContainer {
+    display: flex !important;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100% !important;
+    overflow: auto !important;
+}
+
+.ButtonsContainer button {
+    position: relative !important;
+    width: 200px !important;
+    height: 50px !important;
+    margin: 5px !important;
+}

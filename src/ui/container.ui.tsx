@@ -8,13 +8,20 @@ export type ContainerParams = {
     parent?: Widget | null;
     size?: number | null;
     padding?: number | null;
+    id?: string;
 };
 
 export class Container extends Widget {
     constructor(params: ContainerParams) {
-        const { orientation = "horizontal", parent = null, size = null, padding = null } = params;
+        const {
+            id = "",
+            orientation = "horizontal",
+            parent = null,
+            size = null,
+            padding = null,
+        } = params;
 
-        super(UID(), "div", parent);
+        super(id.length > 0 ? id : UID(), "div", parent);
 
         if (orientation === "horizontal") {
             this.setAlign(WidgetAlignTypes.HORIZONTAL);
@@ -38,16 +45,21 @@ export function Spacer(): Container {
     return new Container({});
 }
 
-export type ContainerProps = Omit<WidgetProps, "id"> & {
+export type ContainerProps = WidgetProps & {
     children?: any;
 };
 
-export const WContainer = (props: ContainerProps) => {
-    return normalizeWidget(<div w-container>{props.children}</div>, { id: "", ...props });
+export const WContainer = (props: Omit<ContainerProps, "id"> & { id?: string }) => {
+    return normalizeWidget(
+        <div id={props.id} w-container>
+            {props.children}
+        </div>,
+        { id: props.id ? props.id : UID(), ...props }
+    );
 };
 
-export const WSpacer = (props: ContainerProps) => {
-    return normalizeWidget(<div w-container>{props.children}</div>, { id: "", ...props });
+export const WSpacer = (props: Omit<ContainerProps, "id">) => {
+    return normalizeWidget(<div w-container>{props.children}</div>, { id: UID(), ...props });
 };
 
 export function createContainer(content: any, parent: Widget | null = null): Container {
