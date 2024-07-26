@@ -1,4 +1,3 @@
-//import { WidgetTypes } from "../../../index";
 import { Tabs, Widget } from "../../../ui";
 
 import homeTab from "./hometab";
