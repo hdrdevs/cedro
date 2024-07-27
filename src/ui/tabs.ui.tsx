@@ -7,6 +7,7 @@ import { Label } from "./label.ui";
 import { IconButton } from "./IconButton.ui";
 import { Scroll } from "./scroll.ui";
 import { WidgetProps, createWidget, normalizeWidget } from "./widget.builder";
+import { UID } from "../core/uid";
 
 const TAB_HEADER_SIZE = 40;
 
@@ -198,6 +199,9 @@ export type WTabItemProps = {
 };
 
 export const WTab = (props: WTabProps) => {
+    if (!props.id) {
+        props.id = "Tabs." + UID();
+    }
     return normalizeWidget(
         <div id={props.id} w-tab w-class={props.classNames}>
             {props.children}

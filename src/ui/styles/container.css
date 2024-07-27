@@ -1,0 +1,29 @@
+.WUIPanel-outlined {
+    background-color: transparent;
+    border-left: solid 0.13rem;
+    border-top: solid 0.13rem;
+    border-bottom: solid 0.13rem;
+    border-right: solid 0.13rem;
+    border-radius: 0.25rem;
+    border-color: var(--palette-background-light);
+    overflow: hidden;
+}
+
+.WUIPanel-contained {
+    background-color: var(--palette-background-light);
+    border-left: none;
+    border-top: none;
+    border-bottom: none;
+    border-right: none;
+    border-radius: 0.25rem;
+    overflow: hidden;
+}
+
+.WUIPanel-plain {
+    background-color: transparent;
+    border-left: none;
+    border-top: none;
+    border-bottom: none;
+    border-right: none;
+    overflow: hidden;
+}

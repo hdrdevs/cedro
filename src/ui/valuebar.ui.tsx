@@ -3,6 +3,7 @@ import { OrientationTypes } from "src/types/orientation.type";
 import { Widget, connectWidgetCallback, getOnlyEventProps } from "./widget.ui";
 import { Draggable } from "./draggable.ui";
 import { normalizeWidget, WidgetProps } from "./widget.builder";
+import { UID } from "../core/uid";
 
 export class ValueBar extends Widget {
     orientation: OrientationTypes;
@@ -121,6 +122,10 @@ export type wValueBarProps = WidgetProps & {
 };
 
 export const WValueBar = (props: wValueBarProps) => {
+    if (!props.id) {
+        props.id = "ValueBar." + UID();
+    }
+
     connectWidgetCallback(props.id, getOnlyEventProps(props));
 
     return normalizeWidget(<div id={props.id} w-valuebar w-value={props.value}></div>, props);

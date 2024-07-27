@@ -1,3 +1,4 @@
+import { UID } from "../core/uid";
 import { WUICallback } from "../interfaces/widget.interface";
 import { Button } from "./button.ui";
 import { Label } from "./label.ui";
@@ -377,6 +378,10 @@ export type WDialogProps = Omit<WidgetProps, "orientation" | "hidden"> & {
 };
 
 export const WDialog = (props: WDialogProps) => {
+    if (!props.id) {
+        props.id = "Dialog." + UID();
+    }
+
     return normalizeWidget(
         <div
             id={props.id}

@@ -1,4 +1,3 @@
-import { WLabel } from "../../../ui/label.ui";
 import { WContainer } from "../../../ui/container.ui";
 import { WIconButton } from "../../../ui/IconButton.ui";
 
@@ -73,7 +72,7 @@ const listOfButtons = [
         id: "btnIcons",
         icon: "filter_hdr",
         text: "Icons",
-        link: "/working/demo/widget-gallery/buttons",
+        link: "/working/demo/widget-gallery/icons",
     },
     {
         id: "btnDialogs",

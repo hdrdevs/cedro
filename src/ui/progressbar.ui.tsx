@@ -1,3 +1,4 @@
+import { UID } from "../core/uid";
 import { Label } from "./label.ui";
 import "./styles/progressbar.css";
 import { normalizeWidget, WidgetProps } from "./widget.builder";
@@ -87,6 +88,10 @@ export type wProgressBarProps = WidgetProps & {
 };
 
 export const WProgressBar = (props: wProgressBarProps) => {
+    if (!props.id) {
+        props.id = "ProgressBar." + UID();
+    }
+
     connectWidgetCallback(props.id, getOnlyEventProps(props));
 
     return normalizeWidget(

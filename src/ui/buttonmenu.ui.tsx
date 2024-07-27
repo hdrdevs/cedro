@@ -1,3 +1,4 @@
+import { UID } from "../core/uid";
 import { SelectItem } from "../types/select.item.type";
 import { Button, wButtonProps } from "./button.ui";
 import { Menu } from "./menu.ui";
@@ -72,6 +73,10 @@ export type WButtonMenuItemProps = {
 };
 
 export const WButtonMenu = (props: WButtonMenuProps) => {
+    if (!props.id) {
+        props.id = "ButtonMenu." + UID();
+    }
+
     return normalizeWidget(
         <div
             id={props.id}

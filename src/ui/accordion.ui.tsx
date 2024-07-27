@@ -3,6 +3,7 @@ import { IconButton } from "./IconButton.ui";
 import { Label } from "./label.ui";
 import { Widget, WidgetTypes } from "./widget.ui";
 import { createWidget, normalizeWidget, WidgetProps } from "./widget.builder";
+import { UID } from "../core/uid";
 
 const ACCORDION_HEADER_HEIGHT = 40;
 
@@ -82,6 +83,10 @@ export type WAccordionItemProps = {
 };
 
 export const WAccordion = (props: WAccordionProps) => {
+    if (!props.id) {
+        props.id = "Accordion." + UID();
+    }
+
     return normalizeWidget(
         <div id={props.id} w-accordion>
             {props.children}

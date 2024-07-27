@@ -1,3 +1,4 @@
+import { UID } from "../core/uid";
 import "./styles/textarea.css";
 import { normalizeWidget, WidgetProps } from "./widget.builder";
 import { connectWidgetCallback, getOnlyEventProps, Widget } from "./widget.ui";
@@ -25,6 +26,10 @@ export type wTextareaProps = WidgetProps & {
 };
 
 export const WTextarea = (props: wTextareaProps) => {
+    if (!props.id) {
+        props.id = "Textarea." + UID();
+    }
+
     connectWidgetCallback(props.id, getOnlyEventProps(props));
 
     return normalizeWidget(<div id={props.id} w-textarea w-text={props.text}></div>, props);

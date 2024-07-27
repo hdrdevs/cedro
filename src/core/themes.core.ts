@@ -23,6 +23,7 @@ LightTheme.add("--palette-text-primary", "rgba(0, 0, 0, 0.87)")
     .add("--palette-text-disabled", "rgba(0, 0, 0, 0.38)")
     .add("--palette-background-default", "#ffffff")
     .add("--palette-background-paper", "#ffffff")
+    .add("--palette-background-light", "#ffffff")
     .add("--palette-action-active", "rgba(0, 0, 0, 0.54)")
     .add("--palette-action-disabled", "rgba(0, 0, 0, 0.26)")
     .add("--palette-action-hover", "#f5f5f5")
@@ -100,6 +101,7 @@ DarkTheme.add("--palette-text-primary", "#cdd0d3")
 
     .add("--palette-background-default", "#121212")
     .add("--palette-background-paper", "#121212")
+    .add("--palette-background-light", "rgba(255, 255, 255, 0.02)")
 
     .add("--palette-action-active", "#ffffff")
     .add("--palette-action-disabled", "rgba(255, 255, 255, 0.3)")
@@ -177,6 +179,7 @@ CedroDarkTheme.add("--palette-text-primary", "#d3d0c8")
 
     .add("--palette-background-default", "#655349")
     .add("--palette-background-paper", "#56473e")
+    .add("--palette-background-light", "#6d5a4e")
 
     .add("--palette-action-active", "#655447")
     .add("--palette-action-disabled", "rgba(39, 32, 27, 0.3)")

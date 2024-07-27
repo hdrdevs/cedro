@@ -1,3 +1,4 @@
+import { UID } from "../core/uid";
 import { ToggleButton } from "./toggle.ui";
 import { normalizeWidget, WidgetProps } from "./widget.builder";
 import { Widget, connectWidgetCallback, getOnlyEventProps } from "./widget.ui";
@@ -14,6 +15,10 @@ export type wRadioButtonProps = WidgetProps & {
 };
 
 export const WRadioButton = (props: wRadioButtonProps) => {
+    if (!props.id) {
+        props.id = "RadioButton." + UID();
+    }
+
     connectWidgetCallback(props.id, getOnlyEventProps(props));
 
     return normalizeWidget(

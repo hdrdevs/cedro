@@ -1,3 +1,4 @@
+import { UID } from "../core/uid";
 import "./styles/image.css";
 import { normalizeWidget, WidgetProps } from "./widget.builder";
 import { Widget, WidgetTypes, connectWidgetCallback, getOnlyEventProps } from "./widget.ui";
@@ -60,6 +61,10 @@ export type wImageProps = WidgetProps & {
 };
 
 export const WImage = (props: wImageProps) => {
+    if (!props.id) {
+        props.id = "Image." + UID();
+    }
+
     connectWidgetCallback(props.id, getOnlyEventProps(props));
 
     return normalizeWidget(

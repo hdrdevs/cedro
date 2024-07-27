@@ -4,6 +4,7 @@ import { Menu } from "./menu.ui";
 import { Widget } from "./widget.ui";
 import { SelectItem } from "../types/select.item.type";
 import { normalizeWidget, WidgetProps } from "./widget.builder";
+import { UID } from "../core/uid";
 
 export class Select extends Widget {
     menu: Menu;
@@ -86,6 +87,10 @@ export type WSelectItemProps = {
 };
 
 export const WSelect = (props: WSelectProps) => {
+    if (!props.id) {
+        props.id = "Select." + UID();
+    }
+
     return normalizeWidget(
         <div id={props.id} w-select w-title={props.title} w-value={props.value}>
             {props.children}

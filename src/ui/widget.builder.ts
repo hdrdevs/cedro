@@ -40,7 +40,7 @@ export type WidgetEventProps = {
 };
 
 export type WidgetProps = {
-    id: string;
+    id?: string | null;
     type?: WidgetTypes | null;
     padding?: number | null;
     classNames?: string | null;
@@ -81,6 +81,10 @@ export function createWidget(
         classNames:
             content.getAttribute("w-classes") === null ? null : content.getAttribute("w-classes"),
     };
+
+    if (!widgetProps.id) {
+        widgetProps.id = UID();
+    }
 
     if (content.getAttribute("w-textbox")) {
         widget = createTextbox(widgetProps.id, content, parent);

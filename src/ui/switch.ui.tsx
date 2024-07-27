@@ -1,3 +1,4 @@
+import { UID } from "../core/uid";
 import { ToggleButton } from "./toggle.ui";
 import { normalizeWidget, WidgetProps } from "./widget.builder";
 import { Widget, connectWidgetCallback, getOnlyEventProps } from "./widget.ui";
@@ -13,6 +14,10 @@ export type wSwitchProps = WidgetProps & {
 };
 
 export const WSwitch = (props: wSwitchProps) => {
+    if (!props.id) {
+        props.id = "Switch." + UID();
+    }
+
     connectWidgetCallback(props.id, getOnlyEventProps(props));
 
     return normalizeWidget(

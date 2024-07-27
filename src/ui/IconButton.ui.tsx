@@ -10,6 +10,7 @@ import { Button, wButtonProps } from "./button.ui";
 import { Icon } from "./Icon.ui";
 import { Label } from "./label.ui";
 import { normalizeWidget } from "./widget.builder";
+import { UID } from "../core/uid";
 
 export class IconButton extends Button {
     icon: Icon;
@@ -127,6 +128,10 @@ export type wIconButtonProps = Omit<wButtonProps, "text"> & {
 };
 
 export const WIconButton = (props: wIconButtonProps) => {
+    if (!props.id) {
+        props.id = "IconButton." + UID();
+    }
+
     connectWidgetCallback(props.id, getOnlyEventProps(props));
 
     return normalizeWidget(

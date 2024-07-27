@@ -3,6 +3,7 @@ import { IconButton } from "./IconButton.ui";
 import { ButonVariants, Button } from "./button.ui";
 import { Widget, WidgetAlignTypes, WidgetTypes } from "./widget.ui";
 import { createWidget, normalizeWidget, WidgetProps } from "./widget.builder";
+import { UID } from "../core/uid";
 
 export class ButtonStack extends Widget {
     orientation: OrientationTypes;
@@ -99,6 +100,9 @@ export type WButtonStackProps = WidgetProps & {
 };
 
 export const WButtonStack = (props: WButtonStackProps) => {
+    if (!props.id) {
+        props.id = "ButtonStack." + UID();
+    }
     return normalizeWidget(
         <div id={props.id} w-button-stack>
             {props.children}

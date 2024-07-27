@@ -1,3 +1,4 @@
+import { UID } from "../core/uid";
 import { IWidget, WUIEvent, WUICallback } from "../interfaces/widget.interface";
 import { Vector2D } from "../types/vector2d.type";
 import { WidgetEventProps, WidgetProps } from "./widget.builder";
@@ -44,8 +45,12 @@ export class Widget implements IWidget {
     bodyTagName: string;
     body: HTMLElement;
 
-    constructor(id: string, bodyTagName: string = "div", parent: IWidget | null = null) {
-        this.id = id;
+    constructor(
+        id: string | null = "",
+        bodyTagName: string = "div",
+        parent: IWidget | null = null
+    ) {
+        this.id = id ? id : UID();
 
         this.overflow = false;
 
@@ -882,7 +887,11 @@ export function getOnlyEventProps(props: WidgetProps): WidgetEventProps {
     return eventProps;
 }
 
-export function connectWidgetCallback(id: string, props: WidgetEventProps): void {
+export function connectWidgetCallback(
+    id: string | null | undefined,
+    props: WidgetEventProps
+): void {
+    if (!id) return;
     connectWidget("widget-added-" + id, {
         event: "widget-load",
         then: (_e, _w) => {

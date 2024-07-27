@@ -1,6 +1,7 @@
 import { normalizeWidget, WidgetProps } from "./widget.builder";
 import "./styles/textbox.css";
 import { Widget, WidgetTypes, connectWidgetCallback, getOnlyEventProps } from "./widget.ui";
+import { UID } from "../core/uid";
 
 export type InputTypes =
     | "text"
@@ -150,6 +151,10 @@ export type wTextBoxProps = WidgetProps & {
 };
 
 export const WTextbox = (props: wTextBoxProps) => {
+    if (!props.id) {
+        props.id = "Textbox." + UID();
+    }
+
     connectWidgetCallback(props.id, getOnlyEventProps(props));
 
     return normalizeWidget(

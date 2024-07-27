@@ -1,6 +1,7 @@
 import { normalizeWidget, WidgetProps } from "./widget.builder";
 import { Colors } from "./colors.ui";
 import { Widget, connectWidgetCallback, getOnlyEventProps } from "./widget.ui";
+import { UID } from "../core/uid";
 
 export type LabelVariants = "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span";
 
@@ -91,6 +92,10 @@ export type wLabelProps = WidgetProps & {
 };
 
 export const WLabel = (props: wLabelProps) => {
+    if (!props.id) {
+        props.id = "Label." + UID();
+    }
+
     connectWidgetCallback(props.id, getOnlyEventProps(props));
 
     return normalizeWidget(

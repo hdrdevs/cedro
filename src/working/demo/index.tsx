@@ -30,7 +30,6 @@ window.app = (() =>
                         <WImage id="top-logo" src="/cedro-logo.png" fixedSize={100} />
                         <WSpacer />
                         <WButton
-                            id="btn-1"
                             text="Home"
                             fixedSize={100}
                             onClick={() => {
@@ -38,7 +37,6 @@ window.app = (() =>
                             }}
                         />
                         <WButton
-                            id="btn-2"
                             text="Widget Gallery"
                             fixedSize={150}
                             onClick={() => {
@@ -56,6 +54,7 @@ window.app = (() =>
                 <Route src="/working/demo/counter" />
                 <Route src="/working/demo/widget-gallery" />
                 <Route src="/working/demo/widget-gallery/buttons" />
+                <Route src="/working/demo/widget-gallery/icons" />
             </Routes>
         </Application>
     ))();

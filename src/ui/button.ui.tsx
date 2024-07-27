@@ -4,6 +4,7 @@ import "./styles/vstackbutton.css";
 import { Colors } from "./colors.ui";
 import { Widget, connectWidgetCallback, getOnlyEventProps } from "./widget.ui";
 import { normalizeWidget, WidgetProps } from "./widget.builder";
+import { UID } from "../core/uid";
 
 export type ButonVariants =
     | "contained"
@@ -114,6 +115,10 @@ export type wButtonProps = WidgetProps & {
 };
 
 export const WButton = (props: wButtonProps) => {
+    if (!props.id) {
+        props.id = "button." + UID();
+    }
+
     connectWidgetCallback(props.id, getOnlyEventProps(props));
 
     return normalizeWidget(

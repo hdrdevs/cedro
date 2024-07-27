@@ -3,6 +3,7 @@ import { Menu } from "./menu.ui";
 import { SelectItem } from "../types/select.item.type";
 import { normalizeWidget, WidgetProps } from "./widget.builder";
 import { Widget } from "./widget.ui";
+import { UID } from "../core/uid";
 
 export class IconButtonMenu extends IconButton {
     menu: Menu;
@@ -73,6 +74,10 @@ export type WIconButtonMenuItemProps = {
 };
 
 export const WIconButtonMenu = (props: WIconButtonMenuProps) => {
+    if (!props.id) {
+        props.id = "IconButtonMenu." + UID();
+    }
+
     return normalizeWidget(
         <div
             id={props.id}

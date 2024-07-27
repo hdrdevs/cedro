@@ -2,6 +2,7 @@ import "./styles/buttoncolor.css";
 import { Button, wButtonProps } from "./button.ui";
 import { connectWidgetCallback, getOnlyEventProps, Widget } from "./widget.ui";
 import { normalizeWidget } from "./widget.builder";
+import { UID } from "../core/uid";
 
 export class ButtonColor extends Button {
     inputColor: Widget;
@@ -29,6 +30,10 @@ export type wButtonColorProps = Omit<wButtonProps, "text"> & {
 };
 
 export const WButtonColor = (props: wButtonColorProps) => {
+    if (!props.id) {
+        props.id = "ButtonColor." + UID();
+    }
+
     connectWidgetCallback(props.id, getOnlyEventProps(props));
 
     return normalizeWidget(
