@@ -8,7 +8,7 @@ import { WLabel } from "../../../../ui/label.ui";
 export default createWidget(
     <Layout>
         <WContainer orientation="vertical" padding={10}>
-            <WLabel id="lblIconSized" text="Icon Sizes" centerY fixedSize={40} />
+            <WLabel text="Icon Sizes" centerY fixedSize={40} variant="h3" />
             <WContainer orientation="horizontal" fixedSize={50}>
                 <WIcon icon="home" color="primary" size="xlarge" variant="Filled" fixedSize={70} />
                 <WIcon icon="home" color="primary" size="large" variant="Filled" fixedSize={70} />
@@ -23,7 +23,7 @@ export default createWidget(
                 <WLabel text="small" centerY fixedSize={70} />
                 <WSpacer />
             </WContainer>
-            <WLabel id="lblIconColor" text="Icon Colors" centerY fixedSize={40} />
+            <WLabel text="Icon Colors" centerY fixedSize={40} variant="h3" />
             <WContainer orientation="horizontal" fixedSize={50}>
                 <WIcon size="large" icon="home" color="primary" variant="Filled" />
                 <WIcon size="large" icon="home" color="secondary" variant="Filled" />
@@ -42,7 +42,7 @@ export default createWidget(
                 <WLabel text="warning" centerY />
                 <WSpacer />
             </WContainer>
-            <WLabel id="lblIconVariants" text="Icon Variants" centerY fixedSize={40} />
+            <WLabel text="Icon Variants" centerY fixedSize={40} variant="h3" />
             <WContainer orientation="horizontal" fixedSize={50}>
                 <WIcon size="large" icon="home" variant="Filled" fixedSize={70} />
                 <WIcon size="large" icon="home" variant="Outlined" fixedSize={70} />

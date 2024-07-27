@@ -1,3 +1,4 @@
+import "./styles/label.css";
 import { normalizeWidget, WidgetProps } from "./widget.builder";
 import { Colors } from "./colors.ui";
 import { Widget, connectWidgetCallback, getOnlyEventProps } from "./widget.ui";
@@ -22,6 +23,10 @@ export class Label extends Widget {
         this.variant = variant;
         this.color = "primary";
         this.text = "";
+
+        this.getBody().style.margin = "0px";
+
+        this.setVariant(this.variant);
 
         this.init();
     }
@@ -63,7 +68,12 @@ export class Label extends Widget {
     }
 
     public setVariant(variant: LabelVariants = "span"): void {
+        if (this.variant !== variant) {
+            this.deleteClass("WUILabel-" + this.variant);
+        }
+
         this.variant = variant;
+        this.addClass("WUILabel-" + this.variant);
     }
 
     public setColor(color: Colors = "primary"): void {
