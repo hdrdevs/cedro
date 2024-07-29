@@ -12,7 +12,7 @@ const listOfButtons = [
         id: "btnLabels",
         icon: "label",
         text: "Labels",
-        link: "/working/demo/widget-gallery/buttons",
+        link: "/working/demo/widget-gallery/labels",
     },
     {
         id: "btnTextboxes",

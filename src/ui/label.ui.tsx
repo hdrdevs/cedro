@@ -24,7 +24,9 @@ export class Label extends Widget {
         this.color = "primary";
         this.text = "";
 
-        this.getBody().style.margin = "0px";
+        this.setColor(this.color);
+
+        //this.getBody().style.margin = "0px";
 
         this.setVariant(this.variant);
 
@@ -69,7 +71,7 @@ export class Label extends Widget {
 
     public setVariant(variant: LabelVariants = "span"): void {
         if (this.variant !== variant) {
-            this.deleteClass("WUILabel-" + this.variant);
+            this.deleteClass("WUILabel" + this.variant);
         }
 
         this.variant = variant;
@@ -77,7 +79,11 @@ export class Label extends Widget {
     }
 
     public setColor(color: Colors = "primary"): void {
+        if (this.color !== color) {
+            this.deleteClass("WUILabel-" + this.color);
+        }
         this.color = color;
+        this.addClass("WUILabel-" + this.color);
     }
 
     public getVariant(): LabelVariants {
