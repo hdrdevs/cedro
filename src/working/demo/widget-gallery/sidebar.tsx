@@ -18,7 +18,7 @@ const listOfButtons = [
         id: "btnTextboxes",
         icon: "input",
         text: "Textboxes",
-        link: "/working/demo/widget-gallery/buttons",
+        link: "/working/demo/widget-gallery/textboxes",
     },
     {
         id: "btnButtons",

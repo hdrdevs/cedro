@@ -56,6 +56,7 @@ window.app = (() =>
                 <Route src="/working/demo/widget-gallery/buttons" />
                 <Route src="/working/demo/widget-gallery/icons" />
                 <Route src="/working/demo/widget-gallery/labels" />
+                <Route src="/working/demo/widget-gallery/textboxes" />
             </Routes>
         </Application>
     ))();

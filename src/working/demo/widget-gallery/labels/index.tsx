@@ -1,7 +1,7 @@
 import "./style.css";
 import { createWidget } from "../../../..";
 import { Layout } from "../Layout";
-import { WContainer, WSpacer } from "../../../../ui/container.ui";
+import { WContainer } from "../../../../ui/container.ui";
 import { WLabel } from "../../../../ui/label.ui";
 
 export default createWidget(
@@ -28,14 +28,31 @@ export default createWidget(
                     color="success"
                     fixedSize={40}
                 />
-                <WLabel text="H5 Label Variant (info)" variant="h5" color="info" fixedSize={30} />
+                <WLabel text="H6 Label Variant (info)" variant="h5" color="info" fixedSize={30} />
                 <WLabel
                     text="H6 Label Variant (warning)"
                     variant="h6"
                     color="warning"
                     fixedSize={20}
                 />
-                <WSpacer />
+            </WContainer>
+            <WLabel text="Span Labels" centerY fixedSize={40} variant="h3" />
+            <WContainer orientation="vertical">
+                <WLabel text="Span label" variant="span" color="primary" fixedSize={55} />
+                <WLabel
+                    text="Span label (horizontally centered)"
+                    variant="h2"
+                    color="secondary"
+                    fixedSize={50}
+                    centerX
+                />
+                <WLabel text="Span label (vertically centered)" variant="spane" centerY />
+                <WLabel
+                    text="Span label (vertically and horizontally centered)"
+                    variant="span"
+                    centerX
+                    centerY
+                />
             </WContainer>
         </WContainer>
     </Layout>
