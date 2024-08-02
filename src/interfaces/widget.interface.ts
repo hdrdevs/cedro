@@ -111,6 +111,7 @@ export interface IWidget {
     getOverflow(): boolean;
 
     addChild(child: IWidget | null): void;
+    populate(): void;
     disableSelection(): void;
     display(): void;
     enableSelection(): void;

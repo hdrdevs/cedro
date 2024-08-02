@@ -60,7 +60,7 @@ const listOfButtons = [
         id: "btnProgressbars",
         icon: "donut_large",
         text: "Progrssbars",
-        link: "/working/demo/widget-gallery/buttons",
+        link: "/working/demo/widget-gallery/progressbar",
     },
     {
         id: "btnImages",

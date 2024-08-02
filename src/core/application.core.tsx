@@ -167,6 +167,7 @@ class WApplication implements IApplication {
         host.removeAllChilds();
 
         host.addChild(guest);
+        guest.populate(); //tiene que recorrer todos los widgets hijos en forma recursiva e ir agregandolos a window.w
         guest.setParent(host);
         guest.render();
         this.root.resize();

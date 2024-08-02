@@ -45,6 +45,11 @@ a:hover {
     display: block;
 }
 
+.WUINonFreePosition {
+    position: absolute !important;
+    overflow: hidden !important;
+}
+
 .cssCustom {
     margin-top: 10px;
     margin-bottom: 10px;

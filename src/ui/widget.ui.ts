@@ -295,6 +295,7 @@ export class Widget implements IWidget {
 
         if (freeStyle) {
             //this.body.style.position = "relative";
+            this.deleteClass("WUINonFreePosition");
             this.addClass("WUIFixPosition");
             //this.body.style.overflow = "auto";
             this.body.style.left = "";
@@ -306,8 +307,10 @@ export class Widget implements IWidget {
             this.body.style.right = "";
         } else {
             if (this.type === WidgetTypes.CUSTOM || this.type === WidgetTypes.FILL) {
-                this.body.style.position = "absolute";
-                this.body.style.overflow = "hidden";
+                // this.body.style.position = "absolute";
+                // this.body.style.overflow = "hidden";
+                this.deleteClass("WUIFixPosition");
+                this.addClass("WUINonFreePosition");
             }
         }
 
@@ -366,6 +369,8 @@ export class Widget implements IWidget {
         }
         this.parent = parent;
         this.parent?.body.appendChild(this.body);
+
+        this.setType(this.type); //TODO: revisar, se coloca para tratar de que reconozca al padre como freestyle en caso de serlo.
 
         //this.parent?.addChild(this);
     }
@@ -601,11 +606,23 @@ export class Widget implements IWidget {
     public addChild(child: IWidget | null = null): void {
         if (!child) return;
         this.childs.push(child);
+
         child.setParent(this);
 
         child.init();
         /*child.resize();
         child.render();*/
+    }
+
+    public populate(): void {
+        //se agrega a si mismo a window.w y a sus hijos.
+        if (!window.w.get(this.id)) {
+            window.w.set(this.id, this);
+        }
+
+        for (const child of this.childs) {
+            child.populate();
+        }
     }
 
     /**
@@ -643,9 +660,25 @@ export class Widget implements IWidget {
      * @return {type} description of return value
      */
     public init(): void {
-        if (this.type !== WidgetTypes.FREE) {
-            this.body.style.position = "absolute";
-            this.body.style.overflow = "hidden";
+        let freeStyle = false;
+
+        if (this.type === WidgetTypes.FREE) {
+            freeStyle = true;
+        }
+
+        const parent = this.getParent();
+
+        if (parent) {
+            if (parent.type === WidgetTypes.FREE) {
+                freeStyle = true;
+            }
+        }
+
+        if (!freeStyle) {
+            this.deleteClass("WUIFixPosition");
+            this.addClass("WUINonFreePosition");
+            // this.body.style.position = "absolute";
+            // this.body.style.overflow = "hidden";
         }
 
         this.initPosition();

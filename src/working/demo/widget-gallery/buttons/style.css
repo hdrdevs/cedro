@@ -4,11 +4,22 @@
     flex-wrap: wrap;
     width: 100% !important;
     overflow: auto !important;
+    margin-left: 20px;
 }
 
 .ButtonsContainer button {
     position: relative !important;
+    display: block !important;
     width: 200px !important;
     height: 50px !important;
     margin: 5px !important;
+}
+
+.ItemTitle h3 {
+    position: relative !important;
+    margin-bottom: 5px !important;
+}
+
+.ItemTitle {
+    height: 30px !important;
 }

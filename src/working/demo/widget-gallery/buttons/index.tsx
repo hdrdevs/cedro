@@ -3,9 +3,13 @@ import { WButton } from "../../../../ui/button.ui";
 import { createWidget, WidgetTypes } from "../../../../";
 import { Layout } from "../Layout";
 import { WContainer } from "../../../../ui/container.ui";
+import { WLabel } from "../../../../ui/label.ui";
 
 export default createWidget(
     <Layout>
+        <WContainer type={WidgetTypes.FREE} classNames="ItemTitle">
+            <WLabel id="mi-label-absolutro" text="Buttons" variant="h3" />
+        </WContainer>
         <WContainer type={WidgetTypes.FREE} classNames="ButtonsContainer">
             <WButton text="Primary | Text" variant="text" color="primary" />
             <WButton text="Secondary | Text" variant="text" color="secondary" />
