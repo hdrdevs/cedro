@@ -17,8 +17,9 @@
         "@oothkoo/seo-js": "1.0.5",
         "@types/color": "3.0.3",
         "@types/react": "18.2.17",
-        "html-entities": "^2.5.2",
         "color": "4.2.3",
+        "glob": "^11.0.0",
+        "html-entities": "^2.5.2",
         "material-icons": "1.13.12",
         "navigo": "8.11.1"
     }

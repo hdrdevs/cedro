@@ -1,6 +1,6 @@
 import { WidgetTypes } from "../../../../index";
 import { ButtonMenu, IconButton, Toolbar } from "../../../../ui";
-import { widgetFactory } from "../../widget-factory.working";
+import { widgetFactory } from "../../";
 
 export class mainToolbar extends Toolbar {
     btn1: IconButton;
@@ -25,7 +25,7 @@ export class mainToolbar extends Toolbar {
         this.btn1.subscribe({
             event: "click",
             then: () => {
-                widgetFactory.alert("New item");
+                widgetFactory.alert("Untitled", "New item");
             },
         });
 
@@ -35,7 +35,7 @@ export class mainToolbar extends Toolbar {
         this.btn2.subscribe({
             event: "click",
             then: () => {
-                widgetFactory.alert("Save all");
+                widgetFactory.alert("Untitled", "Save all");
             },
         });
 
@@ -47,7 +47,7 @@ export class mainToolbar extends Toolbar {
         this.btn4.subscribe({
             event: "click",
             then: () => {
-                widgetFactory.alert("Delete item");
+                widgetFactory.alert("Untitled", "Delete item");
             },
         });
 
@@ -57,7 +57,7 @@ export class mainToolbar extends Toolbar {
         this.btn5.subscribe({
             event: "click",
             then: () => {
-                widgetFactory.alert("Edit  item");
+                widgetFactory.alert("Untitled", "Edit  item");
             },
         });
 
@@ -67,7 +67,7 @@ export class mainToolbar extends Toolbar {
         this.btnSearch.subscribe({
             event: "click",
             then: () => {
-                widgetFactory.alert("Filter by...");
+                widgetFactory.alert("Untitled", "Filter by...");
             },
         });
 

@@ -53,7 +53,7 @@ class WorkingApp extends Application {
             btn.subscribe({
                 event: "click",
                 then: () => {
-                    this.alert("Desea eliminar a " + args.data.name);
+                    this.alert("Untitled", "Desea eliminar a " + args.data.name);
                 },
             });
             btn.setVariant("text");

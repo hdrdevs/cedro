@@ -1,5 +1,5 @@
 import { Checkbox, DataGrid, IconButton, Label, ProgressBar } from "../../../../ui";
-import { widgetFactory } from "../../widget-factory.working";
+import { widgetFactory } from "../../";
 
 const GRID_ROW_HEIGHT = 30;
 
@@ -55,6 +55,7 @@ export class ExampleGrid extends DataGrid {
                 event: "click",
                 then: () => {
                     widgetFactory.alert(
+                        "Untitled",
                         "Are you sure you want to delete <strong>" +
                             args.data.description +
                             "</strong>"

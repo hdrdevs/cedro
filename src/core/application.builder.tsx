@@ -66,13 +66,19 @@ export function createApplication(content: any): Application {
             item.childNodes.forEach((ietmRoute: any) => {
                 if (ietmRoute.getAttribute("w-route-path") && ietmRoute.getAttribute("href")) {
                     newApp.router.on(decode(ietmRoute.getAttribute("href")), () => {
+                        const url = decode(ietmRoute.getAttribute("href"));
                         const timestamp = new Date().getTime();
-                        import(
-                            /*@vite-ignore*/ "./.." +
-                                decode(ietmRoute.getAttribute("href")) +
-                                "?t=" +
-                                timestamp
-                        ).then((module) => {
+                        const isProduction = process.env.NODE_ENV === "production";
+
+                        const pathDev = ".." + url + "?ts=" + timestamp;
+
+                        const pathProduction = `../../assets${decode(
+                            ietmRoute.getAttribute("href")
+                        )}/index.js?ts=${timestamp}`;
+
+                        const path = isProduction ? pathProduction : pathDev;
+
+                        import(/*@vite-ignore*/ path).then((module) => {
                             newApp.clearLoadedModule();
                             newApp.setLoadedModule(module.default);
                             const host = w.get(newApp.getRouterHostId());
@@ -81,6 +87,22 @@ export function createApplication(content: any): Application {
                             }
                             newApp.hideLoading();
                         });
+
+                        const loadCss = async () => {
+                            try {
+                                const cssName = "../../assets" + url + "/style.css";
+
+                                // Crear un elemento <link> para cargar el CSS
+                                const link = document.createElement("link");
+                                link.rel = "stylesheet";
+                                link.href = cssName;
+                                document.head.appendChild(link);
+                            } catch (error) {
+                                console.log(error);
+                            }
+                        };
+
+                        if (isProduction) loadCss();
                     });
                 }
             });

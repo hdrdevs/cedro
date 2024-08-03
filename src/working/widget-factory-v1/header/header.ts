@@ -1,6 +1,6 @@
 import { ButtonStack, IconButton, IconButtonMenu } from "../../../ui";
 import { Widget, WidgetAlignTypes, WidgetTypes } from "../../../ui/widget.ui";
-import { widgetFactory } from "../widget-factory.working";
+import { widgetFactory } from "../";
 
 const HEADER_HEIGHT = 40;
 const STACK_MIN_WIDTH = 120;
