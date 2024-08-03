@@ -1,6 +1,7 @@
 import { UID } from "../core/uid";
 import { WUICallback } from "../interfaces/widget.interface";
 import { Button } from "./button.ui";
+import { Spacer } from "./container.ui";
 import { Label } from "./label.ui";
 import "./styles/dialog.css";
 import { createWidget, normalizeWidget, WidgetProps } from "./widget.builder";
@@ -73,11 +74,11 @@ export class Dialog extends Widget {
         this.setType(WidgetTypes.CUSTOM);
         this.setAlign(WidgetAlignTypes.VERTICAL);
 
-        this.titleContainer = new Widget(this.id + ".titleContainer", "div", this);
-        this.contentCntainer = new Widget(this.id + ".contentCntainer", "div", this);
+        this.titleContainer = new Widget(this.id + ".titleContainer", "div", null);
+        this.contentCntainer = new Widget(this.id + ".contentCntainer", "div", null);
 
         if (hasButtons) {
-            this.buttonContainer = new Widget(this.id + ".buttonContainer", "div", this);
+            this.buttonContainer = new Widget(this.id + ".buttonContainer", "div", null);
 
             this.buttonContainer.setType(WidgetTypes.FILL);
             this.buttonContainer.setAlign(WidgetAlignTypes.HORIZONTAL);
@@ -103,44 +104,37 @@ export class Dialog extends Widget {
 
         this.titleContainer.setFixedSize(TITLE_BAR_HEIGHT);
 
-        this.titleBar = new Label(this.id + ".titleBar", "span", this.titleContainer);
+        this.titleBar = new Label(this.id + ".titleBar", "span", null);
         this.titleBar.setType(WidgetTypes.FILL);
         this.titleBar.setText("Title");
         this.titleBar.addClass("WUITitlebar");
 
-        this.close = new Button(this.id + ".close", this.titleContainer);
+        this.close = new Button(this.id + ".close", null);
         this.close.setType(WidgetTypes.FILL);
         this.close.setColor("primary");
         this.close.setVariant("text");
         this.close.setText("X");
         this.close.setFixedSize(40);
 
-        this.btnSpacerLeft = new Widget(this.id + ".btnSpacerLeft", "div", this.buttonContainer);
-        this.btnSpacerLeft.setType(WidgetTypes.FILL);
-        this.btnSpacerLeft.setAlign(WidgetAlignTypes.HORIZONTAL);
-
         if (this.buttonContainer) {
-            this.cancell = new Button(this.id + ".cancell", this.buttonContainer);
+            this.cancell = new Button(this.id + ".cancell", null);
             this.cancell.setType(WidgetTypes.FILL);
             this.cancell.setColor("error");
             this.cancell.setText("Cancel");
             this.cancell.setVariant("contained");
             this.cancell.setFixedSize(100);
 
-            this.ok = new Button(this.id + ".ok", this.buttonContainer);
+            this.ok = new Button(this.id + ".ok", null);
             this.ok.setType(WidgetTypes.FILL);
             this.ok.setText("OK");
             this.ok.setVariant("contained");
             this.ok.setColor("success");
             this.ok.setFixedSize(100);
 
-            this.btnSpacerRight = new Widget(
-                this.id + ".btnSpacerRight",
-                "div",
-                this.buttonContainer
-            );
-            this.btnSpacerRight.setType(WidgetTypes.FILL);
-            this.btnSpacerRight.setAlign(WidgetAlignTypes.HORIZONTAL);
+            this.buttonContainer.addChild(Spacer());
+            this.buttonContainer.addChild(this.cancell);
+            this.buttonContainer.addChild(this.ok);
+            this.buttonContainer.addChild(Spacer());
 
             this.ok.subscribe({
                 event: "click",
@@ -242,6 +236,13 @@ export class Dialog extends Widget {
                 },
             });
         }
+
+        this.titleContainer.addChild(this.titleBar);
+        this.titleContainer.addChild(this.close);
+
+        this.addChild(this.titleContainer);
+        this.addChild(this.contentCntainer);
+        if (hasButtons) this.addChild(this.buttonContainer);
 
         this.init();
     }
