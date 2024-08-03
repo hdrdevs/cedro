@@ -66,12 +66,18 @@ export function createApplication(content: any): Application {
             item.childNodes.forEach((ietmRoute: any) => {
                 if (ietmRoute.getAttribute("w-route-path") && ietmRoute.getAttribute("href")) {
                     newApp.router.on(decode(ietmRoute.getAttribute("href")), () => {
+                        const timestamp = new Date().getTime();
                         import(
-                            /*@vite-ignore*/ "./.." + decode(ietmRoute.getAttribute("href"))
+                            /*@vite-ignore*/ "./.." +
+                                decode(ietmRoute.getAttribute("href")) +
+                                "?t=" +
+                                timestamp
                         ).then((module) => {
+                            newApp.clearLoadedModule();
+                            newApp.setLoadedModule(module.default);
                             const host = w.get(newApp.getRouterHostId());
                             if (host) {
-                                newApp.attachWidget(module.default as Widget, host);
+                                newApp.attachWidget(newApp.getLoadedModule() as Widget, host);
                             }
                             newApp.hideLoading();
                         });

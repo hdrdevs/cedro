@@ -29,6 +29,8 @@ export interface IApplication {
 
     theme: ThemeManager;
 
+    loadedModule: any;
+
     attachWidget(guest: IWidget, host: IWidget): void;
 
     subscribe: (cb: WUICallback) => void;

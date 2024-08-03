@@ -36,6 +36,8 @@ class WApplication implements IApplication {
 
     theme: ThemeManager;
 
+    loadedModule: any;
+
     constructor(title: string) {
         this.seo = new Seo(title);
 
@@ -71,6 +73,18 @@ class WApplication implements IApplication {
         this.loading = new Loading("loading", null);
 
         this.theme.load();
+    }
+
+    public setLoadedModule(module: any): void {
+        this.loadedModule = module;
+    }
+
+    public getLoadedModule(): any {
+        return this.loadedModule;
+    }
+
+    public clearLoadedModule(): void {
+        this.loadedModule = null;
     }
 
     public setRouterHostId(id: string | null): void {
