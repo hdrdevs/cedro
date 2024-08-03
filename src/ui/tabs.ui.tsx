@@ -4,7 +4,7 @@ import { OrientationTypes } from "src/types/orientation.type";
 import { Widget, WidgetAlignTypes, WidgetTypes } from "./widget.ui";
 import { Toolbar } from "./toolbar.ui";
 import { Label } from "./label.ui";
-import { IconButton } from "./IconButton.ui";
+import { Icon } from "./Icon.ui";
 import { Scroll } from "./scroll.ui";
 import { WidgetProps, createWidget, normalizeWidget } from "./widget.builder";
 import { UID } from "../core/uid";
@@ -36,14 +36,15 @@ export class Tabs extends Widget {
 
         this.content = new Widget(id + ".content", "div");
         this.content.setType(WidgetTypes.FILL);
-        this.content.addClass("WUITabContainer");
 
         this.setType(WidgetTypes.FILL);
 
         if (this.orientation === "horizontal") {
             this.setAlign(WidgetAlignTypes.VERTICAL);
+            this.content.addClass("WUITabContainer-horizontal");
         } else {
             this.setAlign(WidgetAlignTypes.HORIZONTAL);
+            this.content.addClass("WUITabContainer-vertical");
         }
 
         this.items = new Map<string, TabItem>();
@@ -61,7 +62,11 @@ export class Tabs extends Widget {
     }
 
     public setOrientation(orientation: OrientationTypes) {
+        if (this.orientation !== orientation) {
+            this.content.deleteClass("WUITabContainer-" + this.orientation);
+        }
         this.orientation = orientation;
+        this.content.addClass("WUITabContainer-" + this.orientation);
     }
 
     public addTab(id: string, title: string, content: Widget, scrollable: boolean = false) {
@@ -99,9 +104,19 @@ export class Tabs extends Widget {
         this.items.set(id, { title: icon, content });
         this.itemsScrollable.set(id, scrollable);
 
-        const itemControl = new IconButton(id + ".itemControl", icon);
-        itemControl.setW(40);
-        itemControl.setH(TAB_HEADER_SIZE);
+        const itemControl = new Icon(id + ".itemControl", icon);
+
+        if (this.orientation === "horizontal") {
+            itemControl.setH(TAB_HEADER_SIZE);
+            itemControl.getBody().style.lineHeight = TAB_HEADER_SIZE + "px";
+        } else if (this.orientation === "vertical") {
+            itemControl.getBody().style.writingMode = "vertical-rl";
+            itemControl.getBody().style.transform = "scale(-1,-1)";
+            itemControl.getBody().style.paddingTop = "12px";
+            itemControl.getBody().style.paddingBottom = "12px";
+            itemControl.getBody().style.paddingRight = "10px";
+            itemControl.setW(TAB_HEADER_SIZE);
+        }
 
         itemControl.subscribe({
             event: "click",
@@ -126,7 +141,7 @@ export class Tabs extends Widget {
                         ctrlTab.deleteClass("WUITabControlActive");
                         ctrlTab.addClass("WUITabControl");
                     } else if (this.orientation === "vertical") {
-                        if (ctrlTab instanceof IconButton) {
+                        if (ctrlTab instanceof Icon) {
                             ctrlTab.deleteClass("WUITabControlActiveIcon_VL");
                         } else if (ctrlTab instanceof Label) {
                             ctrlTab.deleteClass("WUITabControlActive_VL");
@@ -140,7 +155,7 @@ export class Tabs extends Widget {
                     if (this.orientation === "horizontal") {
                         ctrlTab.addClass("WUITabControlActive");
                     } else if (this.orientation === "vertical") {
-                        if (ctrlTab instanceof IconButton) {
+                        if (ctrlTab instanceof Icon) {
                             ctrlTab.addClass("WUITabControlActiveIcon_VL");
                         } else if (ctrlTab instanceof Label) {
                             ctrlTab.addClass("WUITabControlActive_VL");
@@ -241,14 +256,14 @@ export function createTab(id: string, content: any, parent: Widget | null = null
             if (widget !== null) {
                 if (tabType === "text") {
                     newTab.addTab(
-                        "Tab.Item." + index,
+                        newTab.id + ".Item." + index,
                         tabTitle || "Untitled",
                         widget,
                         dataScrollable
                     );
                 } else if (tabType === "icon-tab") {
                     newTab.addIconTab(
-                        "Tab.Item." + index,
+                        newTab.id + ".Item." + index,
                         tabIcon || "home",
                         widget,
                         dataScrollable

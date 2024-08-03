@@ -54,7 +54,7 @@ const listOfButtons = [
         id: "btnTabs",
         icon: "tab",
         text: "Tabs",
-        link: "/working/demo/widget-gallery/buttons",
+        link: "/working/demo/widget-gallery/tabs",
     },
     {
         id: "btnProgressbars",

@@ -17,9 +17,10 @@
 
 .ItemTitle h3 {
     position: relative !important;
+    margin-top: 15px !important;
     margin-bottom: 5px !important;
 }
 
 .ItemTitle {
-    height: 30px !important;
+    height: 45px !important;
 }
