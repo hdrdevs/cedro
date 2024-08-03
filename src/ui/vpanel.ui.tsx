@@ -126,6 +126,14 @@ export class VPanel extends Widget {
 
         this.handler.setX(this.getX(true));
     }
+
+    public free(): void {
+        this.handler.free();
+        this.topContent?.free();
+        this.bottomContent?.free();
+        //this.draggable.free();
+        super.free();
+    }
 }
 
 export type WVPanelProps = WidgetProps & {

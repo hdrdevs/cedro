@@ -125,6 +125,14 @@ export class HPanel extends Widget {
 
         this.handler.setY(this.getY(true));
     }
+
+    public free(): void {
+        this.handler.free();
+        this.leftContent?.free();
+        this.rightContent?.free();
+        //this.draggable.free();
+        super.free();
+    }
 }
 
 export type WHPanelProps = WidgetProps & {

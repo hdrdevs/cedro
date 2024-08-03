@@ -893,7 +893,13 @@ export class Widget implements IWidget {
                 child.free();
             }
         }
+
         window.w.delete(this.id);
+
+        const body = this.getBody();
+        const parent = body.parentNode;
+        if (!parent && !body) return;
+        parent?.removeChild(body);
     }
 
     public dispose(): void {
