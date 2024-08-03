@@ -1,3 +1,4 @@
+import "./style.css";
 import { createApplication } from "../../core/application.builder";
 import { Application, Routes, Route, Widgets } from "../../core/application.core";
 import { WContainer, WSpacer } from "../../ui/container.ui";
@@ -26,8 +27,13 @@ window.app = (() =>
         >
             <Widgets>
                 <WContainer orientation="vertical">
-                    <WContainer orientation="horizontal" fixedSize={50} padding={4}>
-                        <WImage id="top-logo" src="/cedro-logo.png" fixedSize={100} />
+                    <WContainer
+                        orientation="horizontal"
+                        fixedSize={50}
+                        padding={4}
+                        classNames="headerBar"
+                    >
+                        <WImage id="top-logo" src="/cedro-logo.png" fixedSize={120} />
                         <WSpacer />
                         <WButton
                             text="Home"

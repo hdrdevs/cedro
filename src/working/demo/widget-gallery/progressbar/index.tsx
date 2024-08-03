@@ -8,7 +8,7 @@ import { ProgressBar, WProgressBar } from "../../../../ui/progressbar.ui";
 export default (() => {
     const animateProgressBar = (id: string) => {
         const progressBar = w.get(id) as ProgressBar;
-        const increment = Math.floor(Math.random() * 10);
+        const increment = Math.floor(Math.random() * 2);
 
         if (!progressBar) return;
         let value = progressBar.getValue() + increment;
@@ -21,7 +21,7 @@ export default (() => {
     setInterval(() => {
         animateProgressBar("progressBar1");
         animateProgressBar("progressBar2");
-    }, 1000);
+    }, 10);
 
     return createWidget(
         <Layout>

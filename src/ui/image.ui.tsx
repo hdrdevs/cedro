@@ -24,6 +24,13 @@ export class Image extends Widget {
         this.imageContainer.setX(0);
         this.imageContainer.setY(0);
         this.imageContainer.setWH(this.getW(), this.getH());
+
+        this.image.getBody().style.position = "relative";
+
+        const imageH = this.image.getH();
+
+        this.image.setX(0);
+        this.image.setY(this.getH() / 2 - imageH / 2);
     }
 
     public fillWidth(): void {
