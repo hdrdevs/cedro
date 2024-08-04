@@ -30,7 +30,7 @@ const listOfButtons = [
         id: "btnContainers",
         icon: "dashboard",
         text: "Containers",
-        link: "/working/demo/widget-gallery/buttons",
+        link: "/working/demo/widget-gallery/containers",
     },
     {
         id: "btnToolbar",
