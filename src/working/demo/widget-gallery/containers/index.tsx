@@ -23,7 +23,7 @@ export default (() => {
                             />
                             <WContainer orientation="vertical" variant="contained" padding={20}>
                                 <WLabel text="Accordion" centerY fixedSize={40} variant="h3" />
-                                <WAccordion orientation="vertical">
+                                <WAccordion>
                                     <WAccordionItem title="cabecera 1" icon="draw">
                                         <WLabel text="In laborum occaecat ea amet qui labore duis ea voluptate ullamco." />
                                     </WAccordionItem>

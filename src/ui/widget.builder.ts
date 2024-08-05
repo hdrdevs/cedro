@@ -17,7 +17,7 @@ import { VPanel, createVPanel } from "./vpanel.ui";
 import { HPanel, createHPanel } from "./hpanel.ui";
 import { Tabs, createTab } from "./tabs.ui";
 import { createSwitch } from "./switch.ui";
-import { createAccordion } from "./accordion.ui";
+import { Accordion, createAccordion } from "./accordion.ui";
 import { createButtonStack } from "./buttonstack.ui";
 import { createButtonColor } from "./buttonColor.ui";
 import { createButtonMenu } from "./buttonmenu.ui";
@@ -177,6 +177,10 @@ export function createWidget(
             } else {
                 widget.setAlign(WidgetAlignTypes.HORIZONTAL);
             }
+        }
+
+        if (widget instanceof Accordion) {
+            widget.setAlign(WidgetAlignTypes.VERTICAL);
         }
         if (widgetProps.padding) widget.setPadding(widgetProps.padding);
         if (widgetProps.fixedSize) widget.setFixedSize(widgetProps.fixedSize);

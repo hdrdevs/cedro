@@ -294,10 +294,8 @@ export class Widget implements IWidget {
         }
 
         if (freeStyle) {
-            //this.body.style.position = "relative";
             this.deleteClass("WUINonFreePosition");
             this.addClass("WUIFixPosition");
-            //this.body.style.overflow = "auto";
             this.body.style.left = "";
             this.body.style.top = "";
             this.body.style.width = "";

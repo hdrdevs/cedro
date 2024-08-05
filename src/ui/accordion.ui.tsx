@@ -26,6 +26,8 @@ export class Accordion extends Widget {
     }
 
     public selectItem(id: string): void {
+        this.fixItemsType();
+
         const selected = this.items.get(id);
 
         if (this.selectedItemId !== null) {
@@ -45,30 +47,42 @@ export class Accordion extends Widget {
         this.render();
     }
 
-    public addItem(title: string, icon: string, content: Widget): void {
-        const header =
-            icon !== ""
-                ? new IconButton(content.id + ".header", icon, null)
-                : new Label(content.id + ".header", "span", null);
+    private fixItemsType(): void {
+        this.items.forEach((item) => {
+            item.header.deleteClass("WUIFixPosition");
+            item.header.addClass("WUINonFreePosition");
+            item.content.deleteClass("WUIFixPosition");
+            item.content.addClass("WUINonFreePosition");
+        });
+    }
+
+    public addItem(title: string, icon: string, content: Widget): string {
+        const headerId = this.id + ".item." + Array.from(this.items.entries()).length + ".header";
+        const header = icon !== "" ? new IconButton(headerId, icon) : new Label(headerId);
 
         header.setType(WidgetTypes.FILL);
         header.setFixedSize(ACCORDION_HEADER_HEIGHT);
         header.setText(title);
 
+        header.deleteClass("WUIFixPosition");
+        header.addClass("WUINonFreePosition");
+
         header.subscribe({
             event: "click",
             then: (_e, _w) => {
-                this.selectItem(content.id);
+                this.selectItem(headerId);
             },
         });
 
         content.setType(WidgetTypes.FILL);
         content.setFixedSize(0);
 
-        this.items.set(content.id, { header, content });
+        this.items.set(headerId, { header, content });
 
         this.addChild(header);
         this.addChild(content);
+
+        return headerId;
     }
 }
 
@@ -119,10 +133,21 @@ export function createAccordion(id: string, content: any, parent: Widget | null 
             const widget = createWidget(accordionItem.firstChild);
 
             if (widget !== null) {
-                newAccordion.addItem(accordionTitle || "Untitled", accordionIcon || "", widget);
+                const itemId = newAccordion.addItem(
+                    accordionTitle || "Untitled",
+                    accordionIcon || "",
+                    widget
+                );
+
+                // const lastItem = newAccordion.items.get(itemId);
+                // const headerWidget = lastItem?.header;
+                // const contentWidget = lastItem?.content;
+
+                // headerWidget?.setType(WidgetTypes.FILL);
+                // contentWidget?.setType(WidgetTypes.FILL);
 
                 if (firstWidgetId === "") {
-                    firstWidgetId = widget.id;
+                    firstWidgetId = itemId;
                 }
             }
         }
