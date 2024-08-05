@@ -10,3 +10,4 @@ vite.config.ts
 package-lock.json
 favicon.ico
 .vscode/*
+.prettierrc

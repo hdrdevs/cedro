@@ -139,13 +139,6 @@ export function createAccordion(id: string, content: any, parent: Widget | null 
                     widget
                 );
 
-                // const lastItem = newAccordion.items.get(itemId);
-                // const headerWidget = lastItem?.header;
-                // const contentWidget = lastItem?.content;
-
-                // headerWidget?.setType(WidgetTypes.FILL);
-                // contentWidget?.setType(WidgetTypes.FILL);
-
                 if (firstWidgetId === "") {
                     firstWidgetId = itemId;
                 }
