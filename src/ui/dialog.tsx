@@ -37,6 +37,9 @@ export class Dialog extends Widget {
     draging: boolean;
     resizing: boolean;
 
+    startX: number;
+    startY: number;
+
     constructor(
         id: string,
         parent: Widget | null = null,
@@ -44,6 +47,9 @@ export class Dialog extends Widget {
         resizable: boolean = false
     ) {
         super(id, "div", parent);
+
+        this.startX = -1;
+        this.startY = -1;
 
         this.buttonContainer = null;
         this.handlerResizable = null;
@@ -294,7 +300,13 @@ export class Dialog extends Widget {
         this.deleteClass("WUIDialogHide");
         this.addClass("WUIDialogDisplayed");
         this.render();
-        this.center();
+
+        if (this.startX > 0 && this.startY > 0) {
+            this.setX(this.startX);
+            this.setY(this.startY);
+        } else {
+            this.center();
+        }
 
         this.background.setVisible(true);
         this.background.raisteTop();
@@ -367,6 +379,14 @@ export class Dialog extends Widget {
         if (!this.cancell) return;
         this.cancell.subscribe({ event: "click", then: cb.then });
     }
+
+    public setStartX(x: number): void {
+        this.startX = x;
+    }
+
+    public setStartY(y: number): void {
+        this.startY = y;
+    }
 }
 
 export type WDialogProps = Omit<WidgetProps, "orientation" | "hidden"> & {
@@ -375,6 +395,10 @@ export type WDialogProps = Omit<WidgetProps, "orientation" | "hidden"> & {
     visible?: boolean;
     titleBarHeight?: number;
     buttonBarHeight?: number;
+    positionX?: number;
+    positionY?: number;
+    width?: number;
+    height?: number;
     children: any;
 };
 
@@ -387,6 +411,10 @@ export const WDialog = (props: WDialogProps) => {
         <div
             id={props.id}
             w-dialog
+            w-position-x={props.positionX}
+            w-position-y={props.positionY}
+            w-dialog-width={props.width}
+            w-dialog-height={props.height}
             w-has-buttons={props.hasButtons}
             w-resizable={props.resizable}
             w-visible={props.visible}
@@ -410,10 +438,30 @@ export function createDialog(id: string, content: any, _parent: Widget | null = 
         ? parseInt(content.getAttribute("w-buttonbar-height"))
         : null;
 
+    const dataPositionX = content.getAttribute("w-position-x")
+        ? parseInt(content.getAttribute("w-position-x"))
+        : null;
+
+    const dataPositionY = content.getAttribute("w-position-y")
+        ? parseInt(content.getAttribute("w-position-y"))
+        : null;
+
+    const dataWidth = content.getAttribute("w-dialog-width")
+        ? parseInt(content.getAttribute("w-dialog-width"))
+        : null;
+
+    const dataHeight = content.getAttribute("w-dialog-height")
+        ? parseInt(content.getAttribute("w-dialog-height"))
+        : null;
+
     let newDialog = new Dialog(id, null, dataHasButtons, dataResizable);
 
     if (dataTitlebarHeight !== null) newDialog.setTitlebarHeight(dataTitlebarHeight);
     if (dataButtonbarHeight !== null) newDialog.setButtonbarHeight(dataButtonbarHeight);
+    if (dataPositionX !== null) newDialog.setStartX(dataPositionX);
+    if (dataPositionY !== null) newDialog.setStartY(dataPositionY);
+    if (dataHeight !== null) newDialog.setY(dataHeight);
+    if (dataWidth !== null) newDialog.setW(dataWidth);
 
     if (content.childNodes.length > 1) {
         throw new Error("Dialog must have only one child");

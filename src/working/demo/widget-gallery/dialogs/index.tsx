@@ -11,10 +11,24 @@ export default (() => {
             <WContainer orientation="vertical" padding={10}>
                 <WLabel text="Dialogs" centerY fixedSize={40} variant="h3" />
                 <WContainer orientation="horizontal" padding={4}>
-                    <WDialog resizable visible>
+                    <WDialog
+                        resizable
+                        visible
+                        positionX={10}
+                        positionY={10}
+                        width={400}
+                        height={200}
+                    >
                         <WLabel text="Resizable dialog" variant="span" centerY centerX />
                     </WDialog>
-                    <WDialog hasButtons resizable visible>
+                    <WDialog
+                        hasButtons
+                        visible
+                        positionX={450}
+                        positionY={10}
+                        width={400}
+                        height={200}
+                    >
                         <WLabel text="Alert dialog" variant="span" centerY centerX />
                     </WDialog>
                 </WContainer>
