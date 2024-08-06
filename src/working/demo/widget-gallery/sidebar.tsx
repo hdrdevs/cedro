@@ -30,7 +30,7 @@ const listOfButtons = [
         id: "btnToolbar",
         icon: "widgets",
         text: "Toolbars",
-        link: "/working/demo/widget-gallery/buttons",
+        link: "/working/demo/widget-gallery/toolbars",
     },
     {
         id: "btnDataGrid",
