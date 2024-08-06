@@ -50,6 +50,10 @@ export class ValueBar extends Widget {
         this.render();
     }
 
+    public getValue(): number {
+        return this.value;
+    }
+
     public updateValueFromHandlerPosition(): void {
         if (this.orientation === "horizontal") {
             const maxX = this.draggable.maxX ? this.draggable.maxX : 1;

@@ -3,12 +3,6 @@ import { WIconButton } from "../../../ui/IconButton.ui";
 
 const listOfButtons = [
     {
-        id: "btnAccordion",
-        icon: "view_stream",
-        text: "Accordions",
-        link: "/working/demo/widget-gallery/buttons",
-    },
-    {
         id: "btnLabels",
         icon: "label",
         text: "Labels",
@@ -47,8 +41,8 @@ const listOfButtons = [
     {
         id: "btnSlider",
         icon: "linear_scale",
-        text: "Sliders",
-        link: "/working/demo/widget-gallery/buttons",
+        text: "Value Bars",
+        link: "/working/demo/widget-gallery/valuebars",
     },
     {
         id: "btnTabs",
@@ -78,7 +72,7 @@ const listOfButtons = [
         id: "btnDialogs",
         icon: "open_in_new_down",
         text: "Dialogs",
-        link: "/working/demo/widget-gallery/buttons",
+        link: "/working/demo/widget-gallery/dialogs",
     },
 ];
 
