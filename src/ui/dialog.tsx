@@ -479,5 +479,7 @@ export function createDialog(id: string, content: any, _parent: Widget | null = 
 
     if (dataVisible) newDialog.show();
 
+    newDialog.background.setVisible(false);
+
     return newDialog;
 }
