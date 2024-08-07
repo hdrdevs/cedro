@@ -1,7 +1,16 @@
 import "./styles/datagrid.css";
 import { Label } from "./label.ui";
-import { Widget, WidgetAlignTypes, WidgetTypes } from "./widget.ui";
+import {
+    connectWidgetCallback,
+    getOnlyEventProps,
+    Widget,
+    WidgetAlignTypes,
+    WidgetTypes,
+} from "./widget.ui";
 import { Scroll } from "./scroll.ui";
+import { normalizeWidget, WidgetEventProps, WidgetProps } from "./widget.builder";
+import { UID } from "../core/uid";
+import { decode } from "html-entities";
 
 const DATA_GRID_HEADER_HEIGHT = 30;
 const DATA_GRID_FOOTER_HEIGHT = 40;
@@ -228,4 +237,113 @@ export class DataGrid extends Widget {
         this.buildRows();
         this.renderRows();
     }
+}
+
+export type DataGridColumnType =
+    | "label"
+    | "button"
+    | "buttonmenu"
+    | "iconbutton"
+    | "textbox"
+    | "select"
+    | "checkbox"
+    | "switch"
+    | "image"
+    | "icon"
+    | "valuebar"
+    | "progressbar";
+
+export type WDataGridProps = Omit<WidgetProps, "orientation"> & {
+    data?: any;
+    children: any;
+};
+
+export type WDataGridColumnProps = WidgetEventProps & {
+    header?: string | null;
+    widgetType?: DataGridColumnType | null;
+    field?: string | null;
+    width?: number | null;
+    classNames?: string | null;
+};
+
+export const WDataGrid = (props: WDataGridProps) => {
+    if (!props.id) {
+        props.id = "Grid." + UID();
+    }
+
+    //connectWidgetCallback(props.id, getOnlyEventProps(props));
+
+    return normalizeWidget(
+        <div id={props.id} w-data-grid w-data={props.data}>
+            {props.children}
+        </div>,
+        props
+    );
+};
+
+export const WDataGridColumn = (props: WDataGridColumnProps) => {
+    return (
+        <div
+            w-data-grid-column
+            w-header={props.header}
+            w-widget-type={props.widgetType}
+            w-field={props.field}
+            w-width={props.width}
+            w-class-names={props.classNames}
+            w-props={props}
+        ></div>
+    );
+};
+
+export function createDataGrid(id: string, content: any, parent: Widget | null = null): DataGrid {
+    const data = JSON.parse(decode(content.getAttribute("w-data")));
+
+    let newGrid = new DataGrid(id, parent);
+
+    newGrid.setRowHeight(30);
+
+    content.childNodes.forEach((column: HTMLElement, _index: number) => {
+        if (column.getAttribute("w-data-grid-column") !== null) {
+            const columnHeader = column.getAttribute("w-header");
+            const columnFild = column.getAttribute("w-field");
+            const columnWidth = column.getAttribute("w-width");
+            const columnType = column.getAttribute("w-type") || "label";
+            const columnClassNames = column.getAttribute("w-class-names");
+            const columnProps = column.getAttribute("w-props");
+            let props = {} as WidgetProps;
+
+            if (columnProps !== null) {
+                props = columnProps as WidgetProps;
+            }
+
+            if (columnHeader === null) {
+                throw new Error("Data grid column header is null");
+            }
+
+            if (columnFild === null) {
+                throw new Error("Data grid column field is null");
+            }
+
+            const width = columnWidth ? parseInt(columnWidth) : 100;
+
+            newGrid.addColumn(columnHeader, width, (args) => {
+                if (columnType === "label") {
+                    const newLabel = new Label(args.fieldId);
+                    connectWidgetCallback(args.fieldId, getOnlyEventProps(props));
+                    args.row.addChild(newLabel);
+                    const lbl = window.w.get(args.fieldId) as Label;
+                    lbl.setText(args.data[columnFild]);
+                    if (columnClassNames) {
+                        lbl.addClass(columnClassNames);
+                    }
+                }
+            });
+        }
+    });
+
+    newGrid.setAlign(WidgetAlignTypes.VERTICAL);
+
+    newGrid.setData(data as Array<any>);
+
+    return newGrid;
 }

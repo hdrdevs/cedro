@@ -69,6 +69,7 @@ window.app = (() =>
                 <Route src="/working/demo/widget-gallery/valuebars" />
                 <Route src="/working/demo/widget-gallery/dialogs" />
                 <Route src="/working/demo/widget-gallery/toolbars" />
+                <Route src="/working/demo/widget-gallery/datagrids" />
             </Routes>
         </Application>
     ))();

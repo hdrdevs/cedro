@@ -36,7 +36,7 @@ const listOfButtons = [
         id: "btnDataGrid",
         icon: "view_list",
         text: "Data Grid",
-        link: "/working/demo/widget-gallery/buttons",
+        link: "/working/demo/widget-gallery/datagrids",
     },
     {
         id: "btnSlider",

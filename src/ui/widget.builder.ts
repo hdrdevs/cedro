@@ -26,6 +26,7 @@ import { createIcon } from "./Icon.ui";
 import { createTextarea } from "./textarea.ui";
 import { createSelect } from "./select.ui";
 import { createDialog, Dialog } from "./dialog";
+import { createDataGrid, DataGrid } from "./datagrid.ui";
 
 export type WidgetEventProps = {
     onClick?: () => {} | void;
@@ -134,6 +135,8 @@ export function createWidget(
         widget = createSelect(widgetProps.id, content, parent);
     } else if (content.getAttribute("w-dialog")) {
         widget = createDialog(widgetProps.id, content, null);
+    } else if (content.getAttribute("w-data-grid")) {
+        widget = createDataGrid(widgetProps.id, content, parent);
     } else {
         widget = new Widget(widgetProps.id, content.tagName, parent);
 
@@ -170,6 +173,7 @@ export function createWidget(
             !(widget instanceof VPanel) &&
             !(widget instanceof HPanel) &&
             !(widget instanceof Dialog) &&
+            !(widget instanceof DataGrid) &&
             !(widget instanceof Tabs)
         ) {
             if (widgetProps.orientation === "vertical") {
@@ -182,6 +186,11 @@ export function createWidget(
         if (widget instanceof Accordion) {
             widget.setAlign(WidgetAlignTypes.VERTICAL);
         }
+
+        if (widget instanceof DataGrid) {
+            widget.setAlign(WidgetAlignTypes.VERTICAL);
+        }
+
         if (widgetProps.padding) widget.setPadding(widgetProps.padding);
         if (widgetProps.fixedSize) widget.setFixedSize(widgetProps.fixedSize);
 
