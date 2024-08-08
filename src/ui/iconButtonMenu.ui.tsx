@@ -2,16 +2,22 @@ import { IconButton, wIconButtonProps } from "./IconButton.ui";
 import { Menu } from "./menu.ui";
 import { SelectItem } from "../types/select.item.type";
 import { normalizeWidget, WidgetProps } from "./widget.builder";
-import { Widget } from "./widget.ui";
+import { connectWidgetCallback, getOnlyEventProps, Widget } from "./widget.ui";
 import { UID } from "../core/uid";
+import { connectCustomWidget } from "./widget.collection";
+import { IWidget } from "../interfaces/widget.interface";
 
 export class IconButtonMenu extends IconButton {
     menu: Menu;
     items: Array<SelectItem>;
     selectedItem: SelectItem | null;
 
+    whenOptionClicked: (args: any) => {} | void;
+
     public constructor(id: string, icon: string) {
         super(id, icon);
+
+        this.whenOptionClicked = () => {};
 
         this.menu = new Menu(this.id + ".menu", this.id, null);
 
@@ -35,25 +41,29 @@ export class IconButtonMenu extends IconButton {
             },
         });
 
-        /*this.menu.subscribe({
+        this.menu.subscribe({
             event: "option-clicked",
             then: (_e, clickedOption) => {
                 const option = clickedOption as IconButton;
-
                 const fintOption = this.items.find((item) => item.id === option.id);
 
                 if (fintOption) {
                     this.selectedItem = fintOption;
+                    this.whenOptionClicked({ id: fintOption.id });
                 }
 
-                const selectedText = this.selectedItem?.label;
-                if (selectedText) {
-                    this.setText(selectedText);
-                } else {
-                    this.setText("");
-                }
+                // const selectedText = this.selectedItem?.label;
+                // if (selectedText) {
+                //     this.setText(selectedText);
+                // } else {
+                //     this.setText("");
+                // }
             },
-        });*/
+        });
+    }
+
+    public setOnOptionClicked(cb: ({}) => {} | void) {
+        this.whenOptionClicked = cb;
     }
 
     public addItem(id: string, label: string, icon: string): void {
@@ -64,6 +74,7 @@ export class IconButtonMenu extends IconButton {
 export type WIconButtonMenuProps = WidgetProps &
     wIconButtonProps & {
         icon?: string | null;
+        onOptionClicked?: (args: any) => {} | void;
         children: any;
     };
 
@@ -77,6 +88,20 @@ export const WIconButtonMenu = (props: WIconButtonMenuProps) => {
     if (!props.id) {
         props.id = "IconButtonMenu." + UID();
     }
+
+    connectWidgetCallback(props.id, getOnlyEventProps(props));
+
+    connectCustomWidget("widget-custom-added-" + props.id, {
+        event: "widget-load",
+        then: (_e: Event, _w: IWidget | null) => {
+            if (!props.id) return;
+            const widget = w.get(props.id) as IconButtonMenu;
+
+            if (props.onOptionClicked) {
+                widget.setOnOptionClicked(props.onOptionClicked);
+            }
+        },
+    });
 
     return normalizeWidget(
         <div

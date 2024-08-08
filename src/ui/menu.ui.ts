@@ -162,7 +162,7 @@ export class Menu extends Widget {
         newOption.setAlign(WidgetAlignTypes.VERTICAL);
         newOption.setText(label);
         newOption.setFixedSize(MENU_OPTION_HEIGHT);
-        //newOption.addClass("WUIMenuOptions");
+        newOption.addClass("WUIMenuOptions"); //Esta linea estaba comentada. Con esto se soliciono el ancho del menu
         //newOption.setH(MENU_OPTION_HEIGHT);
 
         newOption.subscribe({

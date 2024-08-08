@@ -7,8 +7,25 @@ import { WButton } from "../../ui/button.ui";
 import { WIconButtonMenu, WIconButtonMenuItem } from "../../ui/iconButtonMenu.ui";
 
 const ThemeMenu = () => {
+    const handleThemeChanged = (args: any) => {
+        if (args.id == "btn-theme-light") {
+            app?.theme.setTheme("light");
+        } else if (args.id == "btn-theme-dark") {
+            app?.theme.setTheme("dark");
+        } else if (args.id == "btn-theme-cedro") {
+            app?.theme.setTheme("cedro-light");
+        } else if (args.id == "btn-theme-cedro-dark") {
+            app?.theme.setTheme("cedro-dark");
+        }
+    };
+
     return (
-        <WIconButtonMenu id="btn-theme" icon="palette" fixedSize={50}>
+        <WIconButtonMenu
+            id="btn-theme"
+            icon="palette"
+            fixedSize={50}
+            onOptionClicked={handleThemeChanged}
+        >
             <WIconButtonMenuItem id="btn-theme-light" icon="light_mode" label="Light" />
             <WIconButtonMenuItem id="btn-theme-dark" icon="dark_mode" label="Dark" />
             <WIconButtonMenuItem id="btn-theme-cedro" icon="light_mode" label="Cedro Light" />
