@@ -16,7 +16,7 @@ export default (() => {
                     variant="h3"
                 />
                 <WContainer orientation="horizontal" padding={4}>
-                    <WTab orientation="vertical">
+                    <WTab orientation="vertical" selectedTab={2}>
                         <WTabItem title="Tab&nbsp;Uno" type="text">
                             <WLabel text="Est quis laboris dolore quis officia culpa incididunt adipisicing incididunt officia nisi magna." />
                         </WTabItem>

@@ -202,6 +202,7 @@ export type TabItemType = "text" | "icon-tab";
 
 export type WTabProps = Omit<WidgetProps, "orientation"> & {
     orientation?: OrientationTypes;
+    selectedTab?: number | null;
     children: any;
 };
 
@@ -218,7 +219,7 @@ export const WTab = (props: WTabProps) => {
         props.id = "Tabs." + UID();
     }
     return normalizeWidget(
-        <div id={props.id} w-tab w-class={props.classNames}>
+        <div id={props.id} w-tab w-class={props.classNames} w-selected-tab={props.selectedTab}>
             {props.children}
         </div>,
         props
@@ -236,6 +237,7 @@ export const WTabItem = (props: WTabItemProps) => {
 export function createTab(id: string, content: any, parent: Widget | null = null): Tabs {
     const dataOrientation = content.getAttribute("w-orientation");
     const dataScrollable = content.getAttribute("w-scrollable") ? true : false;
+    const dataSelectedTab = content.getAttribute("w-selected-tab");
 
     let orientation: OrientationTypes = dataOrientation ? dataOrientation : "horizontal";
 
@@ -273,7 +275,14 @@ export function createTab(id: string, content: any, parent: Widget | null = null
         }
     });
 
-    newTab.setTab("Tab.Item.0");
+    if (dataSelectedTab !== null) {
+        const selectedTab = parseInt(dataSelectedTab);
+        if (selectedTab < newTab.items.size) {
+            newTab.setTab(newTab.id + ".Item." + selectedTab);
+        }
+    } else {
+        newTab.setTab(newTab.id + ".Item.0");
+    }
 
     return newTab;
 }
