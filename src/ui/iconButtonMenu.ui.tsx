@@ -86,6 +86,8 @@ export const WIconButtonMenu = (props: WIconButtonMenuProps) => {
             w-icon={props.icon}
             w-variant={props.variant}
             w-color={props.color}
+            w-width={props.width}
+            w-height={props.height}
         >
             {props.children}
         </div>,
@@ -108,6 +110,8 @@ export function createIconButtonMenu(
     const btnText = content.getAttribute("w-text");
     const btnColor = content.getAttribute("w-color");
     const btnVariant = content.getAttribute("w-variant");
+    const dataWidth = content.getAttribute("w-width");
+    const dataHeight = content.getAttribute("w-height");
 
     let newIconButtonMenu = new IconButtonMenu(id, btnIcon || "home");
 
@@ -121,6 +125,14 @@ export function createIconButtonMenu(
 
     if (btnVariant) {
         newIconButtonMenu.setVariant(btnVariant);
+    }
+
+    if (dataWidth) {
+        newIconButtonMenu.setInitialW(dataWidth);
+    }
+
+    if (dataHeight) {
+        newIconButtonMenu.setInitialH(dataHeight);
     }
 
     content.childNodes.forEach((menuItem: HTMLElement, index: number) => {
