@@ -12,6 +12,10 @@ export default (() => {
         { name: "ros", years: 38 },
     ];
 
+    const onYearsClicked = (args: any) => {
+        app?.alert("Alert", "Click on <strong>" + args.data.name + "</strong> ");
+    };
+
     return createWidget(
         <Layout>
             <WContainer orientation="vertical" padding={10}>
@@ -22,7 +26,7 @@ export default (() => {
                     variant="h3"
                 />
                 <WContainer orientation="vertical" padding={4}>
-                    <WDataGrid data={JSON.stringify(db)}>
+                    <WDataGrid data={JSON.stringify(db)} rowHeight={30}>
                         <WDataGridColumn
                             header="Name"
                             field="name"
@@ -36,6 +40,7 @@ export default (() => {
                             width={80}
                             widgetType="label"
                             classNames="columnYears"
+                            onClick={onYearsClicked}
                         />
                     </WDataGrid>
                 </WContainer>

@@ -29,15 +29,15 @@ import { createDialog, Dialog } from "./dialog";
 import { createDataGrid, DataGrid } from "./datagrid.ui";
 
 export type WidgetEventProps = {
-    onClick?: () => {} | void;
-    onResize?: () => {} | void;
-    onMouseDown?: () => {} | void;
-    onMouseUp?: () => {} | void;
-    onMouseMove?: () => {} | void;
-    onMouseOut?: () => {} | void;
-    onMouseLeave?: () => {} | void;
-    onWheel?: () => {} | void;
-    onDrag?: () => {} | void;
+    onClick?: (args: any) => {} | void;
+    onResize?: (args: any) => {} | void;
+    onMouseDown?: (args: any) => {} | void;
+    onMouseUp?: (args: any) => {} | void;
+    onMouseMove?: (args: any) => {} | void;
+    onMouseOut?: (args: any) => {} | void;
+    onMouseLeave?: (args: any) => {} | void;
+    onWheel?: (args: any) => {} | void;
+    onDrag?: (args: any) => {} | void;
 };
 
 export type WidgetProps = {

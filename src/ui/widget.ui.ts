@@ -938,63 +938,63 @@ export function connectWidgetCallback(
                 widget.subscribe({
                     event: "click",
                     then: (_e, _w) => {
-                        props.onClick ? props.onClick() : null;
+                        props.onClick ? props.onClick({}) : null;
                     },
                 });
 
                 widget.subscribe({
                     event: "drag",
                     then: (_e, _w) => {
-                        props.onDrag ? props.onDrag() : null;
+                        props.onDrag ? props.onDrag({}) : null;
                     },
                 });
 
                 widget.subscribe({
                     event: "resize",
                     then: (_e, _w) => {
-                        props.onResize ? props.onResize() : null;
+                        props.onResize ? props.onResize({}) : null;
                     },
                 });
 
                 widget.subscribe({
                     event: "mousedown",
                     then: (_e, _w) => {
-                        props.onMouseDown ? props.onMouseDown() : null;
+                        props.onMouseDown ? props.onMouseDown({}) : null;
                     },
                 });
 
                 widget.subscribe({
                     event: "mouseup",
                     then: (_e, _w) => {
-                        props.onMouseUp ? props.onMouseUp() : null;
+                        props.onMouseUp ? props.onMouseUp({}) : null;
                     },
                 });
 
                 widget.subscribe({
                     event: "mousemove",
                     then: (_e, _w) => {
-                        props.onMouseMove ? props.onMouseMove() : null;
+                        props.onMouseMove ? props.onMouseMove({}) : null;
                     },
                 });
 
                 widget.subscribe({
                     event: "mouseout",
                     then: (_e, _w) => {
-                        props.onMouseOut ? props.onMouseOut() : null;
+                        props.onMouseOut ? props.onMouseOut({}) : null;
                     },
                 });
 
                 widget.subscribe({
                     event: "mouseleave",
                     then: (_e, _w) => {
-                        props.onMouseLeave ? props.onMouseLeave() : null;
+                        props.onMouseLeave ? props.onMouseLeave({}) : null;
                     },
                 });
 
                 widget.subscribe({
                     event: "wheel",
                     then: (_e, _w) => {
-                        props.onWheel ? props.onWheel() : null;
+                        props.onWheel ? props.onWheel({}) : null;
                     },
                 });
             }

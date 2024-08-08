@@ -255,6 +255,7 @@ export type DataGridColumnType =
 
 export type WDataGridProps = Omit<WidgetProps, "orientation"> & {
     data?: any;
+    rowHeight?: number | null;
     children: any;
 };
 
@@ -266,15 +267,15 @@ export type WDataGridColumnProps = WidgetEventProps & {
     classNames?: string | null;
 };
 
+var columnPropsBackup: Array<any> = []; //Guarda los eventos asociados a los widgets dentro de las columnas de la grilla.
+
 export const WDataGrid = (props: WDataGridProps) => {
     if (!props.id) {
         props.id = "Grid." + UID();
     }
 
-    //connectWidgetCallback(props.id, getOnlyEventProps(props));
-
     return normalizeWidget(
-        <div id={props.id} w-data-grid w-data={props.data}>
+        <div id={props.id} w-data-grid w-data={props.data} w-row-height={props.rowHeight}>
             {props.children}
         </div>,
         props
@@ -282,6 +283,8 @@ export const WDataGrid = (props: WDataGridProps) => {
 };
 
 export const WDataGridColumn = (props: WDataGridColumnProps) => {
+    columnPropsBackup.push(props);
+
     return (
         <div
             w-data-grid-column
@@ -290,30 +293,34 @@ export const WDataGridColumn = (props: WDataGridColumnProps) => {
             w-field={props.field}
             w-width={props.width}
             w-class-names={props.classNames}
-            w-props={props}
         ></div>
     );
 };
 
 export function createDataGrid(id: string, content: any, parent: Widget | null = null): DataGrid {
     const data = JSON.parse(decode(content.getAttribute("w-data")));
+    const rowHeight = content.getAttribute("w-row-height");
 
     let newGrid = new DataGrid(id, parent);
 
-    newGrid.setRowHeight(30);
+    if (rowHeight !== null) {
+        newGrid.setRowHeight(parseInt(rowHeight));
+    } else {
+        newGrid.setRowHeight(DATA_GRID_ROW_HEIGHT);
+    }
 
-    content.childNodes.forEach((column: HTMLElement, _index: number) => {
+    content.childNodes.forEach((column: HTMLElement, index: number) => {
         if (column.getAttribute("w-data-grid-column") !== null) {
             const columnHeader = column.getAttribute("w-header");
             const columnFild = column.getAttribute("w-field");
             const columnWidth = column.getAttribute("w-width");
             const columnType = column.getAttribute("w-type") || "label";
             const columnClassNames = column.getAttribute("w-class-names");
-            const columnProps = column.getAttribute("w-props");
+
             let props = {} as WidgetProps;
 
-            if (columnProps !== null) {
-                props = columnProps as WidgetProps;
+            if (columnPropsBackup[index]) {
+                props = columnPropsBackup[index];
             }
 
             if (columnHeader === null) {
@@ -329,13 +336,22 @@ export function createDataGrid(id: string, content: any, parent: Widget | null =
             newGrid.addColumn(columnHeader, width, (args) => {
                 if (columnType === "label") {
                     const newLabel = new Label(args.fieldId);
-                    connectWidgetCallback(args.fieldId, getOnlyEventProps(props));
+
                     args.row.addChild(newLabel);
                     const lbl = window.w.get(args.fieldId) as Label;
                     lbl.setText(args.data[columnFild]);
                     if (columnClassNames) {
                         lbl.addClass(columnClassNames);
                     }
+
+                    lbl.subscribe({
+                        event: "click",
+                        then: (_e, _w) => {
+                            if (props.onClick) {
+                                props.onClick(args);
+                            }
+                        },
+                    });
                 }
             });
         }
@@ -344,6 +360,8 @@ export function createDataGrid(id: string, content: any, parent: Widget | null =
     newGrid.setAlign(WidgetAlignTypes.VERTICAL);
 
     newGrid.setData(data as Array<any>);
+
+    columnPropsBackup = []; //Limpia las propiedades de las columnas de la grilla actual.
 
     return newGrid;
 }
