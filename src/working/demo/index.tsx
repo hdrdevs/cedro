@@ -6,6 +6,7 @@ import { WImage } from "../../ui/image.ui";
 import { WIconButtonMenu, WIconButtonMenuItem } from "../../ui/iconButtonMenu.ui";
 import { ButtonStack, WButtonStack } from "../../ui/buttonstack.ui";
 import { WIconButton } from "../../ui/IconButton.ui";
+import { config } from "./config";
 
 const ThemeMenu = () => {
     const handleThemeChanged = (args: any) => {
@@ -35,21 +36,45 @@ const ThemeMenu = () => {
     );
 };
 
-const SCREEN_TRIGGER_WIDTH = 600;
-const STACK_MIN_WIDTH = 80;
-const STACK_MAX_WIDTH = 370;
-
 window.app = (() => {
     const onRenderHandler = () => {
-        const stack = w.get("topmenu-stack") as ButtonStack;
-
         if (!app) return;
 
-        if (app?.screen.getWidth() < SCREEN_TRIGGER_WIDTH) {
-            stack?.setFixedSize(STACK_MIN_WIDTH);
-        } else {
-            stack?.setFixedSize(STACK_MAX_WIDTH);
+        const stack = w.get("topmenu-stack") as ButtonStack;
+
+        stack?.setFixedSize(getStackWidth());
+    };
+
+    const getStackWidth = (): number => {
+        if (!window.app) return config.STACK_MAX_WIDTH;
+
+        if (window.app?.screen.getWidth() < config.SCREEN_TRIGGER_WIDTH) {
+            return config.STACK_MIN_WIDTH;
         }
+
+        return config.STACK_MAX_WIDTH;
+    };
+
+    const onLoadHandler = () => {
+        const stack = w.get("topmenu-stack") as ButtonStack;
+        const router = app?.router;
+
+        if (!router) {
+            return;
+        }
+
+        const route = router.getCurrentLocation().url;
+
+        if (route.indexOf("working/demo/widget-gallery") > -1) {
+            stack.setActive("btn-widget-gallery");
+        } else if (router.getCurrentLocation().url.indexOf("working/demo/counter") > -1) {
+            stack.setActive("btn-home");
+        } else {
+            stack.setActive("btn-home");
+            app?.goTo("/working/demo/counter");
+        }
+
+        onRenderHandler();
     };
 
     return createApplication(
@@ -58,6 +83,8 @@ window.app = (() => {
             padding={0}
             orientation="vertical"
             theme="dark"
+            onResize={onRenderHandler}
+            onLoad={onLoadHandler}
         >
             <Widgets>
                 <WContainer orientation="vertical">
@@ -72,12 +99,10 @@ window.app = (() => {
                         <WButtonStack
                             id="topmenu-stack"
                             orientation="horizontal"
-                            fixedSize={290}
-                            onRender={() => {
-                                onRenderHandler();
-                            }}
+                            fixedSize={getStackWidth()}
                         >
                             <WIconButton
+                                id="btn-home"
                                 icon="home"
                                 text="Home"
                                 onClick={() => {
@@ -85,6 +110,7 @@ window.app = (() => {
                                 }}
                             />
                             <WIconButton
+                                id="btn-widget-gallery"
                                 icon="draw"
                                 text="Widget Gallery"
                                 onClick={() => {

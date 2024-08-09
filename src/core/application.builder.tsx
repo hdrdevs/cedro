@@ -111,5 +111,11 @@ export function createApplication(content: any): Application {
         }
     });
 
+    appConnections.forEach((cb) => {
+        newApp.subscribe(cb);
+    });
+
+    appConnections = [];
+
     return newApp;
 }

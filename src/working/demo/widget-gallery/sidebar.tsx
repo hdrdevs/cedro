@@ -1,6 +1,7 @@
 import { HPanel, Widget } from "../../../ui";
 import { WContainer } from "../../../ui/container.ui";
 import { WIconButton } from "../../../ui/IconButton.ui";
+import { config } from "../config";
 
 const listOfButtons = [
     {
@@ -77,39 +78,34 @@ const listOfButtons = [
     },
 ];
 
-const SCREEN_TRIGGER_WIDTH = 600;
-const STACK_MIN_WIDTH = 55;
-const STACK_MAX_WIDTH = 200;
-
 export const SideBar = () => {
     const sidebarButtonHeight = 50;
 
     const onRenderHandler = () => {
-        console.log("onRenderHandler");
-
-        const sideBar = w.get("sidebar-container1") as Widget;
-        const hpanel = sideBar.getParent() as HPanel;
+        const hpanel = window.w.get("widget-gallery-side-panel") as HPanel;
 
         if (!app) return;
 
-        console.log(app?.router.getCurrentLocation().url);
+        hpanel.setLeftWidth(getSidebarWidth());
+    };
 
-        if (app?.screen.getWidth() < SCREEN_TRIGGER_WIDTH) {
-            hpanel.setLeftWidth(STACK_MIN_WIDTH);
-        } else {
-            hpanel.setLeftWidth(STACK_MAX_WIDTH);
+    const getSidebarWidth = (): number => {
+        if (!app) return config.SIDEBAR_MAX_WIDTH;
+
+        if (app?.screen.getWidth() < config.SCREEN_TRIGGER_WIDTH) {
+            return config.SIDEBAR_MIN_WIDTH;
         }
+
+        return config.SIDEBAR_MAX_WIDTH;
     };
 
     return (
         <WContainer
             id="sidebar-container1"
             orientation="vertical"
-            fixedSize={STACK_MAX_WIDTH}
+            fixedSize={getSidebarWidth()}
             padding={10}
-            onRender={() => {
-                onRenderHandler();
-            }}
+            onRender={onRenderHandler}
         >
             {listOfButtons.map((button) => {
                 return (

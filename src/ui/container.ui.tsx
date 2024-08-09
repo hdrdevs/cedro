@@ -98,11 +98,12 @@ export const WSpacer = (props: Omit<ContainerProps, "id">) => {
 export function createContainer(content: any, parent: Widget | null = null): Container {
     const dataOrientation = content.getAttribute("w-orientation");
     const dataVariant = content.getAttribute("w-variant");
+    const dataId = content.getAttribute("id") || UID();
 
     let orientation: OrientationTypes = dataOrientation ? dataOrientation : "horizontal";
     let variant: ContainerVariants = dataVariant ? dataVariant : "plain";
 
-    let newContainer = new Container({ orientation, parent, variant });
+    let newContainer = new Container({ id: dataId, orientation, parent, variant });
 
     content.childNodes.forEach((item: HTMLElement) => {
         const widget = createWidget(item);

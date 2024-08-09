@@ -18,6 +18,10 @@ import { CedroDarkTheme, DarkTheme, LightTheme, ThemeManager } from "./themes.co
 import { Loading } from "../ui/loading.ui";
 import { OrientationTypes } from "../types/orientation.type";
 
+declare global {
+    var appConnections: Array<WUICallback>;
+}
+
 class WApplication implements IApplication {
     seo: Seo;
 
@@ -65,6 +69,12 @@ class WApplication implements IApplication {
             this.screen.updateSize();
             this.getRoot().resize();
             this.run("load");
+        });
+
+        window.addEventListener("resize", () => {
+            this.screen.updateSize();
+            this.getRoot().resize();
+            this.run("resize");
         });
 
         this.alertDialog = new Dialog("Dialog.alert", null);
@@ -169,7 +179,13 @@ class WApplication implements IApplication {
     public attachWidget(guest: IWidget, host: IWidget): void {
         if (!host) {
             console.log("guest:", guest);
+            return;
         }
+
+        if (!guest) {
+            return;
+        }
+
         for (const child of host.getBody().childNodes) {
             child.parentNode?.removeChild(child);
         }
@@ -255,15 +271,35 @@ class WApplication implements IApplication {
     }
 }
 
+export const initApplicationConnections = () => {
+    if (!window.appConnections) {
+        window.appConnections = new Array<WUICallback>();
+    }
+};
+export const connectApplication = (cb: WUICallback) => {
+    initApplicationConnections();
+    window.appConnections.push(cb);
+};
+
 export type ApplicationProps = {
     title: string;
     padding?: number | null;
     orientation?: OrientationTypes | null;
     theme?: string | null;
     children: any;
+    onResize?: (args: any) => void;
+    onLoad?: (args: any) => void;
 };
 
 export const Application = (props: ApplicationProps) => {
+    if (props.onLoad) {
+        connectApplication({ event: "load", then: props.onLoad });
+    }
+
+    if (props.onResize) {
+        connectApplication({ event: "resize", then: props.onResize });
+    }
+
     return (
         <div
             title={props.title}

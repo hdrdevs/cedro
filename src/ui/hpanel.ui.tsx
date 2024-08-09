@@ -1,3 +1,4 @@
+import { UID } from "../core/uid";
 import { Draggable } from "./draggable.ui";
 import "./styles/hpanel.css";
 import { WidgetProps, createWidget, normalizeWidget } from "./widget.builder";
@@ -156,9 +157,18 @@ export type WHPanelProps = WidgetProps & {
 };
 
 export const WHPanel = (props: WHPanelProps) => {
+    if (!props.id) {
+        props.id = "Icon." + UID();
+    }
+
     connectWidgetCallback(props.id, getOnlyEventProps(props));
 
-    return normalizeWidget(<div w-hpanel>{props.children}</div>, props);
+    return normalizeWidget(
+        <div id={props.id} w-hpanel>
+            {props.children}
+        </div>,
+        props
+    );
 };
 
 export function createHPanel(id: string, content: any, parent: Widget | null = null): HPanel {
