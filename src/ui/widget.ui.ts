@@ -794,6 +794,12 @@ export class Widget implements IWidget {
             currentPosition += elementSize;
             child.render();
         }
+
+        this.subscribers.forEach((callback) => {
+            if (callback.event == "render") {
+                callback.then(new Event("render"), this);
+            }
+        });
     }
 
     /**
@@ -919,6 +925,7 @@ export function getOnlyEventProps(props: WidgetProps): WidgetEventProps {
         onMouseOut: props.onMouseOut,
         onMouseLeave: props.onMouseLeave,
         onWheel: props.onWheel,
+        onRender: props.onRender,
     };
 
     return eventProps;
@@ -995,6 +1002,13 @@ export function connectWidgetCallback(
                     event: "wheel",
                     then: (_e, _w) => {
                         props.onWheel ? props.onWheel({}) : null;
+                    },
+                });
+
+                widget.subscribe({
+                    event: "render",
+                    then: (_e, _w) => {
+                        props.onRender ? props.onRender({}) : null;
                     },
                 });
             }

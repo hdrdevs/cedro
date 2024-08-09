@@ -3,8 +3,9 @@ import { createApplication } from "../../core/application.builder";
 import { Application, Routes, Route, Widgets } from "../../core/application.core";
 import { WContainer, WSpacer } from "../../ui/container.ui";
 import { WImage } from "../../ui/image.ui";
-import { WButton } from "../../ui/button.ui";
 import { WIconButtonMenu, WIconButtonMenuItem } from "../../ui/iconButtonMenu.ui";
+import { ButtonStack, WButtonStack } from "../../ui/buttonstack.ui";
+import { WIconButton } from "../../ui/IconButton.ui";
 
 const ThemeMenu = () => {
     const handleThemeChanged = (args: any) => {
@@ -34,8 +35,24 @@ const ThemeMenu = () => {
     );
 };
 
-window.app = (() =>
-    createApplication(
+const SCREEN_TRIGGER_WIDTH = 600;
+const STACK_MIN_WIDTH = 80;
+const STACK_MAX_WIDTH = 370;
+
+window.app = (() => {
+    const onRenderHandler = () => {
+        const stack = w.get("topmenu-stack") as ButtonStack;
+
+        if (!app) return;
+
+        if (app?.screen.getWidth() < SCREEN_TRIGGER_WIDTH) {
+            stack?.setFixedSize(STACK_MIN_WIDTH);
+        } else {
+            stack?.setFixedSize(STACK_MAX_WIDTH);
+        }
+    };
+
+    return createApplication(
         <Application
             title="Ceddro Application Demo | Cedro"
             padding={0}
@@ -52,20 +69,29 @@ window.app = (() =>
                     >
                         <WImage id="top-logo" src="/cedro-logo.png" fixedSize={120} />
                         <WSpacer />
-                        <WButton
-                            text="Home"
-                            fixedSize={100}
-                            onClick={() => {
-                                app?.goTo("/working/demo/counter");
+                        <WButtonStack
+                            id="topmenu-stack"
+                            orientation="horizontal"
+                            fixedSize={290}
+                            onRender={() => {
+                                onRenderHandler();
                             }}
-                        />
-                        <WButton
-                            text="Widget Gallery"
-                            fixedSize={150}
-                            onClick={() => {
-                                app?.goTo("/working/demo/widget-gallery");
-                            }}
-                        />
+                        >
+                            <WIconButton
+                                icon="home"
+                                text="Home"
+                                onClick={() => {
+                                    app?.goTo("/working/demo/counter");
+                                }}
+                            />
+                            <WIconButton
+                                icon="draw"
+                                text="Widget Gallery"
+                                onClick={() => {
+                                    app?.goTo("/working/demo/widget-gallery");
+                                }}
+                            />
+                        </WButtonStack>
                         <WSpacer />
                         <ThemeMenu />
                     </WContainer>
@@ -89,4 +115,5 @@ window.app = (() =>
                 <Route src="/working/demo/widget-gallery/datagrids" />
             </Routes>
         </Application>
-    ))();
+    );
+})();

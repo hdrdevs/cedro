@@ -2,7 +2,7 @@ import "./styles/button.css";
 import "./styles/stackbutton.css";
 import "./styles/vstackbutton.css";
 import { Colors } from "./colors.ui";
-import { Widget, connectWidgetCallback, getOnlyEventProps } from "./widget.ui";
+import { Widget, WidgetTypes, connectWidgetCallback, getOnlyEventProps } from "./widget.ui";
 import { normalizeWidget, WidgetProps } from "./widget.builder";
 import { UID } from "../core/uid";
 
@@ -52,6 +52,13 @@ export class Button extends Widget {
         this.deleteAllClasses();
         this.addClass(`WUIButton-${this.variant}`);
         this.addClass(`WUIButton-${this.variant}-color-${this.color}`);
+        if (this.type === WidgetTypes.FILL) {
+            this.addClass("WUINonFreePosition");
+        } else if (this.type === WidgetTypes.CUSTOM) {
+            this.addClass("WUINonFreePosition");
+        } else if (this.type === WidgetTypes.FREE) {
+            this.addClass("WUIFixPosition");
+        }
     }
 
     public init(): void {

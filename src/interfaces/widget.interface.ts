@@ -13,6 +13,7 @@ export type WUIEvent =
     | "mouseleave"
     | "option-clicked"
     | "wheel"
+    | "render"
     | "drag";
 
 export type WUICallback = {

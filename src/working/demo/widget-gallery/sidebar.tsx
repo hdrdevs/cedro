@@ -1,3 +1,4 @@
+import { HPanel, Widget } from "../../../ui";
 import { WContainer } from "../../../ui/container.ui";
 import { WIconButton } from "../../../ui/IconButton.ui";
 
@@ -76,11 +77,40 @@ const listOfButtons = [
     },
 ];
 
+const SCREEN_TRIGGER_WIDTH = 600;
+const STACK_MIN_WIDTH = 55;
+const STACK_MAX_WIDTH = 200;
+
 export const SideBar = () => {
     const sidebarButtonHeight = 50;
 
+    const onRenderHandler = () => {
+        console.log("onRenderHandler");
+
+        const sideBar = w.get("sidebar-container1") as Widget;
+        const hpanel = sideBar.getParent() as HPanel;
+
+        if (!app) return;
+
+        console.log(app?.router.getCurrentLocation().url);
+
+        if (app?.screen.getWidth() < SCREEN_TRIGGER_WIDTH) {
+            hpanel.setLeftWidth(STACK_MIN_WIDTH);
+        } else {
+            hpanel.setLeftWidth(STACK_MAX_WIDTH);
+        }
+    };
+
     return (
-        <WContainer orientation="vertical" fixedSize={200} padding={10}>
+        <WContainer
+            id="sidebar-container1"
+            orientation="vertical"
+            fixedSize={STACK_MAX_WIDTH}
+            padding={10}
+            onRender={() => {
+                onRenderHandler();
+            }}
+        >
             {listOfButtons.map((button) => {
                 return (
                     <WIconButton
@@ -88,6 +118,11 @@ export const SideBar = () => {
                         icon={button.icon}
                         text={button.text}
                         fixedSize={sidebarButtonHeight}
+                        variant={
+                            "/" + app?.router.getCurrentLocation().url === button.link
+                                ? "contained"
+                                : "text"
+                        }
                         onClick={() => {
                             app?.goTo(button.link);
                         }}

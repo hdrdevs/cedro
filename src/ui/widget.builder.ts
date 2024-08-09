@@ -38,6 +38,7 @@ export type WidgetEventProps = {
     onMouseLeave?: (args: any) => {} | void;
     onWheel?: (args: any) => {} | void;
     onDrag?: (args: any) => {} | void;
+    onRender?: (args: any) => {} | void;
 };
 
 export type WidgetProps = {

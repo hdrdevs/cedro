@@ -1,7 +1,13 @@
 import { Draggable } from "./draggable.ui";
 import "./styles/vpanel.css";
 import { WidgetProps, createWidget, normalizeWidget } from "./widget.builder";
-import { Widget, WidgetAlignTypes, WidgetTypes } from "./widget.ui";
+import {
+    connectWidgetCallback,
+    getOnlyEventProps,
+    Widget,
+    WidgetAlignTypes,
+    WidgetTypes,
+} from "./widget.ui";
 
 const VPANEL_HANDLER_SIZE = 4;
 
@@ -141,6 +147,8 @@ export type WVPanelProps = WidgetProps & {
 };
 
 export const WVPanel = (props: WVPanelProps) => {
+    connectWidgetCallback(props.id, getOnlyEventProps(props));
+
     return normalizeWidget(<div w-vpanel>{props.children}</div>, props);
 };
 

@@ -1,7 +1,13 @@
 import { Draggable } from "./draggable.ui";
 import "./styles/hpanel.css";
 import { WidgetProps, createWidget, normalizeWidget } from "./widget.builder";
-import { Widget, WidgetAlignTypes, WidgetTypes } from "./widget.ui";
+import {
+    connectWidgetCallback,
+    getOnlyEventProps,
+    Widget,
+    WidgetAlignTypes,
+    WidgetTypes,
+} from "./widget.ui";
 
 const HPANEL_HANDLER_SIZE = 4;
 
@@ -101,6 +107,16 @@ export class HPanel extends Widget {
         this.render();
     }
 
+    public setLeftWidth(width: number): void {
+        this.leftWidth = width;
+        this.rightWidth = null;
+    }
+
+    public setRightWidth(width: number): void {
+        this.leftWidth = null;
+        this.rightWidth = width;
+    }
+
     public render(): void {
         super.render();
         this.handler.setW(HPANEL_HANDLER_SIZE);
@@ -140,6 +156,8 @@ export type WHPanelProps = WidgetProps & {
 };
 
 export const WHPanel = (props: WHPanelProps) => {
+    connectWidgetCallback(props.id, getOnlyEventProps(props));
+
     return normalizeWidget(<div w-hpanel>{props.children}</div>, props);
 };
 
