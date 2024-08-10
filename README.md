@@ -2,7 +2,7 @@
 
 
 <div align="center">
-  <img src="https://raw.githubusercontent.com/hdrdevs/cedro/main/public/cedro-logo.svg" alt="Cedro" width="256">
+  <img src="https://raw.githubusercontent.com/hdrdevs/cedro/main/public/cedro-logo.svg" alt="Cedro" width="170">
   <p><strong>Javascript library to build user interfece based on widgets.</strong></p>
 </div>
 
