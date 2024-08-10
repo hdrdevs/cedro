@@ -1,12 +1,12 @@
 # cedro
 
-<div style="text-align: center;">
-  <img src="https://raw.githubusercontent.com/hdrdevs/cedro/main/public/cedro-logo.svg" alt="Cedro" width="300">
+
+<div align="center">
+  <img src="https://raw.githubusercontent.com/hdrdevs/cedro/main/public/cedro-logo.svg" alt="Cedro" width="256">
+  <p><strong>Javascript library to build user interfece based on widgets.</strong></p>
 </div>
 
-Javascript library to build user interfece based on widgets.
-
-**Don't use this library. "cedro" is on development.**
+> ⚠️ **Warning:** Don't use this library. "cedro" is on development.
 
 ## Getting Started
 
