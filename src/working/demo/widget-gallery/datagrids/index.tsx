@@ -68,6 +68,7 @@ export default (() => {
                             field="country"
                             width={150}
                             widgetType="label"
+                            classNames="columnName"
                         />
                         <WDataGridColumn
                             header="Years"

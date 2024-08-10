@@ -1,4 +1,4 @@
-import { HPanel, Widget } from "../../../ui";
+import { HPanel } from "../../../ui";
 import { WContainer } from "../../../ui/container.ui";
 import { WIconButton } from "../../../ui/IconButton.ui";
 import { config } from "../config";
