@@ -6,8 +6,6 @@
   <p><strong>Javascript library to build user interfece based on widgets.</strong></p>
 </div>
 
-> ⚠️ **Warning:** Don't use this library. "cedro" is on development.
-
 ## Getting Started
 
 Install Vite project template from command line
@@ -18,3 +16,5 @@ npx degit hdrdevs/vite-cedro#main my-app-name
 npm install
 npm run dev
 ```
+
+⚠️ **Warning:** Don't use this library. "cedro" is on development.
