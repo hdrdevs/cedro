@@ -1,16 +1,11 @@
 import "./styles/datagrid.css";
 import { Label } from "./label.ui";
-import {
-    connectWidgetCallback,
-    getOnlyEventProps,
-    Widget,
-    WidgetAlignTypes,
-    WidgetTypes,
-} from "./widget.ui";
+import { Widget, WidgetAlignTypes, WidgetTypes } from "./widget.ui";
 import { Scroll } from "./scroll.ui";
 import { normalizeWidget, WidgetEventProps, WidgetProps } from "./widget.builder";
 import { UID } from "../core/uid";
 import { decode } from "html-entities";
+import { Button } from "./button.ui";
 
 const DATA_GRID_HEADER_HEIGHT = 30;
 const DATA_GRID_FOOTER_HEIGHT = 40;
@@ -263,6 +258,8 @@ export type WDataGridColumnProps = WidgetEventProps & {
     header?: string | null;
     widgetType?: DataGridColumnType | null;
     field?: string | null;
+    icon?: string | null; //Para los widgets que tengan icons.
+    action?: string | null; //Para los widgets que tengan que mostrar un texto fijo.
     width?: number | null;
     classNames?: string | null;
 };
@@ -291,6 +288,8 @@ export const WDataGridColumn = (props: WDataGridColumnProps) => {
             w-header={props.header}
             w-widget-type={props.widgetType}
             w-field={props.field}
+            w-icon={props.icon}
+            w-action={props.action}
             w-width={props.width}
             w-class-names={props.classNames}
         ></div>
@@ -312,9 +311,11 @@ export function createDataGrid(id: string, content: any, parent: Widget | null =
     content.childNodes.forEach((column: HTMLElement, index: number) => {
         if (column.getAttribute("w-data-grid-column") !== null) {
             const columnHeader = column.getAttribute("w-header");
-            const columnFild = column.getAttribute("w-field");
+            const columnField = column.getAttribute("w-field");
+            const columnIcon = column.getAttribute("w-icon");
+            const columnAction = column.getAttribute("w-action");
             const columnWidth = column.getAttribute("w-width");
-            const columnType = column.getAttribute("w-type") || "label";
+            const columnType = column.getAttribute("w-widget-type") || "label";
             const columnClassNames = column.getAttribute("w-class-names");
 
             let props = {} as WidgetProps;
@@ -327,7 +328,7 @@ export function createDataGrid(id: string, content: any, parent: Widget | null =
                 throw new Error("Data grid column header is null");
             }
 
-            if (columnFild === null) {
+            if (columnField === null) {
                 throw new Error("Data grid column field is null");
             }
 
@@ -339,7 +340,7 @@ export function createDataGrid(id: string, content: any, parent: Widget | null =
 
                     args.row.addChild(newLabel);
                     const lbl = window.w.get(args.fieldId) as Label;
-                    lbl.setText(args.data[columnFild]);
+                    lbl.setText(args.data[columnField]);
                     if (columnClassNames) {
                         lbl.addClass(columnClassNames);
                     }
@@ -348,6 +349,30 @@ export function createDataGrid(id: string, content: any, parent: Widget | null =
                         event: "click",
                         then: (_e, _w) => {
                             if (props.onClick) {
+                                props.onClick(args);
+                            }
+                        },
+                    });
+                } else if (columnType === "button") {
+                    const newButton = new Button(args.fieldId);
+
+                    args.row.addChild(newButton);
+                    const btn = window.w.get(args.fieldId) as Button;
+                    btn.setVariant("text");
+                    btn.setColor("warning");
+                    if (!columnAction) {
+                        throw new Error("Data grid buttom column action is null");
+                    }
+                    btn.setText(columnAction);
+                    if (columnClassNames) {
+                        btn.addClass(columnClassNames);
+                    }
+
+                    btn.subscribe({
+                        event: "click",
+                        then: (_e, _w) => {
+                            if (props.onClick) {
+                                console.log(args.data[columnField]);
                                 props.onClick(args);
                             }
                         },

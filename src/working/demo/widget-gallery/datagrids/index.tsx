@@ -45,6 +45,17 @@ export default (() => {
         app?.alert("Alert", "Click on <strong>" + args.data.name + "</strong> ");
     };
 
+    const onBtnClicked = (args: any) => {
+        app?.alert(
+            "Alert",
+            "Click on <strong>" +
+                args.data.name +
+                "</strong> and his has <strong>" +
+                args.data.years +
+                "</strong> Years old "
+        );
+    };
+
     return createWidget(
         <Layout>
             <WContainer orientation="vertical" padding={10}>
@@ -77,6 +88,14 @@ export default (() => {
                             widgetType="label"
                             classNames="columnYears"
                             onClick={onYearsClicked}
+                        />
+                        <WDataGridColumn
+                            header="&nbsp;"
+                            field="years"
+                            width={80}
+                            widgetType="button"
+                            action="View"
+                            onClick={onBtnClicked}
                         />
                     </WDataGrid>
                 </WContainer>
