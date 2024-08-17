@@ -6,6 +6,8 @@ import { normalizeWidget, WidgetEventProps, WidgetProps } from "./widget.builder
 import { UID } from "../core/uid";
 import { decode } from "html-entities";
 import { Button } from "./button.ui";
+import { IconButton } from "./IconButton.ui";
+import { ProgressBar } from "./progressbar.ui";
 
 const DATA_GRID_HEADER_HEIGHT = 30;
 const DATA_GRID_FOOTER_HEIGHT = 40;
@@ -258,8 +260,6 @@ export type WDataGridColumnProps = WidgetEventProps & {
     header?: string | null;
     widgetType?: DataGridColumnType | null;
     field?: string | null;
-    icon?: string | null; //Para los widgets que tengan icons.
-    action?: string | null; //Para los widgets que tengan que mostrar un texto fijo.
     width?: number | null;
     classNames?: string | null;
 };
@@ -288,8 +288,6 @@ export const WDataGridColumn = (props: WDataGridColumnProps) => {
             w-header={props.header}
             w-widget-type={props.widgetType}
             w-field={props.field}
-            w-icon={props.icon}
-            w-action={props.action}
             w-width={props.width}
             w-class-names={props.classNames}
         ></div>
@@ -312,8 +310,6 @@ export function createDataGrid(id: string, content: any, parent: Widget | null =
         if (column.getAttribute("w-data-grid-column") !== null) {
             const columnHeader = column.getAttribute("w-header");
             const columnField = column.getAttribute("w-field");
-            const columnIcon = column.getAttribute("w-icon");
-            const columnAction = column.getAttribute("w-action");
             const columnWidth = column.getAttribute("w-width");
             const columnType = column.getAttribute("w-widget-type") || "label";
             const columnClassNames = column.getAttribute("w-class-names");
@@ -360,10 +356,8 @@ export function createDataGrid(id: string, content: any, parent: Widget | null =
                     const btn = window.w.get(args.fieldId) as Button;
                     btn.setVariant("text");
                     btn.setColor("warning");
-                    if (!columnAction) {
-                        throw new Error("Data grid buttom column action is null");
-                    }
-                    btn.setText(columnAction);
+
+                    btn.setText(args.data[columnField]);
                     if (columnClassNames) {
                         btn.addClass(columnClassNames);
                     }
@@ -377,6 +371,39 @@ export function createDataGrid(id: string, content: any, parent: Widget | null =
                             }
                         },
                     });
+                } else if (columnType === "iconbutton") {
+                    const newButton = new IconButton(args.fieldId, args.data[columnField]);
+
+                    args.row.addChild(newButton);
+                    const btn = window.w.get(args.fieldId) as IconButton;
+                    btn.setVariant("text");
+                    btn.setColor("primary");
+
+                    if (columnClassNames) {
+                        btn.addClass(columnClassNames);
+                    }
+
+                    btn.subscribe({
+                        event: "click",
+                        then: (_e, _w) => {
+                            if (props.onClick) {
+                                console.log(args.data[columnField]);
+                                props.onClick(args);
+                            }
+                        },
+                    });
+                } else if (columnType === "progressbar") {
+                    const newProgressBar = new ProgressBar(args.fieldId);
+
+                    args.row.addChild(newProgressBar);
+                    const prg = window.w.get(args.fieldId) as ProgressBar;
+                    prg.setPaddingBar(2);
+
+                    if (columnClassNames) {
+                        prg.addClass(columnClassNames);
+                    }
+
+                    prg.setValue(args.data[columnField]);
                 }
             });
         }
