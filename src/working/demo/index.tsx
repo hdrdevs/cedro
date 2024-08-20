@@ -10,15 +10,9 @@ import { config } from "./config";
 
 const ThemeMenu = () => {
     const handleThemeChanged = (args: any) => {
-        if (args.id == "btn-theme-light") {
-            app?.theme.setTheme("light");
-        } else if (args.id == "btn-theme-dark") {
-            app?.theme.setTheme("dark");
-        } else if (args.id == "btn-theme-cedro") {
-            app?.theme.setTheme("cedro-light");
-        } else if (args.id == "btn-theme-cedro-dark") {
-            app?.theme.setTheme("cedro-dark");
-        }
+        const pattern = "btn-theme-";
+        const theme = args.id.slice(pattern.length)
+        app?.theme.setTheme(theme);
     };
 
     return (
