@@ -108,7 +108,6 @@ export class DataGrid extends Widget {
 
     public init(): void {
         super.init();
-
         this.createHeaders();
     }
 
@@ -123,7 +122,6 @@ export class DataGrid extends Widget {
             this.headerContainer.addChild(btn);
         }
 
-        this.buildRows();
         this.renderHeaders();
     }
 
@@ -150,6 +148,8 @@ export class DataGrid extends Widget {
     }
 
     private buildRows(): void {
+        console.log("buildRows");
+
         let rowY = 0;
 
         for (let i = 0; i < this.data.length; i++) {
@@ -206,6 +206,14 @@ export class DataGrid extends Widget {
             }
             rowY += this.rowHeight;
         }
+    }
+
+    public free(): void {
+        for (let i = 0; i < this.data.length; i++) {
+            const row = window.w.get(this.id + ".row." + i) as Widget;
+            if (row) row.free();
+        }
+        super.free();
     }
 
     public render(): void {
