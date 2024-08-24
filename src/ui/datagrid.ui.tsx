@@ -412,6 +412,22 @@ export function createDataGrid(id: string, content: any, parent: Widget | null =
                     }
 
                     prg.setValue(args.data[columnField]);
+                } else if (columnType === "valuebar") {
+                    throw new Error("Valuebar not implemented");
+                } else if (columnType === "buttonmenu") {
+                    throw new Error("Buttonmenu not implemented");
+                } else if (columnType === "textbox") {
+                    throw new Error("Textbox not implemented");
+                } else if (columnType === "select") {
+                    throw new Error("Select not implemented");
+                } else if (columnType === "checkbox") {
+                    throw new Error("Checkbox not implemented");
+                } else if (columnType === "switch") {
+                    throw new Error("Switch not implemented");
+                } else if (columnType === "image") {
+                    throw new Error("Image not implemented");
+                } else if (columnType === "icon") {
+                    throw new Error("Icon not implemented");
                 }
             });
         }
