@@ -28,14 +28,19 @@ export class Button extends Widget {
     variant: ButonVariants;
     color: Colors;
     fullWidth: boolean;
+    minWidth: boolean;
     size: ButonSizes;
     href: string;
     text: string;
+    requiredWidth: number;
 
     constructor(id: string, parent: Widget | null = null) {
         super(id, "button", parent);
 
+        this.requiredWidth = -1;
+
         this.fullWidth = false;
+        this.minWidth = false;
         //this.setType(WidgetTypes.CUSTOM);
         this.variant = "text";
         this.color = "primary"; //primary";
@@ -59,32 +64,57 @@ export class Button extends Widget {
         } else if (this.type === WidgetTypes.FREE) {
             this.addClass("WUIFixPosition");
         }
+        this.updateRequiredWidth();
+    }
+
+    protected updateRequiredWidth(): void {
+        const div = document.createElement("div");
+        div.id = this.id + ".requiredWidth";
+        div.innerHTML = this.text;
+        div.classList.add(`WUIButton-${this.variant}`);
+        div.classList.add(`WUIButton-${this.variant}-color-${this.color}`);
+        div.style.position = "absolute";
+        div.style.overflow = "hidden";
+        document.body.appendChild(div);
+        this.requiredWidth = div.clientWidth;
+        div.parentNode?.removeChild(div);
     }
 
     public init(): void {
         super.init();
     }
 
-    setText(text: string): void {
+    public setText(text: string): void {
         this.text = text;
         this.body.innerHTML = text;
+        this.updateRequiredWidth();
     }
 
-    setVariant(variant: ButonVariants = "contained"): void {
+    public setVariant(variant: ButonVariants = "contained"): void {
         this.variant = variant;
         this.configureStyles();
     }
 
-    setColor(color: Colors = "primary"): void {
+    public setColor(color: Colors = "primary"): void {
         this.color = color;
         this.configureStyles();
     }
 
-    setFullWidth(fullWidth: boolean = false): void {
+    public setFullWidth(fullWidth: boolean = false): void {
         this.fullWidth = fullWidth;
     }
 
-    setSize(size: ButonSizes = "medium"): void {
+    public setMinWidth(minWidth: boolean = false): void {
+        this.minWidth = minWidth;
+        if (this.minWidth) {
+            if (this.requiredWidth > 0) {
+                console.log("cambiando tamano:", this.requiredWidth, " id:", this.id);
+                this.setW(this.requiredWidth);
+            }
+        }
+    }
+
+    public setSize(size: ButonSizes = "medium"): void {
         this.size = size;
     }
 
@@ -110,6 +140,10 @@ export class Button extends Widget {
 
     getText(): string {
         return this.text;
+    }
+
+    public getRequiredWidth(): number {
+        return this.requiredWidth;
     }
 }
 

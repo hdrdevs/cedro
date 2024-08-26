@@ -11,7 +11,7 @@ import { config } from "./config";
 const ThemeMenu = () => {
     const handleThemeChanged = (args: any) => {
         const pattern = "btn-theme-";
-        const theme = args.id.slice(pattern.length)
+        const theme = args.id.slice(pattern.length);
         app?.theme.setTheme(theme);
     };
 
@@ -94,6 +94,7 @@ window.app = (() => {
                             id="topmenu-stack"
                             orientation="horizontal"
                             fixedSize={getStackWidth()}
+                            centerX
                         >
                             <WIconButton
                                 id="btn-home"

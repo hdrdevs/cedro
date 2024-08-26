@@ -103,6 +103,12 @@ export class Icon extends Widget {
     public getIconSize(): IconSizes {
         return this.iconSize;
     }
+
+    public getRequiredWidth(): number {
+        const sizeString = iconPixelSizesMap[this.iconSize];
+        const size = parseInt(sizeString.split("px")[0]);
+        return size;
+    }
 }
 
 export type wIconProps = WidgetProps & {

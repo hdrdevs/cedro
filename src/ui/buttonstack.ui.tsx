@@ -15,12 +15,15 @@ export class ButtonStack extends Widget {
     orientation: OrientationTypes;
     buttons: Map<string, Button | IconButton>;
     activeButton: string | null;
+    centeredButtons: boolean;
     constructor(
         id: string,
         orientation: OrientationTypes = "horizontal",
         parent: Widget | null = null
     ) {
         super(id, "div", parent);
+
+        this.centeredButtons = false;
 
         this.orientation = orientation;
 
@@ -82,6 +85,9 @@ export class ButtonStack extends Widget {
 
     public addButton(button: Button | IconButton): void {
         this.buttons.set(button.id, button);
+        if (button instanceof IconButton && this.centeredButtons) {
+            (button as IconButton).setCenterX(true);
+        }
         button.setType(WidgetTypes.FILL);
         button.subscribe({ event: "click", then: () => this.setActive(button.id) });
         this.addChild(button);
@@ -99,9 +105,14 @@ export class ButtonStack extends Widget {
     private thereAreMoreThanTwoButtons(): boolean {
         return this.buttons.size > 2;
     }
+
+    public setCenteredButtons(centeredButtons: boolean): void {
+        this.centeredButtons = centeredButtons;
+    }
 }
 
 export type WButtonStackProps = WidgetProps & {
+    centerX?: boolean | null;
     children: any;
 };
 
@@ -113,7 +124,7 @@ export const WButtonStack = (props: WButtonStackProps) => {
     connectWidgetCallback(props.id, getOnlyEventProps(props));
 
     return normalizeWidget(
-        <div id={props.id} w-button-stack>
+        <div id={props.id} w-button-stack w-centerX={props.centerX}>
             {props.children}
         </div>,
         props
@@ -130,6 +141,10 @@ export function createButtonStack(
         : "vertical";
 
     let newStack = new ButtonStack(id, dataOrientation, parent);
+
+    if (content.getAttribute("w-centerX")) {
+        newStack.setCenteredButtons(true);
+    }
 
     content.childNodes.forEach((item: HTMLElement, _index: number) => {
         if (item.getAttribute("w-button") || item.getAttribute("w-icon-button")) {

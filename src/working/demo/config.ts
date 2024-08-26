@@ -1,7 +1,7 @@
 export const config = {
     SCREEN_TRIGGER_WIDTH: 600,
     STACK_MIN_WIDTH: 80,
-    STACK_MAX_WIDTH: 370,
+    STACK_MAX_WIDTH: 450,
     SIDEBAR_MIN_WIDTH: 55,
     SIDEBAR_MAX_WIDTH: 200,
 };

@@ -11,11 +11,15 @@ export class Label extends Widget {
     color: Colors;
     text: string;
 
+    requiredWidth: number;
+
     isHCentered: boolean;
     isVCentered: boolean;
 
     constructor(id: string, variant: LabelVariants = "span", parent: Widget | null = null) {
         super(id, variant, parent);
+
+        this.requiredWidth = -1;
 
         this.isHCentered = false;
         this.isVCentered = false;
@@ -35,6 +39,19 @@ export class Label extends Widget {
 
     public init(): void {
         super.init();
+    }
+
+    private updateRequiredWidth(): void {
+        const div = document.createElement("div");
+        div.id = this.id + ".requiredWidth";
+        div.innerHTML = this.text;
+        div.classList.add("WUILabel" + this.variant);
+        div.classList.add("WUILabel-" + this.color);
+        div.style.position = "absolute";
+        div.style.overflow = "hidden";
+        document.body.appendChild(div);
+        this.requiredWidth = div.clientWidth;
+        div.parentNode?.removeChild(div);
     }
 
     public setHCentered(isHCentered: boolean = true): void {
@@ -67,6 +84,7 @@ export class Label extends Widget {
     public setText(text: string): void {
         this.text = text;
         this.body.innerHTML = text;
+        this.updateRequiredWidth();
     }
 
     public setVariant(variant: LabelVariants = "span"): void {
@@ -76,6 +94,7 @@ export class Label extends Widget {
 
         this.variant = variant;
         this.addClass("WUILabel-" + this.variant);
+        this.updateRequiredWidth();
     }
 
     public setColor(color: Colors = "primary"): void {
@@ -84,6 +103,7 @@ export class Label extends Widget {
         }
         this.color = color;
         this.addClass("WUILabel-" + this.color);
+        this.updateRequiredWidth();
     }
 
     public getVariant(): LabelVariants {
@@ -96,6 +116,10 @@ export class Label extends Widget {
 
     public getText(): string {
         return this.text;
+    }
+
+    public getRequiredWidth(): number {
+        return this.requiredWidth;
     }
 }
 
