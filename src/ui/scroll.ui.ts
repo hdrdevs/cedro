@@ -25,7 +25,7 @@ export class Scroll extends Widget {
     drag: Draggable;
 
     constructor(id: string, contentArea: Widget, orientation: OrientationTypes = "vertical") {
-        super(id, "div", contentArea.getParent());
+        super(id, "div");
 
         this.contentArea = contentArea;
         this.orientation = orientation;
@@ -33,7 +33,7 @@ export class Scroll extends Widget {
         this.setType(WidgetTypes.CUSTOM);
 
         this.getBody().style.overflow = "hidden";
-        this.getBody().style.position = "absolute";
+        this.getBody().style.position = "fixed";
 
         this.addClass("WUIScrollbar");
 
@@ -110,12 +110,12 @@ export class Scroll extends Widget {
         if (this.orientation === "vertical") {
             const recorrido = scrollData.scrollHeight - scrollData.areaHeight;
             const maxY = this.drag.maxY ? this.drag.maxY : 1;
-            const ratio = (this.getY() - this.contentArea.getY()) / maxY;
+            const ratio = (this.getY() - this.contentArea.getY(true)) / maxY;
             this.contentArea.getBody().scrollTop = recorrido * ratio;
         } else if (this.orientation === "horizontal") {
             const recorrido = scrollData.scrollWidth - scrollData.areaWidth;
             const maxX = this.drag.maxX ? this.drag.maxX : 1;
-            const ratio = (this.getX() - this.contentArea.getX()) / maxX;
+            const ratio = (this.getX() - this.contentArea.getX(true)) / maxX;
             this.contentArea.getBody().scrollLeft = recorrido * ratio;
         }
         this.run("scroll");
@@ -140,8 +140,8 @@ export class Scroll extends Widget {
             this.setW(SCROLL_SIZE);
             this.raisteTop();
 
-            const minY = 1 + this.contentArea.getY();
-            const maxY = this.contentArea.getY() + scrollData.availablePositionSize;
+            const minY = 1 + this.contentArea.getY(true);
+            const maxY = this.contentArea.getY(true) + scrollData.availablePositionSize;
 
             this.drag.setMinY(minY);
             this.drag.setMaxY(maxY);
@@ -161,14 +161,14 @@ export class Scroll extends Widget {
                 return;
             }
 
-            this.setX(1 + this.contentArea.getX() + scrollData.position);
-            this.setY(scrollData.scrollPositionY - SCROLL_SIZE - 1);
+            this.setX(1 + this.contentArea.getX(true) + scrollData.position);
+            this.setY(this.contentArea.getY(true) + scrollData.scrollPositionY - SCROLL_SIZE - 1);
             this.setW(scrollData.scrollBarWidth);
             this.setH(SCROLL_SIZE);
             this.raisteTop();
 
-            const minX = 1 + this.contentArea.getX();
-            const maxX = this.contentArea.getX() + scrollData.availablePositionSize;
+            const minX = 1 + this.contentArea.getX(true);
+            const maxX = this.contentArea.getX(true) + scrollData.availablePositionSize;
 
             this.drag.setMinX(minX);
             this.drag.setMaxX(maxX);

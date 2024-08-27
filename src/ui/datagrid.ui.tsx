@@ -281,6 +281,8 @@ export class DataGrid extends Widget {
             const row = window.w.get(this.id + ".row." + i) as Widget;
             if (row) row.free();
         }
+        this.verticalScrollbar.free();
+        this.horizontalScrollbar.free();
         super.free();
     }
 

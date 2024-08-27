@@ -1,0 +1,14 @@
+.IconsContainer {
+    display: flex !important;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100% !important;
+    height: 100% !important;
+    overflow: auto !important;
+}
+
+.IconItem {
+    position: relative !important;
+    margin: 10px !important;
+    text-align: center !important;
+}

@@ -62,7 +62,7 @@ const listOfButtons = [
         id: "btnImages",
         icon: "image",
         text: "Images",
-        link: "/working/demo/widget-gallery/buttons",
+        link: "/working/demo/widget-gallery/images",
     },
     {
         id: "btnIcons",

@@ -125,6 +125,7 @@ window.app = (() => {
                 <Route src="/working/demo/widget-gallery" />
                 <Route src="/working/demo/widget-gallery/buttons" />
                 <Route src="/working/demo/widget-gallery/icons" />
+                <Route src="/working/demo/widget-gallery/images" />
                 <Route src="/working/demo/widget-gallery/labels" />
                 <Route src="/working/demo/widget-gallery/textboxes" />
                 <Route src="/working/demo/widget-gallery/progressbar" />
