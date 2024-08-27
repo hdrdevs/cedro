@@ -108,7 +108,6 @@ export class Button extends Widget {
         this.minWidth = minWidth;
         if (this.minWidth) {
             if (this.requiredWidth > 0) {
-                console.log("cambiando tamano:", this.requiredWidth, " id:", this.id);
                 this.setW(this.requiredWidth);
             }
         }

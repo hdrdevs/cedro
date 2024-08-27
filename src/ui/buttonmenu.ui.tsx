@@ -30,7 +30,6 @@ export class ButtonMenu extends Button {
 
                 if (this.getW() > this.menu.getW()) {
                     this.menu.setW(this.getBody().clientWidth);
-                    console.log("cambiando ancho...");
                 }
             },
         });

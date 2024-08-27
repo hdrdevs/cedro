@@ -76,7 +76,7 @@ window.app = (() => {
             title="Ceddro Application Demo | Cedro"
             padding={0}
             orientation="vertical"
-            theme="cedro"
+            theme="dark"
             onResize={onRenderHandler}
             onLoad={onLoadHandler}
         >

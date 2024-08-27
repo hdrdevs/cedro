@@ -201,8 +201,6 @@ export class DataGrid extends Widget {
      * @return {void}
      */
     private buildRows(): void {
-        console.log("buildRows");
-
         let rowY = 0;
 
         for (let i = 0; i < this.data.length; i++) {
@@ -449,7 +447,6 @@ export function createDataGrid(id: string, content: any, parent: Widget | null =
                         event: "click",
                         then: (_e, _w) => {
                             if (props.onClick) {
-                                console.log(args.data[columnField]);
                                 props.onClick(args);
                             }
                         },
@@ -470,7 +467,6 @@ export function createDataGrid(id: string, content: any, parent: Widget | null =
                         event: "click",
                         then: (_e, _w) => {
                             if (props.onClick) {
-                                console.log(args.data[columnField]);
                                 props.onClick(args);
                             }
                         },

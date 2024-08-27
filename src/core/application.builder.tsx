@@ -91,7 +91,8 @@ export function createApplication(content: any): Application {
                         const loadCss = async () => {
                             try {
                                 const timestamp = new Date().getTime();
-                                const cssName = "../../assets" + url + "/style.css?ts=" + timestamp;
+                                //const cssName = "../../assets" + url + "/style.css?ts=" + timestamp;
+                                const cssName = "/assets" + url + "/style.css?ts=" + timestamp;
 
                                 // Crear un elemento <link> para cargar el CSS
                                 const link = document.createElement("link");

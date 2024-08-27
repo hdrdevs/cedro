@@ -121,7 +121,6 @@ export function createContainer(content: any, parent: Widget | null = null): Con
     let newContainer = new Container({ id: dataId, orientation, parent, variant });
 
     if (dataScrollY) {
-        console.log("setVerticalScrollbar");
         newContainer.setVerticalScrollbar();
     }
 
