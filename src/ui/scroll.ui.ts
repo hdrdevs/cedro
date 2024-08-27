@@ -118,6 +118,7 @@ export class Scroll extends Widget {
             const ratio = (this.getX() - this.contentArea.getX()) / maxX;
             this.contentArea.getBody().scrollLeft = recorrido * ratio;
         }
+        this.run("scroll");
     }
 
     public render(): void {

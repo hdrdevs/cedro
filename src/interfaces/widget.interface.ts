@@ -14,6 +14,7 @@ export type WUIEvent =
     | "option-clicked"
     | "wheel"
     | "render"
+    | "scroll"
     | "drag";
 
 export type WUICallback = {

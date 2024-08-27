@@ -32,6 +32,13 @@ export class DataGrid extends Widget {
 
     columns: Array<DataGridColumn>;
 
+    /**
+     * Initializes a new instance of the DataGrid class.
+     *
+     * @param {string} id - The unique identifier for the DataGrid instance.
+     * @param {Widget|null} parent - The parent widget of the DataGrid instance.
+     * @return {void}
+     */
     constructor(id: string, parent: Widget | null = null) {
         super(id, "div", parent);
 
@@ -63,6 +70,13 @@ export class DataGrid extends Widget {
             "horizontal"
         );
 
+        this.horizontalScrollbar.subscribe({
+            event: "scroll",
+            then: (_e, _w) => {
+                this.renderHeaders();
+            },
+        });
+
         this.columns = new Array<DataGridColumn>();
 
         this.data = new Array<any>();
@@ -78,6 +92,14 @@ export class DataGrid extends Widget {
         this.footerContainer.setFixedSize(DATA_GRID_FOOTER_HEIGHT);
     }
 
+    /**
+     * Calculates the free width available in the data grid.
+     *
+     * The free width is calculated by subtracting the total width of all columns from the width of the data container.
+     * If the calculated free width is less than the minimum allowed column width, it is set to the minimum allowed column width.
+     *
+     * @return {number} The free width available in the data grid.
+     */
     private getFreeWidth(): number {
         let freeW = 0;
         for (let i = 0; i < this.columns.length; i++) {
@@ -95,6 +117,11 @@ export class DataGrid extends Widget {
         return freeW;
     }
 
+    /**
+     * Calculates the total width of all columns in the data grid.
+     *
+     * @return {number} The total width of all columns.
+     */
     private getAllColumnsWidth(): number {
         let returnValue = 0;
         for (let i = 0; i < this.columns.length; i++) {
@@ -111,6 +138,13 @@ export class DataGrid extends Widget {
         this.createHeaders();
     }
 
+    /**
+     * Creates the headers for the data grid based on the provided columns.
+     *
+     * If no columns are provided, the function will return immediately.
+     *
+     * @return {void}
+     */
     private createHeaders(): void {
         if (!this.columns) {
             return;
@@ -125,12 +159,22 @@ export class DataGrid extends Widget {
         this.renderHeaders();
     }
 
+    /**
+     * Renders the headers of the data grid based on the provided columns.
+     *
+     * If no columns are provided, the function will return immediately.
+     *
+     * The headers are rendered as custom labels with their positions and sizes
+     * calculated based on the column widths and the scroll position of the data container.
+     *
+     * @return {void}
+     */
     private renderHeaders(): void {
         if (!this.columns) {
             return;
         }
 
-        let startX = 0;
+        let startX = -this.dataContainer.getBody().scrollLeft;
         for (let i = 0; i < this.columns.length; i++) {
             const column = this.columns[i];
             const btn = window.w.get(this.id + "header." + i) as Label;
@@ -147,6 +191,15 @@ export class DataGrid extends Widget {
         }
     }
 
+    /**
+     * Builds the rows of the data grid based on the provided data and columns.
+     *
+     * This function iterates over the data and creates a new row widget for each item.
+     * It then iterates over the columns and calls the column handler to render the cell content.
+     * The row and column widgets are positioned absolutely and added to the data container.
+     *
+     * @return {void}
+     */
     private buildRows(): void {
         console.log("buildRows");
 
@@ -178,6 +231,13 @@ export class DataGrid extends Widget {
         }
     }
 
+    /**
+     * Renders the rows of the data grid.
+     *
+     * This function iterates over the data and columns, positioning and sizing each row and column widget accordingly.
+     *
+     * @return {void}
+     */
     private renderRows(): void {
         let rowY = 0;
 
@@ -208,6 +268,14 @@ export class DataGrid extends Widget {
         }
     }
 
+    /**
+     * Releases all resources held by this data grid.
+     *
+     * This function iterates over all rows in the data grid and calls the free method on each row widget.
+     * It then calls the free method on the superclass to release any additional resources.
+     *
+     * @return {void}
+     */
     public free(): void {
         for (let i = 0; i < this.data.length; i++) {
             const row = window.w.get(this.id + ".row." + i) as Widget;
@@ -216,6 +284,11 @@ export class DataGrid extends Widget {
         super.free();
     }
 
+    /**
+     * Renders the data grid by calling the superclass's render method and then rendering the headers, rows, and scrollbars.
+     *
+     * @return {void}
+     */
     public render(): void {
         super.render();
         this.renderHeaders();
