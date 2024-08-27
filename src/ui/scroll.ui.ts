@@ -134,8 +134,8 @@ export class Scroll extends Widget {
                 return;
             }
 
-            this.setX(this.contentArea.getX() + this.contentArea.getW() - SCROLL_SIZE - 1);
-            this.setY(1 + this.contentArea.getY() + scrollData.position);
+            this.setX(this.contentArea.getX(true) + this.contentArea.getW() - SCROLL_SIZE - 1);
+            this.setY(1 + this.contentArea.getY(true) + scrollData.position);
             this.setH(scrollData.scrollBarHeight);
             this.setW(SCROLL_SIZE);
             this.raisteTop();
