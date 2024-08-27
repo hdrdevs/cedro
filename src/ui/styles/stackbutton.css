@@ -31,6 +31,10 @@
     border-color: var(--palette-divider);
 }
 
+.WUIButton-stack-start-color-primary:hover span {
+    color: var(--palette-primary-text-light);
+}
+
 /****************************************************************************/
 /***********************************STACK-MIDDLE******************************/
 /****************************************************************************/
@@ -62,6 +66,10 @@
     color: var(--palette-primary-text-light);
     background-color: var(--palette-primary-light);
     border-color: var(--palette-divider);
+}
+
+.WUIButton-stack-middle-color-primary:hover span {
+    color: var(--palette-primary-text-light);
 }
 
 /**************************************************************************/
@@ -99,6 +107,10 @@
     border-color: var(--palette-divider);
 }
 
+.WUIButton-stack-end-color-primary:hover span {
+    color: var(--palette-primary-text-light);
+}
+
 /************************************************************************/
 /******************************STACK-START-ACTIVE************************/
 /************************************************************************/
@@ -127,10 +139,18 @@
     border-color: var(--palette-divider);
 }
 
+.WUIButton-stack-start-active-color-primary span {
+    color: var(--palette-primary-text-light);
+}
+
 .WUIButton-stack-start-active-color-primary:hover {
     color: var(--palette-primary-text-light);
     background-color: var(--palette-primary-light);
     border-color: var(--palette-divider);
+}
+
+.WUIButton-stack-start-active-color-primary:hover span {
+    color: var(--palette-primary-text-light);
 }
 
 /*************************************************************************/
@@ -161,10 +181,18 @@
     border-color: var(--palette-divider);
 }
 
+.WUIButton-stack-middle-active-color-primary span {
+    color: var(--palette-primary-text-light);
+}
+
 .WUIButton-stack-middle-active-color-primary:hover {
     color: var(--palette-primary-text-light);
     background-color: var(--palette-primary-light);
     border-color: var(--palette-divider);
+}
+
+.WUIButton-stack-middle-active-color-primary:hover span {
+    color: var(--palette-primary-text-light);
 }
 
 /**************************************************************************/
@@ -198,8 +226,16 @@
     border-color: var(--palette-divider);
 }
 
+.WUIButton-stack-end-active-color-primary span {
+    color: var(--palette-primary-text-light);
+}
+
 .WUIButton-stack-end-active-color-primary:hover {
     color: var(--palette-primary-text-light);
     background-color: var(--palette-primary-light);
     border-color: var(--palette-divider);
+}
+
+.WUIButton-stack-end-active-color-primary:hover span {
+    color: var(--palette-primary-text-light);
 }
