@@ -17,13 +17,14 @@ export class Theme implements ITheme {
 export const LightTheme = new Theme("light");
 export const DarkTheme = new Theme("dark");
 export const CedroDarkTheme = new Theme("cedro-dark");
+export const CedroLightTheme = new Theme("cedro");
 
 LightTheme.add("--palette-text-primary", "rgba(0, 0, 0, 0.87)")
     .add("--palette-text-secondary", "rgba(0, 0, 0, 0.6)")
     .add("--palette-text-disabled", "rgba(0, 0, 0, 0.38)")
     .add("--palette-background-default", "#ffffff")
     .add("--palette-background-paper", "#ffffff")
-    .add("--palette-background-light", "#ffffff")
+    .add("--palette-background-light", "#f5f5f5")
     .add("--palette-action-active", "rgba(0, 0, 0, 0.54)")
     .add("--palette-action-disabled", "rgba(0, 0, 0, 0.26)")
     .add("--palette-action-hover", "#f5f5f5")
@@ -39,7 +40,7 @@ LightTheme.add("--palette-text-primary", "rgba(0, 0, 0, 0.87)")
 
     .add("--palette-primary-main", "#90caf9")
     .add("--palette-primary-dark", "#42a5f5")
-    .add("--palette-primary-light", "#e3f2fd")
+    .add("--palette-primary-light", "#90caf9")
 
     .add("--palette-primary-text-main", "#2a3b49")
     .add("--palette-primary-text-dark", "#133048")
@@ -244,6 +245,83 @@ CedroDarkTheme.add("--palette-text-primary", "#d3d0c8")
     /*SUCCESS*/
 
     .add("--palette-success-main", "#599062")
+    .add("--palette-success-dark", "#81c784")
+    .add("--palette-success-light", "#388e3c")
+
+    .add("--palette-success-text-main", "#1e371f")
+    .add("--palette-success-text-dark", "#263b27")
+    .add("--palette-success-text-light", "#c3ddc5");
+
+CedroLightTheme.add("--palette-text-primary", "#4f3e2e")
+    .add("--palette-text-secondary", "rgba(0, 0, 0, 0.6)")
+    .add("--palette-text-disabled", "rgba(0, 0, 0, 0.38)")
+    .add("--palette-background-default", "#ffffff")
+    .add("--palette-background-paper", "#ffffff")
+    .add("--palette-background-light", "rgba(250, 243, 235, 0.5)")
+    .add("--palette-action-active", "rgba(0, 0, 0, 0.54)")
+    .add("--palette-action-disabled", "#ffe2ba")
+    .add("--palette-action-hover", "#f5f5f5")
+    .add("--palette-action-selected", "rgba(0, 0, 0, 0.08)")
+    .add("--palette-action-disabled-bg", "rgba(0, 0, 0, 0.12)")
+
+    .add("--palette-divider", "#ffe2ba")
+
+    .add("--palette-link", "#1d79ee")
+    .add("--palette-link-hover", "#3393f2")
+
+    /*PRIMARY*/
+
+    .add("--palette-primary-main", "#baf990")
+    .add("--palette-primary-dark", "#9bce79")
+    .add("--palette-primary-light", "#d1ffb2")
+
+    .add("--palette-primary-text-main", "#2a3b49")
+    .add("--palette-primary-text-dark", "#133048")
+    .add("--palette-primary-text-light", "#43474b")
+
+    /*SECONDARY*/
+
+    .add("--palette-secondary-main", "#ce93d8")
+    .add("--palette-secondary-dark", "#ab47bc")
+    .add("--palette-secondary-light", "#f3e5f5")
+
+    .add("--palette-secondary-text-main", "#3d2b40")
+    .add("--palette-secondary-text-dark", "#e6c8eb")
+    .add("--palette-secondary-text-light", "#484348")
+
+    /*ERROR*/
+
+    .add("--palette-error-main", "#f44336")
+    .add("--palette-error-dark", "#d32f2f")
+    .add("--palette-error-light", "#e57373")
+
+    .add("--palette-error-text-main", "#fbc7c3")
+    .add("--palette-error-text-dark", "#f1c1c1")
+    .add("--palette-error-text-light", "#432222")
+
+    /*WARNING*/
+
+    .add("--palette-warning-main", "#ffa726")
+    .add("--palette-warning-dark", "#ffb74d")
+    .add("--palette-warning-light", "#f57c00")
+
+    .add("--palette-warning-text-main", "#4b310b")
+    .add("--palette-warning-text-dark", "#4b3616")
+    .add("--palette-warning-text-light", "#482400")
+
+    /*INFO*/
+
+    .add("--palette-info-main", "#29b6f6")
+    .add("--palette-info-dark", "#4fc3f7")
+    .add("--palette-info-light", "#0288d1")
+
+    .add("--palette-info-text-main", "#0c3649")
+    .add("--palette-info-text-dark", "#173949")
+    .add("--palette-info-text-light", "#b3dbf1")
+
+    /*SUCCESS*/
+
+    .add("--palette-success-main", "#66bb6a")
     .add("--palette-success-dark", "#81c784")
     .add("--palette-success-light", "#388e3c")
 

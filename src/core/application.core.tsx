@@ -14,7 +14,13 @@ import Navigo from "navigo";
 import { Dialog } from "../ui/dialog";
 import { Label } from "../ui/label.ui";
 import { Seo } from "./seo";
-import { CedroDarkTheme, DarkTheme, LightTheme, ThemeManager } from "./themes.core";
+import {
+    CedroLightTheme,
+    CedroDarkTheme,
+    DarkTheme,
+    LightTheme,
+    ThemeManager,
+} from "./themes.core";
 import { Loading } from "../ui/loading.ui";
 import { OrientationTypes } from "../types/orientation.type";
 
@@ -60,6 +66,7 @@ class WApplication implements IApplication {
         this.theme.add(LightTheme);
         this.theme.add(DarkTheme);
         this.theme.add(CedroDarkTheme);
+        this.theme.add(CedroLightTheme);
 
         this.screen.onResize(() => {
             this.getRoot().resize();

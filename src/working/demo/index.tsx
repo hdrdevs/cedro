@@ -24,7 +24,7 @@ const ThemeMenu = () => {
         >
             <WIconButtonMenuItem id="btn-theme-light" icon="light_mode" label="Light" />
             <WIconButtonMenuItem id="btn-theme-dark" icon="dark_mode" label="Dark" />
-            <WIconButtonMenuItem id="btn-theme-cedro" icon="light_mode" label="Cedro Light" />
+            <WIconButtonMenuItem id="btn-theme-cedro" icon="light_mode" label="Cedro" />
             <WIconButtonMenuItem id="btn-theme-cedro-dark" icon="dark_mode" label="Cedro Dark" />
         </WIconButtonMenu>
     );
@@ -76,7 +76,7 @@ window.app = (() => {
             title="Ceddro Application Demo | Cedro"
             padding={0}
             orientation="vertical"
-            theme="dark"
+            theme="cedro"
             onResize={onRenderHandler}
             onLoad={onLoadHandler}
         >

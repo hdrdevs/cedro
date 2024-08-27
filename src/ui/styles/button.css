@@ -55,7 +55,7 @@
 
 .WUIButton-text-color-error:hover {
     color: var(--palette-text-secondary);
-    background-color: var(--palette-error-text-light);
+    background-color: var(--palette-error-light);
 }
 
 .WUIButton-text-color-error:hover span {
