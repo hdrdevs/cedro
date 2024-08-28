@@ -2,7 +2,7 @@ import { UID } from "../core/uid";
 import "./styles/image.css";
 import { normalizeWidget, WidgetProps } from "./widget.builder";
 import { Widget, WidgetTypes, connectWidgetCallback, getOnlyEventProps } from "./widget.ui";
-import { decode } from "html-entities";
+import { decode } from "../core/html.entities";
 
 export class Image extends Widget {
     imageContainer: Widget;

@@ -1,4 +1,4 @@
-import { OrientationTypes } from "src/types/orientation.type";
+import { OrientationTypes } from "../types/orientation.type";
 import "./styles/draggable.css";
 import { Widget, WidgetTypes } from "./widget.ui";
 

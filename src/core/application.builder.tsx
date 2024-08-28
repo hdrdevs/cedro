@@ -1,8 +1,7 @@
-//import { createWidget } from "src/ui/builder/widget.builder";
 import { Widget, WidgetAlignTypes } from "../ui";
 import { createWidget } from "../ui/widget.builder";
 import Application, { ApplicationProps } from "./application.core";
-import { decode } from "html-entities";
+import { decode } from "./html.entities";
 
 function getApplicationProps(content: any): ApplicationProps {
     let props: ApplicationProps = {
@@ -70,11 +69,26 @@ export function createApplication(content: any): Application {
                         const timestamp = new Date().getTime();
                         const isProduction = process.env.NODE_ENV === "production";
 
+                        /*
+                        //DEVELOPMENT
+
                         const pathDev = ".." + url + "?ts=" + timestamp;
 
                         const pathProduction = `../../assets${decode(
                             ietmRoute.getAttribute("href")
                         )}/index.js?ts=${timestamp}`;
+
+                        //FIN DEVELOPMENT
+*/
+                        //PUBLISH
+
+                        const pathDev = "../../../../src" + url + "?ts=" + timestamp;
+
+                        const pathProduction = `/assets${decode(
+                            ietmRoute.getAttribute("href")
+                        )}index.js?ts=${timestamp}`;
+
+                        //FIN PUBLISH
 
                         const path = isProduction ? pathProduction : pathDev;
 

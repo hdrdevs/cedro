@@ -3,3 +3,5 @@ package-lock.json
 .vscode/*
 dist
 dist/*
+lib
+lib/*

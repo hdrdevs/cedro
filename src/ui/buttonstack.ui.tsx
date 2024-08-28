@@ -1,4 +1,4 @@
-import { OrientationTypes } from "src/types/orientation.type";
+import { OrientationTypes } from "../types/orientation.type";
 import { IconButton } from "./IconButton.ui";
 import { ButonVariants, Button } from "./button.ui";
 import {

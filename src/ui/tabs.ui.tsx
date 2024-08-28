@@ -1,6 +1,6 @@
 import "./styles/tabs.css";
 
-import { OrientationTypes } from "src/types/orientation.type";
+import { OrientationTypes } from "../types/orientation.type";
 import { Widget, WidgetAlignTypes, WidgetTypes } from "./widget.ui";
 import { Toolbar } from "./toolbar.ui";
 import { Label } from "./label.ui";

@@ -1,5 +1,5 @@
 import "./styles/valuebar.css";
-import { OrientationTypes } from "src/types/orientation.type";
+import { OrientationTypes } from "../types/orientation.type";
 import { Widget, connectWidgetCallback, getOnlyEventProps } from "./widget.ui";
 import { Draggable } from "./draggable.ui";
 import { normalizeWidget, WidgetProps } from "./widget.builder";

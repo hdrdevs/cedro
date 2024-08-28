@@ -4,7 +4,7 @@ import { Widget, WidgetAlignTypes, WidgetTypes } from "./widget.ui";
 import { Scroll } from "./scroll.ui";
 import { normalizeWidget, WidgetEventProps, WidgetProps } from "./widget.builder";
 import { UID } from "../core/uid";
-import { decode } from "html-entities";
+import { decode } from "../core/html.entities";
 import { Button } from "./button.ui";
 import { IconButton } from "./IconButton.ui";
 import { ProgressBar } from "./progressbar.ui";

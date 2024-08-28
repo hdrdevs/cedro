@@ -4,7 +4,7 @@ import { addNewWidget } from "./widget.collection";
 import { createTextbox } from "./Textbox.ui";
 import { createButton } from "./button.ui";
 import { createLabel } from "./label.ui";
-import { OrientationTypes } from "src/types/orientation.type";
+import { OrientationTypes } from "../types/orientation.type";
 import { createContainer } from "./container.ui";
 import { createIconButton } from "./IconButton.ui";
 import { createImage } from "./image.ui";

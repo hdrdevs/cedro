@@ -101,7 +101,7 @@ window.app = (() => {
                                 icon="home"
                                 text="Home"
                                 onClick={() => {
-                                    app?.goTo("/working/demo/counter");
+                                    app?.goTo("/working/demo/counter/");
                                 }}
                             />
                             <WIconButton
@@ -109,7 +109,7 @@ window.app = (() => {
                                 icon="draw"
                                 text="Widget Gallery"
                                 onClick={() => {
-                                    app?.goTo("/working/demo/widget-gallery");
+                                    app?.goTo("/working/demo/widget-gallery/");
                                 }}
                             />
                         </WButtonStack>
@@ -121,20 +121,20 @@ window.app = (() => {
             </Widgets>
             <Routes hostId="main-container">
                 <Route src="/" />
-                <Route src="/working/demo/counter" />
-                <Route src="/working/demo/widget-gallery" />
-                <Route src="/working/demo/widget-gallery/buttons" />
-                <Route src="/working/demo/widget-gallery/icons" />
-                <Route src="/working/demo/widget-gallery/images" />
-                <Route src="/working/demo/widget-gallery/labels" />
-                <Route src="/working/demo/widget-gallery/textboxes" />
-                <Route src="/working/demo/widget-gallery/progressbar" />
-                <Route src="/working/demo/widget-gallery/tabs" />
-                <Route src="/working/demo/widget-gallery/containers" />
-                <Route src="/working/demo/widget-gallery/valuebars" />
-                <Route src="/working/demo/widget-gallery/dialogs" />
-                <Route src="/working/demo/widget-gallery/toolbars" />
-                <Route src="/working/demo/widget-gallery/datagrids" />
+                <Route src="/working/demo/counter/" />
+                <Route src="/working/demo/widget-gallery/" />
+                <Route src="/working/demo/widget-gallery/buttons/" />
+                <Route src="/working/demo/widget-gallery/icons/" />
+                <Route src="/working/demo/widget-gallery/images/" />
+                <Route src="/working/demo/widget-gallery/labels/" />
+                <Route src="/working/demo/widget-gallery/textboxes/" />
+                <Route src="/working/demo/widget-gallery/progressbar/" />
+                <Route src="/working/demo/widget-gallery/tabs/" />
+                <Route src="/working/demo/widget-gallery/containers/" />
+                <Route src="/working/demo/widget-gallery/valuebars/" />
+                <Route src="/working/demo/widget-gallery/dialogs/" />
+                <Route src="/working/demo/widget-gallery/toolbars/" />
+                <Route src="/working/demo/widget-gallery/datagrids/" />
             </Routes>
         </Application>
     );

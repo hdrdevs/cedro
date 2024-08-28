@@ -1,8 +1,8 @@
 import "./styles/toolbar.css";
-import { IWidget } from "src/interfaces/widget.interface";
+import { IWidget } from "../interfaces/widget.interface";
 import { Widget, WidgetAlignTypes, WidgetTypes } from "./widget.ui";
 import { IconButton } from "./IconButton.ui";
-import { OrientationTypes } from "src/types/orientation.type";
+import { OrientationTypes } from "../types/orientation.type";
 import { WidgetProps, createWidget, normalizeWidget } from "./widget.builder";
 import { UID } from "../core/uid";
 

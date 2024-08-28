@@ -1,4 +1,4 @@
-import WApplication from "src/core/application.core";
+import WApplication from "../core/application.core";
 import { IWidget, WUICallback } from "../interfaces/widget.interface";
 
 declare global {
