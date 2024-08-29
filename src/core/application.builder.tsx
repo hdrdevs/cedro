@@ -2,6 +2,7 @@ import { Widget, WidgetAlignTypes } from "../ui";
 import { createWidget } from "../ui/widget.builder";
 import Application, { ApplicationProps } from "./application.core";
 import { decode } from "./html.entities";
+import { getAdaptedUrl } from "./path.import.dev";
 
 function getApplicationProps(content: any): ApplicationProps {
     let props: ApplicationProps = {
@@ -66,32 +67,8 @@ export function createApplication(content: any): Application {
                 if (ietmRoute.getAttribute("w-route-path") && ietmRoute.getAttribute("href")) {
                     newApp.router.on(decode(ietmRoute.getAttribute("href")), () => {
                         const url = decode(ietmRoute.getAttribute("href"));
-                        const timestamp = new Date().getTime();
                         const isProduction = process.env.NODE_ENV === "production";
-
-                        /*
-                        //DEVELOPMENT
-
-                        const pathDev = ".." + url + "?ts=" + timestamp;
-
-                        const pathProduction = `../../assets${decode(
-                            ietmRoute.getAttribute("href")
-                        )}/index.js?ts=${timestamp}`;
-
-                        //FIN DEVELOPMENT
-*/
-                        //PUBLISH
-
-                        const pathDev = "../../../../src" + url + "?ts=" + timestamp;
-
-                        const pathProduction = `/assets${decode(
-                            ietmRoute.getAttribute("href")
-                        )}index.js?ts=${timestamp}`;
-
-                        //FIN PUBLISH
-
-                        const path = isProduction ? pathProduction : pathDev;
-
+                        const path = getAdaptedUrl(url);
                         import(/*@vite-ignore*/ path).then((module) => {
                             newApp.clearLoadedModule();
                             newApp.setLoadedModule(module.default);
