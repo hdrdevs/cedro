@@ -1,10 +1,25 @@
 {
     "name": "cedro",
-    "version": "0.1.26",
+    "description": "Javascript library to build user interfece based on widgets.",
+    "keywords": [
+        "javascript",
+        "typescript",
+        "ui",
+        "widgets",
+        "library",
+        "frontend",
+        "object-oriented",
+        "components",
+        "user-interface",
+        "cedro",
+        "web-development",
+        "ui-library",
+        "widget-based"
+    ],
+    "version": "0.1.27",
     "type": "module",
     "devDependencies": {
         "@types/node": "^20.4.4",
-        "rollup": "^4.21.1",
         "typescript": "^5.0.2",
         "@fontsource/roboto": "^5.0.5",
         "@oothkoo/seo-js": "1.0.5",
