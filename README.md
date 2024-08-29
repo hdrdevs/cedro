@@ -1,12 +1,10 @@
-<p align="center">
+<!-- markdownlint-disable-next-line -->
+<div align="center">
+  <img src="https://raw.githubusercontent.com/hdrdevs/cedro/main/public/cedro-logo.svg" alt="Cedro" width="170">
+  <h1>cedro</h1>
+</div>
 
-<a href="https://github.com/hdrdevs/cedro" rel="noopener" target="_blank"><img width="150" height="133" src="https://raw.githubusercontent.com/hdrdevs/cedro/main/public/cedro-logo.svg" alt="Cedro logo"></a>
-
-</p>
-
-<h1 align="center">cedro</h1>
-
-Javascript library to build user interfece based on widgets.
+<h6>Javascript library to build user interfece based on widgets.</h6>
 
 ## Getting Started
 
