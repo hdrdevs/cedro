@@ -4,7 +4,7 @@
   <h1>cedro</h1>
 </div>
 
-<h6>Javascript library to build user interfece based on widgets.</h6>
+Javascript library to build user interfece based on widgets.
 
 ## Getting Started
 
