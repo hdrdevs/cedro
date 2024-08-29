@@ -99,6 +99,7 @@ export function createApplication(content: any): Application {
                     });
                 }
             });
+            newApp.router.on("/", () => {});
             newApp.router.resolve();
         }
     });
