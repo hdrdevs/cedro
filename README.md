@@ -1,8 +1,8 @@
-<!-- markdownlint-disable-next-line -->
-<div align="center">
+<p align="center">
   <img src="https://raw.githubusercontent.com/hdrdevs/cedro/main/public/cedro-logo.svg" alt="Cedro" width="170">
-  <h1>cedro</h1>
-</div>
+</p>
+
+<h1 align="center">cedro</h1>
 
 Javascript library to build user interfece based on widgets.
 
