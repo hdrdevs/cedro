@@ -6,6 +6,18 @@
 
 Javascript library to build user interfece based on widgets.
 
+<div align="center">
+
+[![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/hdrdevs/cedro/blob/HEAD/LICENSE)
+[![npm latest package](https://img.shields.io/npm/v/cedro)](https://www.npmjs.com/package/cedro)
+[![npm downloads](https://img.shields.io/npm/dm/cedro)](https://www.npmjs.com/package/cedro)
+
+</div>
+
+## Documentation
+
+Visit [https://cedro.hdrdevs.com.ar/docs/intro](https://cedro.hdrdevs.com.ar/docs/intro) to view the full documentation.
+
 ## Getting Started
 
 Install Vite project template from command line
@@ -18,4 +30,7 @@ npm install
 npm run dev
 ```
 
-⚠️ **Warning:** Don't use this library. "cedro" is on development.
+## License
+
+This project is licensed under the terms of the
+[MIT license](/LICENSE).
