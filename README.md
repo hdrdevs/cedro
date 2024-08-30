@@ -16,7 +16,7 @@ Javascript library to build user interfece based on widgets.
 
 ## Documentation
 
-Visit [https://cedro.hdrdevs.com.ar/docs/intro](https://cedro.hdrdevs.com.ar/docs/intro) to view the full documentation.
+Visit [https://cedro.hdrdevs.com.ar/docs/intro](https://cedro.hdrdevs.com.ar) to view the full documentation.
 
 ## Getting Started
 
