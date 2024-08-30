@@ -1,11 +1,16 @@
 import "./style.css";
-import { createApplication } from "../../core/application.builder";
-import { Application, Routes, Route, Widgets } from "../../core/application.core";
-import { WContainer, WSpacer } from "../../ui/container.ui";
-import { WImage } from "../../ui/image.ui";
-import { WIconButtonMenu, WIconButtonMenuItem } from "../../ui/iconButtonMenu.ui";
-import { ButtonStack, WButtonStack } from "../../ui/buttonstack.ui";
-import { WIconButton } from "../../ui/IconButton.ui";
+import { createApplication, Application, Routes, Route, Widgets } from "../../core";
+import {
+    WContainer,
+    WSpacer,
+    WImage,
+    WIconButtonMenu,
+    WIconButtonMenuItem,
+    ButtonStack,
+    WButtonStack,
+    WIconButton,
+} from "../../ui";
+
 import { config } from "./config";
 
 const ThemeMenu = () => {

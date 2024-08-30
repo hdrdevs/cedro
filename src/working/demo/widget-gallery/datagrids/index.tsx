@@ -1,9 +1,7 @@
 import "./style.css";
 import { createWidget } from "../../../..";
 import { Layout } from "../Layout";
-import { WContainer } from "../../../../ui/container.ui";
-import { WLabel } from "../../../../ui/label.ui";
-import { WDataGrid, WDataGridColumn } from "../../../../ui/datagrid.ui";
+import { WContainer, WLabel, WDataGrid, WDataGridColumn } from "../../../../ui";
 
 export default (() => {
     const db = [

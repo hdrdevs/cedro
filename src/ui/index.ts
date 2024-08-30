@@ -1,62 +1,93 @@
 import { WidgetAlignTypes, WidgetTypes, Widget } from "./widget.ui";
-import { Textbox } from "./Textbox.ui";
-import { Select } from "./select.ui";
-import { Accordion } from "./accordion.ui";
-import { Button } from "./button.ui";
-import { ButtonColor } from "./buttonColor.ui";
-import { ButtonMenu } from "./buttonmenu.ui";
-import { ButtonStack } from "./buttonstack.ui";
-import { IconButton } from "./IconButton.ui";
-import { Checkbox } from "./checkbox.ui";
-import { Container, Spacer, ContainerParams } from "./container.ui";
-import { Dialog } from "./dialog";
-import { HPanel } from "./hpanel.ui";
-import { Icon } from "./Icon.ui";
-import { Image } from "./image.ui";
-import { Label } from "./label.ui";
+import { Textbox, WTextbox } from "./Textbox.ui";
+import { Select, WSelect, WSelectItem } from "./select.ui";
+import { Accordion, WAccordion, WAccordionItem } from "./accordion.ui";
+import { Button, WButton } from "./button.ui";
+import { ButtonColor, WButtonColor } from "./buttonColor.ui";
+import { ButtonMenu, WButtonMenu, WButtonMenuItem } from "./buttonmenu.ui";
+import { ButtonStack, WButtonStack } from "./buttonstack.ui";
+import { IconButton, WIconButton } from "./IconButton.ui";
+import { Checkbox, WCheckbox } from "./checkbox.ui";
+import { Container, WContainer, Spacer, WSpacer, ContainerParams } from "./container.ui";
+import { Dialog, WDialog } from "./dialog";
+import { HPanel, WHPanel } from "./hpanel.ui";
+import { Icon, WIcon } from "./Icon.ui";
+import { Image, WImage } from "./image.ui";
+import { Label, WLabel } from "./label.ui";
 import { Menu } from "./menu.ui";
-import { ProgressBar } from "./progressbar.ui";
-import { Switch } from "./switch.ui";
-import { Tabs } from "./tabs.ui";
-import { TextArea } from "./textarea.ui";
-import { Toolbar } from "./toolbar.ui";
-import { DataGrid } from "./datagrid.ui";
-import { RadioButton } from "./radiobutton.ui";
-import { ValueBar } from "./valuebar.ui";
-import { VPanel } from "./vpanel.ui";
+import { ProgressBar, WProgressBar } from "./progressbar.ui";
+import { Switch, WSwitch } from "./switch.ui";
+import { Tabs, WTab } from "./tabs.ui";
+import { TextArea, WTextarea } from "./textarea.ui";
+import { Toolbar, WToolbar } from "./toolbar.ui";
+import { DataGrid, WDataGrid, WDataGridColumn } from "./datagrid.ui";
+import { RadioButton, WRadioButton } from "./radiobutton.ui";
+import { ValueBar, WValueBar } from "./valuebar.ui";
+import { VPanel, WVPanel } from "./vpanel.ui";
 import { createWidget } from "./widget.builder";
-import { IconButtonMenu } from "./iconButtonMenu.ui";
+import { IconButtonMenu, WIconButtonMenu, WIconButtonMenuItem } from "./iconButtonMenu.ui";
 
 export type { ContainerParams };
 
 export {
     Textbox,
+    WTextbox,
     Accordion,
+    WAccordion,
+    WAccordionItem,
     Button,
+    WButton,
     ButtonColor,
+    WButtonColor,
     ButtonMenu,
+    WButtonMenu,
+    WButtonMenuItem,
     ButtonStack,
+    WButtonStack,
     IconButton,
+    WIconButton,
     IconButtonMenu,
+    WIconButtonMenu,
+    WIconButtonMenuItem,
     Checkbox,
+    WCheckbox,
     Container,
+    WContainer,
+    WSpacer,
     Dialog,
+    WDialog,
     HPanel,
+    WHPanel,
     Icon,
+    WIcon,
     Image,
+    WImage,
     Label,
+    WLabel,
     Menu,
     ProgressBar,
+    WProgressBar,
     RadioButton,
+    WRadioButton,
     Select,
+    WSelect,
+    WSelectItem,
     Spacer,
     Switch,
+    WSwitch,
     Tabs,
+    WTab,
     TextArea,
+    WTextarea,
     Toolbar,
+    WToolbar,
     ValueBar,
+    WValueBar,
     VPanel,
+    WVPanel,
     DataGrid,
+    WDataGrid,
+    WDataGridColumn,
     Widget,
     WidgetAlignTypes,
     WidgetTypes,
