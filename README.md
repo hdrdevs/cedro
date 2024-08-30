@@ -14,6 +14,14 @@ Javascript library to build user interfece based on widgets.
 
 </div>
 
+## Cedro Demo
+
+We have created a live demo of **Cedro** on CodeSandbox for you to explore its capabilities. This template provides a hands-on experience, allowing you to see Cedro in action and experiment with it in real-time.
+
+[Check out the Cedro Demo on CodeSandbox](https://pyskv2-5173.csb.app)
+
+Feel free to [fork the template](https://codesandbox.io/p/github/hdrdevs/vite-cedro/main?workspaceId=3d60b70f-10da-4eb2-8885-f29769de02c4) and customize it to suit your needs. This is a great way to start learning how to build complex user interfaces with Cedro.
+
 ## Documentation
 
 Visit [https://cedro.hdrdevs.com.ar](https://cedro.hdrdevs.com.ar) to view the full documentation.
