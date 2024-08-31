@@ -1,8 +1,7 @@
 import { OrientationTypes } from "../types/orientation.type";
 import { IconButton } from "./IconButton.ui";
-import { ButonVariants, Button } from "./button.ui";
+import { ButonVariants, Button, createButton } from "./button.ui";
 import { connectWidgetCallback, getOnlyEventProps, Widget } from "./widget.ui";
-import { createWidget } from "./widget.builder";
 import { UID } from "../core/uid";
 import { WidgetAlignTypes, WidgetProps, WidgetTypes } from "./widget.types";
 import { normalizeWidget } from "./widget.normalize";
@@ -144,7 +143,7 @@ export function createButtonStack(
 
     content.childNodes.forEach((item: HTMLElement, _index: number) => {
         if (item.getAttribute("w-button") || item.getAttribute("w-icon-button")) {
-            const widget = createWidget(item) as Button;
+            const widget = createButton(item.id, item) as Button;
 
             if (widget !== null) {
                 newStack.addButton(widget);
