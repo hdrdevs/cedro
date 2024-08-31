@@ -16,7 +16,7 @@
         "ui-library",
         "widget-based"
     ],
-    "version": "0.1.28",
+    "version": "0.1.30",
     "type": "module",
     "devDependencies": {
         "@types/node": "^20.4.4",

@@ -1,4 +1,4 @@
-import { WidgetAlignTypes, WidgetTypes } from "../ui/widget.ui";
+import { WidgetAlignTypes, WidgetTypes } from "../ui/widget.types";
 import { Vector2D } from "../types/vector2d.type";
 
 export type WUIEvent =
