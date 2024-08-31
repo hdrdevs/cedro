@@ -1,9 +1,11 @@
 import "./styles/accordion.css";
 import { IconButton } from "./IconButton.ui";
 import { Label } from "./label.ui";
-import { Widget, WidgetTypes } from "./widget.ui";
-import { createWidget, normalizeWidget, WidgetProps } from "./widget.builder";
+import { Widget } from "./widget.ui";
+import { createWidget } from "./widget.builder";
 import { UID } from "../core/uid";
+import { WidgetProps, WidgetTypes } from "./widget.types";
+import { normalizeWidget } from "./widget.normalize";
 
 const ACCORDION_HEADER_HEIGHT = 40;
 

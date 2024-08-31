@@ -1,10 +1,9 @@
 import { UID } from "../core/uid";
-import { Widget, WidgetAlignTypes, WidgetTypes } from "./widget.ui";
+import { Widget } from "./widget.ui";
 import { addNewWidget } from "./widget.collection";
 import { createTextbox } from "./Textbox.ui";
 import { createButton } from "./button.ui";
 import { createLabel } from "./label.ui";
-import { OrientationTypes } from "../types/orientation.type";
 import { createContainer } from "./container.ui";
 import { createIconButton } from "./IconButton.ui";
 import { createImage } from "./image.ui";
@@ -27,29 +26,7 @@ import { createTextarea } from "./textarea.ui";
 import { createSelect } from "./select.ui";
 import { createDialog, Dialog } from "./dialog";
 import { createDataGrid, DataGrid } from "./datagrid.ui";
-
-export type WidgetEventProps = {
-    onClick?: (args: any) => {} | void;
-    onResize?: (args: any) => {} | void;
-    onMouseDown?: (args: any) => {} | void;
-    onMouseUp?: (args: any) => {} | void;
-    onMouseMove?: (args: any) => {} | void;
-    onMouseOut?: (args: any) => {} | void;
-    onMouseLeave?: (args: any) => {} | void;
-    onWheel?: (args: any) => {} | void;
-    onDrag?: (args: any) => {} | void;
-    onRender?: (args: any) => {} | void;
-};
-
-export type WidgetProps = {
-    id?: string | null;
-    type?: WidgetTypes | null;
-    padding?: number | null;
-    classNames?: string | null;
-    fixedSize?: number | null;
-    orientation?: OrientationTypes | null;
-    hidden?: boolean | null;
-} & WidgetEventProps;
+import { WidgetAlignTypes, WidgetProps, WidgetTypes } from "./widget.types";
 
 export function createWidget(
     content: any,
@@ -212,32 +189,4 @@ export function createWidget(
     }
 
     return null;
-}
-
-export function normalizeWidget(widget: any, props: WidgetProps) {
-    if (props.fixedSize !== undefined) {
-        widget.setAttribute("w-fixed-size", props.fixedSize);
-    }
-
-    if (props.padding !== undefined) {
-        widget.setAttribute("w-padding", props.padding);
-    }
-
-    if (props.type !== undefined) {
-        widget.setAttribute("w-type", props.type);
-    }
-
-    if (props.hidden !== undefined) {
-        widget.setAttribute("w-hidden", props.hidden);
-    }
-
-    if (props.classNames !== undefined) {
-        widget.setAttribute("w-classes", props.classNames);
-    }
-
-    if (props.orientation !== undefined) {
-        widget.setAttribute("w-orientation", props.orientation);
-    }
-
-    return widget;
 }

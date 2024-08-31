@@ -1,6 +1,7 @@
 import { UID } from "../core/uid";
 import "./styles/textarea.css";
-import { normalizeWidget, WidgetProps } from "./widget.builder";
+import { normalizeWidget } from "./widget.normalize";
+import { WidgetProps } from "./widget.types";
 import { connectWidgetCallback, getOnlyEventProps, Widget } from "./widget.ui";
 
 export class TextArea extends Widget {

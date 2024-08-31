@@ -1,10 +1,12 @@
 import "./styles/toolbar.css";
 import { IWidget } from "../interfaces/widget.interface";
-import { Widget, WidgetAlignTypes, WidgetTypes } from "./widget.ui";
+import { Widget } from "./widget.ui";
 import { IconButton } from "./IconButton.ui";
 import { OrientationTypes } from "../types/orientation.type";
-import { WidgetProps, createWidget, normalizeWidget } from "./widget.builder";
+import { createWidget } from "./widget.builder";
 import { UID } from "../core/uid";
+import { WidgetAlignTypes, WidgetProps, WidgetTypes } from "./widget.types";
+import { normalizeWidget } from "./widget.normalize";
 
 export type ToolbarVariants = "contained" | "outlined";
 

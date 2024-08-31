@@ -1,19 +1,8 @@
 import { UID } from "../core/uid";
 import { IWidget, WUIEvent, WUICallback } from "../interfaces/widget.interface";
 import { Vector2D } from "../types/vector2d.type";
-import { WidgetEventProps, WidgetProps } from "./widget.builder";
+import { WidgetEventProps, WidgetProps, WidgetAlignTypes, WidgetTypes } from "./widget.types";
 import { addNewWidget, connectWidget } from "./widget.collection";
-
-export enum WidgetTypes {
-    FILL = 1,
-    CUSTOM = 2,
-    FREE = 3,
-}
-
-export enum WidgetAlignTypes {
-    HORIZONTAL = 1,
-    VERTICAL = 2,
-}
 
 export class Widget implements IWidget {
     readonly id: string;

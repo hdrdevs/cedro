@@ -1,4 +1,4 @@
-import { WidgetAlignTypes, WidgetTypes, Widget } from "./widget.ui";
+import { Widget } from "./widget.ui";
 import { Textbox, WTextbox } from "./Textbox.ui";
 import { Select, WSelect, WSelectItem } from "./select.ui";
 import { Accordion, WAccordion, WAccordionItem } from "./accordion.ui";
@@ -26,6 +26,7 @@ import { ValueBar, WValueBar } from "./valuebar.ui";
 import { VPanel, WVPanel } from "./vpanel.ui";
 import { createWidget } from "./widget.builder";
 import { IconButtonMenu, WIconButtonMenu, WIconButtonMenuItem } from "./iconButtonMenu.ui";
+import { WidgetAlignTypes, WidgetTypes } from "./widget.types";
 
 export type { ContainerParams };
 

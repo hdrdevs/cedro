@@ -1,13 +1,15 @@
 import "./styles/tabs.css";
 
 import { OrientationTypes } from "../types/orientation.type";
-import { Widget, WidgetAlignTypes, WidgetTypes } from "./widget.ui";
+import { Widget } from "./widget.ui";
 import { Toolbar } from "./toolbar.ui";
 import { Label } from "./label.ui";
 import { Icon } from "./Icon.ui";
 import { Scroll } from "./scroll.ui";
-import { WidgetProps, createWidget, normalizeWidget } from "./widget.builder";
+import { createWidget } from "./widget.builder";
 import { UID } from "../core/uid";
+import { WidgetAlignTypes, WidgetProps, WidgetTypes } from "./widget.types";
+import { normalizeWidget } from "./widget.normalize";
 
 const TAB_HEADER_SIZE = 40;
 

@@ -1,15 +1,11 @@
 import { OrientationTypes } from "../types/orientation.type";
 import { IconButton } from "./IconButton.ui";
 import { ButonVariants, Button } from "./button.ui";
-import {
-    connectWidgetCallback,
-    getOnlyEventProps,
-    Widget,
-    WidgetAlignTypes,
-    WidgetTypes,
-} from "./widget.ui";
-import { createWidget, normalizeWidget, WidgetProps } from "./widget.builder";
+import { connectWidgetCallback, getOnlyEventProps, Widget } from "./widget.ui";
+import { createWidget } from "./widget.builder";
 import { UID } from "../core/uid";
+import { WidgetAlignTypes, WidgetProps, WidgetTypes } from "./widget.types";
+import { normalizeWidget } from "./widget.normalize";
 
 export class ButtonStack extends Widget {
     orientation: OrientationTypes;

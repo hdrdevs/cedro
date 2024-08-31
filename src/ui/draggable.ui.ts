@@ -1,6 +1,7 @@
 import { OrientationTypes } from "../types/orientation.type";
 import "./styles/draggable.css";
-import { Widget, WidgetTypes } from "./widget.ui";
+import { WidgetTypes } from "./widget.types";
+import { Widget } from "./widget.ui";
 
 export type DragOrientation = OrientationTypes | "both";
 

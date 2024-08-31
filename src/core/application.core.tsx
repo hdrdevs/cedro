@@ -6,7 +6,7 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import "@fontsource/roboto/900.css";
 import "material-icons/iconfont/material-icons.css";
-import { Widget, WidgetAlignTypes, WidgetTypes } from "../ui/widget.ui";
+import { Widget } from "../ui/widget.ui";
 import { Screen } from "./screeen.core";
 import { IApplication, IScreenSize } from "../interfaces/application.interface";
 import { IWidget, WUICallback, WUIEvent } from "../interfaces/widget.interface";
@@ -23,9 +23,16 @@ import {
 } from "./themes.core";
 import { Loading } from "../ui/loading.ui";
 import { OrientationTypes } from "../types/orientation.type";
+import { WidgetAlignTypes, WidgetTypes } from "../ui/widget.types";
 
 declare global {
     var appConnections: Array<WUICallback>;
+
+    interface Window {
+        app: WApplication | undefined;
+    }
+
+    var app: WApplication | undefined;
 }
 
 class WApplication implements IApplication {

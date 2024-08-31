@@ -1,7 +1,8 @@
 import { OrientationTypes } from "../types/orientation.type";
 import "./styles/scroll.css";
-import { Widget, WidgetTypes } from "./widget.ui";
+import { Widget } from "./widget.ui";
 import { Draggable } from "./draggable.ui";
+import { WidgetTypes } from "./widget.types";
 
 const SCROLL_SIZE = 10;
 

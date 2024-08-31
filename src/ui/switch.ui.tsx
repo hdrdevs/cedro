@@ -1,6 +1,7 @@
 import { UID } from "../core/uid";
 import { ToggleButton } from "./toggle.ui";
-import { normalizeWidget, WidgetProps } from "./widget.builder";
+import { normalizeWidget } from "./widget.normalize";
+import { WidgetProps } from "./widget.types";
 import { Widget, connectWidgetCallback, getOnlyEventProps } from "./widget.ui";
 export class Switch extends ToggleButton {
     constructor(id: string, text: string = "", parent: Widget | null = null) {

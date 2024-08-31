@@ -2,7 +2,8 @@ import { UID } from "../core/uid";
 import { SelectItem } from "../types/select.item.type";
 import { Button, wButtonProps } from "./button.ui";
 import { Menu } from "./menu.ui";
-import { normalizeWidget, WidgetProps } from "./widget.builder";
+import { normalizeWidget } from "./widget.normalize";
+import { WidgetProps } from "./widget.types";
 import { Widget } from "./widget.ui";
 
 export class ButtonMenu extends Button {

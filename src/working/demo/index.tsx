@@ -63,6 +63,9 @@ window.app = (() => {
         }
 
         const route = router.getCurrentLocation().url;
+        const routeData = router.getCurrentLocation().params;
+
+        console.log(routeData);
 
         if (route.indexOf("working/demo/widget-gallery") > -1) {
             stack.setActive("btn-widget-gallery");
@@ -70,7 +73,7 @@ window.app = (() => {
             stack.setActive("btn-home");
         } else {
             stack.setActive("btn-home");
-            app?.goTo("/working/demo/counter");
+            app?.goTo("/working/demo/counter?m=n&k=z");
         }
 
         onRenderHandler();

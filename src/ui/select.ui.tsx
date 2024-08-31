@@ -3,8 +3,9 @@ import { IconButton } from "./IconButton.ui";
 import { Menu } from "./menu.ui";
 import { Widget } from "./widget.ui";
 import { SelectItem } from "../types/select.item.type";
-import { normalizeWidget, WidgetProps } from "./widget.builder";
 import { UID } from "../core/uid";
+import { WidgetProps } from "./widget.types";
+import { normalizeWidget } from "./widget.normalize";
 
 export class Select extends Widget {
     menu: Menu;

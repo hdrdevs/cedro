@@ -1,7 +1,8 @@
 import "./styles/menu.css";
 import { IWidget } from "../interfaces/widget.interface";
 import { IconButton } from "./IconButton.ui";
-import { Widget, WidgetAlignTypes, WidgetTypes } from "./widget.ui";
+import { Widget } from "./widget.ui";
+import { WidgetAlignTypes, WidgetTypes } from "./widget.types";
 
 const MENU_OPTION_HEIGHT = 40;
 

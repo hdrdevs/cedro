@@ -1,8 +1,9 @@
 import "./styles/label.css";
-import { normalizeWidget, WidgetProps } from "./widget.builder";
 import { Colors } from "./colors.ui";
 import { Widget, connectWidgetCallback, getOnlyEventProps } from "./widget.ui";
 import { UID } from "../core/uid";
+import { WidgetProps } from "./widget.types";
+import { normalizeWidget } from "./widget.normalize";
 
 export type LabelVariants = "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span";
 

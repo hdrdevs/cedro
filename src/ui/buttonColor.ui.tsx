@@ -1,8 +1,8 @@
 import "./styles/buttoncolor.css";
 import { Button, wButtonProps } from "./button.ui";
 import { connectWidgetCallback, getOnlyEventProps, Widget } from "./widget.ui";
-import { normalizeWidget } from "./widget.builder";
 import { UID } from "../core/uid";
+import { normalizeWidget } from "./widget.normalize";
 
 export class ButtonColor extends Button {
     inputColor: Widget;

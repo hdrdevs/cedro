@@ -4,8 +4,10 @@ import { Button } from "./button.ui";
 import { Spacer } from "./container.ui";
 import { Label } from "./label.ui";
 import "./styles/dialog.css";
-import { createWidget, normalizeWidget, WidgetProps } from "./widget.builder";
-import { Widget, WidgetAlignTypes, WidgetTypes } from "./widget.ui";
+import { createWidget } from "./widget.builder";
+import { normalizeWidget } from "./widget.normalize";
+import { WidgetAlignTypes, WidgetProps, WidgetTypes } from "./widget.types";
+import { Widget } from "./widget.ui";
 
 const TITLE_BAR_HEIGHT = 40;
 const BUTTON_BAR_HEIGHT = 50;

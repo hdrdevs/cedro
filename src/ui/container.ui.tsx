@@ -1,15 +1,11 @@
 import "./styles/container.css";
 import { OrientationTypes } from "../types/orientation.type";
-import {
-    connectWidgetCallback,
-    getOnlyEventProps,
-    Widget,
-    WidgetAlignTypes,
-    WidgetTypes,
-} from "./widget.ui";
+import { connectWidgetCallback, getOnlyEventProps, Widget } from "./widget.ui";
 import { UID } from "../core/uid";
-import { WidgetProps, createWidget, normalizeWidget } from "./widget.builder";
+import { createWidget } from "./widget.builder";
 import { Scroll } from "./scroll.ui";
+import { WidgetAlignTypes, WidgetProps, WidgetTypes } from "./widget.types";
+import { normalizeWidget } from "./widget.normalize";
 
 export type ContainerVariants = "plain" | "contained" | "outlined";
 

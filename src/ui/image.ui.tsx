@@ -1,8 +1,9 @@
 import { UID } from "../core/uid";
 import "./styles/image.css";
-import { normalizeWidget, WidgetProps } from "./widget.builder";
-import { Widget, WidgetTypes, connectWidgetCallback, getOnlyEventProps } from "./widget.ui";
+import { Widget, connectWidgetCallback, getOnlyEventProps } from "./widget.ui";
 import { decode } from "../core/html.entities";
+import { WidgetProps, WidgetTypes } from "./widget.types";
+import { normalizeWidget } from "./widget.normalize";
 
 export class Image extends Widget {
     imageContainer: Widget;

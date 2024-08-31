@@ -2,9 +2,10 @@ import "./styles/button.css";
 import "./styles/stackbutton.css";
 import "./styles/vstackbutton.css";
 import { Colors } from "./colors.ui";
-import { Widget, WidgetTypes, connectWidgetCallback, getOnlyEventProps } from "./widget.ui";
-import { normalizeWidget, WidgetProps } from "./widget.builder";
+import { Widget, connectWidgetCallback, getOnlyEventProps } from "./widget.ui";
 import { UID } from "../core/uid";
+import { WidgetProps, WidgetTypes } from "./widget.types";
+import { normalizeWidget } from "./widget.normalize";
 
 export type ButonVariants =
     | "contained"

@@ -1,8 +1,9 @@
 import "./styles/icon.css";
 import { Colors } from "./colors.ui";
-import { normalizeWidget, WidgetProps } from "./widget.builder";
 import { connectWidgetCallback, getOnlyEventProps, Widget } from "./widget.ui";
 import { UID } from "../core/uid";
+import { WidgetProps } from "./widget.types";
+import { normalizeWidget } from "./widget.normalize";
 
 export type IconVariants = "Filled" | "Outlined" | "Round" | "Sharp" | "Two Tone";
 export type IconSizes = "small" | "medium" | "large" | "xlarge";

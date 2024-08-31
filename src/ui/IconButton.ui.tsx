@@ -1,16 +1,11 @@
 import "./styles/button.css";
-import {
-    Widget,
-    WidgetAlignTypes,
-    WidgetTypes,
-    connectWidgetCallback,
-    getOnlyEventProps,
-} from "./widget.ui";
+import { Widget, connectWidgetCallback, getOnlyEventProps } from "./widget.ui";
 import { Button, wButtonProps } from "./button.ui";
 import { Icon } from "./Icon.ui";
 import { Label } from "./label.ui";
-import { normalizeWidget } from "./widget.builder";
 import { UID } from "../core/uid";
+import { WidgetAlignTypes, WidgetTypes } from "./widget.types";
+import { normalizeWidget } from "./widget.normalize";
 
 export class IconButton extends Button {
     icon: Icon;

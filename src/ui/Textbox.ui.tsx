@@ -1,7 +1,8 @@
-import { normalizeWidget, WidgetProps } from "./widget.builder";
 import "./styles/textbox.css";
-import { Widget, WidgetTypes, connectWidgetCallback, getOnlyEventProps } from "./widget.ui";
+import { Widget, connectWidgetCallback, getOnlyEventProps } from "./widget.ui";
 import { UID } from "../core/uid";
+import { WidgetProps, WidgetTypes } from "./widget.types";
+import { normalizeWidget } from "./widget.normalize";
 
 export type InputTypes =
     | "text"

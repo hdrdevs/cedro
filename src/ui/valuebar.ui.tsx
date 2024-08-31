@@ -2,8 +2,9 @@ import "./styles/valuebar.css";
 import { OrientationTypes } from "../types/orientation.type";
 import { Widget, connectWidgetCallback, getOnlyEventProps } from "./widget.ui";
 import { Draggable } from "./draggable.ui";
-import { normalizeWidget, WidgetProps } from "./widget.builder";
 import { UID } from "../core/uid";
+import { WidgetProps } from "./widget.types";
+import { normalizeWidget } from "./widget.normalize";
 
 export class ValueBar extends Widget {
     orientation: OrientationTypes;

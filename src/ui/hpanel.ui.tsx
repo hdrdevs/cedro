@@ -1,14 +1,10 @@
 import { UID } from "../core/uid";
 import { Draggable } from "./draggable.ui";
 import "./styles/hpanel.css";
-import { WidgetProps, createWidget, normalizeWidget } from "./widget.builder";
-import {
-    connectWidgetCallback,
-    getOnlyEventProps,
-    Widget,
-    WidgetAlignTypes,
-    WidgetTypes,
-} from "./widget.ui";
+import { createWidget } from "./widget.builder";
+import { normalizeWidget } from "./widget.normalize";
+import { WidgetAlignTypes, WidgetProps, WidgetTypes } from "./widget.types";
+import { connectWidgetCallback, getOnlyEventProps, Widget } from "./widget.ui";
 
 const HPANEL_HANDLER_SIZE = 4;
 

@@ -1,13 +1,9 @@
 import { Draggable } from "./draggable.ui";
 import "./styles/vpanel.css";
-import { WidgetProps, createWidget, normalizeWidget } from "./widget.builder";
-import {
-    connectWidgetCallback,
-    getOnlyEventProps,
-    Widget,
-    WidgetAlignTypes,
-    WidgetTypes,
-} from "./widget.ui";
+import { createWidget } from "./widget.builder";
+import { normalizeWidget } from "./widget.normalize";
+import { WidgetAlignTypes, WidgetProps, WidgetTypes } from "./widget.types";
+import { connectWidgetCallback, getOnlyEventProps, Widget } from "./widget.ui";
 
 const VPANEL_HANDLER_SIZE = 4;
 

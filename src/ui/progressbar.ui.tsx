@@ -1,8 +1,9 @@
 import { UID } from "../core/uid";
 import { Label } from "./label.ui";
 import "./styles/progressbar.css";
-import { normalizeWidget, WidgetProps } from "./widget.builder";
-import { Widget, WidgetTypes, connectWidgetCallback, getOnlyEventProps } from "./widget.ui";
+import { normalizeWidget } from "./widget.normalize";
+import { WidgetProps, WidgetTypes } from "./widget.types";
+import { Widget, connectWidgetCallback, getOnlyEventProps } from "./widget.ui";
 
 const PROGRESS_BAR_HEIGHT = 40;
 
