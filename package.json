@@ -16,25 +16,24 @@
         "ui-library",
         "widget-based"
     ],
-    "version": "0.1.30",
+    "version": "0.1.31",
     "type": "module",
     "devDependencies": {
-        "@types/node": "^20.4.4",
-        "typescript": "^5.0.2",
         "@fontsource/roboto": "^5.0.5",
         "@oothkoo/seo-js": "1.0.5",
         "@types/color": "3.0.3",
+        "@types/node": "^20.4.4",
         "@types/react": "18.2.17",
         "color": "4.2.3",
         "glob": "^11.0.0",
         "material-icons": "1.13.12",
         "navigo": "8.11.1",
-        "vite": "^5.0.8"
+        "typescript": "^5.0.2",
+        "vite": "^7.3.1"
     },
     "scripts": {
         "working": "vite",
         "working-build": "tsc && vite build",
         "working-preview": "vite preview"
-    },
-    "dependencies": {}
+    }
 }
