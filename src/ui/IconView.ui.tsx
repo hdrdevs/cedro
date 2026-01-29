@@ -4,41 +4,20 @@ import { connectWidgetCallback, getOnlyEventProps, Widget } from "./widget.ui";
 import { UID } from "../core/uid";
 import { WidgetProps } from "./widget.types";
 import { normalizeWidget } from "./widget.normalize";
+import { Icon, iconPixelSizesMap, IconSizes, iconSizesMap, IconVariants } from "./Icon.ui";
 
-export type IconVariants = "Filled" | "Outlined" | "Round" | "Sharp" | "Two Tone";
-export type IconSizes = "small" | "medium" | "large" | "xlarge";
-
-export const iconSizesMap = {
-    small: "md-18",
-    medium: "md-24",
-    large: "md-36",
-    xlarge: "md-48",
-};
-
-export const iconPixelSizesMap = {
-    small: "18px",
-    medium: "24px",
-    large: "36px",
-    xlarge: "48px",
-};
-
-export class Icon extends Widget {
+export class IconView extends Widget {
     variant: IconVariants;
     color: Colors | null = null;
     iconSize: IconSizes = "medium";
-    icon: string;
+    items: Array<Icon> = [];
 
-    constructor(
-        id: string,
-        icon: string,
-        variant: IconVariants = "Filled",
-        parent: Widget | null = null
-    ) {
+    constructor(id: string, variant: IconVariants = "Filled", parent: Widget | null = null) {
         super(id, "span", parent);
 
         this.variant = variant;
         this.setColor("primary");
-        this.icon = icon;
+        this.items = [];
 
         this.setIconSize("medium");
 
@@ -49,8 +28,6 @@ export class Icon extends Widget {
                 "material-icons-" + this.variant.toString().replace(" ", "-").toLowerCase()
             );
         }
-
-        this.setIcon(icon);
 
         this.init();
     }
@@ -68,11 +45,6 @@ export class Icon extends Widget {
         this.addClass(iconSizesMap[size]);
 
         this.body.style.fontSize = iconPixelSizesMap[size];
-    }
-
-    public setIcon(icon: string): void {
-        this.icon = icon;
-        this.body.innerHTML = icon;
     }
 
     public setVariant(variant: IconVariants = "Filled"): void {
@@ -95,10 +67,6 @@ export class Icon extends Widget {
 
     public getColor(): Colors {
         return this.color || "primary";
-    }
-
-    public getIcon(): string {
-        return this.icon;
     }
 
     public getIconSize(): IconSizes {
@@ -139,7 +107,7 @@ export const WIcon = (props: wIconProps) => {
     );
 };
 
-export function createIcon(id: string, content: any, parent: Widget | null = null): Icon {
+/*export function createIcon(id: string, content: any, parent: Widget | null = null): Icon {
     const dataIcon = content.getAttribute("w-icon-name");
     const dataVariant = content.getAttribute("w-variant") || "Filled";
     const dataColor = content.getAttribute("w-color") || "primary";
@@ -156,4 +124,4 @@ export function createIcon(id: string, content: any, parent: Widget | null = nul
     }
 
     return newIcon;
-}
+}*/

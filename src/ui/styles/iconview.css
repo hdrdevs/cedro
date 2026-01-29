@@ -1,0 +1,29 @@
+.WUI-icon-color-primary {
+    color: var(--palette-text-primary);
+    background-color: transparent;
+}
+
+.WUI-icon-color-secondary {
+    color: var(--palette-text-secondary);
+    background-color: transparent;
+}
+
+.WUI-icon-color-success {
+    color: var(--palette-success-text-main);
+    background-color: transparent;
+}
+
+.WUI-icon-color-error {
+    color: var(--palette-error-text-main);
+    background-color: transparent;
+}
+
+.WUI-icon-color-info {
+    color: var(--palette-info-text-main);
+    background-color: transparent;
+}
+
+.WUI-icon-color-warning {
+    color: var(--palette-warning-text-main);
+    background-color: transparent;
+}
