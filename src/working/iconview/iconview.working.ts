@@ -1,5 +1,5 @@
 import { IconViewItem } from "../../ui/IconViewItem.ui";
-import { Application, WidgetAlignTypes, WidgetTypes } from "../../index";
+import { Application, WidgetAlignTypes } from "../../index";
 
 import { IconView } from "../../ui/IconView.ui";
 
@@ -7,7 +7,7 @@ class WorkingApp extends Application {
     iconView: IconView;
 
     constructor() {
-        super("Working App - Toolbar");
+        super("Working App - IconView");
         this.getRoot().setAlign(WidgetAlignTypes.VERTICAL);
 
         this.iconView = new IconView("icon-view", null);

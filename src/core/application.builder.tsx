@@ -104,11 +104,13 @@ export function createApplication(content: any): Application {
         }
     });
 
-    appConnections.forEach((cb) => {
-        newApp.subscribe(cb);
-    });
+    if (window.appConnections) {
+        window.appConnections.forEach((cb) => {
+            newApp.subscribe(cb);
+        });
+    }
 
-    appConnections = [];
+    window.appConnections = [];
 
     return newApp;
 }

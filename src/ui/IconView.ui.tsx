@@ -1,15 +1,22 @@
 import "./styles/icon.css";
 
-import { Widget } from "./widget.ui";
-import { WidgetAlignTypes, WidgetTypes } from "./widget.types";
+import { connectWidgetCallback, getOnlyEventProps, Widget } from "./widget.ui";
+import { WidgetAlignTypes, WidgetProps, WidgetTypes } from "./widget.types";
 import { Scroll } from "./scroll.ui";
-import { IconViewItem } from "./IconViewItem.ui";
+import { createIconViewItem, IconViewItem } from "./IconViewItem.ui";
+import { IconSizes, IconVariants } from "./Icon.ui";
+import { Colors } from "./colors.ui";
+import { UID } from "../core/uid";
+import { normalizeWidget } from "./widget.normalize";
 
 export class IconView extends Widget {
     container: Widget;
     verticalScrollbar: Scroll;
     items: Array<IconViewItem> = [];
     itemWidth: number = 100;
+    variant: IconVariants = "Outlined";
+    color: Colors = "primary";
+    size: IconSizes = "medium";
 
     constructor(id: string, parent: Widget | null = null) {
         super(id, "div", parent);
@@ -31,7 +38,6 @@ export class IconView extends Widget {
 
     public addItem(item: IconViewItem): void {
         item.setWH(this.itemWidth, this.itemWidth);
-        //item.icon.setIconSize("large");
         this.items.push(item);
         this.container.addChild(item);
     }
@@ -99,20 +105,31 @@ export class IconView extends Widget {
         this.renderIcons();
         this.verticalScrollbar.render();
     }
+
+    public setVariant(variant: IconVariants): void {
+        this.variant = variant;
+    }
+
+    public setColor(color: Colors): void {
+        this.color = color;
+    }
+
+    public setSize(size: IconSizes): void {
+        this.size = size;
+    }
 }
 
-/*
-export type wIconProps = WidgetProps & {
-    icon: string;
+export type wIconViewProps = WidgetProps & {
+    id?: string | null;
     variant?: IconVariants | null;
     color?: Colors | null;
     size?: IconSizes | null;
+    children?: any;
 };
 
-
-export const WIcon = (props: wIconProps) => {
+export const WIconView = (props: wIconViewProps) => {
     if (!props.id) {
-        props.id = "Icon." + UID();
+        props.id = "IconView." + UID();
     }
 
     connectWidgetCallback(props.id, getOnlyEventProps(props));
@@ -120,31 +137,47 @@ export const WIcon = (props: wIconProps) => {
     return normalizeWidget(
         <div
             id={props.id}
-            w-icon
-            w-icon-name={props.icon}
+            w-icon-view
             w-variant={props.variant}
             w-color={props.color}
             w-size={props.size}
-        ></div>,
+        >
+            {props.children}
+        </div>,
         props
     );
 };
 
-export function createIcon(id: string, content: any, parent: Widget | null = null): Icon {
-    const dataIcon = content.getAttribute("w-icon-name");
+export function createIconView(id: string, content: any, parent: Widget | null = null): IconView {
     const dataVariant = content.getAttribute("w-variant") || "Filled";
     const dataColor = content.getAttribute("w-color") || "primary";
     const dataSize = content.getAttribute("w-size") || "medium";
 
-    let newIcon = new Icon(id, dataIcon, dataVariant, parent);
+    let newIconView = new IconView(id, parent);
+
+    if (dataVariant) {
+        newIconView.setVariant(dataVariant);
+    }
 
     if (dataColor) {
-        newIcon.setColor(dataColor);
+        newIconView.setColor(dataColor);
     }
 
     if (dataSize) {
-        newIcon.setIconSize(dataSize);
+        newIconView.setSize(dataSize);
     }
 
-    return newIcon;
-}*/
+    content.childNodes.forEach((iconItem: HTMLElement, index: number) => {
+        if (iconItem.getAttribute("w-icon-view-item") !== null) {
+            const itemId = iconItem.getAttribute("id") || "icon-view-item." + UID();
+
+            const newItem = createIconViewItem(itemId, iconItem, null);
+
+            if (itemId !== null) {
+                newIconView.addItem(newItem);
+            }
+        }
+    });
+
+    return newIconView;
+}
