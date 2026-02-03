@@ -12,13 +12,8 @@ window.app = (() => {
     return createApplication(
         <Application title="Hola mundo" padding={5} orientation="vertical">
             <Widgets>
-                <WIconView>
-                    <WIconViewItem
-                        id="iconViewItem"
-                        icon="home"
-                        text="Texto del icon 1"
-                        onClick={sendData}
-                    />
+                <WIconView onClick={sendData}>
+                    <WIconViewItem id="iconViewItem" icon="home" text="Texto del icon 1" />
                     <WIconViewItem id="iconViewItem" icon="save" text="Texto del icon 2" />
                     <WIconViewItem id="iconViewItem" icon="delete" text="Texto del icon 3" />
                 </WIconView>

@@ -169,7 +169,7 @@ export function createIconView(id: string, content: any, parent: Widget | null =
 
     content.childNodes.forEach((iconItem: HTMLElement, index: number) => {
         if (iconItem.getAttribute("w-icon-view-item") !== null) {
-            const itemId = iconItem.getAttribute("id") || "icon-view-item." + UID();
+            const itemId = iconItem.getAttribute("id") || "icon-view-item." + index;
 
             const newItem = createIconViewItem(itemId, iconItem, null);
 
