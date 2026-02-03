@@ -1,58 +1,70 @@
-import "./styles/icon.css";
+import "./styles/iconviewitem.css";
 import { Colors } from "./colors.ui";
 import { connectWidgetCallback, getOnlyEventProps, Widget } from "./widget.ui";
 import { UID } from "../core/uid";
-import { WidgetProps } from "./widget.types";
+import { WidgetAlignTypes, WidgetProps, WidgetTypes } from "./widget.types";
 import { normalizeWidget } from "./widget.normalize";
+import { Icon, iconPixelSizesMap, IconSizes, IconVariants } from "./Icon.ui";
+import { Label } from "./label.ui";
+import { Container } from "./container.ui";
 
-export type IconVariants = "Filled" | "Outlined" | "Round" | "Sharp" | "Two Tone";
-export type IconSizes = "small" | "medium" | "large" | "xlarge";
-
-export const iconSizesMap = {
-    small: "md-18",
-    medium: "md-24",
-    large: "md-36",
-    xlarge: "md-48",
-};
-
-export const iconPixelSizesMap = {
-    small: "18px",
-    medium: "24px",
-    large: "36px",
-    xlarge: "48px",
-};
-
-export class Icon extends Widget {
+export class IconViewItem extends Widget {
     variant: IconVariants;
     color: Colors | null = null;
     iconSize: IconSizes = "medium";
-    icon: string;
+    container: Container;
+
+    icon: Icon;
+    text: Label;
 
     constructor(
         id: string,
         icon: string,
+        text: string,
         variant: IconVariants = "Filled",
         parent: Widget | null = null
     ) {
         super(id, "span", parent);
 
         this.variant = variant;
-        this.setColor("primary");
-        this.icon = icon;
+        this.setType(WidgetTypes.CUSTOM);
+        this.setAlign(WidgetAlignTypes.VERTICAL);
 
-        this.setIconSize("medium");
+        this.container = new Container({ id: id + ".container", orientation: "vertical" });
 
-        if (this.variant === "Filled") {
-            this.addClass("material-icons");
-        } else {
-            this.addClass(
-                "material-icons-" + this.variant.toString().replace(" ", "-").toLowerCase()
-            );
-        }
+        this.icon = new Icon(this.id + ".icon", icon, variant, this.container);
+        this.icon.setIconSize(this.iconSize);
 
-        this.setIcon(icon);
+        this.text = new Label(id + ".text", "h4", this.container);
+        this.text.setText(text);
+
+        this.container.addChild(this.icon);
+        this.container.addChild(this.text);
+
+        this.addClass("WUI-icon-view-item");
+
+        this.addChild(this.container);
 
         this.init();
+    }
+
+    public render(): void {
+        super.render();
+    }
+
+    public setWH(w: number, h: number): void {
+        super.setWH(w, h);
+    }
+
+    public setW(w: number): void {
+        super.setWH(w, this.getH());
+    }
+
+    public setH(h: number): void {
+        super.setWH(this.getW(), h);
+
+        this.container.setH(h);
+        this.text.setH(h - this.icon.getH());
     }
 
     public init(): void {
@@ -60,33 +72,20 @@ export class Icon extends Widget {
     }
 
     public setIconSize(size: IconSizes = "medium"): void {
-        if (this.iconSize !== size) {
-            this.deleteClass(iconSizesMap[this.iconSize]);
-        }
-
-        this.iconSize = size;
-        this.addClass(iconSizesMap[size]);
-
-        this.body.style.fontSize = iconPixelSizesMap[size];
+        this.icon.setIconSize(size);
     }
 
     public setIcon(icon: string): void {
-        this.icon = icon;
-        this.body.innerHTML = icon;
+        this.icon.setIcon(icon);
     }
 
     public setVariant(variant: IconVariants = "Filled"): void {
         this.variant = variant;
+        this.icon.setVariant(variant);
     }
 
     public setColor(color: Colors = "primary"): void {
-        if (this.color !== color) {
-            this.deleteClass("WUI-icon-color-" + this.color);
-        }
-
-        this.addClass("WUI-icon-color-" + color);
-
-        this.color = color;
+        this.icon.setColor(color);
     }
 
     public getVariant(): IconVariants {
@@ -94,15 +93,15 @@ export class Icon extends Widget {
     }
 
     public getColor(): Colors {
-        return this.color || "primary";
+        return this.icon.getColor();
     }
 
     public getIcon(): string {
-        return this.icon;
+        return this.icon.getIcon();
     }
 
     public getIconSize(): IconSizes {
-        return this.iconSize;
+        return this.icon.getIconSize();
     }
 
     public getRequiredWidth(): number {
@@ -112,16 +111,17 @@ export class Icon extends Widget {
     }
 }
 
-export type wIconProps = WidgetProps & {
+export type wIconViewItemProps = WidgetProps & {
     icon: string;
+    text: string;
     variant?: IconVariants | null;
     color?: Colors | null;
     size?: IconSizes | null;
 };
 
-export const WIcon = (props: wIconProps) => {
+export const WIconViewItem = (props: wIconViewItemProps) => {
     if (!props.id) {
-        props.id = "Icon." + UID();
+        props.id = "IconViewItem." + UID();
     }
 
     connectWidgetCallback(props.id, getOnlyEventProps(props));
@@ -129,8 +129,9 @@ export const WIcon = (props: wIconProps) => {
     return normalizeWidget(
         <div
             id={props.id}
-            w-icon
+            w-icon-view-item
             w-icon-name={props.icon}
+            w-icon-text={props.text}
             w-variant={props.variant}
             w-color={props.color}
             w-size={props.size}
@@ -139,21 +140,26 @@ export const WIcon = (props: wIconProps) => {
     );
 };
 
-export function createIcon(id: string, content: any, parent: Widget | null = null): Icon {
+export function createIconViewItem(
+    id: string,
+    content: any,
+    parent: Widget | null = null
+): IconViewItem {
     const dataIcon = content.getAttribute("w-icon-name");
+    const dataText = content.getAttribute("w-icon-text");
     const dataVariant = content.getAttribute("w-variant") || "Filled";
     const dataColor = content.getAttribute("w-color") || "primary";
     const dataSize = content.getAttribute("w-size") || "medium";
 
-    let newIcon = new Icon(id, dataIcon, dataVariant, parent);
+    let newIconViewItem = new IconViewItem(id, dataIcon, dataText, dataVariant, parent);
 
     if (dataColor) {
-        newIcon.setColor(dataColor);
+        newIconViewItem.setColor(dataColor);
     }
 
     if (dataSize) {
-        newIcon.setIconSize(dataSize);
+        newIconViewItem.setIconSize(dataSize);
     }
 
-    return newIcon;
+    return newIconViewItem;
 }
