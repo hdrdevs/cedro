@@ -42,6 +42,20 @@ export class Icon extends Widget {
 
         this.setIconSize("medium");
 
+        this.updateStyle();
+
+        this.setIcon(icon);
+
+        this.init();
+    }
+
+    private updateStyle(): void {
+        //Borramos las clases anteriores si las hay.
+        this.deleteClass("material-icons");
+        this.deleteClass(
+                "material-icons-" + this.variant.toString().replace(" ", "-").toLowerCase()
+            );
+        //Agregamos las clases del estilo actual.
         if (this.variant === "Filled") {
             this.addClass("material-icons");
         } else {
@@ -49,10 +63,6 @@ export class Icon extends Widget {
                 "material-icons-" + this.variant.toString().replace(" ", "-").toLowerCase()
             );
         }
-
-        this.setIcon(icon);
-
-        this.init();
     }
 
     public init(): void {
@@ -77,6 +87,7 @@ export class Icon extends Widget {
 
     public setVariant(variant: IconVariants = "Filled"): void {
         this.variant = variant;
+        this.updateStyle();
     }
 
     public setColor(color: Colors = "primary"): void {

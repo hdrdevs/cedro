@@ -108,14 +108,24 @@ export class IconView extends Widget {
 
     public setVariant(variant: IconVariants): void {
         this.variant = variant;
+        for(const icon of this.items){
+            icon.setVariant(variant);
+        }
     }
 
     public setColor(color: Colors): void {
         this.color = color;
+        for(const icon of this.items){
+            icon.setColor(color);
+        }
+
     }
 
     public setSize(size: IconSizes): void {
         this.size = size;
+        for(const icon of this.items){
+            icon.setIconSize(size);
+        }
     }
 }
 
@@ -155,18 +165,6 @@ export function createIconView(id: string, content: any, parent: Widget | null =
 
     let newIconView = new IconView(id, parent);
 
-    if (dataVariant) {
-        newIconView.setVariant(dataVariant);
-    }
-
-    if (dataColor) {
-        newIconView.setColor(dataColor);
-    }
-
-    if (dataSize) {
-        newIconView.setSize(dataSize);
-    }
-
     content.childNodes.forEach((iconItem: HTMLElement, index: number) => {
         if (iconItem.getAttribute("w-icon-view-item") !== null) {
             const itemId = iconItem.getAttribute("id") || "icon-view-item." + index;
@@ -178,6 +176,18 @@ export function createIconView(id: string, content: any, parent: Widget | null =
             }
         }
     });
+
+    if (dataVariant) {
+        newIconView.setVariant(dataVariant);
+    }
+
+    if (dataColor) {
+        newIconView.setColor(dataColor);
+    }
+
+    if (dataSize) {
+        newIconView.setSize(dataSize);
+    }
 
     return newIconView;
 }

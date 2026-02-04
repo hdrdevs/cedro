@@ -1,5 +1,6 @@
 import "./styles/iconviewitem.css";
 import { Colors } from "./colors.ui";
+import { addNewWidget } from "./widget.collection";
 import { connectWidgetCallback, getOnlyEventProps, Widget } from "./widget.ui";
 import { UID } from "../core/uid";
 import { WidgetAlignTypes, WidgetProps, WidgetTypes } from "./widget.types";
@@ -160,6 +161,9 @@ export function createIconViewItem(
     if (dataSize) {
         newIconViewItem.setIconSize(dataSize);
     }
+
+    //Agregamos el widget para que puedan ser inicializados los eventos asociados
+    addNewWidget(id, newIconViewItem);
 
     return newIconViewItem;
 }
