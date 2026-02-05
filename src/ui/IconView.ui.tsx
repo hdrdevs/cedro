@@ -106,24 +106,27 @@ export class IconView extends Widget {
         this.verticalScrollbar.render();
     }
 
+    public setItemWidth(itemWidth: number): void {
+        this.itemWidth = itemWidth;
+    }
+
     public setVariant(variant: IconVariants): void {
         this.variant = variant;
-        for(const icon of this.items){
+        for (const icon of this.items) {
             icon.setVariant(variant);
         }
     }
 
     public setColor(color: Colors): void {
         this.color = color;
-        for(const icon of this.items){
+        for (const icon of this.items) {
             icon.setColor(color);
         }
-
     }
 
     public setSize(size: IconSizes): void {
         this.size = size;
-        for(const icon of this.items){
+        for (const icon of this.items) {
             icon.setIconSize(size);
         }
     }
@@ -134,6 +137,7 @@ export type wIconViewProps = WidgetProps & {
     variant?: IconVariants | null;
     color?: Colors | null;
     size?: IconSizes | null;
+    itemWidth?: number | null;
     children?: any;
 };
 
@@ -151,6 +155,7 @@ export const WIconView = (props: wIconViewProps) => {
             w-variant={props.variant}
             w-color={props.color}
             w-size={props.size}
+            w-item-width={props.itemWidth}
         >
             {props.children}
         </div>,
@@ -162,6 +167,7 @@ export function createIconView(id: string, content: any, parent: Widget | null =
     const dataVariant = content.getAttribute("w-variant") || "Filled";
     const dataColor = content.getAttribute("w-color") || "primary";
     const dataSize = content.getAttribute("w-size") || "medium";
+    const dataItemWidth = content.getAttribute("w-item-width") || 100;
 
     let newIconView = new IconView(id, parent);
 
@@ -187,6 +193,10 @@ export function createIconView(id: string, content: any, parent: Widget | null =
 
     if (dataSize) {
         newIconView.setSize(dataSize);
+    }
+
+    if (dataItemWidth) {
+        newIconView.setItemWidth(parseInt(dataItemWidth));
     }
 
     return newIconView;

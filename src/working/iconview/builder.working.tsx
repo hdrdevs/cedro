@@ -7,14 +7,14 @@ const iconos = [
     {
         icon: "home",
         text: "Home",
-	    data: 1
+        data: 1,
     },
     {
         icon: "delete",
-	    text: "Admin con un texto gigantemente largo",
-	    data: 5
-    }
-]
+        text: "Admin con un texto gigantemente largo",
+        data: 5,
+    },
+];
 
 window.app = (() => {
     const sendData = () => {
@@ -25,15 +25,15 @@ window.app = (() => {
     return createApplication(
         <Application title="Hola mundo" padding={5} orientation="vertical">
             <Widgets>
-                <WIconView variant="Outlined" size="large">
-		            {iconos.map((item, index) => (
+                <WIconView variant="Outlined" size="large" itemWidth={120}>
+                    {iconos.map((item, index) => (
                         <WIconViewItem
                             key={index}
                             icon={item.icon}
                             text={item.text}
                             onClick={() => {
                                 console.log("Click en dato:", item.data);
-			                }}
+                            }}
                         />
                     ))}
                 </WIconView>

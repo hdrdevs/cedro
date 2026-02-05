@@ -2,7 +2,7 @@ import { Widget, WidgetAlignTypes } from "../ui";
 import { createWidget } from "../ui/widget.builder";
 import Application, { ApplicationProps } from "./application.core";
 import { decode } from "./html.entities";
-import { getAdaptedUrl } from "./path.import.dev";
+import { getAdaptedUrl } from "./path.import.release";
 
 function getApplicationProps(content: any): ApplicationProps {
     let props: ApplicationProps = {

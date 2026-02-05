@@ -63,9 +63,7 @@ window.app = (() => {
         }
 
         const route = router.getCurrentLocation().url;
-        const routeData = router.getCurrentLocation().params;
-
-        console.log(routeData);
+        //const routeData = router.getCurrentLocation().params;
 
         if (route.indexOf("working/demo/widget-gallery") > -1) {
             stack.setActive("btn-widget-gallery");
