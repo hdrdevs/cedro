@@ -11,6 +11,7 @@ export type ButonVariants =
     | "contained"
     | "outlined"
     | "text"
+    | "plain"
     | "stack-start"
     | "stack-middle"
     | "stack-end"

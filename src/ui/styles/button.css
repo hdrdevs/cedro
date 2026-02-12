@@ -1,4 +1,118 @@
 /************************************************************************/
+/************************************PLAIN*******************************/
+/************************************************************************/
+
+.WUIButton-plain,
+.WUIButton-plain span {
+    cursor: pointer;
+    font-weight: 500;
+    text-align: center;
+    background-color: transparent;
+    font-size: 1rem;
+    border: none;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+        border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.WUIButton-plain-color-primary,
+.WUIButton-plain-color-primary span {
+    color: var(--palette-text-primary);
+    background-color: transparent;
+}
+
+.WUIButton-plain-color-primary:hover {
+    color: var(--palette-text-primary);
+    background-color: transparent;
+}
+
+.WUIButton-plain-color-primary:hover span {
+    color: var(--palette-text-primary);
+    background-color: transparent;
+}
+
+.WUIButton-plain-color-secondary,
+.WUIButton-plain-color-secondary span {
+    color: var(--palette-text-primary);
+    background-color: transparent;
+}
+
+.WUIButton-plain-color-secondary:hover {
+    color: var(--palette-secondary-text-light);
+    background-color: transparent;
+}
+
+.WUIButton-plain-color-secondary:hover span {
+    color: var(--palette-secondary-text-light);
+    background-color: transparent;
+}
+
+.WUIButton-plain-color-error,
+.WUIButton-plain-color-error span {
+    color: var(--palette-text-secondary);
+    background-color: transparent;
+}
+
+.WUIButton-plain-color-error:hover {
+    color: var(--palette-text-secondary);
+    background-color: transparent;
+}
+
+.WUIButton-plain-color-error:hover span {
+    color: var(--palette-text-secondary);
+    background-color: transparent;
+}
+
+.WUIButton-plain-color-warning,
+.WUIButton-plain-color-warning span {
+    color: var(--palette-text-secondary);
+    background-color: transparent;
+}
+
+.WUIButton-plain-color-warning:hover {
+    color: var(--palette-warning-text-light);
+    background-color: transparent;
+}
+
+.WUIButton-plain-color-warning:hover span {
+    color: var(--palette-warning-text-light);
+    background-color: transparent;
+}
+
+.WUIButton-plain-color-info,
+.WUIButton-plain-color-info span {
+    color: var(--palette-text-secondary);
+    background-color: transparent;
+}
+
+.WUIButton-plain-color-info:hover {
+    color: var(--palette-info-text-light);
+    background-color: transparent;
+}
+
+.WUIButton-plain-color-info:hover span {
+    color: var(--palette-info-text-light);
+    background-color: transparent;
+}
+
+.WUIButton-plain-color-success,
+.WUIButton-text-color-success span {
+    color: var(--palette-text-secondary);
+    background-color: transparent;
+}
+
+.WUIButton-plain-color-success:hover {
+    color: var(--palette-success-text-light);
+    background-color: transparent;
+}
+
+.WUIButton-plain-color-success:hover span {
+    color: var(--palette-success-text-light);
+    background-color: transparent;
+}
+
+
+/************************************************************************/
 /*************************************TEXT*******************************/
 /************************************************************************/
 

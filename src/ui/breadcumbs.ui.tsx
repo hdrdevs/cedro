@@ -87,7 +87,7 @@ export class Breadcumbs extends Toolbar {
             const newWidget = new Button("item." + itemName, this);
             let widgetText = route.label ? route.label : itemName;
             newWidget.setText(widgetText.replaceAll(" ", "&nbsp;"));
-            newWidget.setVariant("text");
+            newWidget.setVariant("plain");
             newWidget.subscribe({
                 event: "click",
                 then: () => {
@@ -105,7 +105,7 @@ export class Breadcumbs extends Toolbar {
                 "keyboard_double_arrow_right",
                 this
             );
-            separator.setVariant("text");
+            separator.setVariant("plain");
             separator.setW(50);
             this.addItem(separator.id, separator);
             separator.setW(20);

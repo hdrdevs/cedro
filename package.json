@@ -16,7 +16,7 @@
         "ui-library",
         "widget-based"
     ],
-    "version": "0.1.35",
+    "version": "0.1.37",
     "type": "module",
     "devDependencies": {
         "@fontsource/roboto": "^5.0.5",

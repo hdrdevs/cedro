@@ -415,11 +415,13 @@ export class Widget implements IWidget {
      * @return {void} This function does not return a value.
      */
     public deleteClass(cssClass: string): void {
+        console.log("borrando clase ", cssClass);
         this.body.classList.remove(cssClass);
     }
 
     public deleteAllClasses(): void {
-        this.body.classList.forEach((cssClass) => {
+        const deleteList = Array.from(this.body.classList);
+        deleteList.forEach((cssClass) => {
             this.deleteClass(cssClass);
         });
     }
