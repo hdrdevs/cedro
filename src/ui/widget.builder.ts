@@ -28,6 +28,7 @@ import { createDialog, Dialog } from "./dialog";
 import { createDataGrid, DataGrid } from "./datagrid.ui";
 import { WidgetAlignTypes, WidgetProps, WidgetTypes } from "./widget.types";
 import { createIconView } from "./IconView.ui";
+import { createBreadcumbs } from "./breadcumbs.ui";
 
 export function createWidget(
     content: any,
@@ -118,6 +119,8 @@ export function createWidget(
         widget = createDataGrid(widgetProps.id, content, parent);
     } else if (content.getAttribute("w-icon-view")) {
         widget = createIconView(widgetProps.id, content, parent);
+    } else if (content.getAttribute("w-breadcumbs")) {
+        widget = createBreadcumbs(widgetProps.id, content, parent);
     } else {
         widget = new Widget(widgetProps.id, content.tagName, parent);
 

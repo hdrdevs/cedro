@@ -144,6 +144,16 @@ export class Toolbar extends Widget {
         this.items.set(id, widget);
     }
 
+    public deleteItem(id: string) {
+        const item = this.items.get(id);
+
+        if (!item) return;
+
+        item.free();
+
+        this.items.delete(id);
+    }
+
     public init(): void {
         super.init();
     }

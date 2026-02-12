@@ -4,6 +4,7 @@ import { Vector2D } from "../types/vector2d.type";
 export type WUIEvent =
     | "widget-load"
     | "load"
+    | "location-change"
     | "click"
     | "resize"
     | "mousedown"

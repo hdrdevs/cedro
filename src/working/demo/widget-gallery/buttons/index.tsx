@@ -41,6 +41,7 @@ export default createWidget(
                     text="Primary | Text"
                     variant="text"
                     color="primary"
+                    iconPosition="right"
                     centerX
                 />
                 <WIconButton

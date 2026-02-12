@@ -9,6 +9,7 @@ import {
     ButtonStack,
     WButtonStack,
     WIconButton,
+    WBreadcumbs
 } from "../../ui";
 
 import { config } from "./config";
@@ -77,6 +78,7 @@ window.app = (() => {
         onRenderHandler();
     };
 
+
     return createApplication(
         <Application
             title="Ceddro Application Demo | Cedro"
@@ -122,25 +124,33 @@ window.app = (() => {
                         <WSpacer />
                         <ThemeMenu />
                     </WContainer>
+                    <WContainer
+                        orientation="horizontal"
+                        fixedSize={50}
+                        padding={4}
+                        classNames="headerBar"
+                    >
+                        <WBreadcumbs ></WBreadcumbs>
+                    </WContainer>
                     <WContainer id="main-container" orientation="vertical"></WContainer>
                 </WContainer>
             </Widgets>
             <Routes hostId="main-container">
                 <Route src="/" />
-                <Route src="/working/demo/counter/" />
-                <Route src="/working/demo/widget-gallery/" />
-                <Route src="/working/demo/widget-gallery/buttons/" />
-                <Route src="/working/demo/widget-gallery/icons/" />
-                <Route src="/working/demo/widget-gallery/images/" />
-                <Route src="/working/demo/widget-gallery/labels/" />
-                <Route src="/working/demo/widget-gallery/textboxes/" />
-                <Route src="/working/demo/widget-gallery/progressbar/" />
-                <Route src="/working/demo/widget-gallery/tabs/" />
-                <Route src="/working/demo/widget-gallery/containers/" />
-                <Route src="/working/demo/widget-gallery/valuebars/" />
-                <Route src="/working/demo/widget-gallery/dialogs/" />
-                <Route src="/working/demo/widget-gallery/toolbars/" />
-                <Route src="/working/demo/widget-gallery/datagrids/" />
+                <Route src="/working/demo/counter/" label="Contador" />
+                <Route src="/working/demo/widget-gallery/" label="Widget Gallery" />
+                <Route src="/working/demo/widget-gallery/buttons/" label="Botones" />
+                <Route src="/working/demo/widget-gallery/icons/" label="Iconos" />
+                <Route src="/working/demo/widget-gallery/images/" label="Imagenes" />
+                <Route src="/working/demo/widget-gallery/labels/" label="Labels" />
+                <Route src="/working/demo/widget-gallery/textboxes/" label="Textboxes" />
+                <Route src="/working/demo/widget-gallery/progressbar/" label="Progress Bar" />
+                <Route src="/working/demo/widget-gallery/tabs/" label="Tabs" />
+                <Route src="/working/demo/widget-gallery/containers/" label="Containers" />
+                <Route src="/working/demo/widget-gallery/valuebars/" label="Value Bars" />
+                <Route src="/working/demo/widget-gallery/dialogs/" label="Dialogs" />
+                <Route src="/working/demo/widget-gallery/toolbars/" label="Toolbars" />
+                <Route src="/working/demo/widget-gallery/datagrids/" label="Data Grids" />
             </Routes>
         </Application>
     );

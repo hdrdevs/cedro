@@ -16,10 +16,17 @@ export enum WUIThemes {
     DARK = "dark",
 }
 
+export interface RouteItem {
+    src: string;
+    label?: string;
+    icon?: string;
+}
+
 export interface IApplication {
     seo: Seo;
     screen: IScreen;
     root: IWidget;
+    routes: Array<RouteItem>;
     router: Navigo;
     alertDialog: Dialog;
     confirmDialog: Dialog;
@@ -43,6 +50,8 @@ export interface IApplication {
         maxWidth: number,
         cb: (app: IApplication) => void
     ): void;
+
+    addRoute(route: RouteItem): void;
 
     init(): void;
     setRoot(root: IWidget): void;

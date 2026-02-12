@@ -26,9 +26,8 @@ window.app = (() => {
         <Application title="Hola mundo" padding={5} orientation="vertical">
             <Widgets>
                 <WIconView variant="Outlined" size="large" itemWidth={120}>
-                    {iconos.map((item, index) => (
+                    {iconos.map((item) => (
                         <WIconViewItem
-                            key={index}
                             icon={item.icon}
                             text={item.text}
                             onClick={() => {

@@ -1,3 +1,4 @@
+import { RouteItem } from "src/interfaces/application.interface";
 import { Widget, WidgetAlignTypes } from "../ui";
 import { createWidget } from "../ui/widget.builder";
 import Application, { ApplicationProps } from "./application.core";
@@ -65,6 +66,21 @@ export function createApplication(content: any): Application {
             newApp.setRouterHostId(item.getAttribute("w-host-id"));
             item.childNodes.forEach((ietmRoute: any) => {
                 if (ietmRoute.getAttribute("w-route-path") && ietmRoute.getAttribute("href")) {
+                    let newRoute: RouteItem = {
+                        src: "",
+                        label: undefined,
+                        icon: undefined
+                    };
+                    if (ietmRoute.getAttribute("href")) {
+                        newRoute.src = decode(ietmRoute.getAttribute("href"));
+                    }
+                    if (ietmRoute.getAttribute("w-label")) {
+                        newRoute.label = ietmRoute.getAttribute("w-label");
+                    }
+                    if (ietmRoute.getAttribute("w-icon")) {
+                        newRoute.icon = ietmRoute.getAttribute("w-icon");
+                    }
+                    newApp.addRoute(newRoute);
                     newApp.router.on(decode(ietmRoute.getAttribute("href")), () => {
                         const url = decode(ietmRoute.getAttribute("href"));
                         const isProduction = process.env.NODE_ENV === "production";
@@ -76,6 +92,7 @@ export function createApplication(content: any): Application {
                             if (host) {
                                 newApp.attachWidget(newApp.getLoadedModule() as Widget, host);
                             }
+                            newApp.run("location-change");
                             newApp.hideLoading();
                         });
 
@@ -96,10 +113,11 @@ export function createApplication(content: any): Application {
                         };
 
                         if (isProduction) loadCss();
+
                     });
                 }
             });
-            newApp.router.on("/", () => {});
+            newApp.router.on("/", () => { });
             newApp.router.resolve();
         }
     });

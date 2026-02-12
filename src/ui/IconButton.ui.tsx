@@ -7,6 +7,8 @@ import { UID } from "../core/uid";
 import { WidgetAlignTypes, WidgetTypes } from "./widget.types";
 import { normalizeWidget } from "./widget.normalize";
 
+export type IconButtonIconPosition = "left" | "right";
+
 export class IconButton extends Button {
     icon: Icon;
     label: Label;
@@ -15,10 +17,13 @@ export class IconButton extends Button {
     showText: boolean;
     centerX: boolean;
 
+    iconPosition: IconButtonIconPosition = "left";
+
     constructor(id: string, icon: string = "dark_mode", parent: Widget | null = null) {
         super(id, parent);
 
         this.centerX = false;
+        this.iconPosition = "left";
 
         this.setAlign(WidgetAlignTypes.HORIZONTAL);
         this.icon = new Icon(id + ".icon", icon, undefined, this);
@@ -96,21 +101,48 @@ export class IconButton extends Button {
             const requiredWidth = labelWidth + iconWidth + padding * 5;
 
             const labelHeight = this.label.getBody().clientHeight;
+            let startX = 0;
+            let startY = 0;
+            let startLabelX = 0;
+            let startLabelY = 0;
+            let spaceBetLabelAndIcon = padding * 2;
 
-            let startX = availableWidth / 2 - (iconWidth + padding + labelWidth) / 2;
+            if (this.iconPosition == "left") {
 
-            if (availableWidth < requiredWidth) {
-                startX = padding * 2;
+                startX = availableWidth / 2 - (iconWidth + spaceBetLabelAndIcon + labelWidth) / 2;
+
+                if (availableWidth < requiredWidth) {
+                    startX = padding * 2;
+                }
+
+                if (!this.centerX) {
+                    startX = padding * 2;
+                }
+
+                startLabelX = startX + iconWidth + spaceBetLabelAndIcon;
+
+                startY = this.getH() / 2 - iconWidth / 2;
+                startLabelY = this.getH() / 2 - labelHeight / 2;
+
+
+            } else if (this.iconPosition == "right") {
+
+                startLabelX = availableWidth / 2 - (iconWidth / 2 + spaceBetLabelAndIcon + labelWidth) / 2;
+
+                if (!this.centerX) {
+                    startLabelX = padding * 2;
+                }
+
+                startX = startLabelX + labelWidth + spaceBetLabelAndIcon;
+
+                if (availableWidth < requiredWidth) {
+                    startLabelX = padding * 2;
+                }
+
+                startY = this.getH() / 2 - iconWidth / 2;
+                startLabelY = this.getH() / 2 - labelHeight / 2;
+
             }
-
-            if (!this.centerX) {
-                startX = padding * 2;
-            }
-
-            const startLabelX = startX + iconWidth + padding;
-
-            let startY = this.getH() / 2 - iconWidth / 2;
-            let startLabelY = this.getH() / 2 - labelHeight / 2;
 
             if (this.getType() !== WidgetTypes.FILL) {
                 startY = this.getH() / 2 - this.icon.getH() / 2;
@@ -126,7 +158,7 @@ export class IconButton extends Button {
             }
 
             this.icon.setX(startX);
-            this.label.setX(startLabelX + padding);
+            this.label.setX(startLabelX);
 
             this.icon.setY(startY);
             this.label.setY(startLabelY);
@@ -147,6 +179,10 @@ export class IconButton extends Button {
     public setCenterX(centerX: boolean): void {
         this.centerX = centerX;
     }
+
+    public setIconPosition(position: IconButtonIconPosition = "left") {
+        this.iconPosition = position;
+    }
 }
 
 export type wIconButtonProps = Omit<wButtonProps, "text"> & {
@@ -154,6 +190,7 @@ export type wIconButtonProps = Omit<wButtonProps, "text"> & {
     text?: string | null;
     onlyIcon?: boolean | null;
     centerX?: boolean | null;
+    iconPosition?: IconButtonIconPosition | null;
 };
 
 export const WIconButton = (props: wIconButtonProps) => {
@@ -175,6 +212,7 @@ export const WIconButton = (props: wIconButtonProps) => {
             w-width={props.width}
             w-height={props.height}
             w-center-x={props.centerX}
+            w-icon-position={props.iconPosition}
         />,
         props
     );
@@ -193,6 +231,7 @@ export function createIconButton(
     const dataHeight = content.getAttribute("w-height");
     const dataOnlyIcon = content.getAttribute("w-only-icon");
     const dataCenterX = content.getAttribute("w-center-x");
+    const dataIconPosition = content.getAttribute("w-icon-position");
 
     let newIconButton = new IconButton(id, dataIcon, parent);
 
@@ -222,6 +261,10 @@ export function createIconButton(
 
     if (dataCenterX) {
         newIconButton.setCenterX(true);
+    }
+
+    if (dataIconPosition) {
+        newIconButton.setIconPosition(dataIconPosition);
     }
 
     return newIconButton;

@@ -27,6 +27,7 @@ import { VPanel, WVPanel } from "./vpanel.ui";
 import { createWidget } from "./widget.builder";
 import { IconButtonMenu, WIconButtonMenu, WIconButtonMenuItem } from "./iconButtonMenu.ui";
 import { WidgetAlignTypes, WidgetTypes } from "./widget.types";
+import { WBreadcumbs } from "./breadcumbs.ui";
 
 export type { ContainerParams };
 
@@ -36,6 +37,7 @@ export {
     Accordion,
     WAccordion,
     WAccordionItem,
+    WBreadcumbs,
     Button,
     WButton,
     ButtonColor,

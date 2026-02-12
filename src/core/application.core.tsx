@@ -8,7 +8,7 @@ import "@fontsource/roboto/900.css";
 import "material-icons/iconfont/material-icons.css";
 import { Widget } from "../ui/widget.ui";
 import { Screen } from "./screeen.core";
-import { IApplication, IScreenSize } from "../interfaces/application.interface";
+import { IApplication, IScreenSize, RouteItem } from "../interfaces/application.interface";
 import { IWidget, WUICallback, WUIEvent } from "../interfaces/widget.interface";
 import Navigo from "navigo";
 import { Dialog } from "../ui/dialog";
@@ -42,6 +42,7 @@ class WApplication implements IApplication {
 
     screen: Screen;
     root: Widget;
+    routes: Array<RouteItem>;
     router: Navigo;
     routerHostId: string;
 
@@ -64,6 +65,7 @@ class WApplication implements IApplication {
 
         this.root.setType(WidgetTypes.FILL);
         this.screen = new Screen();
+        this.routes = new Array<RouteItem>();
         this.router = new Navigo("/");
         this.routerHostId = this.getRoot().id;
 
@@ -146,8 +148,8 @@ class WApplication implements IApplication {
     public alert(
         title: string = "",
         msg: string,
-        onOk: () => void = () => {},
-        onCancell: () => void = () => {}
+        onOk: () => void = () => { },
+        onCancell: () => void = () => { }
     ): void {
         const mesageLabel = new Label("alert.label", "span");
 
@@ -170,8 +172,8 @@ class WApplication implements IApplication {
 
     public confirm(
         msg: string,
-        onOk: () => void = () => {},
-        onCancell: () => void = () => {}
+        onOk: () => void = () => { },
+        onCancell: () => void = () => { }
     ): void {
         const mesageLabel = new Label("alert.label", "span");
 
@@ -225,6 +227,11 @@ class WApplication implements IApplication {
         cb: (app: IApplication) => void
     ): void {
         this.mediaQueries.set(query, { minWidth, maxWidth, cb });
+    }
+
+    public addRoute(route: RouteItem): void {
+        //add route.
+        this.routes.push(route);
     }
 
     /**
@@ -303,6 +310,7 @@ export type ApplicationProps = {
     children: any;
     onResize?: (args: any) => void;
     onLoad?: (args: any) => void;
+    onLocationChange?: (args: any) => void;
 };
 
 export const Application = (props: ApplicationProps) => {
@@ -312,6 +320,10 @@ export const Application = (props: ApplicationProps) => {
 
     if (props.onResize) {
         connectApplication({ event: "resize", then: props.onResize });
+    }
+
+    if (props.onLocationChange) {
+        connectApplication({ event: "location-change", then: props.onLocationChange });
     }
 
     return (
@@ -349,10 +361,12 @@ export const Routes = (props: RoutesProps) => {
 
 export type RouteProps = {
     src: string;
+    label?: string;
+    icon?: string;
 };
 
 export const Route = (props: RouteProps) => {
-    return <a w-route-path href={props.src}></a>;
+    return <a w-route-path href={props.src} w-label={props.label} w-icon={props.icon}></a>;
 };
 
 export default WApplication;
