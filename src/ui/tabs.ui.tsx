@@ -2,7 +2,7 @@ import "./styles/tabs.css";
 
 import { OrientationTypes } from "../types/orientation.type";
 import { Widget } from "./widget.ui";
-import { Toolbar } from "./toolbar.ui";
+import { Toolbar } from "./toolbar.class";
 import { Label } from "./label.ui";
 import { Icon } from "./Icon.ui";
 import { Scroll } from "./scroll.ui";

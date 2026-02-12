@@ -10,7 +10,7 @@
  *  Entonces a las rutas le podemos agregar la propiedad de label o breadcumbLabel que
  *  indicaria el texto a mostrar cuando se esta en esa ruta.
  *  Ademas tambien le podemos definir un icono a cada ruta.
- *  
+ *
  *  Luego el widget Breadcumbs puede buscar en las rutas de la aplicacion, cual es la ruta actual
  *  y actualizarse mostrando graficamente donde se encuentra el usuario.
  *  Para esto podriamos agregar algun evento en las rutas o en la aplicacion que se dispare cuando
@@ -22,7 +22,7 @@
  *
  * */
 
-import { Toolbar } from "./toolbar.ui";
+import { Toolbar } from "./toolbar.class";
 import { connectWidgetCallback, getOnlyEventProps, Widget } from "./widget.ui";
 import { WidgetProps } from "./widget.types";
 import { normalizeWidget } from "./widget.normalize";
@@ -40,12 +40,13 @@ export class Breadcumbs extends Toolbar {
                 setTimeout(connectEvent, 500);
             }
             window.app?.subscribe({
-                event: "location-change", then: () => {
+                event: "location-change",
+                then: () => {
                     this.configItems();
-                }
-            })
+                },
+            });
             this.configItems();
-        }
+        };
         connectEvent();
     }
 
@@ -54,7 +55,6 @@ export class Breadcumbs extends Toolbar {
         const app = window.app;
 
         for (const route of app.routes) {
-
             const parts = route.src.split("/").filter((item) => item != "");
             const last = parts[parts.length - 1];
 
@@ -63,7 +63,6 @@ export class Breadcumbs extends Toolbar {
             if (last == name) {
                 return route;
             }
-
         }
 
         return null;
@@ -87,20 +86,25 @@ export class Breadcumbs extends Toolbar {
             if (!route) continue;
             const newWidget = new Button("item." + itemName, this);
             let widgetText = route.label ? route.label : itemName;
-            newWidget.setText(widgetText.replaceAll(" ", "&nbsp;"))
+            newWidget.setText(widgetText.replaceAll(" ", "&nbsp;"));
             newWidget.setVariant("text");
             newWidget.subscribe({
-                event: "click", then: () => {
+                event: "click",
+                then: () => {
                     app.goTo(route.src);
-                }
-            })
+                },
+            });
             this.addItem(newWidget.id, newWidget);
 
             if (i == path.length - 1) {
                 //El ultimo no lleva separador
                 break;
             }
-            const separator = new IconButton("icon." + itemName, "keyboard_double_arrow_right", this);
+            const separator = new IconButton(
+                "icon." + itemName,
+                "keyboard_double_arrow_right",
+                this
+            );
             separator.setVariant("text");
             separator.setW(50);
             this.addItem(separator.id, separator);
@@ -111,8 +115,7 @@ export class Breadcumbs extends Toolbar {
     }
 }
 
-export type wBreadcumbProps = WidgetProps & {
-};
+export type wBreadcumbProps = WidgetProps & {};
 
 export const WBreadcumbs = (props: wBreadcumbProps) => {
     if (!props.id) {
@@ -121,16 +124,14 @@ export const WBreadcumbs = (props: wBreadcumbProps) => {
 
     connectWidgetCallback(props.id, getOnlyEventProps(props));
 
-    return normalizeWidget(
-        <div
-            id={props.id}
-            w-breadcumbs
-        ></div>,
-        props
-    );
+    return normalizeWidget(<div id={props.id} w-breadcumbs></div>, props);
 };
 
-export function createBreadcumbs(id: string, _content: any, parent: Widget | null = null): Breadcumbs {
+export function createBreadcumbs(
+    id: string,
+    _content: any,
+    parent: Widget | null = null
+): Breadcumbs {
     let newBreadcumbs = new Breadcumbs(id, parent);
 
     return newBreadcumbs;
