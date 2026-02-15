@@ -108,7 +108,7 @@ export class Scroll extends Widget {
                 returnData.areaHeight - returnData.scrollBarHeight - 1;
             returnData.ratioScroll =
                 this.contentArea.getBody().scrollTop /
-                (returnData.areaHeight - returnData.scrollBarHeight);
+                (returnData.scrollHeight - returnData.areaHeight);
             returnData.position = returnData.availablePositionSize * returnData.ratioScroll;
 
             if (returnData.scrollBarHeight >= returnData.areaHeight) {
@@ -122,7 +122,7 @@ export class Scroll extends Widget {
             returnData.availablePositionSize = returnData.areaWidth - returnData.scrollBarWidth - 1;
             returnData.ratioScroll =
                 this.contentArea.getBody().scrollLeft /
-                (returnData.areaWidth - returnData.scrollBarWidth);
+                (returnData.scrollWidth - returnData.areaWidth);
             returnData.position = returnData.availablePositionSize * returnData.ratioScroll;
             returnData.scrollPositionY = this.contentArea.getH() + this.contentArea.getY();
             if (returnData.scrollBarWidth >= returnData.areaWidth) {
