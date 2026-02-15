@@ -24,6 +24,7 @@ export class Scroll extends Widget {
     contentArea: Widget;
     orientation: OrientationTypes;
     drag: Draggable;
+    private resizeObserver: ResizeObserver;
 
     constructor(id: string, contentArea: Widget, orientation: OrientationTypes = "vertical") {
         super(id, "div");
@@ -55,6 +56,32 @@ export class Scroll extends Widget {
                 this.updateScrollPositionByScrollbar();
             },
         });
+
+        // Observer for content area size changes
+        this.resizeObserver = new ResizeObserver(() => {
+            this.render();
+        });
+        this.resizeObserver.observe(this.contentArea.getBody());
+
+        // Also subscribe to specific widget resize events if available
+        this.contentArea.subscribe({
+            event: "resize",
+            then: (_e, _w) => {
+                this.render();
+            },
+        });
+
+        // Initial render to check visibility
+        setTimeout(() => {
+            this.render();
+        }, 0);
+    }
+
+    public free(): void {
+        if (this.resizeObserver) {
+            this.resizeObserver.disconnect();
+        }
+        super.free();
     }
 
     private getScrollData(): ScrollData {
