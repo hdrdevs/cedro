@@ -3,12 +3,13 @@ import { Label } from "./label.ui";
 import { Widget } from "./widget.ui";
 import { Scroll } from "./scroll.ui";
 import { UID } from "../core/uid";
-import { decode } from "../core/html.entities";
 import { Button } from "./button.ui";
 import { IconButton } from "./IconButton.ui";
 import { ProgressBar } from "./progressbar.ui";
 import { WidgetAlignTypes, WidgetEventProps, WidgetProps, WidgetTypes } from "./widget.types";
 import { normalizeWidget } from "./widget.normalize";
+import { connectCustomWidget } from "./widget.collection";
+import { IWidget } from "src/interfaces/widget.interface";
 
 const DATA_GRID_HEADER_HEIGHT = 30;
 const DATA_GRID_FOOTER_HEIGHT = 40;
@@ -21,11 +22,21 @@ type DataGridColumn = {
     handler: (args: any) => void;
 };
 
-export class DataGrid extends Widget {
+export type DataGridProvider<T> = (page: number, pageSize: number) => Promise<DataGridSchema<T>>;
+
+export type DataGridSchema<T> = {
+    rows: T[];
+    page: number;
+    pageSize: number;
+    totalPages: number;
+};
+
+export class DataGrid<T> extends Widget {
     headerContainer: Widget;
     dataContainer: Widget;
     footerContainer: Widget;
-    data: Array<any>;
+    dataProvider: DataGridProvider<T>;
+    data: DataGridSchema<T>;
     verticalScrollbar: Scroll;
     horizontalScrollbar: Scroll;
 
@@ -80,7 +91,15 @@ export class DataGrid extends Widget {
 
         this.columns = new Array<DataGridColumn>();
 
-        this.data = new Array<any>();
+        this.data = {
+            rows: [],
+            page: 0,
+            pageSize: 0,
+            totalPages: 0,
+        };
+        this.dataProvider = async (_page: number, _pageSize: number) => {
+            return this.data;
+        };
 
         this.addClass("WUIDataGrid");
     }
@@ -204,7 +223,7 @@ export class DataGrid extends Widget {
     private buildRows(): void {
         let rowY = 0;
 
-        for (let i = 0; i < this.data.length; i++) {
+        for (let i = 0; i < this.data.rows.length; i++) {
             const row = new Widget(this.id + ".row." + i, "div");
 
             row.setType(WidgetTypes.CUSTOM);
@@ -218,7 +237,7 @@ export class DataGrid extends Widget {
                 const column = this.columns[j];
                 const fieldId = this.id + ".row." + i + ".column." + j;
                 column.handler({
-                    data: this.data[i],
+                    data: this.data.rows[i],
                     index: i,
                     fieldId: fieldId,
                     row: row,
@@ -240,7 +259,7 @@ export class DataGrid extends Widget {
     private renderRows(): void {
         let rowY = 0;
 
-        for (let i = 0; i < this.data.length; i++) {
+        for (let i = 0; i < this.data.rows.length; i++) {
             const row = window.w.get(this.id + ".row." + i) as Widget;
 
             row.setX(0);
@@ -262,6 +281,7 @@ export class DataGrid extends Widget {
                     columnWidget.setW(this.getFreeWidth());
                 }
                 widgetX += column.width ? column.width : columnWidget.getW();
+                columnWidget.render();
             }
             rowY += this.rowHeight;
         }
@@ -276,7 +296,7 @@ export class DataGrid extends Widget {
      * @return {void}
      */
     public free(): void {
-        for (let i = 0; i < this.data.length; i++) {
+        for (let i = 0; i < this.data.rows.length; i++) {
             const row = window.w.get(this.id + ".row." + i) as Widget;
             if (row) row.free();
         }
@@ -310,9 +330,17 @@ export class DataGrid extends Widget {
         return window.w.get(this.id + "header." + index) as Label;
     }
 
-    public setData(data: Array<any>): void {
-        this.data = data;
+    public setData(data: Array<T>): void {
+        this.data.rows = data;
+        this.buildRows();
+        this.renderRows();
+    }
 
+    public async setDataProvider(
+        dataProvider: (page: number, pageSize: number) => Promise<any>
+    ): Promise<void> {
+        this.dataProvider = dataProvider;
+        this.data = await this.dataProvider(1, 10);
         this.buildRows();
         this.renderRows();
     }
@@ -333,9 +361,9 @@ export type DataGridColumnType =
     | "progressbar";
 
 export type WDataGridProps = Omit<WidgetProps, "orientation"> & {
-    data?: any;
     rowHeight?: number | null;
     children: any;
+    dataProvider?: (page: number, pageSize: number) => Promise<any>;
 };
 
 export type WDataGridColumnProps = WidgetEventProps & {
@@ -353,8 +381,26 @@ export const WDataGrid = (props: WDataGridProps) => {
         props.id = "Grid." + UID();
     }
 
+    connectCustomWidget("widget-custom-added-" + props.id, {
+            event: "widget-load",
+            then: (_e: Event, _w: IWidget | null) => {
+                if (!props.id) return;
+                const widget = w.get(props.id) as DataGrid<any>;
+    
+                if (props.dataProvider) {
+                    widget.setDataProvider(props.dataProvider);
+                }
+            },
+        });
+    
+
     return normalizeWidget(
-        <div id={props.id} w-data-grid w-data={props.data} w-row-height={props.rowHeight}>
+        <div
+            id={props.id}
+            w-data-grid
+            w-row-height={props.rowHeight}
+            w-data-provider={props.dataProvider}
+        >
             {props.children}
         </div>,
         props
@@ -376,11 +422,15 @@ export const WDataGridColumn = (props: WDataGridColumnProps) => {
     );
 };
 
-export function createDataGrid(id: string, content: any, parent: Widget | null = null): DataGrid {
-    const data = JSON.parse(decode(content.getAttribute("w-data")));
+export function createDataGrid<T>(
+    id: string,
+    content: any,
+    parent: Widget | null = null
+): DataGrid<T> {
+    
     const rowHeight = content.getAttribute("w-row-height");
 
-    let newGrid = new DataGrid(id, parent);
+    let newGrid = new DataGrid<T>(id, parent);
 
     if (rowHeight !== null) {
         newGrid.setRowHeight(parseInt(rowHeight));
@@ -474,9 +524,10 @@ export function createDataGrid(id: string, content: any, parent: Widget | null =
                     });
                 } else if (columnType === "progressbar") {
                     const newProgressBar = new ProgressBar(args.fieldId);
-
                     args.row.addChild(newProgressBar);
                     const prg = window.w.get(args.fieldId) as ProgressBar;
+
+                    prg.setType(WidgetTypes.CUSTOM);
                     prg.setPaddingBar(2);
 
                     if (columnClassNames) {
@@ -484,6 +535,7 @@ export function createDataGrid(id: string, content: any, parent: Widget | null =
                     }
 
                     prg.setValue(args.data[columnField]);
+                    
                 } else if (columnType === "valuebar") {
                     throw new Error("Valuebar not implemented");
                 } else if (columnType === "buttonmenu") {
@@ -507,7 +559,9 @@ export function createDataGrid(id: string, content: any, parent: Widget | null =
 
     newGrid.setAlign(WidgetAlignTypes.VERTICAL);
 
-    newGrid.setData(data as Array<any>);
+    //newGrid.setData(data as Array<T>);
+
+    //newGrid.setDataProvider(dataProvider);
 
     columnPropsBackup = []; //Limpia las propiedades de las columnas de la grilla actual.
 

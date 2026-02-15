@@ -3,8 +3,19 @@ import { createWidget } from "../../../..";
 import { Layout } from "../Layout";
 import { WContainer, WLabel, WDataGrid, WDataGridColumn } from "../../../../ui";
 
+export type GridRowInfo = {
+    name: string;
+    years: number;
+    country: string;
+    label: string;
+    checked: boolean;
+    porcentaje: number;
+    icon: string;
+};
+
 export default (() => {
-    const db = [
+
+    const db: GridRowInfo[] = [
         {
             name: "Ana González",
             years: 19,
@@ -310,6 +321,15 @@ export default (() => {
         );
     };
 
+    const getGridData = async (page: number, pageSize: number) => {
+        return {
+            rows: db,
+            page: page,
+            pageSize: pageSize,
+            totalPages: 1,
+        };
+    };
+
     return createWidget(
         <Layout>
             <WContainer orientation="vertical" padding={10}>
@@ -320,7 +340,7 @@ export default (() => {
                     variant="h3"
                 />
                 <WContainer orientation="vertical" padding={4}>
-                    <WDataGrid data={JSON.stringify(db)} rowHeight={30}>
+                    <WDataGrid  rowHeight={30} dataProvider={getGridData}>
                         <WDataGridColumn
                             header="Name"
                             field="name"

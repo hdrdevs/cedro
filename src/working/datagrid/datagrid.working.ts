@@ -2,7 +2,7 @@ import { DataGrid, IconButton, Label } from "../../ui";
 import { Application, WidgetAlignTypes } from "../../index";
 
 class WorkingApp extends Application {
-    grid: DataGrid;
+    grid: DataGrid<any>;
 
     constructor() {
         super("Working App - Datagrid Example");
@@ -62,41 +62,47 @@ class WorkingApp extends Application {
 
         this.getRoot().addChild(this.grid);
 
-        //Insert random data...
-        this.grid.setData([
-            { name: "Ana González", years: 19, country: "Colombia" },
-            { name: "Diego Martínez", years: 55, country: "Chile" },
-            { name: "Carla Sánchez", years: 37, country: "Perú" },
-            { name: "Pedro Ramírez", years: 41, country: "Ecuador" },
-            { name: "Laura Rodríguez", years: 23, country: "Venezuela" },
-            { name: "José Fernández", years: 64, country: "Uruguay" },
-            { name: "Sofía López", years: 50, country: "Paraguay" },
-            { name: "Luis Pérez", years: 29, country: "Argentina" },
-            { name: "María García", years: 18, country: "España" },
-            { name: "Juan Hernández", years: 36, country: "México" },
-            { name: "Ana Díaz", years: 47, country: "Colombia" },
-            { name: "Diego Ruiz", years: 22, country: "Chile" },
-            { name: "Carla Flores", years: 33, country: "Perú" },
-            { name: "Pedro Acosta", years: 59, country: "Ecuador" },
-            { name: "Laura Gómez", years: 43, country: "Venezuela" },
-            { name: "José Suárez", years: 39, country: "Uruguay" },
-            { name: "Sofía Castro", years: 26, country: "Paraguay" },
-            { name: "Juan Mendoza", years: 60, country: "Argentina" },
-            { name: "María Ortiz", years: 14, country: "España" },
-            { name: "Luis Morales", years: 25, country: "México" },
-            { name: "Ana Vargas", years: 36, country: "Colombia" },
-            { name: "Diego Herrera", years: 40, country: "Chile" },
-            { name: "Carla Jiménez", years: 51, country: "Perú" },
-            { name: "Pedro Medina", years: 30, country: "Ecuador" },
-            { name: "Laura Navarro", years: 65, country: "Venezuela" },
-            { name: "José Torres", years: 22, country: "Uruguay" },
-            { name: "Sofía Méndez", years: 38, country: "Paraguay" },
-            { name: "Juan Ruiz", years: 46, country: "Argentina" },
-            { name: "María Salazar", years: 37, country: "España" },
-            { name: "Luis Castro", years: 28, country: "México" },
-            { name: "Ana Sánchez", years: 55, country: "Colombia" },
-            { name: "Diego Martínez", years: 22, country: "Chile" },
-        ]);
+        this.grid.setDataProvider(async (page: number, pageSize: number) => {
+            return {
+                rows: [
+                    { name: "Ana González", years: 19, country: "Colombia" },
+                    { name: "Diego Martínez", years: 55, country: "Chile" },
+                    { name: "Carla Sánchez", years: 37, country: "Perú" },
+                    { name: "Pedro Ramírez", years: 41, country: "Ecuador" },
+                    { name: "Laura Rodríguez", years: 23, country: "Venezuela" },
+                    { name: "José Fernández", years: 64, country: "Uruguay" },
+                    { name: "Sofía López", years: 50, country: "Paraguay" },
+                    { name: "Luis Pérez", years: 29, country: "Argentina" },
+                    { name: "María García", years: 18, country: "España" },
+                    { name: "Juan Hernández", years: 36, country: "México" },
+                    { name: "Ana Díaz", years: 47, country: "Colombia" },
+                    { name: "Diego Ruiz", years: 22, country: "Chile" },
+                    { name: "Carla Flores", years: 33, country: "Perú" },
+                    { name: "Pedro Acosta", years: 59, country: "Ecuador" },
+                    { name: "Laura Gómez", years: 43, country: "Venezuela" },
+                    { name: "José Suárez", years: 39, country: "Uruguay" },
+                    { name: "Sofía Castro", years: 26, country: "Paraguay" },
+                    { name: "Juan Mendoza", years: 60, country: "Argentina" },
+                    { name: "María Ortiz", years: 14, country: "España" },
+                    { name: "Luis Morales", years: 25, country: "México" },
+                    { name: "Ana Vargas", years: 36, country: "Colombia" },
+                    { name: "Diego Herrera", years: 40, country: "Chile" },
+                    { name: "Carla Jiménez", years: 51, country: "Perú" },
+                    { name: "Pedro Medina", years: 30, country: "Ecuador" },
+                    { name: "Laura Navarro", years: 65, country: "Venezuela" },
+                    { name: "José Torres", years: 22, country: "Uruguay" },
+                    { name: "Sofía Méndez", years: 38, country: "Paraguay" },
+                    { name: "Juan Ruiz", years: 46, country: "Argentina" },
+                    { name: "María Salazar", years: 37, country: "España" },
+                    { name: "Luis Castro", years: 28, country: "México" },
+                    { name: "Ana Sánchez", years: 55, country: "Colombia" },
+                    { name: "Diego Martínez", years: 22, country: "Chile" },
+                ],
+                page: page,
+                pageSize: pageSize,
+                totalPages: 1,
+            };
+        });
     }
 
     init() {
