@@ -112,7 +112,7 @@ export class VPanel extends Widget {
         if (this.topHeight !== null) {
             const topY = this.topContent ? this.topContent.getY(true) : 0;
             this.handler.setY(topY + this.topHeight);
-            this.topContent?.setFixedSize(this.topHeight);
+            this.topContent?.setFixedSize(this.topHeight-VPANEL_HANDLER_SIZE);
         } else if (this.bottomHeight !== null) {
             const bottomY = this.bottomContent ? this.bottomContent.getY(true) : 0;
             this.handler.setY(bottomY + this.bottomHeight);
