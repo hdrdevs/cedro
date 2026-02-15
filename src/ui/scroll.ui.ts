@@ -166,10 +166,8 @@ export class Scroll extends Widget {
 
         if (this.orientation === "vertical") {
             if (scrollData.areaHeight < scrollData.scrollHeight) {
-                console.log("haciendo visible");
                 this.setVisible(true);
             } else {
-                console.log("haciendo invisible");
                 this.setVisible(false);
                 return;
             }

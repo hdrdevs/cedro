@@ -137,7 +137,7 @@ window.app = (() => {
             </Widgets>
             <Routes hostId="main-container">
                 <Route src="/" />
-                <Route src="/working/demo/counter/" label="Contador" />
+                <Route src="/working/demo/counter/" label="Counter" />
                 <Route src="/working/demo/widget-gallery/" label="Widget Gallery" />
                 <Route src="/working/demo/widget-gallery/buttons/" label="Botones" />
                 <Route src="/working/demo/widget-gallery/icons/" label="Iconos" />
