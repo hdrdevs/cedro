@@ -110,13 +110,23 @@ export class Scroll extends Widget {
 
         if (this.orientation === "vertical") {
             const recorrido = scrollData.scrollHeight - scrollData.areaHeight;
-            const maxY = this.drag.maxY ? this.drag.maxY : 1;
-            const ratio = (this.getY() - this.contentArea.getY(true)) / maxY;
+            const minY = this.drag.minY !== null ? this.drag.minY : 1 + this.contentArea.getY(true);
+            const maxY =
+                this.drag.maxY !== null
+                    ? this.drag.maxY
+                    : this.contentArea.getY(true) + scrollData.availablePositionSize;
+
+            const ratio = (this.getY() - minY) / (maxY - minY);
             this.contentArea.getBody().scrollTop = recorrido * ratio;
         } else if (this.orientation === "horizontal") {
             const recorrido = scrollData.scrollWidth - scrollData.areaWidth;
-            const maxX = this.drag.maxX ? this.drag.maxX : 1;
-            const ratio = (this.getX() - this.contentArea.getX(true)) / maxX;
+            const minX = this.drag.minX !== null ? this.drag.minX : 1 + this.contentArea.getX(true);
+            const maxX =
+                this.drag.maxX !== null
+                    ? this.drag.maxX
+                    : this.contentArea.getX(true) + scrollData.availablePositionSize;
+
+            const ratio = (this.getX() - minX) / (maxX - minX);
             this.contentArea.getBody().scrollLeft = recorrido * ratio;
         }
         this.run("scroll");
@@ -129,8 +139,10 @@ export class Scroll extends Widget {
 
         if (this.orientation === "vertical") {
             if (scrollData.areaHeight < scrollData.scrollHeight) {
+                console.log("haciendo visible");
                 this.setVisible(true);
             } else {
+                console.log("haciendo invisible");
                 this.setVisible(false);
                 return;
             }
