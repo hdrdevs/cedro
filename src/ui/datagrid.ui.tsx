@@ -10,11 +10,13 @@ import { WidgetAlignTypes, WidgetEventProps, WidgetProps, WidgetTypes } from "./
 import { normalizeWidget } from "./widget.normalize";
 import { connectCustomWidget } from "./widget.collection";
 import { IWidget } from "src/interfaces/widget.interface";
+import { Spacer } from "./container.ui";
 
 const DATA_GRID_HEADER_HEIGHT = 30;
 const DATA_GRID_FOOTER_HEIGHT = 40;
 const DATA_GRID_ROW_HEIGHT = 20;
 const DATA_GRID_MIN_COLUMN_WIDTH = 24;
+const DATA_GRID_PAGE_SIZE = 30;
 
 type DataGridColumn = {
     header: string;
@@ -37,8 +39,15 @@ export class DataGrid<T> extends Widget {
     footerContainer: Widget;
     dataProvider: DataGridProvider<T>;
     data: DataGridSchema<T>;
+    pageSize: number;
     verticalScrollbar: Scroll;
     horizontalScrollbar: Scroll;
+
+    btnFirst: IconButton;
+    btnNext: IconButton;
+    btnPrevious: IconButton;
+    btnLast: IconButton;
+    lblCurrentPage: Label;
 
     rowHeight: number;
 
@@ -66,6 +75,7 @@ export class DataGrid<T> extends Widget {
 
         this.footerContainer = new Widget(id + ".footer", "div");
         this.footerContainer.setType(WidgetTypes.FILL);
+        this.footerContainer.setAlign(WidgetAlignTypes.HORIZONTAL);
         this.footerContainer.setFixedSize(DATA_GRID_FOOTER_HEIGHT);
 
         this.setType(WidgetTypes.FILL);
@@ -100,8 +110,68 @@ export class DataGrid<T> extends Widget {
         this.dataProvider = async (_page: number, _pageSize: number) => {
             return this.data;
         };
+        this.pageSize = DATA_GRID_PAGE_SIZE;
 
         this.addClass("WUIDataGrid");
+
+        //Footer.
+        this.btnFirst = new IconButton(this.id + ".btnFirst", "first_page", null);
+        this.btnNext = new IconButton(this.id + ".btnNext", "chevron_right", null);
+        this.btnPrevious = new IconButton(this.id + ".btnPrevious", "chevron_left", null);
+        this.btnLast = new IconButton(this.id + ".btnLast", "last_page", null);
+        this.lblCurrentPage = new Label(this.id + ".lblCurrentPage", "span", null);
+
+        this.btnFirst.setType(WidgetTypes.FILL);
+        this.btnNext.setType(WidgetTypes.FILL);
+        this.btnPrevious.setType(WidgetTypes.FILL);
+        this.btnLast.setType(WidgetTypes.FILL);
+        this.lblCurrentPage.setType(WidgetTypes.FILL);
+
+        this.btnFirst.setVariant("plain")
+        this.btnNext.setVariant("plain")
+        this.btnPrevious.setVariant("plain")
+        this.btnLast.setVariant("plain")
+
+        this.btnFirst.setFixedSize(30);
+        this.btnNext.setFixedSize(30);
+        this.lblCurrentPage.setFixedSize(80);
+        this.btnPrevious.setFixedSize(30);
+        this.btnLast.setFixedSize(30);
+
+        this.lblCurrentPage.setHCentered(true);
+        this.lblCurrentPage.setVCentered(true);
+
+        this.btnFirst.subscribe({
+            event: "click", then: () => {
+                this.fisrtPageHandler();
+            }
+        });
+
+        this.btnPrevious.subscribe({
+            event: "click", then: () => {
+                this.previousPageHandler();
+            }
+        });
+        this.btnNext.subscribe({
+            event: "click", then: () => {
+                this.nextPageHandler();
+            }
+        });
+        this.btnLast.subscribe({
+            event: "click", then: () => {
+                this.lastPageHandler();
+            }
+        });
+
+        this.footerContainer.addChild(Spacer())
+        this.footerContainer.addChild(this.btnFirst);
+        this.footerContainer.addChild(this.btnPrevious);
+        this.footerContainer.addChild(this.lblCurrentPage);
+        this.footerContainer.addChild(this.btnNext);
+        this.footerContainer.addChild(this.btnLast);
+        this.footerContainer.addChild(Spacer())
+
+        this.lblCurrentPage.setText("1 / 1");
     }
 
     public hideFooter(): void {
@@ -287,6 +357,14 @@ export class DataGrid<T> extends Widget {
         }
     }
 
+
+    public freeRows(): void {
+        for (let i = 0; i < this.data.rows.length; i++) {
+            const row = window.w.get(this.id + ".row." + i) as Widget;
+            if (row) row.free();
+        }
+    }
+
     /**
      * Releases all resources held by this data grid.
      *
@@ -340,10 +418,57 @@ export class DataGrid<T> extends Widget {
         dataProvider: (page: number, pageSize: number) => Promise<any>
     ): Promise<void> {
         this.dataProvider = dataProvider;
-        this.data = await this.dataProvider(1, 10);
+        this.data = await this.dataProvider(1, this.pageSize);
+        this.lblCurrentPage.setText(`1 / ${this.data.totalPages}`);
         this.buildRows();
         this.renderRows();
     }
+
+    public async nextPageHandler(): Promise<void> {
+        let loadPage = this.data.page + 1;
+        if (loadPage > this.data.totalPages) {
+            loadPage = this.data.totalPages;
+        }
+        this.freeRows();
+        this.data = await this.dataProvider(loadPage, this.pageSize);
+        this.lblCurrentPage.setText(`${loadPage} / ${this.data.totalPages}`);
+        this.buildRows();
+        this.renderRows();
+    }
+
+
+    public async previousPageHandler(): Promise<void> {
+        let loadPage = this.data.page - 1;
+        if (loadPage < 1) {
+            loadPage = 1;
+        }
+        this.freeRows();
+        this.data = await this.dataProvider(loadPage, this.pageSize);
+        this.lblCurrentPage.setText(`${loadPage} / ${this.data.totalPages}`);
+        this.buildRows();
+        this.renderRows();
+    }
+    public async fisrtPageHandler(): Promise<void> {
+        let loadPage = 1;
+        this.freeRows();
+        this.data = await this.dataProvider(loadPage, this.pageSize);
+        this.lblCurrentPage.setText(`${loadPage} / ${this.data.totalPages}`);
+        this.buildRows();
+        this.renderRows();
+    }
+
+    public async lastPageHandler(): Promise<void> {
+        let lastPage = this.data.totalPages;
+        if (!lastPage) {
+            lastPage = 1;
+        }
+        this.freeRows();
+        this.data = await this.dataProvider(lastPage, this.pageSize);
+        this.lblCurrentPage.setText(`${lastPage} / ${this.data.totalPages}`);
+        this.buildRows();
+        this.renderRows();
+    }
+
 }
 
 export type DataGridColumnType =
@@ -382,17 +507,17 @@ export const WDataGrid = (props: WDataGridProps) => {
     }
 
     connectCustomWidget("widget-custom-added-" + props.id, {
-            event: "widget-load",
-            then: (_e: Event, _w: IWidget | null) => {
-                if (!props.id) return;
-                const widget = w.get(props.id) as DataGrid<any>;
-    
-                if (props.dataProvider) {
-                    widget.setDataProvider(props.dataProvider);
-                }
-            },
-        });
-    
+        event: "widget-load",
+        then: (_e: Event, _w: IWidget | null) => {
+            if (!props.id) return;
+            const widget = w.get(props.id) as DataGrid<any>;
+
+            if (props.dataProvider) {
+                widget.setDataProvider(props.dataProvider);
+            }
+        },
+    });
+
 
     return normalizeWidget(
         <div
@@ -427,7 +552,7 @@ export function createDataGrid<T>(
     content: any,
     parent: Widget | null = null
 ): DataGrid<T> {
-    
+
     const rowHeight = content.getAttribute("w-row-height");
 
     let newGrid = new DataGrid<T>(id, parent);
@@ -535,7 +660,7 @@ export function createDataGrid<T>(
                     }
 
                     prg.setValue(args.data[columnField]);
-                    
+
                 } else if (columnType === "valuebar") {
                     throw new Error("Valuebar not implemented");
                 } else if (columnType === "buttonmenu") {
