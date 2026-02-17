@@ -40,6 +40,8 @@ export class DataGrid<T> extends Widget {
     dataProvider: DataGridProvider<T>;
     data: DataGridSchema<T>;
     pageSize: number;
+    pendingPageSize: number | null = null;
+    loadingData: boolean;
     verticalScrollbar: Scroll;
     horizontalScrollbar: Scroll;
 
@@ -100,6 +102,8 @@ export class DataGrid<T> extends Widget {
         });
 
         this.columns = new Array<DataGridColumn>();
+
+        this.loadingData = false;
 
         this.data = {
             rows: [],
@@ -417,11 +421,13 @@ export class DataGrid<T> extends Widget {
     public async setDataProvider(
         dataProvider: (page: number, pageSize: number) => Promise<any>
     ): Promise<void> {
+        this.loadingData = true;
         this.dataProvider = dataProvider;
         this.data = await this.dataProvider(1, this.pageSize);
         this.lblCurrentPage.setText(`1 / ${this.data.totalPages}`);
         this.buildRows();
         this.renderRows();
+        this.loadingData = false;
     }
 
     public async nextPageHandler(): Promise<void> {
@@ -429,11 +435,13 @@ export class DataGrid<T> extends Widget {
         if (loadPage > this.data.totalPages) {
             loadPage = this.data.totalPages;
         }
+        this.loadingData = true;
         this.freeRows();
         this.data = await this.dataProvider(loadPage, this.pageSize);
         this.lblCurrentPage.setText(`${loadPage} / ${this.data.totalPages}`);
         this.buildRows();
         this.renderRows();
+        this.loadingData = false;
     }
 
 
@@ -442,19 +450,23 @@ export class DataGrid<T> extends Widget {
         if (loadPage < 1) {
             loadPage = 1;
         }
+        this.loadingData = true;
         this.freeRows();
         this.data = await this.dataProvider(loadPage, this.pageSize);
         this.lblCurrentPage.setText(`${loadPage} / ${this.data.totalPages}`);
         this.buildRows();
         this.renderRows();
+        this.loadingData = false;
     }
     public async fisrtPageHandler(): Promise<void> {
         let loadPage = 1;
+        this.loadingData = true;
         this.freeRows();
         this.data = await this.dataProvider(loadPage, this.pageSize);
         this.lblCurrentPage.setText(`${loadPage} / ${this.data.totalPages}`);
         this.buildRows();
         this.renderRows();
+        this.loadingData = false;
     }
 
     public async lastPageHandler(): Promise<void> {
@@ -462,13 +474,51 @@ export class DataGrid<T> extends Widget {
         if (!lastPage) {
             lastPage = 1;
         }
+        this.loadingData = true;
         this.freeRows();
         this.data = await this.dataProvider(lastPage, this.pageSize);
         this.lblCurrentPage.setText(`${lastPage} / ${this.data.totalPages}`);
         this.buildRows();
         this.renderRows();
+        this.loadingData = false;
+    }
+    public setPageSize(size: number): void {
+        this.pendingPageSize = size;
+
+        if (!this.loadingData) {
+            this.processPageSize();
+        }
     }
 
+    private async processPageSize(): Promise<void> {
+        if (this.pendingPageSize === null) {
+            return;
+        }
+
+        const size = this.pendingPageSize;
+        this.pendingPageSize = null;
+
+        this.loadingData = true;
+
+        try {
+            this.pageSize = size;
+            this.freeRows();
+
+            this.data = await this.dataProvider(1, this.pageSize);
+
+            this.lblCurrentPage.setText(`1 / ${this.data.totalPages}`);
+            this.buildRows();
+            this.renderRows();
+        } finally {
+            this.loadingData = false;
+        }
+
+        // Si mientras cargábamos alguien pidió otro tamaño,
+        // procesamos el último valor.
+        if (this.pendingPageSize !== null) {
+            this.processPageSize();
+        }
+    }
 }
 
 export type DataGridColumnType =
@@ -488,6 +538,7 @@ export type DataGridColumnType =
 export type WDataGridProps = Omit<WidgetProps, "orientation"> & {
     rowHeight?: number | null;
     children: any;
+    pageSize?: number | null;
     dataProvider?: (page: number, pageSize: number) => Promise<any>;
 };
 
@@ -524,6 +575,7 @@ export const WDataGrid = (props: WDataGridProps) => {
             id={props.id}
             w-data-grid
             w-row-height={props.rowHeight}
+            w-page-size={props.pageSize}
             w-data-provider={props.dataProvider}
         >
             {props.children}
@@ -554,6 +606,7 @@ export function createDataGrid<T>(
 ): DataGrid<T> {
 
     const rowHeight = content.getAttribute("w-row-height");
+    const pageSize = content.getAttribute("w-page-size");
 
     let newGrid = new DataGrid<T>(id, parent);
 
@@ -562,6 +615,7 @@ export function createDataGrid<T>(
     } else {
         newGrid.setRowHeight(DATA_GRID_ROW_HEIGHT);
     }
+
 
     content.childNodes.forEach((column: HTMLElement, index: number) => {
         if (column.getAttribute("w-data-grid-column") !== null) {
@@ -684,9 +738,9 @@ export function createDataGrid<T>(
 
     newGrid.setAlign(WidgetAlignTypes.VERTICAL);
 
-    //newGrid.setData(data as Array<T>);
-
-    //newGrid.setDataProvider(dataProvider);
+    if (pageSize !== null) {
+        newGrid.setPageSize(parseInt(pageSize));
+    }
 
     columnPropsBackup = []; //Limpia las propiedades de las columnas de la grilla actual.
 

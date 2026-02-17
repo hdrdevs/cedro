@@ -632,7 +632,7 @@ export default (() => {
                     variant="h3"
                 />
                 <WContainer orientation="vertical" padding={4}>
-                    <WDataGrid rowHeight={30} dataProvider={getGridData}>
+                    <WDataGrid rowHeight={30} dataProvider={getGridData} pageSize={15}>
                         <WDataGridColumn
                             header="Name"
                             field="name"
