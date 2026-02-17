@@ -59,9 +59,9 @@ export class DataGrid<T> extends Widget {
     /**
      * Initializes a new instance of the DataGrid class.
      *
-     * @param {string} id - The unique identifier for the DataGrid instance.
-     * @param {Widget|null} parent - The parent widget of the DataGrid instance.
-     * @return {void}
+     * @param  id - The unique identifier for the DataGrid instance.
+     * @param  parent - The parent widget of the DataGrid instance.
+     *
      */
     constructor(id: string, parent: Widget | null = null) {
         super(id, "div", parent);
