@@ -39,6 +39,7 @@ export class DataGrid<T> extends Widget {
     footerContainer: Widget;
     dataProvider: DataGridProvider<T>;
     data: DataGridSchema<T>;
+    currentPage: number;
     pageSize: number;
     pendingPageSize: number | null = null;
     loadingData: boolean;
@@ -66,6 +67,7 @@ export class DataGrid<T> extends Widget {
         super(id, "div", parent);
 
         this.rowHeight = DATA_GRID_ROW_HEIGHT;
+        this.currentPage = 1;
 
         this.headerContainer = new Widget(id + ".header", "div");
         this.headerContainer.setType(WidgetTypes.FILL);
@@ -418,70 +420,53 @@ export class DataGrid<T> extends Widget {
         this.renderRows();
     }
 
-    public async setDataProvider(
-        dataProvider: (page: number, pageSize: number) => Promise<any>
-    ): Promise<void> {
+    private async refresh(): Promise<void> {
         this.loadingData = true;
-        this.dataProvider = dataProvider;
-        this.data = await this.dataProvider(1, this.pageSize);
-        this.lblCurrentPage.setText(`1 / ${this.data.totalPages}`);
+        this.freeRows();
+        this.data = await this.dataProvider(this.currentPage, this.pageSize);
+        this.lblCurrentPage.setText(`${this.currentPage} / ${this.data.totalPages}`);
         this.buildRows();
         this.renderRows();
         this.loadingData = false;
     }
 
+    public async setDataProvider(
+        dataProvider: (page: number, pageSize: number) => Promise<any>
+    ): Promise<void> {
+        this.dataProvider = dataProvider;
+        this.refresh();
+    }
+
     public async nextPageHandler(): Promise<void> {
-        let loadPage = this.data.page + 1;
-        if (loadPage > this.data.totalPages) {
-            loadPage = this.data.totalPages;
+        this.currentPage = this.data.page + 1;
+        if (this.currentPage > this.data.totalPages) {
+            this.currentPage = this.data.totalPages;
         }
-        this.loadingData = true;
-        this.freeRows();
-        this.data = await this.dataProvider(loadPage, this.pageSize);
-        this.lblCurrentPage.setText(`${loadPage} / ${this.data.totalPages}`);
-        this.buildRows();
-        this.renderRows();
-        this.loadingData = false;
+        this.refresh();
     }
 
 
     public async previousPageHandler(): Promise<void> {
-        let loadPage = this.data.page - 1;
-        if (loadPage < 1) {
-            loadPage = 1;
+        this.currentPage--;
+        if (this.currentPage < 1) {
+            this.currentPage = 1;
         }
-        this.loadingData = true;
-        this.freeRows();
-        this.data = await this.dataProvider(loadPage, this.pageSize);
-        this.lblCurrentPage.setText(`${loadPage} / ${this.data.totalPages}`);
-        this.buildRows();
-        this.renderRows();
-        this.loadingData = false;
+        this.refresh();
     }
+
     public async fisrtPageHandler(): Promise<void> {
-        let loadPage = 1;
-        this.loadingData = true;
-        this.freeRows();
-        this.data = await this.dataProvider(loadPage, this.pageSize);
-        this.lblCurrentPage.setText(`${loadPage} / ${this.data.totalPages}`);
-        this.buildRows();
-        this.renderRows();
-        this.loadingData = false;
+        this.currentPage = 1;
+        this.refresh();
     }
 
     public async lastPageHandler(): Promise<void> {
-        let lastPage = this.data.totalPages;
-        if (!lastPage) {
-            lastPage = 1;
+        this.currentPage = this.data.totalPages;
+        if (!this.currentPage) {
+            this.currentPage = 1;
         }
-        this.loadingData = true;
-        this.freeRows();
-        this.data = await this.dataProvider(lastPage, this.pageSize);
-        this.lblCurrentPage.setText(`${lastPage} / ${this.data.totalPages}`);
-        this.buildRows();
-        this.renderRows();
-        this.loadingData = false;
+        this.refresh();
     }
+
     public setPageSize(size: number): void {
         this.pendingPageSize = size;
 
@@ -502,13 +487,7 @@ export class DataGrid<T> extends Widget {
 
         try {
             this.pageSize = size;
-            this.freeRows();
-
-            this.data = await this.dataProvider(1, this.pageSize);
-
-            this.lblCurrentPage.setText(`1 / ${this.data.totalPages}`);
-            this.buildRows();
-            this.renderRows();
+            this.refresh();
         } finally {
             this.loadingData = false;
         }
